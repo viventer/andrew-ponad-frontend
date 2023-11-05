@@ -13,6 +13,7 @@ import App from "./App.jsx";
 const theme = {
   colors: {
     black: "#000000",
+    almostBlack: "#141414",
     navy: "#14213D",
     orange: "#FCA311",
     sunset: "#F1C47B",

@@ -1,5 +1,5 @@
-import React from "react";
+import { StyledSearchBar } from "../styles/Header.styled";
 
 export default function SearchBar() {
-  return <div>SearchBar</div>;
+  return <StyledSearchBar></StyledSearchBar>;
 }
