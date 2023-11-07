@@ -27,4 +27,9 @@ export const StyledHeader = styled.header`
   }
 `;
 
-export const StyledSearchBar = styled.nav``;
+export const StyledSearchBar = styled.nav`
+  & input {
+    background-color: ${({ theme }) => theme.colors.navy};
+    border: none;
+  }
+`;
