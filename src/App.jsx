@@ -17,6 +17,7 @@ function App() {
         <Route path="adminpanel" element={<AdminPanel />} />
         <Route path="post/:id" element={<Post />} />
         <Route path="post/:id/edit" element={<PostEditor />} />
+        <Route path="post/create" element={<PostEditor />} />
         <Route path="*" element={<Missing />} />
       </Route>
     </Routes>

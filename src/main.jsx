@@ -14,7 +14,8 @@ const theme = {
   colors: {
     black: "#000000",
     almostBlack: "#141414",
-    navy: "#14213D",
+    darkNavy: "#14213D",
+    navy: "#15315c",
     orange: "#FCA311",
     sunset: "#F1C47B",
     lightGray: "#E5E5E5",

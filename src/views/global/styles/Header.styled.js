@@ -14,13 +14,14 @@ export const StyledHeader = styled.header`
     align-items: center;
     width: 100%;
     padding-right: 2rem;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
   }
 
   & .reactRouterLink {
     color: ${({ theme }) => theme.colors.sunset};
     white-space: nowrap;
     transition: all ease-in-out 0.15s;
+    font-size: 1.5rem;
   }
 
   & .reactRouterLink:hover {

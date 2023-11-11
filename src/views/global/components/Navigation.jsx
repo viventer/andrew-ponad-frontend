@@ -1,10 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledNavigation } from "../styles/Navigation.styled";
-import {
-  faLinux,
-  faUbuntu,
-  faWindows,
-} from "@fortawesome/free-brands-svg-icons";
+import { faUbuntu, faWindows } from "@fortawesome/free-brands-svg-icons";
 import {
   faCode,
   faGraduationCap,
