@@ -1,5 +1,7 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledSearchBar } from "../styles/Header.styled";
 import { useState } from "react";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -13,6 +15,9 @@ export default function SearchBar() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        <div className="icon">
+          <FontAwesomeIcon icon={faSearch} />
+        </div>
       </form>
     </StyledSearchBar>
   );
