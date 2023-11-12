@@ -10,4 +10,7 @@ export const StyledPostEditor = styled.main`
     width: 1000rem;
     height: 10rem;
   }
+
+  & img {
+  }
 `;

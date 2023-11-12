@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { StyledPostEditor } from "../styles/PostEditor.styled";
 
 import { UploadDropzone } from "@bytescale/upload-widget-react";
@@ -5,19 +6,21 @@ import { UploadDropzone } from "@bytescale/upload-widget-react";
 const customLocale = {
   "error!": "Błąd!",
   done: "Zakończono",
-  cancel: "anuluj",
+  cancel: "Anuluj",
+  cancelInPreviewWindow: "Anuluj",
   "cancelled!": "anulowano",
-  continue: "kontynuuj",
-  crop: "przytnij",
-  finish: "Koniec",
+  continue: "Kontynuuj",
+  crop: "Przytnij",
+  finish: "Dodaj",
   image: "obraz",
   maxSize: "Maksymalny rozmiar pliku:",
   orDragDropImage: "...lub przeciągnij ją tutaj.",
   pleaseWait: "Proszę czekać...",
   remove: "Usuń",
-  skip: "pomiń",
-  unsupportedFileType: "File type not supported.",
+  skip: "Pomiń",
+  unsupportedFileType: "Nie wspierany typ pliku.",
   uploadImage: "Wybierz miniaturkę",
+  "removed!": "usunięto",
 };
 
 const options = {
@@ -41,20 +44,29 @@ const options = {
       base: "Ubuntu, sans-serif",
     },
   },
+  showFinishButton: true,
+  apiKey: "public_12a1yfj8Brf88jVbjp8iUHaJ6sJs",
 };
 
 export default function PostEditor() {
+  const [imageUrl, setImageUrl] = useState("");
+
   return (
     <StyledPostEditor>
-      <UploadDropzone
-        options={options}
-        onUpdate={({ uploadedFiles }) => {
-          console.log(uploadedFiles.map((x) => x.fileUrl).join("\n"));
-        }}
-        className="dropZone"
-        width="48rem"
-        height="27rem"
-      />
+      {!imageUrl ? (
+        <UploadDropzone
+          options={options}
+          onComplete={(file) => {
+            setImageUrl(file[0].fileUrl);
+            console.log(file[0].fileUrl);
+          }}
+          className="dropZone"
+          width="48rem"
+          height="27rem"
+        />
+      ) : (
+        <img src={imageUrl} />
+      )}
     </StyledPostEditor>
   );
 }
