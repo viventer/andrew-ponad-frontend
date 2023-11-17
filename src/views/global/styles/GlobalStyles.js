@@ -24,6 +24,15 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
   }
 
+  .flex-column {
+    flex-direction: column;
+  }
+
+  .flex-center {
+    align-items: center;
+    justify-content: center;
+  }
+
   .reactRouterLink {
     color: white;
     text-decoration: none;
