@@ -1,5 +1,6 @@
 import { StyledPostEditor } from "../styles/PostEditor.styled";
 import ImageDropzone from "./ImageDropzone";
+import ThumbnailBar from "./ThumbnailBar";
 
 import { useState } from "react";
 
@@ -8,16 +9,8 @@ export default function PostEditor() {
 
   return (
     <StyledPostEditor>
-      {fileUrl ? (
-        <img
-          src={fileUrl}
-          onLoad={() => {
-            URL.revokeObjectURL(fileUrl);
-          }}
-        />
-      ) : (
-        <ImageDropzone fileUrl={fileUrl} setFileUrl={setFileUrl} />
-      )}
+      {fileUrl && <ThumbnailBar fileUrl={fileUrl} canEdit={true} />}
+      <ImageDropzone fileUrl={fileUrl} setFileUrl={setFileUrl} />
     </StyledPostEditor>
   );
 }

@@ -2,7 +2,7 @@ import { useDropzone } from "react-dropzone";
 
 import { StyledImageDropzone } from "../styles/PostEditor.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpload } from "@fortawesome/free-solid-svg-icons";
+import { faExchange, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import ErrorWindow from "../../global/components/ErrorWindow";
 
@@ -13,7 +13,7 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
     accept: {
       "image/*": [],
     },
-    maxFiles: 2,
+    maxFiles: 1,
     maxSize: 1048576,
     onDrop: (acceptedFiles) => {
       if (acceptedFiles) setUploadError("");
@@ -31,13 +31,22 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
   }, []);
 
   return (
-    <div className="flex flex-column flex-center">
+    <>
       <StyledImageDropzone {...getRootProps()}>
         <input {...getInputProps()} />
-        <p>Przeciągnij obraz tutaj lub kliknij aby wybrać</p>
-        <FontAwesomeIcon icon={faUpload} className="icon" />
+        {!fileUrl ? (
+          <div>
+            <p>Przeciągnij obraz tutaj lub kliknij aby wybrać</p>
+            <FontAwesomeIcon icon={faUpload} className="icon" />
+          </div>
+        ) : (
+          <div className="hover-effect">
+            <FontAwesomeIcon icon={faExchange} className="change-icon" />
+            <p className="change-paragraph">Zmień zdjęcie</p>
+          </div>
+        )}
       </StyledImageDropzone>
       {uploadError && <ErrorWindow message={uploadError} />}
-    </div>
+    </>
   );
 }

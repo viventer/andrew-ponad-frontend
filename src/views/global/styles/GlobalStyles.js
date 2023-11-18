@@ -45,4 +45,8 @@ export const GlobalStyles = createGlobalStyle`
   .bold {
     font-weight: 700;
   }
+
+  .relative {
+    position: relative;
+  }
 `;
