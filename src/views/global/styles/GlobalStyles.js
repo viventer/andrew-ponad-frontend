@@ -25,10 +25,12 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .flex-column {
+    display: flex;
     flex-direction: column;
   }
 
   .flex-center {
+    display: flex;
     align-items: center;
     justify-content: center;
   }
@@ -44,10 +46,6 @@ export const GlobalStyles = createGlobalStyle`
 
   .bold {
     font-weight: 700;
-  }
-
-  .relative {
-    position: relative;
   }
 
 `;

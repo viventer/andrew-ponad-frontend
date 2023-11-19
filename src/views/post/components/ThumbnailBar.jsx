@@ -1,26 +1,21 @@
-import { StyledThumbnailBar } from "../styles/Post.styled";
+import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
 
-export default function ThumbnailBar({ fileUrl, canEdit }) {
+export default function ThumbnailBar({ fileUrl }) {
+  const images = [];
+  for (let i = 0; i < 3; i++) {
+    images.push(
+      <img
+        src={fileUrl}
+        onLoad={() => {
+          URL.revokeObjectURL(fileUrl);
+        }}
+      />
+    );
+  }
+
   return (
     <StyledThumbnailBar className="flex flex-center">
-      <img
-        src={fileUrl}
-        onLoad={() => {
-          URL.revokeObjectURL(fileUrl);
-        }}
-      />
-      <img
-        src={fileUrl}
-        onLoad={() => {
-          URL.revokeObjectURL(fileUrl);
-        }}
-      />
-      <img
-        src={fileUrl}
-        onLoad={() => {
-          URL.revokeObjectURL(fileUrl);
-        }}
-      />
+      {images}
     </StyledThumbnailBar>
   );
 }

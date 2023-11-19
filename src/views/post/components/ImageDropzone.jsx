@@ -1,10 +1,10 @@
-import { useDropzone } from "react-dropzone";
+import ErrorWindow from "../../global/components/ErrorWindow";
+import { StyledImageDropzone } from "../styles/ImageDropzone.styled";
 
-import { StyledImageDropzone } from "../styles/PostEditor.styled";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExchange, faUpload } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
-import ErrorWindow from "../../global/components/ErrorWindow";
+import { useDropzone } from "react-dropzone";
 
 export default function ImageDropzone({ fileUrl, setFileUrl }) {
   const [uploadError, setUploadError] = useState("");
@@ -19,7 +19,7 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
       if (acceptedFiles) setUploadError("");
       setFileUrl(URL.createObjectURL(acceptedFiles[0]));
     },
-    onError: (error) => {
+    onError: () => {
       setUploadError(
         "Plik został odrzucony. Pamiętaj, że rozmiar nie może przekraczać 1MB."
       );

@@ -86,4 +86,10 @@ export const StyledSearchBar = styled.nav`
     border: 0.1rem solid ${({ theme }) => theme.colors.sunset};
     border-left: none;
   }
+
+  @media (max-width: 500px) {
+    & form {
+      display: none;
+    }
+  }
 `;

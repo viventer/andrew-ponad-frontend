@@ -9,7 +9,7 @@ export default function PostEditor() {
 
   return (
     <StyledPostEditor>
-      {fileUrl && <ThumbnailBar fileUrl={fileUrl} canEdit={true} />}
+      {fileUrl && <ThumbnailBar fileUrl={fileUrl} />}
       <ImageDropzone fileUrl={fileUrl} setFileUrl={setFileUrl} />
     </StyledPostEditor>
   );

@@ -1,5 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledNavigation } from "../styles/Navigation.styled";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUbuntu, faWindows } from "@fortawesome/free-brands-svg-icons";
 import {
   faCode,
@@ -8,23 +9,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 export default function Navigation() {
-  return (
-    <StyledNavigation>
-      <div className="icon">
-        <FontAwesomeIcon icon={faWindows} />
-      </div>
-      <div className="icon">
-        <FontAwesomeIcon icon={faUbuntu} />
-      </div>
-      <div className="icon">
-        <FontAwesomeIcon icon={faWifi} />
-      </div>
-      <div className="icon">
-        <FontAwesomeIcon icon={faCode} />
-      </div>
-      <div className="icon">
-        <FontAwesomeIcon icon={faGraduationCap} />
-      </div>
-    </StyledNavigation>
-  );
+  const icons = [faWindows, faUbuntu, faWifi, faCode, faGraduationCap];
+
+  const iconElements = icons.map((icon) => (
+    <div className="icon">
+      <FontAwesomeIcon icon={icon} />
+    </div>
+  ));
+  return <StyledNavigation>{iconElements}</StyledNavigation>;
 }
