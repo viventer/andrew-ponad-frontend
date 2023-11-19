@@ -21,7 +21,7 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
     },
     onError: (error) => {
       setUploadError(
-        "Plik został odrzucony. Pamiętaj, że rozmiar nie może przekraczać 1MB"
+        "Plik został odrzucony. Pamiętaj, że rozmiar nie może przekraczać 1MB."
       );
     },
   });
@@ -31,22 +31,20 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
   }, []);
 
   return (
-    <>
-      <StyledImageDropzone {...getRootProps()}>
-        <input {...getInputProps()} />
-        {!fileUrl ? (
-          <div>
-            <p>Przeciągnij obraz tutaj lub kliknij aby wybrać</p>
-            <FontAwesomeIcon icon={faUpload} className="icon" />
-          </div>
-        ) : (
-          <div className="hover-effect">
-            <FontAwesomeIcon icon={faExchange} className="change-icon" />
-            <p className="change-paragraph">Zmień zdjęcie</p>
-          </div>
-        )}
-      </StyledImageDropzone>
+    <StyledImageDropzone {...getRootProps()}>
+      <input {...getInputProps()} />
+      {!fileUrl ? (
+        <div>
+          <p>Przeciągnij obraz tutaj lub kliknij aby wybrać</p>
+          <FontAwesomeIcon icon={faUpload} className="icon" />
+        </div>
+      ) : (
+        <div className="hover-effect">
+          <FontAwesomeIcon icon={faExchange} className="change-icon" />
+          <p className="change-paragraph">Zmień zdjęcie</p>
+        </div>
+      )}
       {uploadError && <ErrorWindow message={uploadError} />}
-    </>
+    </StyledImageDropzone>
   );
 }

@@ -17,7 +17,7 @@ export const StyledPostEditor = styled.main`
 `;
 
 export const StyledImageDropzone = styled.div`
-  border: 0.15rem dashed rgba(255, 255, 255, 0.15);
+  outline: 0.15rem dashed rgba(255, 255, 255, 0.15);
   background-color: rgba(255, 255, 255, 0.01);
   width: 90vw;
   height: calc(0.5625 * 90vw);
@@ -34,6 +34,11 @@ export const StyledImageDropzone = styled.div`
   top: 0%;
   transform: translate(-50%);
   z-index: 200;
+  text-align: center;
+
+  & p {
+    padding: 0 1rem;
+  }
 
   & .icon,
   & .change-icon {
@@ -63,22 +68,49 @@ export const StyledImageDropzone = styled.div`
     height: 100%;
   }
 
-  &:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    border-width: 0.3rem;
-  }
-
-  &:hover > .hover-effect {
-    background-color: rgba(0, 0, 0, 0.75);
-  }
-
   & .change-icon,
   & .change-paragraph {
     transition: all 0.15s ease-in-out;
   }
 
-  &:hover .change-icon,
-  &:hover .change-paragraph {
-    filter: opacity(1);
+  @media (hover: hover) {
+    &:hover {
+      outline-color: rgba(255, 255, 255, 0.3);
+      outline-width: 0.3rem;
+    }
+
+    &:hover > .hover-effect {
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+  }
+
+  @media (hover: none) {
+    &:active {
+      outline-color: rgba(255, 255, 255, 0.3);
+      outline-width: 0.3rem;
+    }
+  }
+
+  @media (max-width: 1500px) {
+    width: 80vw;
+    height: calc(0.5625 * 80vw);
+    max-width: 32rem;
+    max-height: 18rem;
+  }
+
+  @media (max-width: 1300px) {
+    width: 70vw;
+    height: calc(0.5625 * 70vw);
+    max-width: 28rem;
+    max-height: 15.75rem;
+  }
+
+  @media (max-width: 450px) {
+    font-size: 1rem;
+
+    & .icon,
+    & .change-icon {
+      font-size: 2rem;
+    }
   }
 `;

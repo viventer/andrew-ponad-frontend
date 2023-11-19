@@ -49,4 +49,5 @@ export const GlobalStyles = createGlobalStyle`
   .relative {
     position: relative;
   }
+
 `;
