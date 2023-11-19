@@ -98,8 +98,12 @@ export const StyledImageDropzone = styled.div`
     max-height: 15.75rem;
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: 500px) {
     font-size: 1rem;
+    width: 90vw;
+    height: calc(0.5625 * 90vw);
+    max-width: 36rem;
+    max-height: 20.25rem;
 
     & .icon,
     & .change-icon {

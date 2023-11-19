@@ -11,8 +11,8 @@ import {
 export default function Navigation() {
   const icons = [faWindows, faUbuntu, faWifi, faCode, faGraduationCap];
 
-  const iconElements = icons.map((icon) => (
-    <div className="icon">
+  const iconElements = icons.map((icon, i) => (
+    <div className="icon" key={i}>
       <FontAwesomeIcon icon={icon} />
     </div>
   ));

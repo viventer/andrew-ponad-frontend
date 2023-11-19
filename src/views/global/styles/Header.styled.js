@@ -87,7 +87,7 @@ export const StyledSearchBar = styled.nav`
     border-left: none;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 1000px) {
     & form {
       display: none;
     }

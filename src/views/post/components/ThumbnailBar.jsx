@@ -5,6 +5,7 @@ export default function ThumbnailBar({ fileUrl }) {
   for (let i = 0; i < 3; i++) {
     images.push(
       <img
+        key={i}
         src={fileUrl}
         onLoad={() => {
           URL.revokeObjectURL(fileUrl);
