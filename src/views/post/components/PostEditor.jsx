@@ -12,8 +12,10 @@ export default function PostEditor() {
   return (
     <StyledPostEditor>
       {fileUrl && <ThumbnailBar fileUrl={fileUrl} />}
-      <ImageDropzone fileUrl={fileUrl} setFileUrl={setFileUrl} />
-      <PostTitleInput postTitle={postTitle} />
+      <section>
+        <ImageDropzone fileUrl={fileUrl} setFileUrl={setFileUrl} />
+        <PostTitleInput postTitle={postTitle} />
+      </section>
     </StyledPostEditor>
   );
 }

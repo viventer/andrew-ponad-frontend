@@ -5,6 +5,7 @@ export const StyledThumbnailBar = styled.section`
 
   & img {
     width: 90vw;
+    width: 100%;
     height: calc(0.5625 * 90vw);
     max-width: 36rem;
     max-height: 20.25rem;
