@@ -31,7 +31,10 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
   }, []);
 
   return (
-    <StyledImageDropzone {...getRootProps()}>
+    <StyledImageDropzone
+      {...getRootProps()}
+      isabsolute={fileUrl ? true : false}
+    >
       <input {...getInputProps()} />
       {!fileUrl ? (
         <div>
