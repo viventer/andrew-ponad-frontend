@@ -57,7 +57,7 @@ export const StyledPostTitleInput = styled.input`
   top: 100%;
   left: 0;
   transform: translate(0, -100%);
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.5);
   border: solid 0.1rem rgba(241, 196, 123, 1);
   font-size: 1.5rem;
   color: white;
@@ -69,6 +69,6 @@ export const StyledPostTitleInput = styled.input`
   }
 
   &:focus-visible {
-    box-shadow: 0 0 1rem rgba(241, 196, 123, 0.75);
+    box-shadow: 0 0 0.5rem rgba(241, 196, 123, 0.5);
   }
 `;
