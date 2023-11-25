@@ -48,4 +48,8 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 700;
   }
 
+  .transition {
+    transition: all 0.15s ease-in-out;
+  }
+
 `;

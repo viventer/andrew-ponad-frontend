@@ -1,15 +1,14 @@
 import styled from "styled-components";
 
 export const StyledImageDropzone = styled.div`
-  ${({ isabsolute }) =>
-    isabsolute &&
+  ${({ $isabsolute }) =>
+    $isabsolute &&
     `
   position: absolute;
   left: 50%;
   top: 0%;
   transform: translate(-50%);
     `}
-  text-align: center;
   z-index: 200;
   width: 90vw;
   height: calc(0.5625 * 90vw);
@@ -24,6 +23,7 @@ export const StyledImageDropzone = styled.div`
 
   & p {
     padding: 0 1rem;
+    text-align: center;
   }
 
   & .icon {
@@ -88,27 +88,29 @@ export const StyledImageDropzone = styled.div`
     }
   }
 
-  @media (max-width: 1500px) {
+  @media (max-width: 1600px) {
     width: 80vw;
     height: calc(0.5625 * 80vw);
     max-width: 32rem;
     max-height: 18rem;
   }
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1414px) {
     width: 70vw;
     height: calc(0.5625 * 70vw);
     max-width: 28rem;
     max-height: 15.75rem;
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 1100px) {
     font-size: 1rem;
-    width: 90vw;
-    height: calc(0.5625 * 90vw);
-    max-width: 36rem;
-    max-height: 20.25rem;
+    width: 80vw;
+    height: calc(0.5625 * 80vw);
+    max-width: 32rem;
+    max-height: 18rem;
+  }
 
+  @media (max-width: 500px) {
     & .icon,
     & .change-icon {
       font-size: 2rem;

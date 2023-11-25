@@ -1,4 +1,3 @@
-import ErrorWindow from "../../global/components/ErrorWindow";
 import { StyledImageDropzone } from "../styles/ImageDropzone.styled";
 
 import { useEffect, useState } from "react";
@@ -6,9 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExchange, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useDropzone } from "react-dropzone";
 
-export default function ImageDropzone({ fileUrl, setFileUrl }) {
-  const [uploadError, setUploadError] = useState("");
-
+export default function ImageDropzone({
+  fileUrl,
+  setFileUrl,
+  errorMessage,
+  setErrorMessage,
+}) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
@@ -16,11 +18,11 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
     maxFiles: 1,
     maxSize: 1048576,
     onDrop: (acceptedFiles) => {
-      if (acceptedFiles) setUploadError("");
+      if (acceptedFiles) setErrorMessage("");
       setFileUrl(URL.createObjectURL(acceptedFiles[0]));
     },
     onError: () => {
-      setUploadError(
+      setErrorMessage(
         "Plik został odrzucony. Pamiętaj, że rozmiar nie może przekraczać 1MB."
       );
     },
@@ -31,10 +33,7 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
   }, []);
 
   return (
-    <StyledImageDropzone
-      {...getRootProps()}
-      isabsolute={fileUrl ? true : false}
-    >
+    <StyledImageDropzone {...getRootProps()} $isabsolute={fileUrl ? 1 : 0}>
       <input {...getInputProps()} />
       {!fileUrl ? (
         <div>
@@ -47,7 +46,6 @@ export default function ImageDropzone({ fileUrl, setFileUrl }) {
           <p className="change-paragraph">Zmień zdjęcie</p>
         </div>
       )}
-      {uploadError && <ErrorWindow message={uploadError} />}
     </StyledImageDropzone>
   );
 }

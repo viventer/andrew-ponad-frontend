@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const StyledThumbnailBar = styled.section`
-  min-width: 100%;
-
   & img {
     width: 90vw;
     height: calc(0.5625 * 90vw);
@@ -32,7 +30,7 @@ export const StyledThumbnailBar = styled.section`
     z-index: 100;
   }
 
-  @media (max-width: 1500px) {
+  @media (max-width: 1600px) {
     & img:first-child,
     & img:last-child {
       width: 70vw;
@@ -57,7 +55,7 @@ export const StyledThumbnailBar = styled.section`
     }
   }
 
-  @media (max-width: 1300px) {
+  @media (max-width: 1414px) {
     & img:first-child,
     & img:last-child {
       width: 50vw;
@@ -82,19 +80,16 @@ export const StyledThumbnailBar = styled.section`
     }
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
     & img:last-child,
     & img:first-child {
       display: none;
     }
-  }
-
-  @media (max-width: 500px) {
     & img:nth-child(2) {
-      width: 90vw;
-      height: calc(0.5625 * 90vw);
-      max-width: 36rem;
-      max-height: 20.25rem;
+      width: 80vw;
+      height: calc(0.5625 * 80vw);
+      max-width: 32rem;
+      max-height: 18rem;
     }
   }
 `;
