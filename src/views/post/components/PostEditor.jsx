@@ -5,6 +5,7 @@ import PostTitleInput from "./PostTitleInput";
 import ErrorWindow from "../../global/components/ErrorWindow";
 
 import { useEffect, useState } from "react";
+import PostContentEditor from "./PostContentEditor";
 
 export default function PostEditor() {
   const [fileUrl, setFileUrl] = useState(null);
@@ -35,6 +36,7 @@ export default function PostEditor() {
             setErrorMessage={setErrorMessage}
           />
         </div>
+        <PostContentEditor />
       </StyledPostEditor>
       <div style={{ opacity: errorMessage ? 1 : 0 }} className="transition">
         <ErrorWindow message={errorMessage} />
