@@ -8,7 +8,6 @@ import { useDropzone } from "react-dropzone";
 export default function ImageDropzone({
   fileUrl,
   setFileUrl,
-  errorMessage,
   setErrorMessage,
 }) {
   const { getRootProps, getInputProps } = useDropzone({

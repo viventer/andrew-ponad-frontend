@@ -10,13 +10,11 @@ export default function PostEditor() {
   const [fileUrl, setFileUrl] = useState(null);
   const [postTitle, setPostTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     if (errorMessage) {
-      setIsError(true);
       setTimeout(() => {
-        setIsError(false);
+        setErrorMessage("");
       }, 5000);
     }
   }, [errorMessage]);
@@ -28,14 +26,17 @@ export default function PostEditor() {
         <ImageDropzone
           fileUrl={fileUrl}
           setFileUrl={setFileUrl}
-          errorMessage={errorMessage}
           setErrorMessage={setErrorMessage}
         />
         <div className="input">
-          <PostTitleInput postTitle={postTitle} />
+          <PostTitleInput
+            postTitle={postTitle}
+            setPostTitle={setPostTitle}
+            setErrorMessage={setErrorMessage}
+          />
         </div>
       </StyledPostEditor>
-      <div style={{ opacity: isError ? 1 : 0 }} className="transition">
+      <div style={{ opacity: errorMessage ? 1 : 0 }} className="transition">
         <ErrorWindow message={errorMessage} />
       </div>
     </>

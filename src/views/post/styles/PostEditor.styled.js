@@ -32,16 +32,16 @@ export const StyledPostEditor = styled.main`
 `;
 
 export const StyledPostTitleInput = styled.input`
-  background-color: rgba(0, 0, 0, 0.5);
+  transform: translate(0, -100%);
+  z-index: 1000;
+  max-width: 100%;
+  padding: 0.3rem 1.5rem;
+  border: solid 0.1rem rgba(255, 255, 255, 0.5);
   font-size: 1.5rem;
   color: white;
-  padding: 0.3rem 1.5rem;
   font-weight: 700;
-  transform: translate(0, -100%);
-  border: solid 0.1rem rgba(255, 255, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   transition: border 0.15s ease-in-out;
-  z-index: 500;
-  max-width: 100%;
 
   &:focus {
     outline: none;
