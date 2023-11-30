@@ -1,4 +1,5 @@
 import { StyledPostContentEditor } from "../styles/PostContentEditor.styled";
+import ImageDropzone from "./ImageDropzone";
 
 import { useEffect, useState } from "react";
 
@@ -23,6 +24,7 @@ export default function PostContentEditor() {
         modules={quillModules}
         className="quillEditor"
       />
+      <ImageDropzone />
     </StyledPostContentEditor>
   );
 }
