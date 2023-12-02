@@ -8,9 +8,10 @@ import { useEffect, useState } from "react";
 import PostContentEditor from "./PostContentEditor";
 
 export default function PostEditor() {
-  const [fileUrl, setFileUrl] = useState(null);
+  const [thumbnailUrl, setThumbnailUrl] = useState(null);
   const [postTitle, setPostTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [postRows, setPostRows] = useState([]);
 
   useEffect(() => {
     if (errorMessage) {
@@ -23,10 +24,11 @@ export default function PostEditor() {
   return (
     <>
       <StyledPostEditor>
-        {fileUrl && <ThumbnailBar fileUrl={fileUrl} />}
+        {thumbnailUrl && <ThumbnailBar thumbnailUrl={thumbnailUrl} />}
         <ImageDropzone
-          fileUrl={fileUrl}
-          setFileUrl={setFileUrl}
+          isThumbnail={true}
+          imageUrl={thumbnailUrl}
+          setImageUrl={setThumbnailUrl}
           setErrorMessage={setErrorMessage}
         />
         <div className="input">
@@ -36,7 +38,11 @@ export default function PostEditor() {
             setErrorMessage={setErrorMessage}
           />
         </div>
-        <PostContentEditor />
+        <PostContentEditor
+          setErrorMessage={setErrorMessage}
+          postRows={postRows}
+          setPostRows={setPostRows}
+        />
       </StyledPostEditor>
       <div style={{ opacity: errorMessage ? 1 : 0 }} className="transition">
         <ErrorWindow message={errorMessage} />

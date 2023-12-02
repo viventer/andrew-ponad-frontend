@@ -6,9 +6,10 @@ import { faExchange, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useDropzone } from "react-dropzone";
 
 export default function ImageDropzone({
-  fileUrl,
-  setFileUrl,
+  imageUrl,
+  setImageUrl,
   setErrorMessage,
+  isThumbnail,
 }) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -18,9 +19,10 @@ export default function ImageDropzone({
     maxSize: 1048576,
     onDrop: (acceptedFiles) => {
       if (acceptedFiles) setErrorMessage("");
-      setFileUrl(URL.createObjectURL(acceptedFiles[0]));
+      setImageUrl(URL.createObjectURL(acceptedFiles[0]));
     },
     onError: () => {
+      console.log(setErrorMessage);
       setErrorMessage(
         "Plik został odrzucony. Pamiętaj, że rozmiar nie może przekraczać 1MB."
       );
@@ -28,17 +30,17 @@ export default function ImageDropzone({
   });
 
   useEffect(() => {
-    return () => URL.revokeObjectURL(fileUrl);
+    return () => URL.revokeObjectURL(imageUrl);
   }, []);
 
   return (
     <StyledImageDropzone
       {...getRootProps()}
-      $isabsolute={fileUrl ? 1 : 0}
-      className="imageDropzone"
+      $isabsolute={imageUrl && isThumbnail ? 1 : 0}
+      className="imageDropzone responsivePostElement"
     >
       <input {...getInputProps()} />
-      {!fileUrl ? (
+      {!imageUrl ? (
         <div>
           <p>Przeciągnij obraz tutaj lub kliknij aby wybrać</p>
           <FontAwesomeIcon icon={faUpload} className="icon" />

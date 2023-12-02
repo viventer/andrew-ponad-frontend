@@ -10,10 +10,6 @@ export const StyledImageDropzone = styled.div`
   transform: translate(-50%);
     `}
   z-index: 200;
-  width: 90vw;
-  height: calc(0.5625 * 90vw);
-  max-width: 36rem;
-  max-height: 20.25rem;
   outline: 0.15rem dashed rgba(255, 255, 255, 0.15);
   font-size: 1.2rem;
   font-weight: 500;
@@ -85,35 +81,6 @@ export const StyledImageDropzone = styled.div`
     &:active {
       outline-width: 0.3rem;
       outline-color: rgba(255, 255, 255, 0.3);
-    }
-  }
-
-  @media (max-width: 1600px) {
-    width: 80vw;
-    height: calc(0.5625 * 80vw);
-    max-width: 32rem;
-    max-height: 18rem;
-  }
-
-  @media (max-width: 1414px) {
-    width: 70vw;
-    height: calc(0.5625 * 70vw);
-    max-width: 28rem;
-    max-height: 15.75rem;
-  }
-
-  @media (max-width: 1100px) {
-    width: 80vw;
-    height: calc(0.5625 * 80vw);
-    max-width: 40rem;
-    max-height: 22.5rem;
-  }
-
-  @media (max-width: 500px) {
-    font-size: 1rem;
-    & .icon,
-    & .change-icon {
-      font-size: 2rem;
     }
   }
 `;

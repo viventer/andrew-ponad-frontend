@@ -6,10 +6,32 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-export default function PostContentEditor() {
+export default function PostContentEditor({
+  postRows,
+  setPostRows,
+  setErrorMessage,
+}) {
+  const [imageUrl, setImageUrl] = useState("");
+
   const [quillContent, setQuillContent] = useState();
   const quillsContentList = [];
   const quillModules = {};
+
+  useEffect(() => {
+    setPostRows([
+      ...postRows,
+      {
+        firstElement: {
+          type: "image",
+          imageUrl: "",
+        },
+        secondElement: {
+          type: "textEditor",
+          textEditorContent: "",
+        },
+      },
+    ]);
+  }, []);
 
   return (
     <StyledPostContentEditor>
@@ -22,9 +44,16 @@ export default function PostContentEditor() {
           console.log(quillsContentList);
         }}
         modules={quillModules}
-        className="quillEditor"
+        className="quillEditor responsivePostElement"
       />
-      <ImageDropzone />
+      <div className="responsivePostElement">
+        {imageUrl && <img src={imageUrl} />}
+        <ImageDropzone
+          setErrorMessage={setErrorMessage}
+          setImageUrl={setImageUrl}
+          imageUrl={imageUrl}
+        />
+      </div>
     </StyledPostContentEditor>
   );
 }

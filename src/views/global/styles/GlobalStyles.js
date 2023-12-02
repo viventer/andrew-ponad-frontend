@@ -52,4 +52,38 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.15s ease-in-out;
   }
 
+  .responsivePostElement {
+    width: 90vw;
+    height: calc(0.5625 * 90vw);
+    max-width: 36rem;
+    max-height: calc(20.25rem);
+  }
+
+  @media (max-width: 1600px) {
+    .responsivePostElement {
+      width: 80vw;
+      height: calc(0.5625 * 80vw);
+      max-width: 32rem;
+      max-height: calc(18rem);
+    }
+  }
+
+  @media (max-width: 1414px) {
+    .responsivePostElement {
+      width: 70vw;
+      height: calc(0.5625 * 70vw);
+      max-width: 28rem;
+      max-height: calc(15.75rem);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .responsivePostElement {
+      width: 80vw;
+      height: calc(0.5625 * 80vw);
+      max-width: 40rem;
+      max-height: calc(22.5rem);
+    }
+  }
+
 `;

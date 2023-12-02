@@ -1,15 +1,16 @@
 import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
 
-export default function ThumbnailBar({ fileUrl }) {
+export default function ThumbnailBar({ thumbnailUrl }) {
   const images = [];
   for (let i = 0; i < 3; i++) {
     images.push(
       <img
         key={i}
-        src={fileUrl}
+        src={thumbnailUrl}
         onLoad={() => {
-          URL.revokeObjectURL(fileUrl);
+          URL.revokeObjectURL(thumbnailUrl);
         }}
+        className={i == 1 ? "responsivePostElement" : ""}
       />
     );
   }
