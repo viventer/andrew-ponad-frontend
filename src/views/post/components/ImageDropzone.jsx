@@ -32,7 +32,11 @@ export default function ImageDropzone({
   }, []);
 
   return (
-    <StyledImageDropzone {...getRootProps()} $isabsolute={fileUrl ? 1 : 0}>
+    <StyledImageDropzone
+      {...getRootProps()}
+      $isabsolute={fileUrl ? 1 : 0}
+      className="imageDropzone"
+    >
       <input {...getInputProps()} />
       {!fileUrl ? (
         <div>

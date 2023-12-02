@@ -88,8 +88,8 @@ export const StyledThumbnailBar = styled.section`
     & img:nth-child(2) {
       width: 80vw;
       height: calc(0.5625 * 80vw);
-      max-width: 32rem;
-      max-height: 18rem;
+      max-width: 40rem;
+      max-height: 22.5rem;
     }
   }
 `;

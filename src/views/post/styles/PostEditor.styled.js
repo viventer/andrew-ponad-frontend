@@ -16,8 +16,8 @@ export const StyledPostEditor = styled.main`
 
   @media (max-width: 1100px) {
     & > .input {
-      width: 80vw;
-      max-width: 32rem;
+      max-width: 40rem;
+      max-height: 22.5rem;
     }
   }
 
@@ -54,5 +54,6 @@ export const StyledPostTitleInput = styled.input`
   @media (max-width: 500px) {
     transform: translate(0, 0);
     padding: 0.3rem 1.5rem;
+    width: 100%;
   }
 `;
