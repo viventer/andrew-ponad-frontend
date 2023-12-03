@@ -15,7 +15,18 @@ export default function PostContentEditor({
 
   const [quillContent, setQuillContent] = useState();
   const quillsContentList = [];
-  const quillModules = {};
+
+  let toolbarOptions = [
+    ["bold", "italic", "underline", "strike", "code-block"], // toggled buttons
+
+    [{ list: "ordered" }, { list: "bullet" }],
+
+    [{ header: [1, 2, 3, false] }],
+
+    [{ color: [] }], // dropdown with defaults from theme
+    [{ align: [] }],
+  ];
+  const quillModules = { toolbar: toolbarOptions };
 
   useEffect(() => {
     setPostRows([

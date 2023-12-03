@@ -12,12 +12,13 @@ export const StyledPostEditor = styled.main`
     display: flex;
     justify-content: left;
     width: 100%;
+    max-width: 80vw;
   }
 
   @media (max-width: 1100px) {
     & > .input {
+      width: 80vw;
       max-width: 40rem;
-      max-height: 22.5rem;
     }
   }
 
