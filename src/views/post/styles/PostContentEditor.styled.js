@@ -1,15 +1,19 @@
 import styled from "styled-components";
 
 export const StyledPostContentEditor = styled.section`
-  width: 100%;
+  max-width: fit-content;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  column-gap: 3rem;
-  row-gap: 1rem;
+  flex-direction: column;
   height: 100%;
-  align-items: center;
+  align-items: left;
   margin-top: 3rem;
+
+  & .flex {
+    flex-wrap: wrap;
+    column-gap: 3rem;
+    row-gap: 1rem;
+  }
 
   .quillEditor {
     border: 0.1rem solid rgba(241, 196, 123, 0.5);
@@ -59,5 +63,32 @@ export const StyledPostContentEditor = styled.section`
 
   @media (max-width: 553px) {
     row-gap: 2.5rem;
+  }
+`;
+
+export const StyledRowTypeSelection = styled.div`
+  display: flex;
+  gap: 2rem;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+  background-color: rgba(21, 49, 92, 0.15);
+  border: 0.1rem solid ${({ theme }) => theme.colors.navy};
+  border-radius: 0.3rem;
+
+  & div {
+    display: flex;
+    gap: 0.5rem;
+    transition: all ease-in-out 0.15s;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+  }
+
+  & div:hover {
+    color: white;
+  }
+
+  & div[selected="true"] {
+    color: red;
   }
 `;
