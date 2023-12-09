@@ -93,4 +93,20 @@ export const StyledRowTypeSelection = styled.div`
   }
 `;
 
-export const StyledPostContentEditorRow = styled.section``;
+export const StyledPostContentEditorRow = styled.section`
+  & .onlyOneElement .responsivePostElement {
+    width: 60vw;
+    max-width: none;
+    height: calc(0.5625 * 60vw);
+    max-height: none;
+  }
+
+  @media (max-width: 1100px) {
+    & .onlyOneElement .responsivePostElement {
+      width: 80vw;
+      height: calc(0.5625 * 80vw);
+      max-width: 40rem;
+      max-height: calc(22.5rem);
+    }
+  }
+`;

@@ -29,7 +29,11 @@ export default function PostContentEditorRow({ setErrorMessage }) {
   return (
     <StyledPostContentEditorRow>
       <RowTypeSelection setRowElementsType={setRowElementsType} />
-      <div className="flex flex-center">
+      <div
+        className={`flex flex-center ${
+          rowElementsType.length == 1 && "onlyOneElement"
+        }`}
+      >
         {rowElementsType.map((type, i) => {
           const imageUrl = i == 0 ? firstImageUrl : secondImageUrl;
           const setImageUrl = i == 0 ? setFirstImageUrl : setSecondImageUrl;
