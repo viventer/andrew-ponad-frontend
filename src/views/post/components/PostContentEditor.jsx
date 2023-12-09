@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import RowTypeSelection from "./RowTypeSelection";
+import PostContentEditorRow from "./PostContentEditorRow";
 
 export default function PostContentEditor({
   postRows,
@@ -13,7 +14,6 @@ export default function PostContentEditor({
   setErrorMessage,
 }) {
   const [imageUrl, setImageUrl] = useState("");
-  const [rowElementsType, setRowElementsType] = useState([]);
 
   const [quillContent, setQuillContent] = useState();
   const quillsContentList = [];
@@ -45,31 +45,7 @@ export default function PostContentEditor({
 
   return (
     <StyledPostContentEditor>
-      <RowTypeSelection
-        rowElementsType={rowElementsType}
-        setRowElementsType={setRowElementsType}
-      />
-      <div className="flex flex-center">
-        <ReactQuill
-          theme="snow"
-          value={quillContent}
-          onChange={(content) => {
-            setQuillContent(content);
-            quillsContentList[0] = quillContent;
-            console.log(quillsContentList);
-          }}
-          modules={quillModules}
-          className="quillEditor responsivePostElement"
-        />
-        <div className="responsivePostElement">
-          {imageUrl && <img src={imageUrl} />}
-          <ImageDropzone
-            setErrorMessage={setErrorMessage}
-            setImageUrl={setImageUrl}
-            imageUrl={imageUrl}
-          />
-        </div>
-      </div>
+      <PostContentEditorRow setErrorMessage={setErrorMessage} />
     </StyledPostContentEditor>
   );
 }

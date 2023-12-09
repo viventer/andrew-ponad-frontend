@@ -92,3 +92,5 @@ export const StyledRowTypeSelection = styled.div`
     color: red;
   }
 `;
+
+export const StyledPostContentEditorRow = styled.section``;

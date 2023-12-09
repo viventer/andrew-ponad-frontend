@@ -2,10 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledRowTypeSelection } from "../styles/PostContentEditor.styled";
 import { faAlignLeft, faImage } from "@fortawesome/free-solid-svg-icons";
 
-export default function RowTypeSelection({
-  rowElementsType,
-  setRowElementsType,
-}) {
+export default function RowTypeSelection({ setRowElementsType }) {
   return (
     <StyledRowTypeSelection>
       <div
