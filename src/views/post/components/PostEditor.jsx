@@ -11,7 +11,20 @@ export default function PostEditor() {
   const [thumbnailUrl, setThumbnailUrl] = useState(null);
   const [postTitle, setPostTitle] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [postRows, setPostRows] = useState([]);
+  const [postRows, setPostRows] = useState([
+    {
+      firstElement: {
+        type: "textEditor",
+        textEditorContent: "",
+        imageUrl: "",
+      },
+      secondElement: {
+        type: "image",
+        textEditorContent: "",
+        imageUrl: "",
+      },
+    },
+  ]);
 
   useEffect(() => {
     if (errorMessage) {

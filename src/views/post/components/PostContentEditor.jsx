@@ -1,11 +1,8 @@
 import { StyledPostContentEditor } from "../styles/PostContentEditor.styled";
-import ImageDropzone from "./ImageDropzone";
 
 import { useEffect, useState } from "react";
 
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import RowTypeSelection from "./RowTypeSelection";
 import PostContentEditorRow from "./PostContentEditorRow";
 
 export default function PostContentEditor({
@@ -27,25 +24,30 @@ export default function PostContentEditor({
   ];
   const quillModules = { toolbar: toolbarOptions };
 
-  useEffect(() => {
-    setPostRows([
-      ...postRows,
-      {
-        firstElement: {
-          type: "image",
-          imageUrl: "",
-        },
-        secondElement: {
-          type: "textEditor",
-          textEditorContent: "",
-        },
+  function addRow() {
+    const newRow = {
+      firstElement: {
+        type: "textEditor",
+        textEditorContent: "",
+        imageUrl: "",
       },
-    ]);
-  }, []);
+      secondElement: {
+        type: "image",
+        textEditorContent: "",
+        imageUrl: "",
+      },
+    };
+    setPostRows([...postRows, newRow]);
+  }
 
   return (
     <StyledPostContentEditor>
-      <PostContentEditorRow setErrorMessage={setErrorMessage} />
+      {postRows.map((postRow, i) => (
+        <PostContentEditorRow setErrorMessage={setErrorMessage} key={i} />
+      ))}
+      <button onClick={addRow}>
+        <p>Dodaj nowy wiersz</p>
+      </button>
     </StyledPostContentEditor>
   );
 }
