@@ -5,7 +5,12 @@ import RowTypeSelection from "./RowTypeSelection";
 
 import { useState } from "react";
 
-export default function PostContentEditorRow({ setErrorMessage }) {
+export default function PostContentEditorRow({
+  setErrorMessage,
+  activeRowNumber,
+  setActiveRowNumber,
+  index,
+}) {
   const [rowElementsType, setRowElementsType] = useState([
     "postEditor",
     "image",
@@ -28,11 +33,16 @@ export default function PostContentEditorRow({ setErrorMessage }) {
 
   return (
     <StyledPostContentEditorRow>
-      <RowTypeSelection setRowElementsType={setRowElementsType} />
+      {activeRowNumber == index && (
+        <RowTypeSelection setRowElementsType={setRowElementsType} />
+      )}
       <div
         className={`flex flex-center ${
           rowElementsType.length == 1 && "onlyOneElement"
-        }`}
+        } ${activeRowNumber == index && "active"}`}
+        onClick={() => {
+          setActiveRowNumber(index);
+        }}
       >
         {rowElementsType.map((type, i) => {
           const imageUrl = i == 0 ? firstImageUrl : secondImageUrl;

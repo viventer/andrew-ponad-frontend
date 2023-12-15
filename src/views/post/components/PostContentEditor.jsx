@@ -12,6 +12,8 @@ export default function PostContentEditor({
 }) {
   const [imageUrl, setImageUrl] = useState("");
 
+  const [activeRowNumber, setActiveRowNumber] = useState(0);
+
   const [quillContent, setQuillContent] = useState();
   const quillsContentList = [];
 
@@ -43,7 +45,13 @@ export default function PostContentEditor({
   return (
     <StyledPostContentEditor>
       {postRows.map((postRow, i) => (
-        <PostContentEditorRow setErrorMessage={setErrorMessage} key={i} />
+        <PostContentEditorRow
+          setErrorMessage={setErrorMessage}
+          key={i}
+          index={i}
+          activeRowNumber={activeRowNumber}
+          setActiveRowNumber={setActiveRowNumber}
+        />
       ))}
       <button onClick={addRow}>
         <p>Dodaj nowy wiersz</p>

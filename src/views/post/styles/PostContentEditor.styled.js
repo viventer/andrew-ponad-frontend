@@ -8,7 +8,7 @@ export const StyledPostContentEditor = styled.section`
   height: 100%;
   align-items: left;
   margin-top: 3rem;
-  gap: 2rem;
+  gap: 3rem;
 
   & .flex {
     flex-wrap: wrap;
@@ -126,6 +126,15 @@ export const StyledPostContentEditorRow = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & .flex:not(.active) {
+    cursor: pointer;
+  }
+
+  & .flex:not(.active):hover {
+    outline: 0.1rem solid #777;
+    outline-offset: 0.4rem;
+  }
 
   & .onlyOneElement .responsivePostElement {
     max-width: 75rem;
