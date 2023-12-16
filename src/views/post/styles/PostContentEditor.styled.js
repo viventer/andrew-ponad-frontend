@@ -44,8 +44,6 @@ export const StyledPostContentEditor = styled.section`
 
   .ql-container {
     width: 100%;
-    /* height: calc(100% - 42px); */
-    max-height: 50vh;
     border: none;
   }
 
@@ -188,5 +186,23 @@ export const StyledPostContentEditorRow = styled.section`
       max-width: 40rem;
       max-height: calc(22.5rem);
     }
+
+    & .flex {
+      width: 80vw;
+      max-width: 40rem;
+    }
+  }
+
+  & .onlyOneElement .quillEditor {
+    height: 100%;
+    max-height: calc(80vh + 42px);
+  }
+
+  & .onlyOneElement .ql-container {
+    max-height: 80vh;
+  }
+
+  & .onlyOneElement .ql-editor {
+    max-height: 80vh;
   }
 `;
