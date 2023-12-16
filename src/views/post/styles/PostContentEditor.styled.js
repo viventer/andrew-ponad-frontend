@@ -6,7 +6,7 @@ export const StyledPostContentEditor = styled.section`
   justify-content: center;
   flex-direction: column;
   height: 100%;
-  align-items: left;
+  align-items: center;
   margin-top: 3rem;
   gap: 3rem;
 
@@ -18,6 +18,9 @@ export const StyledPostContentEditor = styled.section`
 
   .quillEditor {
     border: 0.1rem solid rgba(241, 196, 123, 0.5);
+    height: auto;
+    max-height: 100%;
+    min-height: calc(20.25rem);
   }
 
   .quillEditor p,
@@ -41,8 +44,13 @@ export const StyledPostContentEditor = styled.section`
 
   .ql-container {
     width: 100%;
-    height: calc(100% - 42px);
+    /* height: calc(100% - 42px); */
+    max-height: 50vh;
     border: none;
+  }
+
+  .ql-container .ql-editor {
+    max-height: 50vh;
   }
 
   .ql-toolbar {
@@ -71,6 +79,7 @@ export const StyledPostContentEditor = styled.section`
     font-weight: 700;
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     transition: filter 0.15s ease-in-out;
+    width: 100%;
   }
 
   & button:hover {
@@ -82,8 +91,19 @@ export const StyledPostContentEditor = styled.section`
     filter: brightness(1.75);
   }
 
+  @media (max-width: 1100px) {
+    & button {
+      width: 80vw;
+      max-width: 40rem;
+    }
+  }
+
   @media (max-width: 553px) {
     row-gap: 2.5rem;
+
+    .ql-container {
+      height: calc(100% - 65px);
+    }
   }
 `;
 
@@ -126,6 +146,10 @@ export const StyledPostContentEditorRow = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  & .flex {
+    max-width: fit-content;
+  }
 
   & .flex:not(.active) {
     cursor: pointer;
