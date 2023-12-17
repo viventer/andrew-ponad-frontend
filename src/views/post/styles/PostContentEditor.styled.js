@@ -68,29 +68,63 @@ export const StyledPostContentEditor = styled.section`
     object-fit: cover;
   }
 
-  & button {
-    border: none;
-    background-color: rgba(21, 49, 92, 0.15);
+  & > button {
+    background-color: rgba(0, 0, 0, 0);
     color: white;
     padding: 2rem;
     font-size: 1.5rem;
     font-weight: 700;
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
-    transition: filter 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
     width: 100%;
+    box-shadow: inset 0 0 10rem rgba(21, 49, 92, 0.15);
+    margin-bottom: 2rem;
   }
 
-  & button:hover {
+  & > button:hover {
     cursor: pointer;
-    filter: brightness(1.25);
+    box-shadow: inset 20rem 0 10rem rgba(21, 49, 92, 0.2);
   }
 
-  & button:active {
+  & > button:active {
+    filter: brightness(1.75);
+  }
+
+  & > footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.15s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & > footer > button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 0.1rem solid rgba(21, 49, 92, 1);
+    padding: 0.5rem 1rem;
+    transition: all 0.15s ease-in-out;
+    box-shadow: inset 0 0 5rem rgba(21, 49, 92, 0.3);
+  }
+
+  & > footer > button:hover {
+    box-shadow: inset 2rem 0rem 5rem rgba(21, 49, 92, 0.5);
+    cursor: pointer;
+  }
+
+  & > footer > button:active {
     filter: brightness(1.75);
   }
 
   @media (max-width: 1100px) {
-    & button {
+    & > button {
       width: 80vw;
       max-width: 40rem;
     }
@@ -107,8 +141,8 @@ export const StyledPostContentEditor = styled.section`
 
 export const StyledRowTypeSelection = styled.div`
   display: flex;
-  column-gap: 2rem;
-  row-gap: 1rem;
+  gap: 1rem;
+  justify-content: space-between;
   font-size: 1.2rem;
   padding: 0.5rem 1rem;
   margin-bottom: 0.5rem;
@@ -116,7 +150,12 @@ export const StyledRowTypeSelection = styled.div`
   border: 0.1rem solid ${({ theme }) => theme.colors.navy};
   border-radius: 0.3rem;
   width: 100%;
-  flex-wrap: wrap;
+
+  & > div:first-child {
+    column-gap: 2rem;
+    row-gap: 1rem;
+    flex-wrap: wrap;
+  }
 
   & div {
     display: flex;

@@ -12,7 +12,7 @@ export default function PostContentEditorRow({
   index,
 }) {
   const [rowElementsType, setRowElementsType] = useState([
-    "postEditor",
+    "textEditor",
     "image",
   ]);
 
@@ -33,7 +33,7 @@ export default function PostContentEditorRow({
 
   return (
     <StyledPostContentEditorRow>
-      {activeRowNumber == index && (
+      {activeRowNumber == index && rowElementsType[0] != "none" && (
         <RowTypeSelection setRowElementsType={setRowElementsType} />
       )}
       <div
@@ -59,7 +59,7 @@ export default function PostContentEditorRow({
                 />
               </div>
             );
-          } else {
+          } else if (type === "textEditor") {
             return (
               <ReactQuill
                 key={i + 10}

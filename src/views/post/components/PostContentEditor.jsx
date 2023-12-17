@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 
 import "react-quill/dist/quill.snow.css";
 import PostContentEditorRow from "./PostContentEditorRow";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function PostContentEditor({
   postRows,
@@ -56,6 +58,9 @@ export default function PostContentEditor({
       <button onClick={addRow}>
         <p>Dodaj nowy wiersz</p>
       </button>
+      <footer>
+        <button>Dodaj posta</button>
+      </footer>
     </StyledPostContentEditor>
   );
 }
