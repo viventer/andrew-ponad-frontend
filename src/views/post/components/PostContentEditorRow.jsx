@@ -34,7 +34,10 @@ export default function PostContentEditorRow({
   return (
     <StyledPostContentEditorRow>
       {activeRowNumber == index && rowElementsType[0] != "none" && (
-        <RowTypeSelection setRowElementsType={setRowElementsType} />
+        <RowTypeSelection
+          setRowElementsType={setRowElementsType}
+          index={index}
+        />
       )}
       <div
         className={`flex flex-center ${

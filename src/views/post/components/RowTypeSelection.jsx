@@ -6,7 +6,7 @@ import {
   faImage,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function RowTypeSelection({ setRowElementsType }) {
+export default function RowTypeSelection({ setRowElementsType, index }) {
   return (
     <StyledRowTypeSelection>
       <div>
@@ -49,13 +49,15 @@ export default function RowTypeSelection({ setRowElementsType }) {
           <FontAwesomeIcon icon={faImage} />
         </div>
       </div>
-      <div
-        onClick={() => {
-          setRowElementsType(["none"]);
-        }}
-      >
-        <FontAwesomeIcon icon={faClose} />
-      </div>
+      {index != 0 && (
+        <div
+          onClick={() => {
+            setRowElementsType(["none"]);
+          }}
+        >
+          <FontAwesomeIcon icon={faClose} />
+        </div>
+      )}
     </StyledRowTypeSelection>
   );
 }

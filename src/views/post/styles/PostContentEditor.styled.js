@@ -169,6 +169,10 @@ export const StyledRowTypeSelection = styled.div`
     color: white;
   }
 
+  & div:last-child:hover {
+    color: rgb(255, 100, 100);
+  }
+
   & div[selected="true"] {
     color: red;
   }
