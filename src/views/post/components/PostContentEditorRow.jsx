@@ -10,12 +10,10 @@ export default function PostContentEditorRow({
   activeRowNumber,
   setActiveRowNumber,
   index,
+  rowData,
+  updateElement,
+  deleteRow,
 }) {
-  const [rowElementsType, setRowElementsType] = useState([
-    "textEditor",
-    "image",
-  ]);
-
   const [firstImageUrl, setFirstImageUrl] = useState("");
   const [secondImageUrl, setSecondImageUrl] = useState("");
 
@@ -33,25 +31,26 @@ export default function PostContentEditorRow({
 
   return (
     <StyledPostContentEditorRow>
-      {activeRowNumber == index && rowElementsType[0] != "none" && (
+      {activeRowNumber == index && (
         <RowTypeSelection
-          setRowElementsType={setRowElementsType}
           index={index}
+          updateElement={updateElement}
+          deleteRow={deleteRow}
         />
       )}
       <div
         className={`flex flex-center ${
-          rowElementsType.length == 1 && "onlyOneElement"
+          rowData[1].type == "none" && "onlyOneElement"
         } ${activeRowNumber == index && "active"}`}
         onClick={() => {
           setActiveRowNumber(index);
         }}
       >
-        {rowElementsType.map((type, i) => {
+        {rowData.map((elementData, i) => {
           const imageUrl = i == 0 ? firstImageUrl : secondImageUrl;
           const setImageUrl = i == 0 ? setFirstImageUrl : setSecondImageUrl;
 
-          if (type === "image") {
+          if (elementData.type === "image") {
             return (
               <div className="responsivePostElement" key={i}>
                 {imageUrl && <img src={imageUrl} />}
@@ -62,7 +61,7 @@ export default function PostContentEditorRow({
                 />
               </div>
             );
-          } else if (type === "textEditor") {
+          } else if (elementData.type === "textEditor") {
             return (
               <ReactQuill
                 key={i + 10}

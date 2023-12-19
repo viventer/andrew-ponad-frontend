@@ -169,7 +169,7 @@ export const StyledRowTypeSelection = styled.div`
     color: white;
   }
 
-  & div:last-child:hover {
+  & > div:nth-child(2):hover {
     color: rgb(255, 100, 100);
   }
 

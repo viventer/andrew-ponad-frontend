@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import PostContentEditorRow from "./PostContentEditorRow";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function PostContentEditor({
   postRows,
   setPostRows,
   setErrorMessage,
+  updateElement,
+  deleteRow,
 }) {
   const [imageUrl, setImageUrl] = useState("");
 
@@ -29,18 +30,18 @@ export default function PostContentEditor({
   const quillModules = { toolbar: toolbarOptions };
 
   function addRow() {
-    const newRow = {
-      firstElement: {
+    const newRow = [
+      {
         type: "textEditor",
         textEditorContent: "",
         imageUrl: "",
       },
-      secondElement: {
+      {
         type: "image",
         textEditorContent: "",
         imageUrl: "",
       },
-    };
+    ];
     setPostRows([...postRows, newRow]);
   }
 
@@ -53,6 +54,9 @@ export default function PostContentEditor({
           index={i}
           activeRowNumber={activeRowNumber}
           setActiveRowNumber={setActiveRowNumber}
+          rowData={postRow}
+          updateElement={updateElement}
+          deleteRow={deleteRow}
         />
       ))}
       <button onClick={addRow}>

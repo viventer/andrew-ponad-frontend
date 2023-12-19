@@ -6,27 +6,30 @@ import {
   faImage,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function RowTypeSelection({ setRowElementsType, index }) {
+export default function RowTypeSelection({ index, updateElement, deleteRow }) {
   return (
     <StyledRowTypeSelection>
       <div>
         <div
           onClick={() => {
-            setRowElementsType(["textEditor"]);
+            updateElement(index, 0, { type: "textEditor" });
+            updateElement(index, 1, { type: "none" });
           }}
         >
           <FontAwesomeIcon icon={faAlignLeft} />
         </div>
         <div
           onClick={() => {
-            setRowElementsType(["image"]);
+            updateElement(index, 0, { type: "image" });
+            updateElement(index, 1, { type: "none" });
           }}
         >
           <FontAwesomeIcon icon={faImage} />
         </div>
         <div
           onClick={() => {
-            setRowElementsType(["textEditor", "image"]);
+            updateElement(index, 0, { type: "textEditor" });
+            updateElement(index, 1, { type: "image" });
           }}
         >
           <FontAwesomeIcon icon={faAlignLeft} />
@@ -34,7 +37,8 @@ export default function RowTypeSelection({ setRowElementsType, index }) {
         </div>
         <div
           onClick={() => {
-            setRowElementsType(["image", "textEditor"]);
+            updateElement(index, 0, { type: "image" });
+            updateElement(index, 1, { type: "textEditor" });
           }}
         >
           <FontAwesomeIcon icon={faImage} />
@@ -42,7 +46,8 @@ export default function RowTypeSelection({ setRowElementsType, index }) {
         </div>
         <div
           onClick={() => {
-            setRowElementsType(["image", "image"]);
+            updateElement(index, 0, { type: "image" });
+            updateElement(index, 1, { type: "image" });
           }}
         >
           <FontAwesomeIcon icon={faImage} />
@@ -52,7 +57,7 @@ export default function RowTypeSelection({ setRowElementsType, index }) {
       {index != 0 && (
         <div
           onClick={() => {
-            setRowElementsType(["none"]);
+            deleteRow(index);
           }}
         >
           <FontAwesomeIcon icon={faClose} />
