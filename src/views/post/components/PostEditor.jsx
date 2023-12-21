@@ -7,11 +7,13 @@ import ErrorWindow from "../../global/components/ErrorWindow";
 import { useEffect, useState } from "react";
 import PostContentEditor from "./PostContentEditor";
 
+import useLocalStorage from "../../../hooks/useLocalStorage";
+
 export default function PostEditor() {
-  const [thumbnailUrl, setThumbnailUrl] = useState(null);
-  const [postTitle, setPostTitle] = useState("");
+  const [thumbnailUrl, setThumbnailUrl] = useLocalStorage("thumbnailUrl", "");
+  const [postTitle, setPostTitle] = useLocalStorage("postTitle", "");
   const [errorMessage, setErrorMessage] = useState("");
-  const [postRows, setPostRows] = useState([
+  const [postRows, setPostRows] = useLocalStorage("postRows", [
     [
       {
         type: "textEditor",
@@ -25,6 +27,12 @@ export default function PostEditor() {
       },
     ],
   ]);
+
+  const postContent = {
+    thumbnailUrl: thumbnailUrl,
+    postRows: postRows,
+    postTitle: postTitle,
+  };
 
   function updateElement(rowIndex, elementIndex, updatedFields) {
     setPostRows((prevRows) => {
@@ -83,6 +91,9 @@ export default function PostEditor() {
           updateElement={updateElement}
           deleteRow={deleteRow}
         />
+        <footer>
+          <button onClick={() => console.log(postContent)}>Dodaj posta</button>
+        </footer>
       </StyledPostEditor>
       <div style={{ opacity: errorMessage ? 1 : 0 }} className="transition">
         <ErrorWindow message={errorMessage} />

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledErrorWindow = styled.section`
   position: fixed;
   left: 3rem;
-  bottom: 3rem;
+  bottom: 6rem;
   margin-top: 1rem;
   z-index: 1000;
   padding: 1rem 1rem;

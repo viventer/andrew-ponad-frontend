@@ -15,6 +15,40 @@ export const StyledPostEditor = styled.main`
     max-width: 80vw;
   }
 
+  & > footer {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -10;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: all 0.15s ease-in-out;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10000;
+  }
+
+  & > footer > button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border: 0.1rem solid rgba(21, 49, 92, 1);
+    padding: 0.5rem 1rem;
+    transition: all 0.15s ease-in-out;
+    box-shadow: inset 0 0 5rem rgba(21, 49, 92, 0.3);
+  }
+
+  & > footer > button:hover {
+    box-shadow: inset 2rem 0rem 5rem rgba(21, 49, 92, 0.5);
+    cursor: pointer;
+  }
+
+  & > footer > button:active {
+    filter: brightness(1.75);
+  }
+
   @media (max-width: 1100px) {
     & > .input {
       width: 80vw;

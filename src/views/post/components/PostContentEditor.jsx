@@ -62,9 +62,6 @@ export default function PostContentEditor({
       <button onClick={addRow}>
         <p>Dodaj nowy wiersz</p>
       </button>
-      <footer>
-        <button>Dodaj posta</button>
-      </footer>
     </StyledPostContentEditor>
   );
 }

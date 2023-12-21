@@ -3,8 +3,6 @@ import ImageDropzone from "./ImageDropzone";
 import ReactQuill from "react-quill";
 import RowTypeSelection from "./RowTypeSelection";
 
-import { useState } from "react";
-
 export default function PostContentEditorRow({
   setErrorMessage,
   activeRowNumber,
@@ -14,12 +12,6 @@ export default function PostContentEditorRow({
   updateElement,
   deleteRow,
 }) {
-  const [firstImageUrl, setFirstImageUrl] = useState("");
-  const [secondImageUrl, setSecondImageUrl] = useState("");
-
-  const [quillContent, setQuillContent] = useState();
-  const quillsContentList = [];
-
   let toolbarOptions = [
     ["bold", "italic", "underline", "strike", "code-block"],
     [{ list: "ordered" }, { list: "bullet" }],
@@ -47,8 +39,10 @@ export default function PostContentEditorRow({
         }}
       >
         {rowData.map((elementData, i) => {
-          const imageUrl = i == 0 ? firstImageUrl : secondImageUrl;
-          const setImageUrl = i == 0 ? setFirstImageUrl : setSecondImageUrl;
+          const imageUrl = rowData[i].imageUrl;
+          const setImageUrl = (url) => {
+            updateElement(index, i, { imageUrl: url });
+          };
 
           if (elementData.type === "image") {
             return (
@@ -56,8 +50,9 @@ export default function PostContentEditorRow({
                 {imageUrl && <img src={imageUrl} />}
                 <ImageDropzone
                   setErrorMessage={setErrorMessage}
+                  rowIndex={index}
+                  imageUrl={rowData[i].imageUrl}
                   setImageUrl={setImageUrl}
-                  imageUrl={imageUrl}
                 />
               </div>
             );
@@ -66,11 +61,9 @@ export default function PostContentEditorRow({
               <ReactQuill
                 key={i + 10}
                 theme="snow"
-                value={quillContent}
+                value={rowData[i].textEditorContent}
                 onChange={(content) => {
-                  setQuillContent(content);
-                  quillsContentList[0] = quillContent;
-                  console.log(quillsContentList);
+                  updateElement(index, i, { textEditorContent: content });
                 }}
                 modules={quillModules}
                 className="quillEditor responsivePostElement"
