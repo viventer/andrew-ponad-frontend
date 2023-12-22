@@ -4,10 +4,10 @@ import ThumbnailBar from "./ThumbnailBar";
 import PostTitleInput from "./PostTitleInput";
 import ErrorWindow from "../../global/components/ErrorWindow";
 
+import useLocalStorage from "../../../hooks/useLocalStorage";
+
 import { useEffect, useState } from "react";
 import PostContentEditor from "./PostContentEditor";
-
-import useLocalStorage from "../../../hooks/useLocalStorage";
 
 export default function PostEditor() {
   const [thumbnailUrl, setThumbnailUrl] = useLocalStorage("thumbnailUrl", "");

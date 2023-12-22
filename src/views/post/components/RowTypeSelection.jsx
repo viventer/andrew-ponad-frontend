@@ -1,5 +1,6 @@
+import { StyledRowTypeSelection } from "../styles/RowTypeSelection.styled";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyledRowTypeSelection } from "../styles/PostContentEditor.styled";
 import {
   faAlignLeft,
   faClose,

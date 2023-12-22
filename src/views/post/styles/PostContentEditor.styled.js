@@ -1,26 +1,26 @@
 import styled from "styled-components";
 
 export const StyledPostContentEditor = styled.section`
-  max-width: fit-content;
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  height: 100%;
   align-items: center;
-  margin-top: 3rem;
+  flex-direction: column;
   gap: 3rem;
+  height: 100%;
+  max-width: fit-content;
+  margin-top: 3rem;
 
   & .flex {
-    flex-wrap: wrap;
     column-gap: 3rem;
     row-gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .quillEditor {
-    border: 0.1rem solid rgba(241, 196, 123, 0.5);
     height: auto;
     max-height: 100%;
     min-height: calc(20.25rem);
+    border: 0.1rem solid rgba(241, 196, 123, 0.5);
   }
 
   .quillEditor p,
@@ -39,7 +39,11 @@ export const StyledPostContentEditor = styled.section`
   }
 
   .quillEditor h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .quillEditor h2 {
+    font-size: 1.4rem;
   }
 
   .ql-container {
@@ -69,16 +73,16 @@ export const StyledPostContentEditor = styled.section`
   }
 
   & > button {
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
+    width: 100%;
+    margin-bottom: 2rem;
     padding: 2rem;
     font-size: 1.5rem;
     font-weight: 700;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     transition: all 0.15s ease-in-out;
-    width: 100%;
     box-shadow: inset 0 0 10rem rgba(21, 49, 92, 0.15);
-    margin-bottom: 2rem;
   }
 
   & > button:hover {
@@ -89,7 +93,6 @@ export const StyledPostContentEditor = styled.section`
   & > button:active {
     filter: brightness(1.75);
   }
-
 
   @media (max-width: 1100px) {
     & > button {
@@ -104,116 +107,5 @@ export const StyledPostContentEditor = styled.section`
     .ql-container {
       height: calc(100% - 65px);
     }
-  }
-`;
-
-export const StyledRowTypeSelection = styled.div`
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  font-size: 1.2rem;
-  padding: 0.5rem 1rem;
-  margin-bottom: 0.5rem;
-  background-color: rgba(21, 49, 92, 0.15);
-  border: 0.1rem solid ${({ theme }) => theme.colors.navy};
-  border-radius: 0.3rem;
-  width: 100%;
-
-  & > div:first-child {
-    column-gap: 2rem;
-    row-gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  & div {
-    display: flex;
-    gap: 0.5rem;
-    transition: all ease-in-out 0.15s;
-    color: rgba(255, 255, 255, 0.75);
-    cursor: pointer;
-  }
-
-  & div:hover {
-    color: white;
-  }
-
-  & > div:nth-child(2):hover {
-    color: rgb(255, 100, 100);
-  }
-
-  & div[selected="true"] {
-    color: red;
-  }
-
-  @media (max-width: 1100px) {
-    width: 80vw;
-    max-width: 40rem;
-  }
-`;
-
-export const StyledPostContentEditorRow = styled.section`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  & .flex {
-    max-width: fit-content;
-  }
-
-  & .flex:not(.active) {
-    cursor: pointer;
-  }
-
-  & .flex:not(.active):hover {
-    outline: 0.1rem solid #777;
-    outline-offset: 0.4rem;
-  }
-
-  & .onlyOneElement .responsivePostElement {
-    max-width: 75rem;
-    max-height: calc(0.5625 * 75rem);
-  }
-
-  @media (max-width: 1600px) {
-    & .onlyOneElement .responsivePostElement {
-      max-width: 67rem;
-      max-height: calc(0.5625 * 67rem);
-    }
-  }
-
-  @media (max-width: 1414px) {
-    & .onlyOneElement .responsivePostElement {
-      width: 140vw;
-      height: calc(0.5625 * 140vw);
-      max-width: 59rem;
-      max-height: calc(0.5625 * 59rem);
-    }
-  }
-
-  @media (max-width: 1100px) {
-    & .onlyOneElement .responsivePostElement {
-      width: 80vw;
-      height: calc(0.5625 * 80vw);
-      max-width: 40rem;
-      max-height: calc(22.5rem);
-    }
-
-    & .flex {
-      width: 80vw;
-      max-width: 40rem;
-    }
-  }
-
-  & .onlyOneElement .quillEditor {
-    height: 100%;
-    max-height: calc(80vh + 42px);
-  }
-
-  & .onlyOneElement .ql-container {
-    max-height: 80vh;
-  }
-
-  & .onlyOneElement .ql-editor {
-    max-height: 80vh;
   }
 `;

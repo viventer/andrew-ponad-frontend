@@ -1,10 +1,8 @@
 import { StyledPostContentEditor } from "../styles/PostContentEditor.styled";
-
-import { useEffect, useState } from "react";
-
-import "react-quill/dist/quill.snow.css";
 import PostContentEditorRow from "./PostContentEditorRow";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import { useState } from "react";
+import "react-quill/dist/quill.snow.css";
 
 export default function PostContentEditor({
   postRows,
@@ -13,21 +11,7 @@ export default function PostContentEditor({
   updateElement,
   deleteRow,
 }) {
-  const [imageUrl, setImageUrl] = useState("");
-
   const [activeRowNumber, setActiveRowNumber] = useState(0);
-
-  const [quillContent, setQuillContent] = useState();
-  const quillsContentList = [];
-
-  let toolbarOptions = [
-    ["bold", "italic", "underline", "strike", "code-block"],
-    [{ list: "ordered" }, { list: "bullet" }],
-    [{ header: [1, 2, 3, false] }],
-    [{ color: [] }],
-    [{ align: [] }],
-  ];
-  const quillModules = { toolbar: toolbarOptions };
 
   function addRow() {
     const newRow = [

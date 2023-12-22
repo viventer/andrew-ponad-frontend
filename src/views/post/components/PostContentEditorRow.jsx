@@ -1,7 +1,8 @@
-import { StyledPostContentEditorRow } from "../styles/PostContentEditor.styled";
-import ImageDropzone from "./ImageDropzone";
-import ReactQuill from "react-quill";
+import { StyledPostContentEditorRow } from "../styles/PostContentEditorRow.styled";
 import RowTypeSelection from "./RowTypeSelection";
+import ImageDropzone from "./ImageDropzone";
+
+import ReactQuill from "react-quill";
 
 export default function PostContentEditorRow({
   setErrorMessage,
@@ -15,7 +16,7 @@ export default function PostContentEditorRow({
   let toolbarOptions = [
     ["bold", "italic", "underline", "strike", "code-block"],
     [{ list: "ordered" }, { list: "bullet" }],
-    [{ header: [1, 2, 3, false] }],
+    [{ header: [1, 2, false] }],
     [{ color: [] }],
     [{ align: [] }],
   ];

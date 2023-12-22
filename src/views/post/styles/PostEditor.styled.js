@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const StyledPostEditor = styled.main`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  position: relative;
   margin-top: 4rem;
 
   & > .input {
@@ -16,28 +16,24 @@ export const StyledPostEditor = styled.main`
   }
 
   & > footer {
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: -10;
     position: fixed;
     left: 0;
     right: 0;
     bottom: 0;
-    transition: all 0.15s ease-in-out;
-    display: flex;
-    justify-content: space-between;
     z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all 0.15s ease-in-out;
   }
 
   & > footer > button {
-    border: none;
-    background-color: rgba(0, 0, 0, 0);
-    color: white;
+    padding: 0.5rem 1rem;
+    border: 0.1rem solid rgba(21, 49, 92, 1);
+    box-shadow: inset 0 0 5rem rgba(21, 49, 92, 0.3);
     font-size: 1.5rem;
     font-weight: 700;
-    border: 0.1rem solid rgba(21, 49, 92, 1);
-    padding: 0.5rem 1rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
     transition: all 0.15s ease-in-out;
-    box-shadow: inset 0 0 5rem rgba(21, 49, 92, 0.3);
   }
 
   & > footer > button:hover {
@@ -68,8 +64,8 @@ export const StyledPostEditor = styled.main`
 
 export const StyledPostTitleInput = styled.input`
   transform: translate(0, -100%);
-  z-index: 1000;
   max-width: 100%;
+  z-index: 1000;
   padding: 0.3rem 1.5rem;
   border: solid 0.1rem rgba(255, 255, 255, 0.5);
   font-size: 1.5rem;
@@ -88,7 +84,7 @@ export const StyledPostTitleInput = styled.input`
 
   @media (max-width: 500px) {
     transform: translate(0, 0);
-    padding: 0.3rem 1.5rem;
     width: 100%;
+    padding: 0.3rem 1.5rem;
   }
 `;
