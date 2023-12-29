@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
 
 import { GlobalStyles } from "./views/global/styles/GlobalStyles.js";
-// import { store } from "./views/global/redux/store.js"
+import { store } from "./redux/store.js";
 
 import App from "./App.jsx";
 
@@ -28,13 +28,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      {/* <Provider store={store}> */}
-      <BrowserRouter>
-        <Routes>
-          <Route path="/*" element={<App />} />
-        </Routes>
-      </BrowserRouter>
-      {/* </Provider> */}
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/*" element={<App />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>
 );
