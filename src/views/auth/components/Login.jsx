@@ -9,8 +9,8 @@ import { useLoginMutation } from "../slices/authApiSlice";
 import usePersist from "../../../hooks/usePersist";
 import useAuth from "../../../hooks/useAuth";
 
-import ErrorInfo from "../../global/components/ErrorWindow";
-import SignInForm from "./SignInForm";
+import ErrorWindow from "../../global/components/ErrorWindow";
+import LoginForm from "./LoginForm";
 import { StyledAuth } from "../styles/Login.styled";
 
 export default function Login() {
@@ -82,9 +82,9 @@ export default function Login() {
 
   const content = (
     <StyledAuth>
-      {errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
-      <h2>Sign in</h2>
-      <SignInForm
+      {errMsg && <ErrorWindow aria-live="assertive" message={errMsg} />}
+      <h2>Zaloguj się</h2>
+      <LoginForm
         handlers={{
           handleSubmit,
           handleUserInput,
@@ -96,9 +96,9 @@ export default function Login() {
         canSubmit={canSubmit}
       />
       <div className="flex">
-        <p>Need an Account? </p>
-        <Link to="/signup" className="reactRouterLink">
-          <p>Sign up</p>
+        <p>Nie masz konta? </p>
+        <Link to="/register" className="reactRouterLink">
+          <p>Zarejestruj się</p>
         </Link>
       </div>
     </StyledAuth>
