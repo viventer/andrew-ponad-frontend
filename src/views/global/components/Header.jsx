@@ -1,5 +1,6 @@
 import SearchBar from "./SearchBar";
 import Navigation from "./Navigation";
+import UserInfo from "./UserInfo";
 import { StyledHeader } from "../styles/Header.styled";
 
 import { Link } from "react-router-dom";
@@ -16,6 +17,7 @@ export default function Header() {
         <SearchBar />
       </div>
       <Navigation />
+      <UserInfo />
     </StyledHeader>
   );
 }

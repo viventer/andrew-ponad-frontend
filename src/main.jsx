@@ -20,6 +20,7 @@ const theme = {
     sunset: "#F1C47B",
     lightGray: "#E5E5E5",
     gray: "#5C5C5C",
+    darkGray: "#222",
     white: "#ffffff",
   },
 };

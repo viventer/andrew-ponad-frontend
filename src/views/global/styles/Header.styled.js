@@ -5,8 +5,10 @@ export const StyledHeader = styled.header`
   gap: 1rem;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.07);
-  box-shadow: 0 0 0.7rem 0 rgba(241, 196, 123, 1);
+  background-color: ${({ theme }) => theme.colors.darkGray};
+  /* box-shadow: 0 0 0.7rem 0 rgba(241, 196, 123, 1); */
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+  position: relative;
 
   & .flex {
     gap: 3rem;
@@ -76,7 +78,7 @@ export const StyledSearchBar = styled.nav`
     max-width: 35rem;
   }
 
-  .icon {
+  & .icon {
     border-left: none;
     border-radius: 0 2rem 2rem 0;
     background-color: rgba(255, 255, 255, 0.15);
