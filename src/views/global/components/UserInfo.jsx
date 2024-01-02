@@ -1,6 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledUserInfo } from "../styles/UserInfo.styled";
-import { faPencil, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheck,
+  faKey,
+  faPencil,
+  faRightFromBracket,
+  faUser,
+  faUserSlash,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function UserInfo() {
   return (
@@ -31,12 +38,24 @@ export default function UserInfo() {
           <p>
             rola: <span>niezweryfikowany</span>
           </p>
-          <button>Zweryfikuj się</button>
+          <button className="verifyButton">
+            <FontAwesomeIcon icon={faCheck} />
+            Zweryfikuj się
+          </button>
         </section>
         <section className="flex">
-          <button>Wyloguj się</button>
-          <button>Zmień hasło</button>
-          <button>Usuń konto</button>
+          <button>
+            <FontAwesomeIcon icon={faRightFromBracket} />
+            Wyloguj się
+          </button>
+          <button>
+            <FontAwesomeIcon icon={faKey} />
+            Zmień hasło
+          </button>
+          <button>
+            <FontAwesomeIcon icon={faUserSlash} />
+            Usuń konto
+          </button>
         </section>
       </article>
     </StyledUserInfo>
