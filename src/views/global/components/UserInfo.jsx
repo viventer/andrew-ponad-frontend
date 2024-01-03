@@ -8,14 +8,17 @@ import {
   faUser,
   faUserSlash,
 } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function UserInfo() {
+  const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
+
   return (
     <StyledUserInfo>
-      <button>
+      <button onClick={() => setIsUserInfoVisible((prev) => !prev)}>
         <FontAwesomeIcon icon={faUser} className="icon" />
       </button>
-      <article>
+      <article className={isUserInfoVisible ? "visible" : ""}>
         <header className="flex">
           <h2>Informacje o koncie</h2>
           <button>

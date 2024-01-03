@@ -6,7 +6,6 @@ export const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.darkGray};
-  /* box-shadow: 0 0 0.7rem 0 rgba(241, 196, 123, 1); */
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   position: relative;
 
@@ -32,6 +31,17 @@ export const StyledHeader = styled.header`
 
   & .reactRouterLink:active {
     filter: brightness(1.2);
+  }
+
+  @media (max-width: 650px) {
+    &.flex {
+      gap: 0;
+    }
+
+    & > .flex {
+      justify-content: space-between;
+      width: 100%;
+    }
   }
 `;
 
@@ -89,9 +99,19 @@ export const StyledSearchBar = styled.nav`
     border-left: none;
   }
 
-  @media (max-width: 1000px) {
-    & form {
+  @media (max-width: 650px) {
+    width: fit-content;
+
+    & input {
       display: none;
+    }
+
+    & .icon {
+      border: none;
+      background: none;
+      box-shadow: none;
+      font-size: 1.4rem;
+      padding: 0;
     }
   }
 `;
