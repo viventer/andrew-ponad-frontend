@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledUserInfo } from "../styles/UserInfo.styled";
+import { StyledButton } from "../styles/Button.styled";
 import {
   faCheck,
   faKey,
@@ -9,6 +10,10 @@ import {
   faUserSlash,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import LogoutButton from "./LogoutButton";
+import DeleteAccountButton from "./DeleteAccountButton";
+import ChangePasswordButton from "./ChangePasswordButton";
+import VerificationButton from "./VerificationButton";
 
 export default function UserInfo() {
   const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
@@ -21,9 +26,10 @@ export default function UserInfo() {
       <article className={isUserInfoVisible ? "visible" : ""}>
         <header className="flex">
           <h2>Informacje o koncie</h2>
-          <button>
+          <StyledButton>
             <FontAwesomeIcon icon={faPencil} />
-          </button>
+            Edytuj dane
+          </StyledButton>
         </header>
         <section>
           <p>
@@ -41,24 +47,12 @@ export default function UserInfo() {
           <p>
             rola: <span>niezweryfikowany</span>
           </p>
-          <button className="verifyButton">
-            <FontAwesomeIcon icon={faCheck} />
-            Zweryfikuj się
-          </button>
+          <VerificationButton />
         </section>
         <section className="flex">
-          <button>
-            <FontAwesomeIcon icon={faRightFromBracket} />
-            Wyloguj się
-          </button>
-          <button>
-            <FontAwesomeIcon icon={faKey} />
-            Zmień hasło
-          </button>
-          <button>
-            <FontAwesomeIcon icon={faUserSlash} />
-            Usuń konto
-          </button>
+          <LogoutButton />
+          <ChangePasswordButton />
+          <DeleteAccountButton />
         </section>
       </article>
     </StyledUserInfo>
