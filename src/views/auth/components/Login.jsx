@@ -74,7 +74,7 @@ export default function Login() {
   if (isLoading)
     return (
       <div className="flex">
-        <HashLoader color="fff" />
+        <HashLoader color="fff" className="hashLoader" />
       </div>
     );
 

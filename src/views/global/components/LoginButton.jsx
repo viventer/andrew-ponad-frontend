@@ -22,7 +22,7 @@ export default function SignOutButton() {
     if (isError) {
       return <ErrorInfo message={error} />;
     } else if (isLoading) {
-      return <HashLoader color="fff" />;
+      return <HashLoader color="white" className="hashLoader" />;
     } else {
       setIsLogged(false);
       navigate("/");

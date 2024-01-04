@@ -23,6 +23,8 @@ export const StyledHeader = styled.header`
     white-space: nowrap;
     transition: all ease-in-out 0.15s;
     font-size: 1.5rem;
+    display: flex;
+    align-items: center;
   }
 
   & .reactRouterLink:hover {
@@ -41,6 +43,12 @@ export const StyledHeader = styled.header`
     & > .flex {
       justify-content: space-between;
       width: 100%;
+    }
+  }
+
+  @media (max-width: 385px) {
+    & > .flex {
+      gap: 1rem;
     }
   }
 `;

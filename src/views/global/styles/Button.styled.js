@@ -17,7 +17,8 @@ export const StyledButton = styled.button`
   white-space: nowrap;
 
   &:hover {
-    box-shadow: inset 3rem 0 3rem rgba(21, 49, 92, 0.75);
+    box-shadow: inset 3rem 0 2rem rgba(21, 49, 92, 1);
     cursor: pointer;
+    border: 0.1rem solid rgba(255, 255, 255, 0.3);
   }
 `;

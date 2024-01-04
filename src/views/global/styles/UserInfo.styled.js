@@ -14,11 +14,6 @@ export const StyledUserInfo = styled.div`
     align-items: center;
   }
 
-  & > button:hover {
-    cursor: pointer;
-    box-shadow: -0.5rem 0 0 ${({ theme }) => theme.colors.sunset};
-  }
-
   & > article {
     position: absolute;
     right: 0;
@@ -89,7 +84,14 @@ export const StyledUserInfo = styled.div`
   }
 
   & section:last-child > button:last-child:hover {
-    box-shadow: inset 3rem 0 3rem rgba(255, 0, 0, 0.75);
+    box-shadow: inset 3rem 0 2rem rgba(255, 0, 0, 0.75);
+  }
+
+  @media (hover: hover) {
+    & > button:hover {
+      cursor: pointer;
+      box-shadow: -0.5rem 0 0 ${({ theme }) => theme.colors.sunset};
+    }
   }
 
   @media (max-width: 650px) {
@@ -115,6 +117,12 @@ export const StyledUserInfo = styled.div`
     & section:last-child > button {
       width: 100%;
       justify-content: center;
+    }
+  }
+
+  @media (max-width: 385px) {
+    & > button {
+      margin-left: 1rem;
     }
   }
 `;

@@ -59,6 +59,12 @@ export const GlobalStyles = createGlobalStyle`
     max-height: calc(20.25rem);
   }
 
+  .hashLoader {
+    position: fixed;
+    left: 50vw;
+    top: 40vh;
+}
+
   @media (max-width: 1600px) {
     .responsivePostElement {
       width: 80vw;
