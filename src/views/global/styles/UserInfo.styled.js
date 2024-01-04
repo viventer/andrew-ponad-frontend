@@ -10,6 +10,8 @@ export const StyledUserInfo = styled.div`
     margin-left: 3rem;
     padding-left: 1rem;
     transition: all 0.15s ease-in-out;
+    display: flex;
+    align-items: center;
   }
 
   & > button:hover {
@@ -49,9 +51,7 @@ export const StyledUserInfo = styled.div`
   & section:first-of-type {
     display: flex;
     gap: 1rem;
-    margin-top: 0.5rem;
     flex-direction: column;
-    margin-bottom: 2rem;
   }
 
   & p {
@@ -64,9 +64,23 @@ export const StyledUserInfo = styled.div`
     font-weight: 400;
   }
 
+  & > article > .flex {
+    align-items: end;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+    gap: 2rem;
+  }
+
   & section:last-child {
-    padding-top: 1.5rem;
-    border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 1rem;
+    width: fit-content;
+    height: 100%;
+  }
+
+  & section:last-child > button {
+    width: 100%;
   }
 
   & section:last-child > button:last-child {
@@ -78,22 +92,29 @@ export const StyledUserInfo = styled.div`
     box-shadow: inset 3rem 0 3rem rgba(255, 0, 0, 0.75);
   }
 
-  & > article .flex:last-child {
-    gap: 2rem;
-  }
-
-  & section.flex:last-of-type {
-    justify-content: space-between;
-  }
-
   @media (max-width: 650px) {
     & > article {
       width: 100lvw;
       border-left: none;
     }
+  }
 
-    & section.flex:last-of-type {
-      justify-content: space-between;
+  @media (max-width: 553px) {
+    & > article > .flex:last-child {
+      flex-direction: column;
+      align-items: start;
+      justify-content: center;
+    }
+
+    & section:last-child {
+      margin-top: 2rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    & section:last-child > button {
+      width: 100%;
+      justify-content: center;
     }
   }
 `;

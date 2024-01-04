@@ -9,7 +9,7 @@ export const StyledHeader = styled.header`
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   position: relative;
 
-  & .flex {
+  & > .flex {
     gap: 3rem;
     justify-content: left;
     align-items: center;

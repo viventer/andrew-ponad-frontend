@@ -7,7 +7,6 @@ export const StyledButton = styled.button`
   padding: 0.2rem 1rem;
   font-size: 1.1rem;
   width: fit-content;
-  margin-top: -0.5rem;
   font-weight: 700;
   box-shadow: inset 0 0 3rem rgba(21, 49, 92, 0.5);
   transition: all 0.15s ease-in-out;
@@ -15,6 +14,7 @@ export const StyledButton = styled.button`
   gap: 0.5rem;
   align-items: center;
   transition: all 0.15s ease-in-out;
+  white-space: nowrap;
 
   &:hover {
     box-shadow: inset 3rem 0 3rem rgba(21, 49, 92, 0.75);

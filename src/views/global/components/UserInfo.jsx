@@ -26,34 +26,36 @@ export default function UserInfo() {
       <article className={isUserInfoVisible ? "visible" : ""}>
         <header className="flex">
           <h2>Informacje o koncie</h2>
-          <StyledButton>
-            <FontAwesomeIcon icon={faPencil} />
-            Edytuj dane
-          </StyledButton>
         </header>
-        <section>
-          <p>
-            login: <span>jakasnazwauseramax20</span>
-          </p>
-          <p>
-            email: <span>jakisemailciekawy@gmail.com</span>
-          </p>
-          <p>
-            imię: <span>Jan</span>
-          </p>
-          <p>
-            nazwisko: <span>Kowalski</span>
-          </p>
-          <p>
-            rola: <span>niezweryfikowany</span>
-          </p>
-          <VerificationButton />
-        </section>
-        <section className="flex">
-          <LogoutButton />
-          <ChangePasswordButton />
-          <DeleteAccountButton />
-        </section>
+        <div className="flex">
+          <section>
+            <p>
+              login: <span>jakasnazwauseramax20</span>
+            </p>
+            <p>
+              email: <span>jakisemailciekawy@gmail.com</span>
+            </p>
+            <p>
+              imię: <span>Jan</span>
+            </p>
+            <p>
+              nazwisko: <span>Kowalski</span>
+            </p>
+            <p>
+              rola: <span>niezweryfikowany</span>
+            </p>
+            <VerificationButton />
+          </section>
+          <section className="flex">
+            <LogoutButton />
+            <StyledButton>
+              <FontAwesomeIcon icon={faPencil} />
+              Edytuj dane
+            </StyledButton>
+            <ChangePasswordButton />
+            <DeleteAccountButton />
+          </section>
+        </div>
       </article>
     </StyledUserInfo>
   );
