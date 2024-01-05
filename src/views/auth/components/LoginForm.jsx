@@ -1,6 +1,6 @@
 import { StyledAuthForm } from "../styles/Login.styled";
 
-export default function SignInForm({
+export default function LoginForm({
   handlers,
   loginData,
   usernameRef,

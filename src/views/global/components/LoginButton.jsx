@@ -26,7 +26,6 @@ export default function SignOutButton() {
     } else {
       setIsLogged(false);
       navigate("/");
-      // You have to reload the page to see sign in and sign up buttons in header
       window.location.reload();
     }
   }

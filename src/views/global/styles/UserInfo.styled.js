@@ -18,18 +18,20 @@ export const StyledUserInfo = styled.div`
     position: absolute;
     right: 0;
     top: calc(100% + 0.1rem);
-    padding: 1rem 2rem;
-    background-color: ${({ theme }) => theme.colors.darkGray};
-    border-left: 0.1rem solid ${({ theme }) => theme.colors.navy};
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
-    border-right: none;
+    border: none;
     z-index: 2000;
     opacity: 0;
-    transition: all 0.15s ease-in-out;
+    max-height: 0;
+    transition: opacity 0.15s ease-in-out, padding 0.15s ease-in-out;
   }
 
   & > article.visible {
     opacity: 1;
+    max-height: 100vh;
+    padding: 1rem 2rem;
+    background-color: ${({ theme }) => theme.colors.darkGray};
+    border-left: 0.1rem solid ${({ theme }) => theme.colors.navy};
+    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
   }
 
   & header.flex {

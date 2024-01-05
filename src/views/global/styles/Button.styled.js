@@ -13,12 +13,12 @@ export const StyledButton = styled.button`
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  transition: all 0.15s ease-in-out;
+  transition: box-shadow 0.15s ease-in-out;
   white-space: nowrap;
 
   &:hover {
     box-shadow: inset 3rem 0 2rem rgba(21, 49, 92, 1);
     cursor: pointer;
-    border: 0.1rem solid rgba(255, 255, 255, 0.3);
+    outline: 0.1rem solid rgba(255, 255, 255, 0.3);
   }
 `;
