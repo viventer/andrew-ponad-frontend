@@ -20,18 +20,15 @@ export const StyledUserInfo = styled.div`
     top: calc(100% + 0.1rem);
     border: none;
     z-index: 2000;
-    opacity: 0;
-    max-height: 0;
-    transition: opacity 0.15s ease-in-out, padding 0.15s ease-in-out;
-  }
-
-  & > article.visible {
-    opacity: 1;
-    max-height: 100vh;
     padding: 1rem 2rem;
     background-color: ${({ theme }) => theme.colors.darkGray};
     border-left: 0.1rem solid ${({ theme }) => theme.colors.navy};
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
+    display: none;
+  }
+
+  & > article.visible {
+    display: block;
   }
 
   & header.flex {
@@ -97,7 +94,7 @@ export const StyledUserInfo = styled.div`
   }
 
   @media (max-width: 650px) {
-    & > article {
+    & > article.visible {
       width: 100lvw;
       border-left: none;
     }

@@ -9,7 +9,7 @@ import { useLoginMutation } from "../slices/authApiSlice";
 import usePersist from "../../../hooks/usePersist";
 import useAuth from "../../../hooks/useAuth";
 
-import ErrorWindow from "../../global/components/ErrorWindow";
+import ErrorInfo from "../../global/components/ErrorInfo";
 import LoginForm from "./LoginForm";
 import { StyledAuth } from "../styles/Login.styled";
 
@@ -56,11 +56,11 @@ export default function Login() {
       navigate(from, { replace: true });
     } catch (err) {
       if (!err.originalStatus) {
-        setErrMsg("No Server Response");
+        setErrMsg("Brak odpowiedzi serwera");
       } else if (err.originalStatus === 400) {
-        setErrMsg("Missing Username or Password");
+        setErrMsg("Uzupełnij wymagane pola");
       } else if (err.originalStatus === 401) {
-        setErrMsg("Unauthorized");
+        setErrMsg("Błędny login lub/i hasło");
       } else {
         setErrMsg(err.data?.message);
       }
@@ -82,7 +82,6 @@ export default function Login() {
 
   const content = (
     <StyledAuth>
-      {errMsg && <ErrorWindow aria-live="assertive" message={errMsg} />}
       <h2>Zaloguj się</h2>
       <LoginForm
         handlers={{
@@ -101,6 +100,7 @@ export default function Login() {
           <p>Zarejestruj się</p>
         </Link>
       </div>
+      {errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
     </StyledAuth>
   );
 

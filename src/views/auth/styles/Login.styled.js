@@ -36,6 +36,13 @@ export const StyledAuth = styled.main`
     border: 0.1rem solid rgba(255, 255, 255, 0.15);
     margin-top: 1.5rem;
   }
+
+  @media (max-width: 335px) {
+    & > .flex {
+      justify-content: space-between;
+      gap: 0;
+    }
+  }
 `;
 
 export const StyledAuthForm = styled.form`
@@ -113,5 +120,20 @@ export const StyledAuthForm = styled.form`
 
   @media (max-width: 425px) {
     width: 100%;
+  }
+
+  @media (max-width: 340px) {
+    & .flex input {
+      width: 1.15rem;
+      height: 1.15rem;
+    }
+
+    & .flex {
+      gap: 0.5rem;
+    }
+
+    & .flex label {
+      font-size: 1.15rem;
+    }
   }
 `;
