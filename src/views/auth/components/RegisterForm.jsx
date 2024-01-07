@@ -1,6 +1,12 @@
 import { StyledAuthForm } from "../styles/Login.styled";
 
-export function RegisterForm({ canSave, data, handlers, usernameRef }) {
+export function RegisterForm({
+  canSave,
+  persist,
+  handlers,
+  usernameRef,
+  inputs,
+}) {
   return (
     <StyledAuthForm onSubmit={handlers.onSignUpClicked}>
       <label htmlFor="username">
@@ -10,8 +16,8 @@ export function RegisterForm({ canSave, data, handlers, usernameRef }) {
         id="username"
         type="text"
         autoComplete="off"
-        value={data.username}
-        onChange={handlers.onUsernameChanged}
+        value={inputs.username}
+        onChange={handlers.handleInputChange}
         required
         ref={usernameRef}
       />
@@ -22,16 +28,16 @@ export function RegisterForm({ canSave, data, handlers, usernameRef }) {
       <input
         id="password"
         type="password"
-        value={data.password}
-        onChange={handlers.onPasswordChanged}
+        value={inputs.password}
+        onChange={handlers.handleInputChange}
         required
       />
       <label htmlFor="confirmPassword">Confirm Password:</label>
       <input
         id="confirmPassword"
         type="password"
-        value={data.confirmPassword}
-        onChange={handlers.onConfirmPasswordChanged}
+        value={inputs.confirmPassword}
+        onChange={handlers.handleInputChange}
         required
       />
       <button
@@ -45,7 +51,7 @@ export function RegisterForm({ canSave, data, handlers, usernameRef }) {
           type="checkbox"
           id="persist"
           onChange={handlers.onPersistToggle}
-          checked={data.persist}
+          checked={persist}
         />
         <label htmlFor="persist">Trust this device</label>
       </div>

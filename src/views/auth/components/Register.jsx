@@ -1,7 +1,11 @@
-import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import HashLoader from "react-spinners/HashLoader";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
+import HashLoader from "react-spinners/HashLoader";
+import Filter from "bad-words";
+import PasswordValidator from "password-validator";
+import validator from "validator";
 
 import { setCredentials } from "../slices/authSlice";
 import { useRegisterMutation, useLoginMutation } from "../slices/authApiSlice";
@@ -12,9 +16,6 @@ import useAuth from "../../../hooks/useAuth";
 import ErrorInfo from "../../global/components/ErrorInfo";
 import { RegisterForm } from "./RegisterForm";
 import { StyledAuth } from "../styles/Login.styled";
-
-const USER_REGEX = /^[A-z]{3,20}$/;
-const PWD_REGEX = /^[A-z0-9!@#$%]{4,12}$/;
 
 export default function Register() {
   const { setIsLogged, isLogged } = useAuth();
@@ -31,22 +32,104 @@ export default function Register() {
   const [register, { isLoading, isSuccess }] = useRegisterMutation();
 
   const [persist, setPersist] = usePersist();
-
-  const [username, setUsername] = useState("");
-  const [validUsername, setValidUsername] = useState(false);
-  const [password, setPassword] = useState("");
-  const [validPassword, setValidPassword] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [validConfirmPassword, setValidConfirmPassword] = useState(false);
+  const onPersistToggle = () => setPersist((prev) => !prev);
 
   const [errMsg, setErrMsg] = useState("");
 
-  useEffect(() => {
-    setValidUsername(USER_REGEX.test(username));
-    setValidPassword(PWD_REGEX.test(password));
-    setValidConfirmPassword(password === confirmPassword && password);
-    setErrMsg("");
-  }, [username, password, confirmPassword]);
+  const [inputs, setInputs] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+  });
+
+  const [validations, setValidations] = useState({
+    username: false,
+    password: false,
+    confirmPassword: false,
+    email: false,
+    name: false,
+  });
+
+  const handleInputChange = (fieldName, value) => {
+    setInputs((prevInputs) => ({ ...prevInputs, [fieldName]: value }));
+    setValidations((prevValidations) => ({
+      ...prevValidations,
+      [fieldName]: validateField(fieldName, value),
+    }));
+  };
+
+  const validateField = (fieldName, value) => {
+    switch (fieldName) {
+      case "password":
+        return validatePassword(value);
+      case "username":
+        return validateUsername(value);
+      case "firstName":
+        return validateName(value, inputs.lastName);
+      case "lastName":
+        return validateName(inputs.firstName, value);
+      case "email":
+        return validateEmail(value);
+      case "confirmPassword":
+        return inputs.password === value;
+    }
+  };
+
+  const validateUsername = (username) => {
+    /*
+  Requirements:
+  - min. 3 chars
+  - max. 20 chars
+  - only letters (big and small) or numbers or "_"
+  - no whitespaces
+  - no special characters on the start and end
+  - two special characters mustn't be next to each other
+  - must contain at least 2 letters
+  */
+    const regex =
+      /^(?!.*_{2,})(?=.{1,20}$)[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*_?[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]$/;
+
+    const isValid = regex.test(username);
+    return isValid;
+  };
+
+  const validatePassword = (password) => {
+    const schema = new passwordValidator();
+
+    schema
+      .is()
+      .min(8) // min. 8 chars
+      .has()
+      .uppercase() // min. 1 uppercase letter
+      .has()
+      .lowercase() // min. 1 lowercase letter
+      .has()
+      .digits() // min. 1 digit
+      .has()
+      .not()
+      .spaces() // no spaces
+      .has()
+      .symbols(); // min. 1 special character
+
+    const isValid = schema.validate(password);
+    return isValid;
+  };
+
+  const validateEmail = (email) => {
+    const isValid = validator.isEmail(email);
+    return isValid;
+  };
+
+  const validateName = (firstName, lastName) => {
+    const regex =
+      /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{3,50}(?:[-\s'][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/;
+
+    const isValid = regex.test(firstName) && regex.test(lastName);
+    return isValid;
+  };
 
   const usernameRef = useRef();
   useEffect(() => {
@@ -65,19 +148,17 @@ export default function Register() {
     navigate("/");
   };
 
-  const onUsernameChanged = (e) => setUsername(e.target.value);
-  const onPasswordChanged = (e) => setPassword(e.target.value);
-  const onConfirmPasswordChanged = (e) => setConfirmPassword(e.target.value);
-  const onPersistToggle = () => setPersist((prev) => !prev);
-
   const dispatch = useDispatch();
 
   const [login, { isLoginLoading }] = useLoginMutation();
 
   const onSignUpClicked = async (e) => {
     e.preventDefault();
-    if (!canSave) {
-      setErrMsg("Enter all the data");
+    if (!isAllDataExist) {
+      setErrMsg("Uzupełnij wszystkie pola");
+      return;
+    } else if (!isAllDataValid) {
+      setErrMsg("Wprowadzone dane są niepoprawne");
       return;
     }
     try {
@@ -101,11 +182,11 @@ export default function Register() {
     }
   };
 
-  const canSave =
-    [validUsername, validPassword, validConfirmPassword].every(Boolean) &&
-    !isLoading;
+  const isAllDataValid = Object.values(validations).every(Boolean);
+  const isAllDataExist = Object.values(inputs).every(Boolean);
 
-  if (isLoading && isLoginLoading) return <HashLoader color="fff" />;
+  if (isLoading && isLoginLoading)
+    return <HashLoader color="fff" className="hashLoader" />;
 
   const content = (
     <StyledAuth>
@@ -114,19 +195,13 @@ export default function Register() {
 
       <RegisterForm
         handlers={{
+          handleInputChange,
           onSignUpClicked,
-          onUsernameChanged,
-          onPasswordChanged,
-          onConfirmPasswordChanged,
           onPersistToggle,
         }}
-        canSave={canSave}
-        data={{
-          username,
-          password,
-          confirmPassword,
-          persist,
-        }}
+        persist={persist}
+        canSave={isAllDataExist && isAllDataValid}
+        inputs={inputs}
         usernameRef={usernameRef}
       />
 
