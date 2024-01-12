@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import HashLoader from "react-spinners/HashLoader";
 import Filter from "bad-words";
-import PasswordValidator from "password-validator";
+import passwordValidator from "password-validator";
 import validator from "validator";
 
 import { setCredentials } from "../slices/authSlice";
@@ -97,11 +97,20 @@ export default function Register() {
   };
 
   const validatePassword = (password) => {
+    if (password.length >= 8 && password.length <= 32) {
+      const firstParagraph =
+        passwordRequirementsRef.current.querySelector("p:first-of-type");
+
+      firstParagraph.style.color = "green";
+    }
+
     const schema = new passwordValidator();
 
     schema
       .is()
       .min(8) // min. 8 chars
+      .is()
+      .max(32)
       .has()
       .uppercase() // min. 1 uppercase letter
       .has()
@@ -135,6 +144,8 @@ export default function Register() {
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
+
+  const passwordRequirementsRef = useRef();
 
   useEffect(() => {
     if (isSuccess) {
@@ -171,11 +182,11 @@ export default function Register() {
       navigate(from, { replace: true });
     } catch (err) {
       if (!err.originalStatus) {
-        setErrMsg("No Server Response");
+        setErrMsg("Brak odpowiedzi serwera");
       } else if (err.originalStatus === 400) {
-        setErrMsg("Missing Username or Password");
+        setErrMsg("Wprowadź wszystkie dane");
       } else if (err.originalStatus === 409) {
-        setErrMsg("Username is taken");
+        setErrMsg("Nazwa użytkownika jest zajęta");
       } else {
         setErrMsg(err.data?.message);
       }
@@ -191,7 +202,7 @@ export default function Register() {
   const content = (
     <StyledAuth>
       {errMsg && <ErrorInfo message={errMsg} />}
-      <h2>Sign up</h2>
+      <h2>Zarejestruj się</h2>
 
       <RegisterForm
         handlers={{
@@ -203,12 +214,13 @@ export default function Register() {
         canSave={isAllDataExist && isAllDataValid}
         inputs={inputs}
         usernameRef={usernameRef}
+        passwordRequirementsRef={passwordRequirementsRef}
       />
 
       <div className="flex">
-        <p>Already registered? </p>
+        <p>Masz już konto? </p>
         <Link to="/login" className="reactRouterLink">
-          <p>Sign in</p>
+          <p>Zaloguj się</p>
         </Link>
       </div>
     </StyledAuth>

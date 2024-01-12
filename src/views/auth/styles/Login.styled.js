@@ -49,9 +49,25 @@ export const StyledAuthForm = styled.form`
   display: flex;
   flex-direction: column;
 
-  & input,
   & button {
     margin-bottom: 1.5rem;
+  }
+
+  & label,
+  & button {
+    margin-top: 1.5rem;
+  }
+
+  & section {
+    margin-top: 0.5rem;
+    color: ${({ theme }) => theme.colors.sunset};
+    font-size: 1.1rem;
+    line-height: 1.3rem;
+    display: none;
+  }
+
+  & div > input:focus + section {
+    display: block;
   }
 
   & input {
@@ -61,6 +77,11 @@ export const StyledAuthForm = styled.form`
     border: none;
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
+    width: 100%;
+  }
+
+  h3 {
+    font-size: 1.2rem;
   }
 
   & input:focus {
