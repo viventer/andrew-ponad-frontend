@@ -66,6 +66,10 @@ export const StyledAuthForm = styled.form`
     display: none;
   }
 
+  & section > p {
+    transition: opacity 0.5s ease-in-out;
+  }
+
   & div > input:focus + section {
     display: block;
   }
@@ -81,6 +85,7 @@ export const StyledAuthForm = styled.form`
   }
 
   h3 {
+    color: white;
     font-size: 1.2rem;
   }
 

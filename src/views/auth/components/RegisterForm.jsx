@@ -4,9 +4,8 @@ export function RegisterForm({
   canSave,
   persist,
   handlers,
-  usernameRef,
   inputs,
-  passwordRequirementsRef,
+  references,
 }) {
   return (
     <StyledAuthForm onSubmit={handlers.onSignUpClicked}>
@@ -21,11 +20,11 @@ export function RegisterForm({
             handlers.handleInputChange("username", e.target.value)
           }
           required
-          ref={usernameRef}
+          ref={references.usernameRef}
         />
         <section>
-          <p>- nazwa powinna zawierać od 3 do 20 znaków</p>
-          <p>- może zawierać litery (min. 2), liczby i znak specjalny: "_"</p>
+          <p>&bull; od 3 do 20 znaków</p>
+          <p>&bull; w tym litery (min. 2), liczby i znak specjalny: "_"</p>
         </section>
       </div>
 
@@ -37,6 +36,7 @@ export function RegisterForm({
         value={inputs.email}
         onChange={(e) => handlers.handleInputChange("email", e.target.value)}
         required
+        ref={references.emailRef}
       />
 
       <label htmlFor="firstName">Imię:</label>
@@ -71,14 +71,15 @@ export function RegisterForm({
             handlers.handleInputChange("password", e.target.value)
           }
           required
+          ref={references.passwordRef}
         />
-        <section ref={passwordRequirementsRef}>
-          <h3>Musi zawierać:</h3>
-          <p>- od 8 do 32 znaków</p>
-          <p>- dużą literę</p>
-          <p>- małą literę</p>
-          <p>- cyfrę</p>
-          <p>- znak specjalny</p>
+        <section ref={references.passwordRequirementsRef}>
+          <p>&bull; od 8 do 32 znaków</p>
+          <p>&bull; duża litera</p>
+          <p>&bull; mała litera</p>
+          <p>&bull; cyfra</p>
+          <p>&bull; znak specjalny</p>
+          <p>&bull; brak spacji</p>
         </section>
       </div>
 
@@ -91,6 +92,7 @@ export function RegisterForm({
           handlers.handleInputChange("confirmPassword", e.target.value)
         }
         required
+        ref={references.confirmPasswordRef}
       />
       <button
         disabled={!canSave}

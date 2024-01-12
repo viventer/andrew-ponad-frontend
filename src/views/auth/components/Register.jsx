@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { useTheme } from "styled-components";
 
 import HashLoader from "react-spinners/HashLoader";
 import Filter from "bad-words";
@@ -18,6 +19,8 @@ import { RegisterForm } from "./RegisterForm";
 import { StyledAuth } from "../styles/Login.styled";
 
 export default function Register() {
+  const theme = useTheme();
+
   const { setIsLogged, isLogged } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -97,38 +100,60 @@ export default function Register() {
   };
 
   const validatePassword = (password) => {
-    if (password.length >= 8 && password.length <= 32) {
-      const firstParagraph =
-        passwordRequirementsRef.current.querySelector("p:first-of-type");
+    const getRequirementParagraph = (index) => {
+      return passwordRequirementsRef.current.querySelector(
+        `p:nth-of-type(${index})`
+      );
+    };
 
-      firstParagraph.style.color = "green";
+    const checkRequirement = (requirement, paragraphIndex) => {
+      const requirementParagraph = getRequirementParagraph(paragraphIndex);
+      if (requirement) {
+        requirementParagraph.style.color = theme.colors.green;
+        setTimeout(() => {
+          requirementParagraph.style.display = "none";
+        }, 500);
+        requirementParagraph.style.opacity = "0";
+      } else {
+        requirementParagraph.style.color = theme.colors.red;
+        setTimeout(() => {
+          requirementParagraph.style.display = "block";
+        }, 500);
+        requirementParagraph.style.opacity = "1";
+      }
+    };
+
+    const requirements = {
+      correctLength: password.length >= 8 && password.length <= 32,
+      containsUpperCase: /[A-Z]/.test(password),
+      containsLowerCase: /[a-z]/.test(password),
+      containsDigit: /[1-9]/.test(password),
+      containsSpecialChar: /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password),
+      notContainSpace: /^[^\s]*$/.test(password),
+    };
+
+    let paragraphIndex = 1;
+    for (const requirement in requirements) {
+      checkRequirement(requirements[requirement], paragraphIndex);
+      paragraphIndex++;
     }
 
-    const schema = new passwordValidator();
+    const isValid = Object.values(requirements).every(Boolean);
 
-    schema
-      .is()
-      .min(8) // min. 8 chars
-      .is()
-      .max(32)
-      .has()
-      .uppercase() // min. 1 uppercase letter
-      .has()
-      .lowercase() // min. 1 lowercase letter
-      .has()
-      .digits() // min. 1 digit
-      .has()
-      .not()
-      .spaces() // no spaces
-      .has()
-      .symbols(); // min. 1 special character
+    passwordRef.current.style.outlineColor = isValid
+      ? theme.colors.green
+      : theme.colors.red;
 
-    const isValid = schema.validate(password);
     return isValid;
   };
 
   const validateEmail = (email) => {
     const isValid = validator.isEmail(email);
+
+    emailRef.current.style.outlineColor = isValid
+      ? theme.colors.green
+      : theme.colors.red;
+
     return isValid;
   };
 
@@ -145,6 +170,9 @@ export default function Register() {
     usernameRef.current.focus();
   }, []);
 
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
   const passwordRequirementsRef = useRef();
 
   useEffect(() => {
@@ -213,8 +241,13 @@ export default function Register() {
         persist={persist}
         canSave={isAllDataExist && isAllDataValid}
         inputs={inputs}
-        usernameRef={usernameRef}
-        passwordRequirementsRef={passwordRequirementsRef}
+        references={{
+          usernameRef,
+          emailRef,
+          passwordRef,
+          confirmPasswordRef,
+          passwordRequirementsRef,
+        }}
       />
 
       <div className="flex">
