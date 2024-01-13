@@ -8,7 +8,7 @@ export const StyledAuth = styled.main`
   width: fit-content;
   box-shadow: 0 0 1rem rgba(255, 255, 255, 0.15);
   border-radius: 0.5rem;
-  padding: 2rem;
+  padding: 3rem 5rem;
   margin-top: 4rem;
   max-width: 100%;
 
@@ -30,6 +30,10 @@ export const StyledAuth = styled.main`
     text-decoration-line: underline;
   }
 
+  @media (max-width: 1000px) {
+    padding: 2rem;
+  }
+
   @media (max-width: 425px) {
     box-shadow: none;
     width: 95%;
@@ -48,6 +52,8 @@ export const StyledAuth = styled.main`
 export const StyledAuthForm = styled.form`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  border-top: 0.1rem solid rgba(255, 255, 255, 0.15);
 
   & button {
     margin-bottom: 1.5rem;
@@ -82,7 +88,15 @@ export const StyledAuthForm = styled.form`
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     width: 100%;
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.red};
+    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+  }
+
+  & input[type="checkbox"]:focus {
+    outline: none;
+  }
+
+  & input[type="checkbox"]:focus-visible {
+    outline: 0.1rem solid white;
   }
 
   h3 {
@@ -92,12 +106,17 @@ export const StyledAuthForm = styled.form`
 
   & input:focus {
     border-bottom: none;
-    outline: 0.1rem solid ${({ theme }) => theme.colors.red};
+    outline: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
 
   & input.correct {
     border-color: ${({ theme }) => theme.colors.green};
     outline-color: ${({ theme }) => theme.colors.green};
+  }
+
+  & input.incorrect {
+    border-color: ${({ theme }) => theme.colors.red};
+    outline-color: ${({ theme }) => theme.colors.red};
   }
 
   & label {

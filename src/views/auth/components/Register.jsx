@@ -72,9 +72,9 @@ export default function Register() {
       case "username":
         return validateUsername(value);
       case "firstName":
-        return validateName(value, inputs.lastName);
+        return validateFirstName(value);
       case "lastName":
-        return validateName(inputs.firstName, value);
+        return validateLastName(value);
       case "email":
         return validateEmail(value);
       case "confirmPassword":
@@ -83,9 +83,13 @@ export default function Register() {
   };
 
   const setValidationStyle = (isValid, fieldRef) => {
-    isValid
-      ? fieldRef.current.classList.add("correct")
-      : fieldRef.current.classList.remove("correct");
+    if (isValid) {
+      fieldRef.current.classList.add("correct");
+      fieldRef.current.classList.remove("incorrect");
+    } else {
+      fieldRef.current.classList.add("incorrect");
+      fieldRef.current.classList.remove("correct");
+    }
   };
 
   const validateConfirmPassword = (confirmPassword) => {
@@ -168,18 +172,24 @@ export default function Register() {
     return isValid;
   };
 
-  const validateName = (firstName, lastName) => {
+  const validateFirstName = (firstName) => {
     const regex =
       /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{3,50}(?:[-\s'][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/;
 
-    const isValidFirstName = regex.test(firstName);
-    setValidationStyle(isValidFirstName, firstNameRef);
+    const isValid = regex.test(firstName);
+    setValidationStyle(isValid, firstNameRef);
 
-    const isValidLastName = regex.test(lastName);
-    setValidationStyle(isValidLastName, lastNameRef);
+    return isValid;
+  };
 
-    const isValidName = isValidFirstName && isValidLastName;
-    return isValidName;
+  const validateLastName = (lastName) => {
+    const regex =
+      /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{3,50}(?:[-\s'][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/;
+
+    const isValid = regex.test(lastName);
+    setValidationStyle(isValid, lastNameRef);
+
+    return isValid;
   };
 
   const usernameRef = useRef();
@@ -201,8 +211,7 @@ export default function Register() {
   }, [isSuccess, navigate]);
 
   const finish = () => {
-    setUsername("");
-    setPassword("");
+    setInputs({});
     navigate("/");
   };
 
@@ -210,7 +219,7 @@ export default function Register() {
 
   const [login, { isLoginLoading }] = useLoginMutation();
 
-  const onSignUpClicked = async (e) => {
+  const onRegisterClicked = async (e) => {
     e.preventDefault();
     if (!isAllDataExist) {
       setErrMsg("Uzupełnij wszystkie pola");
@@ -220,9 +229,12 @@ export default function Register() {
       return;
     }
     try {
-      await register({ username, password }).unwrap();
-      const { accessToken } = await login({ username, password }).unwrap();
-      dispatch(setCredentials({ username, accessToken }));
+      await register(inputs).unwrap();
+      const { accessToken } = await login({
+        password: inputs.password,
+        username: inputs.username,
+      }).unwrap();
+      dispatch(setCredentials({ username: inputs.username, accessToken }));
       if (!isLogged) {
         setIsLogged(true);
       }
@@ -243,20 +255,17 @@ export default function Register() {
   const isAllDataValid = Object.values(validations).every(Boolean);
   const isAllDataExist = Object.values(inputs).every(Boolean);
 
-  console.log(validations);
-
   if (isLoading && isLoginLoading)
     return <HashLoader color="fff" className="hashLoader" />;
 
   const content = (
-    <StyledAuth>
-      {errMsg && <ErrorInfo message={errMsg} />}
+    <StyledAuth className="register">
       <h2>Zarejestruj się</h2>
 
       <RegisterForm
         handlers={{
           handleInputChange,
-          onSignUpClicked,
+          onRegisterClicked,
           onPersistToggle,
         }}
         persist={persist}
@@ -279,6 +288,8 @@ export default function Register() {
           <p>Zaloguj się</p>
         </Link>
       </div>
+
+      {errMsg && <ErrorInfo message={errMsg} />}
     </StyledAuth>
   );
 

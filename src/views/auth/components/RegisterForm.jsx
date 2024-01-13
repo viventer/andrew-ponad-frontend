@@ -8,7 +8,7 @@ export function RegisterForm({
   references,
 }) {
   return (
-    <StyledAuthForm onSubmit={handlers.onSignUpClicked}>
+    <StyledAuthForm onSubmit={handlers.onRegisterClicked}>
       <label htmlFor="username">Nazwa użytkownika:</label>
       <div>
         <input
@@ -100,7 +100,6 @@ export function RegisterForm({
       <button
         disabled={!canSave}
         className={canSave ? "activeButton" : "disabledButton"}
-        onClick={() => console.log(canSave)}
       >
         Zarejestruj się
       </button>
