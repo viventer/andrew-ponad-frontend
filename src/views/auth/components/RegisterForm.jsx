@@ -24,7 +24,8 @@ export function RegisterForm({
         />
         <section>
           <p>&bull; od 3 do 20 znaków</p>
-          <p>&bull; w tym litery (min. 2), liczby i znak specjalny: "_"</p>
+          <p>&bull; min. 2 litery</p>
+          <p>&bull; dozwolony znak specjalny: "_"</p>
         </section>
       </div>
 
@@ -49,6 +50,7 @@ export function RegisterForm({
           handlers.handleInputChange("firstName", e.target.value)
         }
         required
+        ref={references.firstNameRef}
       />
 
       <label htmlFor="lastName">Nazwisko:</label>
@@ -59,6 +61,7 @@ export function RegisterForm({
         value={inputs.lastName}
         onChange={(e) => handlers.handleInputChange("lastName", e.target.value)}
         required
+        ref={references.lastNameRef}
       />
 
       <label htmlFor="password">Hasło:</label>
@@ -97,6 +100,7 @@ export function RegisterForm({
       <button
         disabled={!canSave}
         className={canSave ? "activeButton" : "disabledButton"}
+        onClick={() => console.log(canSave)}
       >
         Zarejestruj się
       </button>

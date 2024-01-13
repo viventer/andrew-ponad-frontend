@@ -82,6 +82,7 @@ export const StyledAuthForm = styled.form`
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     width: 100%;
+    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.red};
   }
 
   h3 {
@@ -90,7 +91,13 @@ export const StyledAuthForm = styled.form`
   }
 
   & input:focus {
-    outline: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+    border-bottom: none;
+    outline: 0.1rem solid ${({ theme }) => theme.colors.red};
+  }
+
+  & input.correct {
+    border-color: ${({ theme }) => theme.colors.green};
+    outline-color: ${({ theme }) => theme.colors.green};
   }
 
   & label {
@@ -107,6 +114,7 @@ export const StyledAuthForm = styled.form`
     border-radius: 0.3rem;
     background-color: ${({ theme }) => theme.colors.navy};
     width: 100%;
+    filter: brightness(1);
   }
 
   & .activeButton:hover {

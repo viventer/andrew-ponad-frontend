@@ -53,7 +53,8 @@ export default function Register() {
     password: false,
     confirmPassword: false,
     email: false,
-    name: false,
+    firstName: false,
+    lastName: false,
   });
 
   const handleInputChange = (fieldName, value) => {
@@ -77,8 +78,21 @@ export default function Register() {
       case "email":
         return validateEmail(value);
       case "confirmPassword":
-        return inputs.password === value;
+        return validateConfirmPassword(value);
     }
+  };
+
+  const setValidationStyle = (isValid, fieldRef) => {
+    isValid
+      ? fieldRef.current.classList.add("correct")
+      : fieldRef.current.classList.remove("correct");
+  };
+
+  const validateConfirmPassword = (confirmPassword) => {
+    const isValid = inputs.password === confirmPassword;
+    setValidationStyle(isValid, confirmPasswordRef);
+
+    return isValid;
   };
 
   const validateUsername = (username) => {
@@ -93,9 +107,12 @@ export default function Register() {
   - must contain at least 2 letters
   */
     const regex =
-      /^(?!.*_{2,})(?=.{1,20}$)[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*_?[a-zA-Z0-9]*[a-zA-Z][a-zA-Z0-9]*[a-zA-Z0-9]$/;
+      /^(?!.*_{3,})(?=.{3,20}$)[a-zA-Z0-9]+(_[a-zA-Z0-9]*)*[a-zA-Z0-9]+$/;
+    const twoLettersRegex = /.*[a-zA-Z].*[a-zA-Z].*/;
 
-    const isValid = regex.test(username);
+    const isValid = regex.test(username) && twoLettersRegex.test(username);
+    setValidationStyle(isValid, usernameRef);
+
     return isValid;
   };
 
@@ -139,20 +156,14 @@ export default function Register() {
     }
 
     const isValid = Object.values(requirements).every(Boolean);
-
-    passwordRef.current.style.outlineColor = isValid
-      ? theme.colors.green
-      : theme.colors.red;
+    setValidationStyle(isValid, passwordRef);
 
     return isValid;
   };
 
   const validateEmail = (email) => {
     const isValid = validator.isEmail(email);
-
-    emailRef.current.style.outlineColor = isValid
-      ? theme.colors.green
-      : theme.colors.red;
+    setValidationStyle(isValid, emailRef);
 
     return isValid;
   };
@@ -161,8 +172,14 @@ export default function Register() {
     const regex =
       /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{3,50}(?:[-\s'][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/;
 
-    const isValid = regex.test(firstName) && regex.test(lastName);
-    return isValid;
+    const isValidFirstName = regex.test(firstName);
+    setValidationStyle(isValidFirstName, firstNameRef);
+
+    const isValidLastName = regex.test(lastName);
+    setValidationStyle(isValidLastName, lastNameRef);
+
+    const isValidName = isValidFirstName && isValidLastName;
+    return isValidName;
   };
 
   const usernameRef = useRef();
@@ -174,6 +191,8 @@ export default function Register() {
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const passwordRequirementsRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
 
   useEffect(() => {
     if (isSuccess) {
@@ -224,6 +243,8 @@ export default function Register() {
   const isAllDataValid = Object.values(validations).every(Boolean);
   const isAllDataExist = Object.values(inputs).every(Boolean);
 
+  console.log(validations);
+
   if (isLoading && isLoginLoading)
     return <HashLoader color="fff" className="hashLoader" />;
 
@@ -247,6 +268,8 @@ export default function Register() {
           passwordRef,
           confirmPasswordRef,
           passwordRequirementsRef,
+          firstNameRef,
+          lastNameRef,
         }}
       />
 
