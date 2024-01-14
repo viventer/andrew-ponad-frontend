@@ -19,18 +19,21 @@ export default function Login() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
+  const [errMsg, setErrMsg] = useState("");
+
+  const [persist, setPersist] = usePersist();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (isLogged) {
       navigate(from, { replace: true });
     }
   }, []);
 
-  const usernameRef = useRef();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errMsg, setErrMsg] = useState("");
-  const [persist, setPersist] = usePersist();
 
+  const usernameRef = useRef();
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
@@ -38,8 +41,6 @@ export default function Login() {
   useEffect(() => {
     setErrMsg("");
   }, [username, password]);
-
-  const dispatch = useDispatch();
 
   const [login, { isLoading }] = useLoginMutation();
 
@@ -55,15 +56,19 @@ export default function Login() {
       }
       navigate(from, { replace: true });
     } catch (err) {
-      if (!err.originalStatus) {
-        setErrMsg("Brak odpowiedzi serwera");
-      } else if (err.originalStatus === 400) {
-        setErrMsg("Uzupełnij wymagane pola");
-      } else if (err.originalStatus === 401) {
-        setErrMsg("Błędny login lub/i hasło");
-      } else {
-        setErrMsg(err.data?.message);
-      }
+      handleLoginError(err);
+    }
+  };
+
+  const handleLoginError = (err) => {
+    if (!err.originalStatus) {
+      setErrMsg("Brak odpowiedzi serwera");
+    } else if (err.originalStatus === 400) {
+      setErrMsg("Uzupełnij wymagane pola");
+    } else if (err.originalStatus === 401) {
+      setErrMsg("Błędny login lub/i hasło");
+    } else {
+      setErrMsg(err.data?.message);
     }
   };
 
