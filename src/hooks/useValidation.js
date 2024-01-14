@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { useTheme } from "styled-components";
+import validator from "validator";
 
-export default function useValidation() {
+export default function useValidation(references, inputs) {
   const [validations, setValidations] = useState({
     username: false,
     password: "",
@@ -9,6 +11,8 @@ export default function useValidation() {
     firstName: "",
     lastName: "",
   });
+
+  const theme = useTheme();
 
   const validateField = (fieldName, value) => {
     switch (fieldName) {
@@ -39,35 +43,25 @@ export default function useValidation() {
 
   const validateConfirmPassword = (confirmPassword) => {
     const isValid = inputs.password === confirmPassword;
-    setValidationStyle(isValid, confirmPasswordRef);
+    setValidationStyle(isValid, references.confirmPasswordRef);
 
     return isValid;
   };
 
   const validateUsername = (username) => {
-    /*
-  Requirements:
-  - min. 3 chars
-  - max. 20 chars
-  - only letters (big and small) or numbers or "_"
-  - no whitespaces
-  - no special characters on the start and end
-  - two special characters mustn't be next to each other
-  - must contain at least 2 letters
-  */
     const regex =
       /^(?!.*_{3,})(?=.{3,20}$)[a-zA-Z0-9]+(_[a-zA-Z0-9]*)*[a-zA-Z0-9]+$/;
     const twoLettersRegex = /.*[a-zA-Z].*[a-zA-Z].*/;
 
     const isValid = regex.test(username) && twoLettersRegex.test(username);
-    setValidationStyle(isValid, usernameRef);
+    setValidationStyle(isValid, references.usernameRef);
 
     return isValid;
   };
 
   const validatePassword = (password) => {
     const getRequirementParagraph = (index) => {
-      return passwordRequirementsRef.current.querySelector(
+      return references.passwordRequirementsRef.current.querySelector(
         `p:nth-of-type(${index})`
       );
     };
@@ -105,14 +99,14 @@ export default function useValidation() {
     }
 
     const isValid = Object.values(requirements).every(Boolean);
-    setValidationStyle(isValid, passwordRef);
+    setValidationStyle(isValid, references.passwordRef);
 
     return isValid;
   };
 
   const validateEmail = (email) => {
     const isValid = validator.isEmail(email);
-    setValidationStyle(isValid, emailRef);
+    setValidationStyle(isValid, references.emailRef);
 
     return isValid;
   };
@@ -122,7 +116,7 @@ export default function useValidation() {
       /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{3,50}(?:[-\s'][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/;
 
     const isValid = regex.test(firstName);
-    setValidationStyle(isValid, firstNameRef);
+    setValidationStyle(isValid, references.firstNameRef);
 
     return isValid;
   };
@@ -132,7 +126,7 @@ export default function useValidation() {
       /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{3,50}(?:[-\s'][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/;
 
     const isValid = regex.test(lastName);
-    setValidationStyle(isValid, lastNameRef);
+    setValidationStyle(isValid, references.lastNameRef);
 
     return isValid;
   };
