@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import { useTheme } from "styled-components";
 
 import HashLoader from "react-spinners/HashLoader";
-import Filter from "bad-words";
-import passwordValidator from "password-validator";
 import validator from "validator";
 
 import { setCredentials } from "../slices/authSlice";
@@ -240,11 +238,13 @@ export default function Register() {
       }
       navigate(from, { replace: true });
     } catch (err) {
-      if (!err.originalStatus) {
+      if (!err.status) {
         setErrMsg("Brak odpowiedzi serwera");
-      } else if (err.originalStatus === 400) {
+      } else if (err.status === 400) {
         setErrMsg("Wprowadź wszystkie dane");
-      } else if (err.originalStatus === 409) {
+      } else if (err.status === 422) {
+        setErrMsg("Wprowadzone dane zawierają obraźliwe słowa");
+      } else if (err.status === 409) {
         setErrMsg("Nazwa użytkownika jest zajęta");
       } else {
         setErrMsg(err.data?.message);
