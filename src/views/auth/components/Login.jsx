@@ -47,7 +47,10 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { accessToken } = await login({ username, password }).unwrap();
+      const { accessToken, userId } = await login({
+        username,
+        password,
+      }).unwrap();
       dispatch(setCredentials({ username, accessToken }));
       setUsername("");
       setPassword("");
