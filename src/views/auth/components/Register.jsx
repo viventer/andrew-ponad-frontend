@@ -99,11 +99,13 @@ export default function Register() {
     }
     try {
       await register(inputs).unwrap();
-      const { accessToken } = await login({
+      const { accessToken, userId } = await login({
         password: inputs.password,
         username: inputs.username,
       }).unwrap();
-      dispatch(setCredentials({ username: inputs.username, accessToken }));
+      dispatch(
+        setCredentials({ username: inputs.username, accessToken, userId })
+      );
       if (!isLogged) {
         setIsLogged(true);
       }

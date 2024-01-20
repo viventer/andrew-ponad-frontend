@@ -19,6 +19,7 @@ export const StyledUserInfo = styled.div`
     right: 0;
     top: calc(100% + 0.1rem);
     border: none;
+    min-width: 30rem;
     z-index: 2000;
     padding: 1rem 2rem;
     background-color: ${({ theme }) => theme.colors.darkGray};
@@ -101,6 +102,10 @@ export const StyledUserInfo = styled.div`
   }
 
   @media (max-width: 553px) {
+    & > article {
+      min-width: 0;
+    }
+
     & > article > .flex:last-child {
       flex-direction: column;
       align-items: start;

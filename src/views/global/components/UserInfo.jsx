@@ -1,22 +1,37 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledUserInfo } from "../styles/UserInfo.styled";
 import { StyledButton } from "../styles/Button.styled";
-import {
-  faCheck,
-  faKey,
-  faPencil,
-  faRightFromBracket,
-  faUser,
-  faUserSlash,
-} from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import LogoutButton from "./LogoutButton";
 import DeleteAccountButton from "./DeleteAccountButton";
 import ChangePasswordButton from "./ChangePasswordButton";
 import VerificationButton from "./VerificationButton";
+import { selectUserId } from "../../auth/slices/authSlice";
+import { useGetUserByIdQuery } from "../slices/usersApiSlice";
+import { useSelector } from "react-redux";
+import useAuth from "../../../hooks/useAuth";
 
 export default function UserInfo() {
   const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
+
+  const { setIsLogged, isLogged } = useAuth();
+  const userId = useSelector(selectUserId);
+
+  const { data: userRawData, error, isLoading } = useGetUserByIdQuery(userId);
+
+  const userData = userRawData.entities[userId];
+  console.log(userData);
+
+  const userRole = userData.roles.includes("Admin")
+    ? "Admin"
+    : userData.roles.includes("Editor")
+    ? "Edytor"
+    : userData.roles.includes("Creator")
+    ? "Twórca"
+    : userData.roles.includes("Verified")
+    ? "Zweryfikowany"
+    : "Niezweryfikowany";
 
   return (
     <StyledUserInfo>
@@ -30,19 +45,19 @@ export default function UserInfo() {
         <div className="flex">
           <section>
             <p>
-              login: <span>jakasnazwauseramax20</span>
+              login: <span>{userData.username}</span>
             </p>
             <p>
-              email: <span>jakisemailciekawy@gmail.com</span>
+              email: <span>{userData.email}</span>
             </p>
             <p>
-              imię: <span>Jan</span>
+              imię: <span>{userData.firstName}</span>
             </p>
             <p>
-              nazwisko: <span>Kowalski</span>
+              nazwisko: <span>{userData.lastName}</span>
             </p>
             <p>
-              rola: <span>niezweryfikowany</span>
+              rola: <span>{userRole}</span>
             </p>
             <VerificationButton />
           </section>

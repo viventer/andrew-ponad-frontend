@@ -12,6 +12,7 @@ import useAuth from "../../../hooks/useAuth";
 import ErrorInfo from "../../global/components/ErrorInfo";
 import LoginForm from "./LoginForm";
 import { StyledAuth } from "../styles/Login.styled";
+import { useGetUserByIdQuery } from "../../global/slices/usersApiSlice";
 
 export default function Login() {
   const { setIsLogged, isLogged } = useAuth();
@@ -51,7 +52,7 @@ export default function Login() {
         username,
         password,
       }).unwrap();
-      dispatch(setCredentials({ username, accessToken }));
+      dispatch(setCredentials({ username, accessToken, userId }));
       setUsername("");
       setPassword("");
       if (!isLogged) {
@@ -64,12 +65,15 @@ export default function Login() {
   };
 
   const handleLoginError = (err) => {
-    if (!err.originalStatus) {
+    if (!err.originalStatus && !err.status) {
+      console.log(err);
       setErrMsg("Brak odpowiedzi serwera");
     } else if (err.originalStatus === 400) {
       setErrMsg("Uzupełnij wymagane pola");
     } else if (err.originalStatus === 401) {
       setErrMsg("Błędny login lub/i hasło");
+    } else if (err.status === 429) {
+      setErrMsg("Za dużo prób logowania, spróbuj ponownie za 60 sekund");
     } else {
       setErrMsg(err.data?.message);
     }

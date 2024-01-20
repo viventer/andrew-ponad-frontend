@@ -1,5 +1,5 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
-import { apiSlice } from "../../app/api/apiSlice";
+import { apiSlice } from "../../../redux/apiSlice";
 
 const usersAdapter = createEntityAdapter({});
 
@@ -30,6 +30,19 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         } else return [{ type: "User", id: "LIST" }];
       },
     }),
+    getUserById: builder.query({
+      query: (userId) => ({
+        url: `/users/${userId}`,
+        validateStatus: (response, result) => {
+          return response.status === 200 && !result.isError;
+        },
+      }),
+      transformResponse: (responseData) => {
+        const user = { ...responseData, id: responseData._id };
+        return usersAdapter.setOne(initialState, user);
+      },
+      providesTags: (result, error, userId) => [{ type: "User", id: userId }],
+    }),
     updateUser: builder.mutation({
       query: (userId, initialUserData) => ({
         url: `/users/${userId}`,
@@ -48,27 +61,43 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
     }),
+    addNewUser: builder.mutation({
+      query: (initialUserData) => ({
+        url: "/users",
+        method: "POST",
+        body: {
+          ...initialUserData,
+        },
+      }),
+      invalidatesTags: [{ type: "User", id: "LIST" }],
+    }),
   }),
 });
 
 export const {
   useGetUsersQuery,
+  useGetUserByIdQuery,
   useAddNewUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
 } = usersApiSlice;
 
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select();
+const selectUserByIdResult = usersApiSlice.endpoints.getUserById.select();
 
 const selectUsersData = createSelector(
   selectUsersResult,
   (usersResult) => usersResult.data
 );
 
-export const {
-  selectAll: selectAllUsers,
-  selectById: selectUserById,
-  selectIds: selectUserIds,
-} = usersAdapter.getSelectors(
-  (state) => selectUsersData(state) ?? initialState
+const selectUserByIdData = createSelector(
+  selectUserByIdResult,
+  (userResult) => userResult.data
 );
+
+export const { selectAll: selectAllUsers, selectIds: selectUserIds } =
+  usersAdapter.getSelectors((state) => selectUsersData(state) ?? initialState);
+
+export const selectUserById = (state, userId) =>
+  usersAdapter.getSelectors().selectById(selectUserByIdData(state), userId) ??
+  initialState;
