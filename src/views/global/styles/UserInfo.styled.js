@@ -50,10 +50,6 @@ export const StyledUserInfo = styled.div`
     margin-top: 1rem;
   }
 
-  & section.flex-column > button:first-child {
-    margin-top: 2rem;
-  }
-
   & p {
     color: ${({ theme }) => theme.colors.sunset};
     font-weight: 700;
@@ -99,6 +95,7 @@ export const StyledUserInfo = styled.div`
     justify-content: space-between;
     width: 100%;
     justify-content: center;
+    gap: 1rem;
   }
 
   & .buttonsSection .reactRouterLink {
@@ -128,6 +125,10 @@ export const StyledUserInfo = styled.div`
   }
 
   @media (max-width: 553px) {
+    & section.flex-column > button:first-child {
+      margin-top: 2rem;
+    }
+
     & > article {
       min-width: 0;
     }
@@ -139,7 +140,6 @@ export const StyledUserInfo = styled.div`
     }
 
     & section.flex-column {
-      margin-top: 2rem;
       align-items: center;
       width: 100%;
     }

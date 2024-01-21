@@ -32,7 +32,6 @@ export default function UserInfo() {
     if (/login/i.test(currentUrl) || /register/i.test(currentUrl)) {
       setIsUserInfoVisible(false);
     }
-    console.log(currentUrl);
   }, [currentUrl]);
 
   if (userRawData) {
@@ -49,6 +48,10 @@ export default function UserInfo() {
       : "Niezweryfikowany";
   }
 
+  useEffect(() => {
+    userRawData ? setIsLogged(true) : setIsLogged(false);
+  }, [userRawData]);
+
   return (
     <StyledUserInfo>
       <button onClick={() => setIsUserInfoVisible((prev) => !prev)}>
@@ -59,7 +62,7 @@ export default function UserInfo() {
           <header className="flex">
             <h2>Informacje o koncie</h2>
           </header>
-          <div className="flex-column">
+          <div className="flex">
             <section>
               <p>
                 login: <span>{userData.username}</span>
@@ -76,14 +79,14 @@ export default function UserInfo() {
               <p>
                 rola: <span>{userRole}</span>
               </p>
-              <VerificationButton />
+              {userRole == "Niezweryfikowany" && <VerificationButton />}
             </section>
             <section className="flex-column">
               <LogoutButton />
-              <StyledButton>
+              {/* <StyledButton>
                 <FontAwesomeIcon icon={faPencil} />
                 Edytuj dane
-              </StyledButton>
+              </StyledButton> */}
               <ChangePasswordButton />
               <DeleteAccountButton className="deleteAccountButton" />
             </section>

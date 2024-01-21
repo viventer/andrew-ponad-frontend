@@ -12,7 +12,6 @@ import useAuth from "../../../hooks/useAuth";
 import ErrorInfo from "../../global/components/ErrorInfo";
 import LoginForm from "./LoginForm";
 import { StyledAuth } from "../styles/Login.styled";
-import { useGetUserByIdQuery } from "../../global/slices/usersApiSlice";
 
 export default function Login() {
   const { setIsLogged, isLogged } = useAuth();
