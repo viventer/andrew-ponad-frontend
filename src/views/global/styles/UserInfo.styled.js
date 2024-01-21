@@ -43,10 +43,15 @@ export const StyledUserInfo = styled.div`
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
 
-  & section:first-of-type {
+  & div > section:first-of-type {
     display: flex;
-    gap: 1rem;
     flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  & section.flex-column > button:first-child {
+    margin-top: 2rem;
   }
 
   & p {
@@ -66,9 +71,9 @@ export const StyledUserInfo = styled.div`
     gap: 2rem;
   }
 
-  & section:last-child {
+  & section.flex-column {
+    display: flex;
     justify-content: space-between;
-    flex-direction: column;
     gap: 1rem;
     width: fit-content;
     height: 100%;
@@ -78,13 +83,34 @@ export const StyledUserInfo = styled.div`
     width: 100%;
   }
 
-  & section:last-child > button:last-child {
+  & section.flex-column button:last-child {
     border-color: red;
     box-shadow: inset 0 0 3rem rgba(255, 0, 0, 0.5);
   }
 
-  & section:last-child > button:last-child:hover {
+  & section.flex-column button:last-child:hover {
     box-shadow: inset 3rem 0 2rem rgba(255, 0, 0, 0.75);
+    outline: none;
+  }
+
+  & .buttonsSection {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: space-between;
+    width: 100%;
+    justify-content: center;
+  }
+
+  & .buttonsSection .reactRouterLink {
+    width: 100%;
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    font-size: 1.25rem;
+  }
+
+  & .buttonsSection p {
+    color: white;
   }
 
   @media (hover: hover) {
@@ -112,7 +138,7 @@ export const StyledUserInfo = styled.div`
       justify-content: center;
     }
 
-    & section:last-child {
+    & section.flex-column {
       margin-top: 2rem;
       align-items: center;
       width: 100%;
@@ -121,6 +147,14 @@ export const StyledUserInfo = styled.div`
     & section:last-child > button {
       width: 100%;
       justify-content: center;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .buttonsSection {
+      flex-direction: column;
+      margin-top: 2rem;
+      gap: 1rem;
     }
   }
 

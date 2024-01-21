@@ -24,6 +24,11 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
   }
 
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+  }
+
   .flex-column {
     display: flex;
     flex-direction: column;
