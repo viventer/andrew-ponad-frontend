@@ -11,31 +11,22 @@ import useAuth from "../../../hooks/useAuth";
 
 export default function DeleteAccountButton() {
   const userId = useSelector(selectUserId);
-  const [deleteUser, { isLoading: isDeletingLoading }] =
-    useDeleteUserMutation(userId);
 
-  const [signOut, { isLoading: isLoggingOutLoading, isError, error }] =
-    useLogoutMutation();
+  const [deleteUser, { isLoading }] = useDeleteUserMutation(userId);
 
   const { setIsLogged } = useAuth();
 
   const deleteAccount = async () => {
     try {
-      console.log(userId);
       await deleteUser(userId).unwrap();
+      setIsLogged(false);
+      window.location.reload();
     } catch (err) {
       console.log(err);
     }
-    // await signOut();
-    // if (isError) {
-    //   return <ErrorWindow message={error} />;
-    // } else {
-    //   setIsLogged(false);
-    //   // window.location.reload();
-    // }
   };
 
-  if (isLoggingOutLoading || isDeletingLoading)
+  if (isLoading)
     return (
       <div className="flex">
         <HashLoader color="fff" className="hashLoader" />
