@@ -27,7 +27,6 @@ export default function LogoutButton() {
     } else {
       setIsLogged(false);
       navigate("/");
-      window.location.reload();
     }
   }
 

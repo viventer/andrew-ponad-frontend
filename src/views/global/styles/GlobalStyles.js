@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     font-family: 'Ubuntu', sans-serif;
     color: white;
+    background-color: black;
     background-color: ${({ theme }) => theme.colors.almostBlack};
     margin-bottom: 2rem;
   }

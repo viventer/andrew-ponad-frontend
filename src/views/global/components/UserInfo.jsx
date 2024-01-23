@@ -16,7 +16,7 @@ import RegisterButton from "./RegisterButton";
 import { useLocation } from "react-router-dom";
 
 export default function UserInfo() {
-  const currentUrl = useLocation().pathname;
+  const currentLocation = useLocation();
 
   const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
 
@@ -29,14 +29,15 @@ export default function UserInfo() {
   let userRole;
 
   useEffect(() => {
+    const currentUrl = currentLocation.pathname;
     if (/login/i.test(currentUrl) || /register/i.test(currentUrl)) {
       setIsUserInfoVisible(false);
     }
-  }, [currentUrl]);
+  }, [currentLocation]);
 
-  if (userRawData) {
-    userData = userRawData.entities[userId];
+  if (userRawData) userData = userRawData.entities[userId];
 
+  if (userData) {
     userRole = userData.roles.includes("Admin")
       ? "Admin"
       : userData.roles.includes("Editor")
@@ -57,7 +58,7 @@ export default function UserInfo() {
       <button onClick={() => setIsUserInfoVisible((prev) => !prev)}>
         <FontAwesomeIcon icon={faUser} className="icon" />
       </button>
-      {userRawData ? (
+      {userData ? (
         <article className={isUserInfoVisible ? "visible" : ""}>
           <header className="flex">
             <h2>Informacje o koncie</h2>
