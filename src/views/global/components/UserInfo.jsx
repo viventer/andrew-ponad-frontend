@@ -1,7 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledUserInfo } from "../styles/UserInfo.styled";
-import { StyledButton } from "../styles/Button.styled";
-import { faPencil, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import LogoutButton from "./LogoutButton";
 import DeleteAccountButton from "./DeleteAccountButton";
@@ -14,11 +13,14 @@ import useAuth from "../../../hooks/useAuth";
 import LoginButton from "./LoginButton";
 import RegisterButton from "./RegisterButton";
 import { useLocation } from "react-router-dom";
+import ChangePasswordWindow from "./ChangePasswordWindow";
 
 export default function UserInfo() {
   const currentLocation = useLocation();
 
   const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
+  const [isChangePwdWindowVisible, setIsChangePwdWindowVisible] =
+    useState(false);
 
   const { setIsLogged, isLogged } = useAuth();
   const userId = useSelector(selectUserId);
@@ -84,14 +86,15 @@ export default function UserInfo() {
             </section>
             <section className="flex-column">
               <LogoutButton />
-              {/* <StyledButton>
-                <FontAwesomeIcon icon={faPencil} />
-                Edytuj dane
-              </StyledButton> */}
-              <ChangePasswordButton />
+              <ChangePasswordButton
+                setIsChangePwdWindowVisible={setIsChangePwdWindowVisible}
+              />
               <DeleteAccountButton className="deleteAccountButton" />
             </section>
           </div>
+          {isChangePwdWindowVisible && (
+            <ChangePasswordWindow username={userData.username} />
+          )}
         </article>
       ) : (
         <article className={isUserInfoVisible ? "visible" : ""}>
