@@ -8,18 +8,21 @@ import Post from "./views/post/components/Post";
 import PostEditor from "./views/post/components/PostEditor";
 import Missing from "./views/global/components/Missing";
 import Register from "./views/auth/components/Register";
+import PersistLogin from "./views/auth/components/PersistLogin";
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
-        <Route path="adminpanel" element={<AdminPanel />} />
-        <Route path="post/:id" element={<Post />} />
-        <Route path="post/:id/edit" element={<PostEditor />} />
-        <Route path="post/create" element={<PostEditor />} />
+        <Route element={<PersistLogin />}>
+          <Route index element={<Home />} />
+          <Route path="adminpanel" element={<AdminPanel />} />
+          <Route path="post/:id" element={<Post />} />
+          <Route path="post/:id/edit" element={<PostEditor />} />
+          <Route path="post/create" element={<PostEditor />} />
+        </Route>
         <Route path="*" element={<Missing />} />
       </Route>
     </Routes>
