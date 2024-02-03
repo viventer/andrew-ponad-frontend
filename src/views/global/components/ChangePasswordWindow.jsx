@@ -6,7 +6,7 @@ import useValidation from "../../../hooks/useValidation";
 import ErrorInfo from "./ErrorInfo";
 import { HashLoader } from "react-spinners";
 
-export default function ChangePasswordWindow({ username }) {
+export default function ChangePasswordWindow({ username, roles, userId }) {
   const [errMsg, setErrMsg] = useState("");
 
   const [inputs, setInputs] = useState({

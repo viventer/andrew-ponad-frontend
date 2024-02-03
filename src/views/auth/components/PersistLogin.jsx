@@ -58,6 +58,7 @@ const PersistLogin = () => {
     }
     content = <Outlet />;
   }
+  console.log("siema");
 
   return content;
 };

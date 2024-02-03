@@ -27,7 +27,7 @@ export default function Register() {
     }
   }, []);
 
-  const [register, { isLoading, isSuccess }] = useRegisterMutation();
+  const [register, { isLoading }] = useRegisterMutation();
   const [login, { isLoginLoading }] = useLoginMutation();
 
   const [persist, setPersist] = usePersist();
@@ -55,17 +55,6 @@ export default function Register() {
     firstName: "",
     lastName: "",
   });
-
-  useEffect(() => {
-    if (isSuccess) {
-      finish();
-    }
-  }, [isSuccess, navigate]);
-
-  const finish = () => {
-    setInputs({});
-    navigate("/");
-  };
 
   const { validations, setValidations, validateField } = useValidation(
     {
@@ -106,6 +95,7 @@ export default function Register() {
       dispatch(
         setCredentials({ username: inputs.username, accessToken, userId })
       );
+      setInputs({});
       if (!isLogged) {
         setIsLogged(true);
       }
@@ -132,7 +122,7 @@ export default function Register() {
   const isAllDataValid = Object.values(validations).every(Boolean);
   const isAllDataExist = Object.values(inputs).every(Boolean);
 
-  if (isLoading && isLoginLoading)
+  if (isLoading || isLoginLoading)
     return <HashLoader color="fff" className="hashLoader" />;
 
   const content = (

@@ -93,7 +93,11 @@ export default function UserInfo() {
             </section>
           </div>
           {isChangePwdWindowVisible && (
-            <ChangePasswordWindow username={userData.username} />
+            <ChangePasswordWindow
+              username={userData.username}
+              roles={userData.roles}
+              userId={userId}
+            />
           )}
         </article>
       ) : (
