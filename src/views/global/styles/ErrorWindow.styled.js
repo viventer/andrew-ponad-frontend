@@ -12,6 +12,7 @@ export const StyledErrorWindow = styled.section`
   border: 0.1rem solid rgba(255, 0, 0, 1);
   border-radius: 0.1rem;
   background-color: rgba(255, 0, 0, 0.7);
+  color: white;
 
   @media (max-width: 750px) {
     left: 10vw;

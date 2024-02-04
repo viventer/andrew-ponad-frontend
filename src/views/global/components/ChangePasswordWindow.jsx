@@ -6,9 +6,17 @@ import useValidation from "../../../hooks/useValidation";
 import ErrorInfo from "./ErrorInfo";
 import { HashLoader } from "react-spinners";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
+import SuccessInfo from "./SuccessInfo";
 
-export default function ChangePasswordWindow({ username, roles, userId }) {
+export default function ChangePasswordWindow({
+  username,
+  roles,
+  userId,
+  finished,
+  setFinished,
+}) {
   const [errMsg, setErrMsg] = useState("");
+  const [showSuccessMsg, setShowSuccessMsg] = useState(false);
 
   const [inputs, setInputs] = useState({
     oldPassword: "",
@@ -69,16 +77,34 @@ export default function ChangePasswordWindow({ username, roles, userId }) {
         username,
         password: inputs.oldPassword,
       }).unwrap();
-      await updateUser({ userId, initialUserData: userData }).unwrap();
+      await updateUser({
+        userId,
+        initialUserData: { username, password: inputs.newPassword, roles },
+      }).unwrap();
+      setInputs({ oldPassword: "", newPassword: "", confirmNewPassword: "" });
+      setFinished(true);
+      setShowSuccessMsg(true);
+      setTimeout(() => {
+        setShowSuccessMsg(false);
+      }, 5000);
     } catch (err) {
-      // console.log(
-      //   JSON.stringify({ roles, password: inputs.newPassword, username })
-      // );
       handleChangePasswordError(err);
     }
   };
 
-  const handleChangePasswordError = (err) => {};
+  const handleChangePasswordError = (err) => {
+    if (!err.originalStatus && !err.status) {
+      setErrMsg("Brak odpowiedzi serwera");
+    } else if (err.originalStatus === 400) {
+      setErrMsg(err.data?.message);
+    } else if (err.status === 422) {
+      setErrMsg("Wprowadzone dane zawierają obraźliwe słowa");
+    } else if (err.status === 401) {
+      setErrMsg("Stare hasło jest błędne");
+    } else {
+      setErrMsg(err.data?.message);
+    }
+  };
 
   if (isUpdateLoading || isLoginLoading)
     return (
@@ -92,7 +118,7 @@ export default function ChangePasswordWindow({ username, roles, userId }) {
 
   const canSubmit = isAllDataExist && isAllDataValid;
 
-  return (
+  return !finished ? (
     <StyledAuth>
       <h2>Zmień hasło</h2>
       <ChangePasswordForm
@@ -112,5 +138,9 @@ export default function ChangePasswordWindow({ username, roles, userId }) {
       />
       {errMsg && <ErrorInfo message={errMsg} />}
     </StyledAuth>
+  ) : showSuccessMsg ? (
+    <SuccessInfo message={"Hasło zostało zmienione"} />
+  ) : (
+    <></>
   );
 }

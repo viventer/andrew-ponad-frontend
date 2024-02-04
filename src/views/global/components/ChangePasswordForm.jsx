@@ -54,7 +54,9 @@ export default function ChangePasswordForm({
           handlers.handleInputChange("confirmNewPassword", e.target.value)
         }
       />
-      <button onClick={handlers.handleSubmit}>Zmień hasło</button>
+      <button disabled={!canSubmit} onClick={handlers.handleSubmit}>
+        Zmień hasło
+      </button>
     </StyledAuthForm>
   );
 }

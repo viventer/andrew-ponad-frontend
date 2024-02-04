@@ -49,7 +49,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         method: "PATCH",
         body: JSON.stringify(initialUserData),
         headers: {
-          "Content-Type": "application/json", // Ustawienie nagłówka Content-Type na application/json
+          "Content-Type": "application/json",
         },
       }),
       invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],

@@ -22,6 +22,8 @@ export default function UserInfo() {
   const [isChangePwdWindowVisible, setIsChangePwdWindowVisible] =
     useState(false);
 
+  const [finishedPwdChange, setFinishedPwdChange] = useState(false);
+
   const { setIsLogged, isLogged } = useAuth();
   const userId = useSelector(selectUserId);
 
@@ -88,6 +90,7 @@ export default function UserInfo() {
               <LogoutButton />
               <ChangePasswordButton
                 setIsChangePwdWindowVisible={setIsChangePwdWindowVisible}
+                setFinishedPwdChange={setFinishedPwdChange}
               />
               <DeleteAccountButton className="deleteAccountButton" />
             </section>
@@ -97,6 +100,8 @@ export default function UserInfo() {
               username={userData.username}
               roles={userData.roles}
               userId={userId}
+              finished={finishedPwdChange}
+              setFinished={setFinishedPwdChange}
             />
           )}
         </article>

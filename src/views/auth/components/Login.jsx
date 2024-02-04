@@ -69,7 +69,7 @@ export default function Login() {
       setErrMsg("Brak odpowiedzi serwera");
     } else if (err.originalStatus === 400) {
       setErrMsg("Uzupełnij wymagane pola");
-    } else if (err.originalStatus === 401) {
+    } else if (err.status === 401 || err.originalStatus === 401) {
       setErrMsg("Błędny login lub/i hasło");
     } else if (err.status === 429) {
       setErrMsg("Za dużo prób logowania, spróbuj ponownie za 60 sekund");
