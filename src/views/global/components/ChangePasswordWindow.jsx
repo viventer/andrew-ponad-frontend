@@ -5,6 +5,7 @@ import { useLoginMutation } from "../../auth/slices/authApiSlice";
 import useValidation from "../../../hooks/useValidation";
 import ErrorInfo from "./ErrorInfo";
 import { HashLoader } from "react-spinners";
+import { useUpdateUserMutation } from "../slices/usersApiSlice";
 
 export default function ChangePasswordWindow({ username, roles, userId }) {
   const [errMsg, setErrMsg] = useState("");
@@ -50,7 +51,8 @@ export default function ChangePasswordWindow({ username, roles, userId }) {
     setErrMsg("");
   }, [inputs]);
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
+  const [updateUser, { isLoading: isUpdateLoading }] = useUpdateUserMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,15 +69,18 @@ export default function ChangePasswordWindow({ username, roles, userId }) {
         username,
         password: inputs.oldPassword,
       }).unwrap();
+      await updateUser({ userId, initialUserData: userData }).unwrap();
     } catch (err) {
-      console.log(username, inputs.oldPassword);
+      // console.log(
+      //   JSON.stringify({ roles, password: inputs.newPassword, username })
+      // );
       handleChangePasswordError(err);
     }
   };
 
   const handleChangePasswordError = (err) => {};
 
-  if (isLoading)
+  if (isUpdateLoading || isLoginLoading)
     return (
       <div className="flex">
         <HashLoader color="fff" className="hashLoader" />
