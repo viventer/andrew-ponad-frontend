@@ -5,7 +5,7 @@ import { StyledButton } from "../styles/Button.styled";
 import HashLoader from "react-spinners/HashLoader";
 import { useNavigate } from "react-router-dom";
 
-import ErrorInfo from "./ErrorInfo";
+import DynamicErrorNotification from "./DynamicErrorNotification";
 
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
 
@@ -21,7 +21,7 @@ export default function LogoutButton() {
   async function handleLogOut() {
     await signOut();
     if (isError) {
-      return <ErrorInfo message={error} />;
+      return <DynamicErrorNotification message={error} />;
     } else if (isLoading) {
       return <HashLoader color="white" className="hashLoader" />;
     } else {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledErrorInfo = styled.section`
+export const StyledDynamicErrorNotification = styled.section`
   font-size: 1.1rem;
   font-weight: 500;
   background-color: rgba(255, 0, 0, 0.25);

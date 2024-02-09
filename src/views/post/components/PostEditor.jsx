@@ -2,17 +2,18 @@ import { StyledPostEditor } from "../styles/PostEditor.styled";
 import ImageDropzone from "./ImageDropzone";
 import ThumbnailBar from "./ThumbnailBar";
 import PostTitleInput from "./PostTitleInput";
-import ErrorWindow from "../../global/components/ErrorWindow";
-
-import useLocalStorage from "../../../hooks/useLocalStorage";
-
-import { useEffect, useState } from "react";
 import PostContentEditor from "./PostContentEditor";
 
+import useLocalStorage from "../../../hooks/useLocalStorage";
+import { useDispatch } from "react-redux";
+
+import { useEffect } from "react";
+
 export default function PostEditor() {
+  const dispatch = useDispatch();
+
   const [thumbnailUrl, setThumbnailUrl] = useLocalStorage("thumbnailUrl", "");
   const [postTitle, setPostTitle] = useLocalStorage("postTitle", "");
-  const [errorMessage, setErrorMessage] = useState("");
   const [postRows, setPostRows] = useLocalStorage("postRows", [
     [
       {
@@ -59,14 +60,6 @@ export default function PostEditor() {
     });
   };
 
-  useEffect(() => {
-    if (errorMessage) {
-      setTimeout(() => {
-        setErrorMessage("");
-      }, 5000);
-    }
-  }, [errorMessage]);
-
   return (
     <>
       <StyledPostEditor>
@@ -75,17 +68,11 @@ export default function PostEditor() {
           isThumbnail={true}
           imageUrl={thumbnailUrl}
           setImageUrl={setThumbnailUrl}
-          setErrorMessage={setErrorMessage}
         />
         <div className="input">
-          <PostTitleInput
-            postTitle={postTitle}
-            setPostTitle={setPostTitle}
-            setErrorMessage={setErrorMessage}
-          />
+          <PostTitleInput postTitle={postTitle} setPostTitle={setPostTitle} />
         </div>
         <PostContentEditor
-          setErrorMessage={setErrorMessage}
           postRows={postRows}
           setPostRows={setPostRows}
           updateElement={updateElement}
@@ -95,9 +82,6 @@ export default function PostEditor() {
           <button onClick={() => console.log(postContent)}>Dodaj posta</button>
         </footer>
       </StyledPostEditor>
-      <div style={{ opacity: errorMessage ? 1 : 0 }} className="transition">
-        <ErrorWindow message={errorMessage} />
-      </div>
     </>
   );
 }

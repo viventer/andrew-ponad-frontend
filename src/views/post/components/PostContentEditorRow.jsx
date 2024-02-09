@@ -5,7 +5,6 @@ import ImageDropzone from "./ImageDropzone";
 import ReactQuill from "react-quill";
 
 export default function PostContentEditorRow({
-  setErrorMessage,
   activeRowNumber,
   setActiveRowNumber,
   index,
@@ -50,7 +49,6 @@ export default function PostContentEditorRow({
               <div className="responsivePostElement" key={i}>
                 {imageUrl && <img src={imageUrl} />}
                 <ImageDropzone
-                  setErrorMessage={setErrorMessage}
                   rowIndex={index}
                   imageUrl={rowData[i].imageUrl}
                   setImageUrl={setImageUrl}

@@ -11,7 +11,7 @@ import usePersist from "../../../hooks/usePersist";
 import useAuth from "../../../hooks/useAuth";
 import useValidation from "../../../hooks/useValidation";
 
-import ErrorInfo from "../../global/components/ErrorInfo";
+import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import { RegisterForm } from "./RegisterForm";
 import { StyledAuth } from "../styles/Login.styled";
 
@@ -156,7 +156,7 @@ export default function Register() {
         </Link>
       </div>
 
-      {errMsg && <ErrorInfo message={errMsg} />}
+      {errMsg && <DynamicErrorNotification message={errMsg} />}
     </StyledAuth>
   );
 

@@ -7,7 +7,6 @@ import "react-quill/dist/quill.snow.css";
 export default function PostContentEditor({
   postRows,
   setPostRows,
-  setErrorMessage,
   updateElement,
   deleteRow,
 }) {
@@ -33,7 +32,6 @@ export default function PostContentEditor({
     <StyledPostContentEditor>
       {postRows.map((postRow, i) => (
         <PostContentEditorRow
-          setErrorMessage={setErrorMessage}
           key={i}
           index={i}
           activeRowNumber={activeRowNumber}

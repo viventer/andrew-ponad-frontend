@@ -2,15 +2,16 @@ import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledButton } from "../styles/Button.styled";
 import { useDeleteUserMutation } from "../slices/usersApiSlice";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
-import ErrorWindow from "./ErrorWindow";
+import FixedErrorModal from "./FixedErrorModal";
 import { HashLoader } from "react-spinners";
 import useAuth from "../../../hooks/useAuth";
+import { setErrMsg } from "../slices/globalStatesSlice";
 
 export default function DeleteAccountButton() {
-  const userId = useSelector(selectUserId);
+  const userId = useSelector(selectUserId) || 0;
 
   const [deleteUser, { isDeletingLoading }] = useDeleteUserMutation(userId);
   const [signOut, { isLoggingOutLoading, isError, error }] =
@@ -18,12 +19,15 @@ export default function DeleteAccountButton() {
 
   const { setIsLogged } = useAuth();
 
+  const dispatch = useDispatch();
+
   const deleteAccount = async () => {
     try {
       await deleteUser(userId).unwrap();
       await signOut();
       if (isError) {
-        return <ErrorWindow message={error} />;
+        dispatch(setErrMsg(error));
+        return;
       } else if (isDeletingLoading || isLoggingOutLoading) {
         return <HashLoader color="white" className="hashLoader" />;
       } else {

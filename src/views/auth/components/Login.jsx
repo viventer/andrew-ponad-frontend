@@ -9,7 +9,7 @@ import { useLoginMutation } from "../slices/authApiSlice";
 import usePersist from "../../../hooks/usePersist";
 import useAuth from "../../../hooks/useAuth";
 
-import ErrorInfo from "../../global/components/ErrorInfo";
+import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import LoginForm from "./LoginForm";
 import { StyledAuth } from "../styles/Login.styled";
 
@@ -111,7 +111,9 @@ export default function Login() {
           <p>Zarejestruj się</p>
         </Link>
       </div>
-      {errMsg && <ErrorInfo aria-live="assertive" message={errMsg} />}
+      {errMsg && (
+        <DynamicErrorNotification aria-live="assertive" message={errMsg} />
+      )}
     </StyledAuth>
   );
 

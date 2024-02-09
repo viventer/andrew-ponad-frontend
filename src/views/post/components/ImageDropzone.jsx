@@ -4,13 +4,12 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExchange, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useDropzone } from "react-dropzone";
+import { useDispatch } from "react-redux";
+import { setErrMsg } from "../../global/slices/globalStatesSlice";
 
-export default function ImageDropzone({
-  imageUrl,
-  setImageUrl,
-  setErrorMessage,
-  isThumbnail,
-}) {
+export default function ImageDropzone({ imageUrl, setImageUrl, isThumbnail }) {
+  const dispatch = useDispatch();
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
@@ -18,13 +17,14 @@ export default function ImageDropzone({
     maxFiles: 1,
     maxSize: 1048576,
     onDrop: (acceptedFiles) => {
-      if (acceptedFiles) setErrorMessage("");
+      if (acceptedFiles) dispatch(setErrMsg(""));
       setImageUrl(URL.createObjectURL(acceptedFiles[0]));
     },
     onError: () => {
-      console.log(setErrorMessage);
-      setErrorMessage(
-        "Plik został odrzucony. Pamiętaj, że rozmiar nie może przekraczać 1MB."
+      dispatch(
+        setErrMsg(
+          "Plik został odrzucony. Pamiętaj, że rozmiar nie może przekraczać 1MB."
+        )
       );
     },
   });

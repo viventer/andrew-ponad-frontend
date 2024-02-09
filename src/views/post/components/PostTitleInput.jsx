@@ -1,10 +1,10 @@
+import { useDispatch } from "react-redux";
 import { StyledPostTitleInput } from "../styles/PostEditor.styled";
+import { setErrMsg } from "../../global/slices/globalStatesSlice";
 
-export default function PostTitleInput({
-  postTitle,
-  setPostTitle,
-  setErrorMessage,
-}) {
+export default function PostTitleInput({ postTitle, setPostTitle }) {
+  const dispatch = useDispatch();
+
   return (
     <StyledPostTitleInput
       placeholder="Tytuł posta"
@@ -13,7 +13,7 @@ export default function PostTitleInput({
       maxLength={40}
       onKeyDown={() => {
         if (postTitle.length >= 40) {
-          setErrorMessage("Tytuł może zawierać maksymalnie 40 znaków");
+          dispatch(setErrMsg("Tytuł może zawierać maksymalnie 40 znaków"));
         }
       }}
     />

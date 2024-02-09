@@ -6,7 +6,7 @@ import HashLoader from "react-spinners/HashLoader";
 import { useRefreshMutation } from "../slices/authApiSlice";
 import { selectCurrentToken } from "../slices/authSlice";
 
-import ErrorInfo from "../../global/components/ErrorInfo";
+import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 
 import useAuth from "../../../hooks/useAuth";
 import usePersist from "../../../hooks/usePersist";
@@ -49,9 +49,13 @@ const PersistLogin = () => {
     content = <HashLoader color="fff" />;
   } else if (isError) {
     if (isLogged) {
+      content = (
+        <DynamicErrorNotification
+          message={`${error?.data?.message} - Zaloguj się ponownie`}
+        />
+      );
       setIsLogged(false);
     }
-    content = <ErrorInfo message={`${error?.error} - Please login again`} />;
   } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {
     if (!isLogged) {
       setIsLogged(true);

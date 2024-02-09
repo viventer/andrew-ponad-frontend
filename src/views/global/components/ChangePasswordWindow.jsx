@@ -3,7 +3,7 @@ import { StyledAuth } from "../../auth/styles/Login.styled";
 import ChangePasswordForm from "./ChangePasswordForm";
 import { useLoginMutation } from "../../auth/slices/authApiSlice";
 import useValidation from "../../../hooks/useValidation";
-import ErrorInfo from "./ErrorInfo";
+import DynamicErrorNotification from "./DynamicErrorNotification";
 import { HashLoader } from "react-spinners";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
 import SuccessInfo from "./SuccessInfo";
@@ -136,7 +136,7 @@ export default function ChangePasswordWindow({
         }}
         canSubmit={canSubmit}
       />
-      {errMsg && <ErrorInfo message={errMsg} />}
+      {errMsg && <DynamicErrorNotification message={errMsg} />}
     </StyledAuth>
   ) : showSuccessMsg ? (
     <SuccessInfo message={"Hasło zostało zmienione"} />
