@@ -7,11 +7,7 @@ import PostContentEditor from "./PostContentEditor";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import { useDispatch } from "react-redux";
 
-import { useEffect } from "react";
-
 export default function PostEditor() {
-  const dispatch = useDispatch();
-
   const [thumbnailUrl, setThumbnailUrl] = useLocalStorage("thumbnailUrl", "");
   const [postTitle, setPostTitle] = useLocalStorage("postTitle", "");
   const [postRows, setPostRows] = useLocalStorage("postRows", [

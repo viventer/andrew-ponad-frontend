@@ -1,17 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import HashLoader from "react-spinners/HashLoader";
 
 import { useRefreshMutation } from "../slices/authApiSlice";
 import { selectCurrentToken } from "../slices/authSlice";
 
-import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
-
 import useAuth from "../../../hooks/useAuth";
 import usePersist from "../../../hooks/usePersist";
+import { setErrMsg } from "../../global/slices/globalStatesSlice";
 
 const PersistLogin = () => {
+  const dispatch = useDispatch();
+
   const [persist] = usePersist();
   const token = useSelector(selectCurrentToken);
   const effectRan = useRef(false);
@@ -49,11 +50,7 @@ const PersistLogin = () => {
     content = <HashLoader color="fff" />;
   } else if (isError) {
     if (isLogged) {
-      content = (
-        <DynamicErrorNotification
-          message={`${error?.data?.message} - Zaloguj się ponownie`}
-        />
-      );
+      dispatch(setErrMsg(`${error?.data?.message} - zaloguj się ponownie`));
       setIsLogged(false);
     }
   } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {

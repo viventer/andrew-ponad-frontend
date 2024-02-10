@@ -6,7 +6,7 @@ export const StyledAuth = styled.main`
   justify-content: center;
   flex-direction: column;
   width: fit-content;
-  box-shadow: 0 0 1rem rgba(255, 255, 255, 0.15);
+  border: 0.1rem solid ${({ theme }) => theme.colors.navy};
   border-radius: 0.5rem;
   padding: 3rem 5rem;
   margin-top: 4rem;

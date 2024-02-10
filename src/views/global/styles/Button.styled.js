@@ -21,4 +21,8 @@ export const StyledButton = styled.button`
     cursor: pointer;
     outline: 0.1rem solid rgba(255, 255, 255, 0.3);
   }
+
+  & .icon {
+    color: ${({ theme }) => theme.colors.sunset};
+  }
 `;

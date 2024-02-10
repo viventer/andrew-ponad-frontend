@@ -5,13 +5,15 @@ import { StyledButton } from "../styles/Button.styled";
 import HashLoader from "react-spinners/HashLoader";
 import { useNavigate } from "react-router-dom";
 
-import DynamicErrorNotification from "./DynamicErrorNotification";
-
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
 
 import useAuth from "../../../hooks/useAuth";
+import { useDispatch } from "react-redux";
+import { setErrMsg } from "../slices/globalStatesSlice";
 
 export default function LogoutButton() {
+  const dispatch = useDispatch();
+
   const [signOut, { isLoading, isError, error }] = useLogoutMutation();
 
   const navigate = useNavigate();
@@ -21,7 +23,8 @@ export default function LogoutButton() {
   async function handleLogOut() {
     await signOut();
     if (isError) {
-      return <DynamicErrorNotification message={error} />;
+      dispatch(setErrMsg(error));
+      return;
     } else if (isLoading) {
       return <HashLoader color="white" className="hashLoader" />;
     } else {

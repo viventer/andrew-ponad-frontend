@@ -5,6 +5,7 @@ const globalStatesSlice = createSlice({
   initialState: {
     errMsg: null,
     dialogMsg: null,
+    dialogAnswer: null,
   },
   reducers: {
     setErrMsg: (state, action) => {
@@ -13,12 +14,17 @@ const globalStatesSlice = createSlice({
     setDialogMsg: (state, action) => {
       state.dialogMsg = action.payload;
     },
+    setDialogAnswer: (state, action) => {
+      state.dialogAnswer = action.payload;
+    },
   },
 });
 
-export const { setErrMsg, setDialogMsg } = globalStatesSlice.actions;
+export const { setErrMsg, setDialogMsg, setDialogAnswer } =
+  globalStatesSlice.actions;
 
 export default globalStatesSlice.reducer;
 
 export const selectErrMsg = (state) => state.globalStates.errMsg;
 export const selectDialogMsg = (state) => state.globalStates.dialogMsg;
+export const selectDialogAnswer = (state) => state.globalStates.dialogAnswer;

@@ -8,6 +8,14 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
   }
+  
+  p, h1, h2, h3, h4, h5, h6 {
+    font-size: inherit;
+    font-weight: inherit;
+    font-style: inherit;
+    line-height: inherit;
+  }
+
   body {
     font-family: 'Ubuntu', sans-serif;
     color: white;
@@ -15,6 +23,7 @@ export const GlobalStyles = createGlobalStyle`
     background-color: ${({ theme }) => theme.colors.almostBlack};
     margin-bottom: 2rem;
   }
+
   main {
     width: 95%;
     margin-right: auto;

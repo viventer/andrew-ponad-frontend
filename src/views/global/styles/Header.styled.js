@@ -6,7 +6,7 @@ export const StyledHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.darkGray};
-  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
   position: relative;
 
   & > .flex {
@@ -19,20 +19,21 @@ export const StyledHeader = styled.header`
   }
 
   & .reactRouterLink {
-    color: ${({ theme }) => theme.colors.sunset};
+    color: white;
     white-space: nowrap;
     transition: all ease-in-out 0.15s;
     font-size: 1.5rem;
+    font-weight: 500;
     display: flex;
     align-items: center;
   }
 
   & .reactRouterLink:hover {
-    filter: brightness(1.1);
+    color: ${({ theme }) => theme.colors.sunset};
   }
 
   & .reactRouterLink:active {
-    filter: brightness(1.2);
+    filter: brightness(0.7);
   }
 
   @media (max-width: 650px) {

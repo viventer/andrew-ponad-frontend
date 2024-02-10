@@ -17,10 +17,7 @@ export default function FixedErrorModal({ message }) {
   });
 
   return (
-    <StyledFixedErrorModal
-      style={{ opacity: message ? 1 : 0 }}
-      className="transition"
-    >
+    <StyledFixedErrorModal style={{ display: message ? "flex" : "none" }}>
       <FontAwesomeIcon icon={faTriangleExclamation} className="icon" />
       <p>{message?.error || message?.message || message}</p>
     </StyledFixedErrorModal>

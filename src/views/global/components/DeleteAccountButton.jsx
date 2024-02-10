@@ -5,10 +5,15 @@ import { useDeleteUserMutation } from "../slices/usersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
-import FixedErrorModal from "./FixedErrorModal";
 import { HashLoader } from "react-spinners";
 import useAuth from "../../../hooks/useAuth";
-import { setErrMsg } from "../slices/globalStatesSlice";
+import {
+  selectDialogAnswer,
+  setDialogAnswer,
+  setDialogMsg,
+  setErrMsg,
+} from "../slices/globalStatesSlice";
+import { useEffect } from "react";
 
 export default function DeleteAccountButton() {
   const userId = useSelector(selectUserId) || 0;
@@ -20,6 +25,15 @@ export default function DeleteAccountButton() {
   const { setIsLogged } = useAuth();
 
   const dispatch = useDispatch();
+  const dialogAnswer = useSelector(selectDialogAnswer);
+
+  const showDialog = () => {
+    dispatch(
+      setDialogMsg(
+        "Czy na pewno chcesz usunąć konto? Ta operacja jest nieodwracalna."
+      )
+    );
+  };
 
   const deleteAccount = async () => {
     try {
@@ -39,8 +53,15 @@ export default function DeleteAccountButton() {
     }
   };
 
+  useEffect(() => {
+    if (dialogAnswer == "yes") {
+      deleteAccount();
+    }
+    dispatch(setDialogAnswer(null));
+  }, [dialogAnswer]);
+
   return (
-    <StyledButton onClick={deleteAccount}>
+    <StyledButton onClick={showDialog}>
       <FontAwesomeIcon icon={faUserSlash} />
       Usuń konto
     </StyledButton>

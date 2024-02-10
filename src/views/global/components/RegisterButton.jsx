@@ -8,7 +8,7 @@ export default function RegisterButton() {
   return (
     <StyledButton>
       <Link to="/register" className="reactRouterLink">
-        <FontAwesomeIcon icon={faUserPlus} />
+        <FontAwesomeIcon icon={faUserPlus} className="icon" />
         <p>Zarejestruj się</p>
       </Link>
     </StyledButton>

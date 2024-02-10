@@ -8,7 +8,7 @@ export default function LoginButton() {
   return (
     <StyledButton>
       <Link to="/login" className="reactRouterLink">
-        <FontAwesomeIcon icon={faRightToBracket} />
+        <FontAwesomeIcon icon={faRightToBracket} className="icon" />
         <p>Zaloguj się</p>
       </Link>
     </StyledButton>
