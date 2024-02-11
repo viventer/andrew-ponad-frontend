@@ -6,14 +6,15 @@ export const StyledAuth = styled.main`
   justify-content: center;
   flex-direction: column;
   width: fit-content;
-  border: 0.1rem solid ${({ theme }) => theme.colors.navy};
+  border: 0.1rem solid rgba(255, 255, 255, 0.15);
   border-radius: 0.5rem;
-  padding: 3rem 5rem;
+  padding: 2rem 4rem;
   margin-top: 4rem;
   max-width: 100%;
 
   & h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 500;
     margin-bottom: 1rem;
   }
 
@@ -36,8 +37,7 @@ export const StyledAuth = styled.main`
 
   @media (max-width: 425px) {
     box-shadow: none;
-    width: 95%;
-    border: 0.1rem solid rgba(255, 255, 255, 0.15);
+    width: 95vw;
     margin-top: 1.5rem;
   }
 
@@ -57,6 +57,9 @@ export const StyledAuthForm = styled.form`
 
   & button {
     margin-bottom: 1.5rem;
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem;
   }
 
   & label,
@@ -67,8 +70,8 @@ export const StyledAuthForm = styled.form`
   & section {
     margin-top: 0.5rem;
     color: ${({ theme }) => theme.colors.sunset};
-    font-size: 1.1rem;
-    line-height: 1.3rem;
+    font-size: 1rem;
+    line-height: 1.6rem;
     display: none;
   }
 
@@ -82,11 +85,11 @@ export const StyledAuthForm = styled.form`
 
   & input {
     color: white;
-    font-size: 1.2rem;
+    font-size: 1rem;
     background-color: rgba(255, 255, 255, 0.15);
     border: none;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    padding: 0.5rem 0.75rem;
     width: 100%;
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
@@ -121,23 +124,11 @@ export const StyledAuthForm = styled.form`
 
   & label {
     margin-bottom: 0.3rem;
-    font-size: 1.2rem;
-  }
-
-  & button {
-    color: white;
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 0.5rem;
-    border: none;
-    border-radius: 0.3rem;
-    background-color: ${({ theme }) => theme.colors.navy};
-    width: 100%;
-    filter: brightness(1);
+    font-size: 1.1rem;
   }
 
   & .disabledButton {
-    filter: brightness(0.5);
+    filter: brightness(0.75);
   }
 
   & .flex {
@@ -182,13 +173,6 @@ export const StyledAuthForm = styled.form`
 
     & .flex label {
       font-size: 1.15rem;
-    }
-  }
-
-  @media (hover: hover) {
-    & .activeButton:hover {
-      filter: brightness(1.25);
-      cursor: pointer;
     }
   }
 `;

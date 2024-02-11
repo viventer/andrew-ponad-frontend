@@ -1,3 +1,4 @@
+import { StyledButton } from "../../global/styles/Button.styled";
 import { StyledAuthForm } from "../styles/Login.styled";
 
 export default function LoginForm({
@@ -26,12 +27,12 @@ export default function LoginForm({
         value={loginData.password}
         required
       />
-      <button
+      <StyledButton
         className={canSubmit ? "activeButton" : "disabledButton"}
         disabled={!canSubmit}
       >
-        Zaloguj się
-      </button>
+        <p>Zaloguj się</p>
+      </StyledButton>
       <div className="flex">
         <input
           type="checkbox"

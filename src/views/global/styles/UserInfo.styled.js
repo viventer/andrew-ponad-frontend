@@ -43,7 +43,7 @@ export const StyledUserInfo = styled.div`
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
 
-  & div > section:first-of-type {
+  & .userInfo > section:first-of-type {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -133,7 +133,7 @@ export const StyledUserInfo = styled.div`
       min-width: 0;
     }
 
-    & > article > .flex:last-child {
+    & > article > .userInfo {
       flex-direction: column;
       align-items: start;
       justify-content: center;

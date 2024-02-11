@@ -1,3 +1,4 @@
+import { StyledButton } from "../../global/styles/Button.styled";
 import { StyledAuthForm } from "../styles/Login.styled";
 
 export function RegisterForm({
@@ -97,12 +98,12 @@ export function RegisterForm({
         required
         ref={references.confirmPasswordRef}
       />
-      <button
+      <StyledButton
         disabled={!canSave}
         className={canSave ? "activeButton" : "disabledButton"}
       >
         Zarejestruj się
-      </button>
+      </StyledButton>
       <div className="flex">
         <input
           type="checkbox"

@@ -74,6 +74,12 @@ export const StyledHeader = styled.header`
       box-shadow: 0.5rem 0 0 ${({ theme }) => theme.colors.sunset};
     }
   }
+
+  @media (max-width: 350px) {
+    & h1 > .reactRouterLink > p {
+      display: none;
+    }
+  }
 `;
 
 export const StyledSearchBar = styled.nav`

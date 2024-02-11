@@ -67,7 +67,7 @@ export default function UserInfo() {
           <header className="flex">
             <h2>Informacje o koncie</h2>
           </header>
-          <div className="flex">
+          <div className="flex userInfo">
             <section>
               <p>
                 login: <span>{userData.username}</span>

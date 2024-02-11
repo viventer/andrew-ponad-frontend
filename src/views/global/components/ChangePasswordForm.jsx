@@ -1,4 +1,5 @@
 import { StyledAuthForm } from "../../auth/styles/Login.styled";
+import { StyledButton } from "../styles/Button.styled";
 
 export default function ChangePasswordForm({
   handlers,
@@ -54,9 +55,9 @@ export default function ChangePasswordForm({
           handlers.handleInputChange("confirmNewPassword", e.target.value)
         }
       />
-      <button disabled={!canSubmit} onClick={handlers.handleSubmit}>
+      <StyledButton disabled={!canSubmit} onClick={handlers.handleSubmit}>
         Zmień hasło
-      </button>
+      </StyledButton>
     </StyledAuthForm>
   );
 }

@@ -4,7 +4,7 @@ export const StyledButton = styled.button`
   background: none;
   color: white;
   border: 0.1rem solid ${({ theme }) => theme.colors.navy};
-  padding: 0.2rem 1rem;
+  padding: 0.3rem 1rem;
   font-size: 1.1rem;
   width: fit-content;
   font-weight: 700;
@@ -15,6 +15,7 @@ export const StyledButton = styled.button`
   align-items: center;
   transition: box-shadow 0.15s ease-in-out;
   white-space: nowrap;
+  border-radius: 0.3rem;
 
   & .icon {
     color: ${({ theme }) => theme.colors.sunset};
