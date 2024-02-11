@@ -21,15 +21,17 @@ export const StyledNavigation = styled.nav`
     border-radius: 0.2rem;
   }
 
-  .icon:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    border: 0.1rem solid ${({ theme }) => theme.colors.sunset};
-    cursor: pointer;
-  }
-
   @media (max-width: 1000px) {
     & .icon {
       display: none;
+    }
+  }
+
+  @media (hover: hover) {
+    .icon:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      border: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+      cursor: pointer;
     }
   }
 `;

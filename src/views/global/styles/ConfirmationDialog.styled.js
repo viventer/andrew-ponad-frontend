@@ -51,14 +51,6 @@ export const StyledConfirmationDialog = styled.article`
     gap: 1rem;
   }
 
-  & button:first-of-type:hover {
-    outline-color: ${({ theme }) => theme.colors.green};
-  }
-
-  & button:nth-of-type(2):hover {
-    outline-color: ${({ theme }) => theme.colors.red};
-  }
-
   @media (max-width: 800px) {
     & > dialog {
       max-width: 35rem;
@@ -98,6 +90,16 @@ export const StyledConfirmationDialog = styled.article`
     }
 
     h2 {
+    }
+  }
+
+  @media (hover: hover) {
+    & button:first-of-type:hover {
+      outline-color: ${({ theme }) => theme.colors.green};
+    }
+
+    & button:nth-of-type(2):hover {
+      outline-color: ${({ theme }) => theme.colors.red};
     }
   }
 `;

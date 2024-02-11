@@ -13,14 +13,16 @@ export const StyledPostContentEditorRow = styled.section`
     cursor: pointer;
   }
 
-  & .flex:not(.active):hover {
-    outline: 0.1rem solid #777;
-    outline-offset: 0.4rem;
-  }
-
   & .onlyOneElement .responsivePostElement {
     max-width: 75rem;
     max-height: calc(0.5625 * 75rem);
+  }
+
+  @media (hover: hover) {
+    & .flex:not(.active):hover {
+      outline: 0.1rem solid #777;
+      outline-offset: 0.4rem;
+    }
   }
 
   @media (max-width: 1600px) {

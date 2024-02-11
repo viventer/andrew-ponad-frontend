@@ -16,13 +16,20 @@ export const StyledButton = styled.button`
   transition: box-shadow 0.15s ease-in-out;
   white-space: nowrap;
 
-  &:hover {
-    box-shadow: inset 3rem 0 2rem rgba(21, 49, 92, 1);
-    cursor: pointer;
-    outline: 0.1rem solid rgba(255, 255, 255, 0.3);
-  }
-
   & .icon {
     color: ${({ theme }) => theme.colors.sunset};
+  }
+
+  & .reactRouterLink {
+    display: flex;
+    align-items: center;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: inset 3rem 0 2rem rgba(21, 49, 92, 1);
+      cursor: pointer;
+      outline: 0.1rem solid rgba(255, 255, 255, 0.3);
+    }
   }
 `;

@@ -136,11 +136,6 @@ export const StyledAuthForm = styled.form`
     filter: brightness(1);
   }
 
-  & .activeButton:hover {
-    filter: brightness(1.25);
-    cursor: pointer;
-  }
-
   & .disabledButton {
     filter: brightness(0.5);
   }
@@ -187,6 +182,13 @@ export const StyledAuthForm = styled.form`
 
     & .flex label {
       font-size: 1.15rem;
+    }
+  }
+
+  @media (hover: hover) {
+    & .activeButton:hover {
+      filter: brightness(1.25);
+      cursor: pointer;
     }
   }
 `;

@@ -9,6 +9,17 @@ export const StyledHeader = styled.header`
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
   position: relative;
 
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  & h1 > .icon {
+    font-size: 1.25rem;
+    color: ${({ theme }) => theme.colors.sunset};
+  }
+
   & > .flex {
     gap: 3rem;
     justify-content: left;
@@ -18,22 +29,27 @@ export const StyledHeader = styled.header`
     padding: 0.5rem 0;
   }
 
-  & .reactRouterLink {
+  & h1 > .reactRouterLink {
     color: white;
     white-space: nowrap;
     transition: all ease-in-out 0.15s;
     font-size: 1.5rem;
-    font-weight: 500;
+    font-weight: 300;
     display: flex;
     align-items: center;
+    gap: 0.5rem;
   }
 
-  & .reactRouterLink:hover {
+  & h1 > .reactRouterLink .icon {
+    transition: all ease-in-out 0.15s;
+    box-shadow: 0.1rem 0 0 white;
+    padding-right: 0.5rem;
+    margin-right: 0.5rem;
     color: ${({ theme }) => theme.colors.sunset};
   }
 
-  & .reactRouterLink:active {
-    filter: brightness(0.7);
+  & h1 > .reactRouterLink:active {
+    color: ${({ theme }) => theme.colors.sunset};
   }
 
   @media (max-width: 650px) {
@@ -50,6 +66,12 @@ export const StyledHeader = styled.header`
   @media (max-width: 385px) {
     & > .flex {
       gap: 1rem;
+    }
+  }
+
+  @media (hover: hover) {
+    & h1 > .reactRouterLink:hover .icon {
+      box-shadow: 0.5rem 0 0 ${({ theme }) => theme.colors.sunset};
     }
   }
 `;

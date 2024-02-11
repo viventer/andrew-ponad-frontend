@@ -85,13 +85,15 @@ export const StyledPostContentEditor = styled.section`
     box-shadow: inset 0 0 10rem rgba(21, 49, 92, 0.15);
   }
 
-  & > button:hover {
-    cursor: pointer;
-    box-shadow: inset 20rem 0 10rem rgba(21, 49, 92, 0.2);
-  }
-
   & > button:active {
     filter: brightness(1.75);
+  }
+
+  @media (hover: hover) {
+    & > button:hover {
+      cursor: pointer;
+      box-shadow: inset 20rem 0 10rem rgba(21, 49, 92, 0.2);
+    }
   }
 
   @media (max-width: 1100px) {

@@ -26,12 +26,14 @@ export const StyledRowTypeSelection = styled.div`
     cursor: pointer;
   }
 
-  & div:hover {
-    color: white;
-  }
+  @media (hover: hover) {
+    & div:hover {
+      color: white;
+    }
 
-  & > div:nth-child(2):hover {
-    color: rgb(255, 100, 100);
+    & > div:nth-child(2):hover {
+      color: rgb(255, 100, 100);
+    }
   }
 
   @media (max-width: 1100px) {

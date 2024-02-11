@@ -4,6 +4,8 @@ import UserInfo from "./UserInfo";
 import { StyledHeader } from "../styles/Header.styled";
 
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faServer } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
   return (
@@ -11,7 +13,8 @@ export default function Header() {
       <div className="flex">
         <h1>
           <Link to="/" className="reactRouterLink">
-            Andrzej Pławecki
+            <FontAwesomeIcon icon={faServer} className="icon" />
+            <p>Andrzej Pławecki</p>
           </Link>
         </h1>
         <SearchBar />

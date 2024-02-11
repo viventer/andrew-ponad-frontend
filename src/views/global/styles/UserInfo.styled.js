@@ -84,11 +84,6 @@ export const StyledUserInfo = styled.div`
     box-shadow: inset 0 0 3rem rgba(255, 0, 0, 0.5);
   }
 
-  & section.flex-column button:last-child:hover {
-    box-shadow: inset 3rem 0 2rem rgba(255, 0, 0, 0.75);
-    outline: none;
-  }
-
   & .buttonsSection {
     display: flex;
     margin-top: 1rem;
@@ -114,6 +109,11 @@ export const StyledUserInfo = styled.div`
     & > button:hover {
       cursor: pointer;
       box-shadow: -0.5rem 0 0 ${({ theme }) => theme.colors.sunset};
+    }
+
+    & section.flex-column button:last-child:hover {
+      box-shadow: inset 3rem 0 2rem rgba(255, 0, 0, 0.75);
+      outline: none;
     }
   }
 

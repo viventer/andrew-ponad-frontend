@@ -36,13 +36,15 @@ export const StyledPostEditor = styled.main`
     transition: all 0.15s ease-in-out;
   }
 
-  & > footer > button:hover {
-    box-shadow: inset 2rem 0rem 5rem rgba(21, 49, 92, 0.5);
-    cursor: pointer;
-  }
-
   & > footer > button:active {
     filter: brightness(1.75);
+  }
+
+  @media (hover: hover) {
+    & > footer > button:hover {
+      box-shadow: inset 2rem 0rem 5rem rgba(21, 49, 92, 0.5);
+      cursor: pointer;
+    }
   }
 
   @media (max-width: 1100px) {
