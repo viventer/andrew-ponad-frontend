@@ -27,7 +27,7 @@ export const StyledButton = styled.button`
   }
 
   @media (hover: hover) {
-    &:hover {
+    &:not([disabled]):hover {
       box-shadow: inset 3rem 0 2rem rgba(21, 49, 92, 1);
       cursor: pointer;
       outline: 0.1rem solid rgba(255, 255, 255, 0.3);

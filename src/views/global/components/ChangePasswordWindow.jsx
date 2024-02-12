@@ -4,7 +4,6 @@ import ChangePasswordForm from "./ChangePasswordForm";
 import { useLoginMutation } from "../../auth/slices/authApiSlice";
 import useValidation from "../../../hooks/useValidation";
 import DynamicErrorNotification from "./DynamicErrorNotification";
-import { HashLoader } from "react-spinners";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
 import SuccessInfo from "./SuccessInfo";
 
@@ -106,12 +105,14 @@ export default function ChangePasswordWindow({
     }
   };
 
-  if (isUpdateLoading || isLoginLoading)
-    return (
-      <div className="flex">
-        <HashLoader color="fff" className="hashLoader" />
-      </div>
-    );
+  useEffect(() => {
+    if (isUpdateLoading || isLoginLoading) {
+      dispatch(setIsLoading(true));
+      return;
+    } else {
+      dispatch(setIsLoading(false));
+    }
+  }, [isUpdateLoading, isLoginLoading]);
 
   const isAllDataValid = validations.password && validations.confirmPassword;
   const isAllDataExist = Object.values(inputs).every(Boolean);

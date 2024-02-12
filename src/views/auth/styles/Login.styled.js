@@ -86,7 +86,7 @@ export const StyledAuthForm = styled.form`
   & input {
     color: white;
     font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0.1);
     border: none;
     border-radius: 0.3rem;
     padding: 0.5rem 0.75rem;
@@ -127,8 +127,8 @@ export const StyledAuthForm = styled.form`
     font-size: 1.1rem;
   }
 
-  & .disabledButton {
-    filter: brightness(0.75);
+  & button[disabled] {
+    filter: brightness(0.5);
   }
 
   & .flex {

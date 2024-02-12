@@ -67,18 +67,24 @@ export const GlobalStyles = createGlobalStyle`
     transition: all 0.15s ease-in-out;
   }
 
+  .blur {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    backdrop-filter: blur(0.1rem);
+  }
+
   .responsivePostElement {
     width: 90vw;
     height: calc(0.5625 * 90vw);
     max-width: 36rem;
     max-height: calc(20.25rem);
   }
-
-  .hashLoader {
-    position: fixed;
-    left: 50vw;
-    top: 40vh;
-}
 
   @media (max-width: 1600px) {
     .responsivePostElement {

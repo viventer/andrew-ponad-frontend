@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import HashLoader from "react-spinners/HashLoader";
 
 import { useRefreshMutation } from "../slices/authApiSlice";
 import { selectCurrentToken } from "../slices/authSlice";
 
 import useAuth from "../../../hooks/useAuth";
 import usePersist from "../../../hooks/usePersist";
-import { setErrMsg } from "../../global/slices/globalStatesSlice";
+import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
 const PersistLogin = () => {
   const dispatch = useDispatch();
@@ -47,16 +46,19 @@ const PersistLogin = () => {
   if (!persist) {
     content = <Outlet />;
   } else if (isLoading) {
-    content = <HashLoader color="fff" />;
+    dispatch(setIsLoading(true));
+    return;
   } else if (isError) {
     if (isLogged) {
       dispatch(setErrMsg(`${error?.data?.message} - zaloguj się ponownie`));
       setIsLogged(false);
     }
+    dispatch(setIsLoading(false));
   } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {
     if (!isLogged) {
       setIsLogged(true);
     }
+    dispatch(setIsLoading(false));
     content = <Outlet />;
   }
 

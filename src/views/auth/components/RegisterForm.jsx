@@ -98,12 +98,7 @@ export function RegisterForm({
         required
         ref={references.confirmPasswordRef}
       />
-      <StyledButton
-        disabled={!canSave}
-        className={canSave ? "activeButton" : "disabledButton"}
-      >
-        Zarejestruj się
-      </StyledButton>
+      <StyledButton disabled={!canSave}>Zarejestruj się</StyledButton>
       <div className="flex">
         <input
           type="checkbox"

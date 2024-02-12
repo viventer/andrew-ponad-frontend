@@ -5,13 +5,13 @@ import { useDeleteUserMutation } from "../slices/usersApiSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
-import { HashLoader } from "react-spinners";
 import useAuth from "../../../hooks/useAuth";
 import {
   selectDialogAnswer,
   setDialogAnswer,
   setDialogMsg,
   setErrMsg,
+  setIsLoading,
 } from "../slices/globalStatesSlice";
 import { useEffect } from "react";
 
@@ -41,15 +41,19 @@ export default function DeleteAccountButton() {
       await signOut();
       if (isError) {
         dispatch(setErrMsg(error));
+        dispatch(setIsLoading(false));
         return;
       } else if (isDeletingLoading || isLoggingOutLoading) {
-        return <HashLoader color="white" className="hashLoader" />;
+        dispatch(setIsLoading(true));
+        return;
       } else {
         setIsLogged(false);
+        dispatch(setIsLoading(false));
         window.location.reload();
       }
     } catch (err) {
       console.log(err);
+      dispatch(setIsLoading(false));
     }
   };
 

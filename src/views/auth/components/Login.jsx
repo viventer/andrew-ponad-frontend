@@ -1,6 +1,5 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import HashLoader from "react-spinners/HashLoader";
 import { useDispatch } from "react-redux";
 
 import { setCredentials } from "../slices/authSlice";
@@ -12,6 +11,7 @@ import useAuth from "../../../hooks/useAuth";
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import LoginForm from "./LoginForm";
 import { StyledAuth } from "../styles/Login.styled";
+import { setIsLoading } from "../../global/slices/globalStatesSlice";
 
 export default function Login() {
   const { setIsLogged, isLogged } = useAuth();
@@ -82,12 +82,14 @@ export default function Login() {
   const handlePwdInput = (e) => setPassword(e.target.value);
   const handlePersistToggle = () => setPersist((prev) => !prev);
 
-  if (isLoading)
-    return (
-      <div className="flex">
-        <HashLoader color="fff" className="hashLoader" />
-      </div>
-    );
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setIsLoading(true));
+      return;
+    } else {
+      dispatch(setIsLoading(false));
+    }
+  }, [isLoading]);
 
   const canSubmit = username && password;
 

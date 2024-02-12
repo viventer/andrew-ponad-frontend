@@ -2,14 +2,13 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledButton } from "../styles/Button.styled";
 
-import HashLoader from "react-spinners/HashLoader";
 import { useNavigate } from "react-router-dom";
 
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
 
 import useAuth from "../../../hooks/useAuth";
 import { useDispatch } from "react-redux";
-import { setErrMsg } from "../slices/globalStatesSlice";
+import { setErrMsg, setIsLoading } from "../slices/globalStatesSlice";
 
 export default function LogoutButton() {
   const dispatch = useDispatch();
@@ -24,11 +23,14 @@ export default function LogoutButton() {
     await signOut();
     if (isError) {
       dispatch(setErrMsg(error));
+      dispatch(setIsLoading(false));
       return;
     } else if (isLoading) {
-      return <HashLoader color="white" className="hashLoader" />;
+      dispatch(setIsLoading(true));
+      return;
     } else {
       setIsLogged(false);
+      dispatch(setIsLoading(false));
       navigate("/");
     }
   }

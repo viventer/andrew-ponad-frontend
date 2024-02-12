@@ -2,8 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import HashLoader from "react-spinners/HashLoader";
-
 import { setCredentials } from "../slices/authSlice";
 import { useRegisterMutation, useLoginMutation } from "../slices/authApiSlice";
 
@@ -14,6 +12,7 @@ import useValidation from "../../../hooks/useValidation";
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import { RegisterForm } from "./RegisterForm";
 import { StyledAuth } from "../styles/Login.styled";
+import { setIsLoading } from "../../global/slices/globalStatesSlice";
 
 export default function Register() {
   const { setIsLogged, isLogged } = useAuth();
@@ -122,8 +121,14 @@ export default function Register() {
   const isAllDataValid = Object.values(validations).every(Boolean);
   const isAllDataExist = Object.values(inputs).every(Boolean);
 
-  if (isLoading || isLoginLoading)
-    return <HashLoader color="fff" className="hashLoader" />;
+  useEffect(() => {
+    if (isLoading || isLoginLoading) {
+      dispatch(setIsLoading(true));
+      return;
+    } else {
+      dispatch(setIsLoading(false));
+    }
+  }, [isLoading, isLoginLoading]);
 
   const content = (
     <StyledAuth className="register">
