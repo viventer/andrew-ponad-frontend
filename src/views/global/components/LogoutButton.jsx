@@ -9,6 +9,7 @@ import { useLogoutMutation } from "../../auth/slices/authApiSlice";
 import useAuth from "../../../hooks/useAuth";
 import { useDispatch } from "react-redux";
 import { setErrMsg, setIsLoading } from "../slices/globalStatesSlice";
+import usePersist from "../../../hooks/usePersist";
 
 export default function LogoutButton() {
   const dispatch = useDispatch();

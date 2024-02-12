@@ -18,8 +18,8 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route element={<PersistLogin />}>
           <Route index element={<Home />} />
-          <Route path="adminpanel" element={<AdminPanel />} />
           <Route path="post/:id" element={<Post />} />
+          <Route path="adminpanel" element={<AdminPanel />} />
           <Route path="post/:id/edit" element={<PostEditor />} />
           <Route path="post/create" element={<PostEditor />} />
         </Route>

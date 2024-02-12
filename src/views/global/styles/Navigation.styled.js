@@ -21,7 +21,7 @@ export const StyledNavigation = styled.nav`
     border-radius: 0.2rem;
   }
 
-  @media (max-width: 1000px) {
+  @media (max-width: 1100px) {
     & .icon {
       display: none;
     }

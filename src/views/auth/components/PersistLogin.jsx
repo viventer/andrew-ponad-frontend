@@ -50,10 +50,10 @@ const PersistLogin = () => {
     return;
   } else if (isError) {
     if (isLogged) {
-      dispatch(setErrMsg(`${error?.data?.message} - zaloguj się ponownie`));
       setIsLogged(false);
     }
     dispatch(setIsLoading(false));
+    content = <Outlet />;
   } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {
     if (!isLogged) {
       setIsLogged(true);
