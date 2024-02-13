@@ -1,21 +1,24 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-  background: none;
-  color: white;
-  border: 0.1rem solid ${({ theme }) => theme.colors.navy};
-  padding: 0.3rem 1rem;
-  font-size: 1.1rem;
-  width: fit-content;
-  font-weight: 700;
-  box-shadow: inset 0 0 3rem rgba(21, 49, 92, 0.5);
-  transition: all 0.15s ease-in-out;
   display: flex;
-  gap: 0.5rem;
   align-items: center;
-  transition: box-shadow 0.15s ease-in-out;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.3rem 1rem;
   white-space: nowrap;
+  border: 0.1rem solid ${({ theme }) => theme.colors.navy};
   border-radius: 0.3rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  box-shadow: inset 0 0 3rem rgba(21, 49, 92, 0.5);
+  transition: box-shadow 0.15s ease-in-out;
+  background: none;
+
+  &[disabled] {
+    filter: brightness(0.5);
+  }
 
   & .icon {
     color: ${({ theme }) => theme.colors.sunset};

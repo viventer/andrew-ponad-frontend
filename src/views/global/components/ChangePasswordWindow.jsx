@@ -1,11 +1,13 @@
 import { useEffect, useState, useRef } from "react";
-import { StyledAuth } from "../../auth/styles/Login.styled";
-import ChangePasswordForm from "./ChangePasswordForm";
-import { useLoginMutation } from "../../auth/slices/authApiSlice";
+
 import useValidation from "../../../hooks/useValidation";
-import DynamicErrorNotification from "./DynamicErrorNotification";
 import { useUpdateUserMutation } from "../slices/usersApiSlice";
+import { useLoginMutation } from "../../auth/slices/authApiSlice";
+
+import ChangePasswordForm from "./ChangePasswordForm";
+import DynamicErrorNotification from "./DynamicErrorNotification";
 import SuccessInfo from "./SuccessInfo";
+import { StyledAuth } from "../../auth/styles/Auth.styled";
 
 export default function ChangePasswordWindow({
   username,
@@ -14,6 +16,14 @@ export default function ChangePasswordWindow({
   finished,
   setFinished,
 }) {
+  const oldPasswordRef = useRef();
+  const newPasswordRef = useRef();
+  const confirmNewPasswordRef = useRef();
+  const passwordRequirementsRef = useRef();
+
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
+  const [updateUser, { isLoading: isUpdateLoading }] = useUpdateUserMutation();
+
   const [errMsg, setErrMsg] = useState("");
   const [showSuccessMsg, setShowSuccessMsg] = useState(false);
 
@@ -23,10 +33,22 @@ export default function ChangePasswordWindow({
     confirmNewPassword: "",
   });
 
-  const oldPasswordRef = useRef();
-  const newPasswordRef = useRef();
-  const confirmNewPasswordRef = useRef();
-  const passwordRequirementsRef = useRef();
+  useEffect(() => {
+    oldPasswordRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrMsg("");
+  }, [inputs]);
+
+  useEffect(() => {
+    if (isUpdateLoading || isLoginLoading) {
+      dispatch(setIsLoading(true));
+      return;
+    } else {
+      dispatch(setIsLoading(false));
+    }
+  }, [isUpdateLoading, isLoginLoading]);
 
   const { validations, setValidations, validateField } = useValidation(
     {
@@ -50,24 +72,12 @@ export default function ChangePasswordWindow({
     }));
   };
 
-  useEffect(() => {
-    oldPasswordRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [inputs]);
-
-  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
-  const [updateUser, { isLoading: isUpdateLoading }] = useUpdateUserMutation();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isAllDataExist) {
       setErrMsg("Uzupełnij wszystkie pola");
       return;
     } else if (!isAllDataValid) {
-      console.log(validations);
       setErrMsg("Wprowadzone dane są niepoprawne");
       return;
     }
@@ -105,15 +115,6 @@ export default function ChangePasswordWindow({
     }
   };
 
-  useEffect(() => {
-    if (isUpdateLoading || isLoginLoading) {
-      dispatch(setIsLoading(true));
-      return;
-    } else {
-      dispatch(setIsLoading(false));
-    }
-  }, [isUpdateLoading, isLoginLoading]);
-
   const isAllDataValid = validations.password && validations.confirmPassword;
   const isAllDataExist = Object.values(inputs).every(Boolean);
 
@@ -137,7 +138,9 @@ export default function ChangePasswordWindow({
         }}
         canSubmit={canSubmit}
       />
-      {errMsg && <DynamicErrorNotification message={errMsg} />}
+      {errMsg && (
+        <DynamicErrorNotification message={errMsg} aria-live="assertive" />
+      )}
     </StyledAuth>
   ) : showSuccessMsg ? (
     <SuccessInfo message={"Hasło zostało zmienione"} />

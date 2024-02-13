@@ -32,8 +32,13 @@ export const StyledImageDropzone = styled.div`
   }
 
   & .change-icon {
-    font-size: 7rem;
     filter: opacity(0);
+    font-size: 7rem;
+  }
+
+  & .change-icon,
+  & .change-paragraph {
+    transition: all 0.15s ease-in-out;
   }
 
   & .change-paragraph {
@@ -50,11 +55,6 @@ export const StyledImageDropzone = styled.div`
     gap: 1rem;
     width: 100%;
     height: 100%;
-    transition: all 0.15s ease-in-out;
-  }
-
-  & .change-icon,
-  & .change-paragraph {
     transition: all 0.15s ease-in-out;
   }
 

@@ -1,9 +1,12 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyledConfirmationDialog } from "../styles/ConfirmationDialog.styled";
-import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
-import { StyledButton } from "../styles/Button.styled";
 import { useDispatch } from "react-redux";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+
 import { setDialogAnswer, setDialogMsg } from "../slices/globalStatesSlice";
+
+import { StyledConfirmationDialog } from "../styles/ConfirmationDialog.styled";
+import { StyledButton } from "../styles/Button.styled";
 
 export default function ConfirmationDialog({ message }) {
   const dispatch = useDispatch();

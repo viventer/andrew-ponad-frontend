@@ -1,4 +1,4 @@
-import { StyledAuthForm } from "../../auth/styles/Login.styled";
+import { StyledAuthForm } from "../../auth/styles/AuthForm.styled";
 import { StyledButton } from "../styles/Button.styled";
 
 export default function ChangePasswordForm({

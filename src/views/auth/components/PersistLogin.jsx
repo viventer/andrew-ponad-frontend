@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useRefreshMutation } from "../slices/authApiSlice";
 import { selectCurrentToken } from "../slices/authSlice";
+import { setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import useAuth from "../../../hooks/useAuth";
 import usePersist from "../../../hooks/usePersist";
-import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
 const PersistLogin = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const PersistLogin = () => {
 
   const [trueSuccess, setTrueSuccess] = useState(false);
 
-  const [refresh, { isUninitialized, isLoading, isSuccess, isError, error }] =
+  const [refresh, { isUninitialized, isLoading, isSuccess, isError }] =
     useRefreshMutation();
 
   useEffect(() => {
@@ -42,26 +42,28 @@ const PersistLogin = () => {
     // eslint-disable-next-line
   }, []);
 
-  let content;
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setIsLoading(true));
+    } else {
+      dispatch(setIsLoading(false));
+    }
+  }, [isLoading, dispatch]);
+
   if (!persist) {
-    content = <Outlet />;
+    return <Outlet />;
   } else if (isLoading) {
-    dispatch(setIsLoading(true));
     return;
   } else if (isError) {
     if (isLogged) {
       setIsLogged(false);
     }
-    dispatch(setIsLoading(false));
-    content = <Outlet />;
   } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {
     if (!isLogged) {
       setIsLogged(true);
     }
-    dispatch(setIsLoading(false));
-    content = <Outlet />;
   }
 
-  return content;
+  return <Outlet />;
 };
 export default PersistLogin;

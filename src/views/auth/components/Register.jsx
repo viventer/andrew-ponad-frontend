@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { setCredentials } from "../slices/authSlice";
 import { useRegisterMutation, useLoginMutation } from "../slices/authApiSlice";
+import { setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import usePersist from "../../../hooks/usePersist";
 import useAuth from "../../../hooks/useAuth";
@@ -11,8 +12,7 @@ import useValidation from "../../../hooks/useValidation";
 
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import { RegisterForm } from "./RegisterForm";
-import { StyledAuth } from "../styles/Login.styled";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+import { StyledAuth } from "../styles/Auth.styled";
 
 export default function Register() {
   const { setIsLogged, isLogged } = useAuth();
@@ -26,15 +26,6 @@ export default function Register() {
     }
   }, []);
 
-  const [register, { isLoading }] = useRegisterMutation();
-  const [login, { isLoginLoading }] = useLoginMutation();
-
-  const [persist, setPersist] = usePersist();
-  const onPersistToggle = () => setPersist((prev) => !prev);
-
-  const [errMsg, setErrMsg] = useState("");
-  const dispatch = useDispatch();
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
@@ -42,9 +33,19 @@ export default function Register() {
   const firstNameRef = useRef();
   const lastNameRef = useRef();
   const usernameRef = useRef();
+
   useEffect(() => {
     usernameRef.current.focus();
   }, []);
+
+  const dispatch = useDispatch();
+  const [persist, setPersist] = usePersist();
+  const onPersistToggle = () => setPersist((prev) => !prev);
+
+  const [register, { isLoading }] = useRegisterMutation();
+  const [login, { isLoginLoading }] = useLoginMutation();
+
+  const [errMsg, setErrMsg] = useState("");
 
   const [inputs, setInputs] = useState({
     username: "",
@@ -161,7 +162,9 @@ export default function Register() {
         </Link>
       </div>
 
-      {errMsg && <DynamicErrorNotification message={errMsg} />}
+      {errMsg && (
+        <DynamicErrorNotification message={errMsg} aria-live="assertive" />
+      )}
     </StyledAuth>
   );
 

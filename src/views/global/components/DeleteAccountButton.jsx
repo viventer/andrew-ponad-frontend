@@ -1,11 +1,14 @@
-import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyledButton } from "../styles/Button.styled";
-import { useDeleteUserMutation } from "../slices/usersApiSlice";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
+
+import useAuth from "../../../hooks/useAuth";
+
+import { useDeleteUserMutation } from "../slices/usersApiSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
-import useAuth from "../../../hooks/useAuth";
 import {
   selectDialogAnswer,
   setDialogAnswer,
@@ -13,10 +16,14 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../slices/globalStatesSlice";
-import { useEffect } from "react";
+
+import { StyledButton } from "../styles/Button.styled";
 
 export default function DeleteAccountButton() {
+  const dispatch = useDispatch();
+
   const userId = useSelector(selectUserId) || 0;
+  const dialogAnswer = useSelector(selectDialogAnswer);
 
   const [deleteUser, { isDeletingLoading }] = useDeleteUserMutation(userId);
   const [signOut, { isLoggingOutLoading, isError, error }] =
@@ -24,8 +31,12 @@ export default function DeleteAccountButton() {
 
   const { setIsLogged } = useAuth();
 
-  const dispatch = useDispatch();
-  const dialogAnswer = useSelector(selectDialogAnswer);
+  useEffect(() => {
+    if (dialogAnswer == "yes") {
+      deleteAccount();
+    }
+    dispatch(setDialogAnswer(null));
+  }, [dialogAnswer]);
 
   const showDialog = () => {
     dispatch(
@@ -56,13 +67,6 @@ export default function DeleteAccountButton() {
       dispatch(setIsLoading(false));
     }
   };
-
-  useEffect(() => {
-    if (dialogAnswer == "yes") {
-      deleteAccount();
-    }
-    dispatch(setDialogAnswer(null));
-  }, [dialogAnswer]);
 
   return (
     <StyledButton onClick={showDialog}>

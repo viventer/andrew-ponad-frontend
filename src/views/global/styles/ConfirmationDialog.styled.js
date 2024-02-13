@@ -1,47 +1,47 @@
 import styled from "styled-components";
 
 export const StyledConfirmationDialog = styled.article`
+  position: fixed;
+  bottom: 0;
+  z-index: 141414;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100vh;
-  bottom: 0;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(0.1rem);
-  z-index: 141414;
+  background-color: rgba(0, 0, 0, 0.25);
 
   & > dialog {
-    margin-right: auto;
-    margin-left: auto;
     display: flex;
     flex-direction: column;
-    color: white;
+    gap: 2rem;
+    min-width: 25rem;
+    max-width: 40rem;
+    margin-right: auto;
+    margin-left: auto;
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     padding: 1rem 1rem;
     font-size: 1.2rem;
     font-weight: 500;
-    gap: 2rem;
+    color: white;
     background-color: ${({ theme }) => theme.colors.darkGray};
-    min-width: 25rem;
-    max-width: 40rem;
   }
 
   & .icon {
-    color: ${({ theme }) => theme.colors.sunset};
-    font-size: 1.6rem;
     margin-right: 1rem;
-  }
-
-  & h2 > div {
-    border-right: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+    font-size: 1.6rem;
+    color: ${({ theme }) => theme.colors.sunset};
   }
 
   & h2 {
     display: flex;
-    gap: 1rem;
     align-items: start;
+    gap: 1rem;
+  }
+
+  & h2 > div {
+    border-right: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
 
   & > dialog > section {

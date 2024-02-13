@@ -17,11 +17,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
+    margin-bottom: 2rem;
     font-family: 'Ubuntu', sans-serif;
     color: white;
     background-color: black;
     background-color: ${({ theme }) => theme.colors.almostBlack};
-    margin-bottom: 2rem;
   }
 
   main {
@@ -69,13 +69,13 @@ export const GlobalStyles = createGlobalStyle`
 
   .blur {
     position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     left: 0;
     top: 0;
     bottom: 0;
     right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     backdrop-filter: blur(0.1rem);
   }
 
@@ -112,6 +112,4 @@ export const GlobalStyles = createGlobalStyle`
       max-height: calc(22.5rem);
     }
   }
-
-
 `;

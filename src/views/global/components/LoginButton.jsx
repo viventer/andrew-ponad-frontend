@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 
-import { StyledButton } from "../styles/Button.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightToBracket } from "@fortawesome/free-solid-svg-icons";
+
+import { StyledButton } from "../styles/Button.styled";
 
 export default function LoginButton() {
   return (

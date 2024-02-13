@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useTheme } from "styled-components";
+
 import validator from "validator";
 
 export default function useValidation(references, inputs) {
+  const theme = useTheme();
+
   const [validations, setValidations] = useState({
     username: false,
     password: "",
@@ -11,8 +14,6 @@ export default function useValidation(references, inputs) {
     firstName: "",
     lastName: "",
   });
-
-  const theme = useTheme();
 
   const validateField = (fieldName, value) => {
     switch (fieldName) {
@@ -28,16 +29,6 @@ export default function useValidation(references, inputs) {
         return validateEmail(value);
       case "confirmPassword":
         return validateConfirmPassword(value);
-    }
-  };
-
-  const setValidationStyle = (isValid, fieldRef) => {
-    if (isValid) {
-      fieldRef.current.classList.add("correct");
-      fieldRef.current.classList.remove("incorrect");
-    } else {
-      fieldRef.current.classList.add("incorrect");
-      fieldRef.current.classList.remove("correct");
     }
   };
 
@@ -60,12 +51,6 @@ export default function useValidation(references, inputs) {
   };
 
   const validatePassword = (password) => {
-    const getRequirementParagraph = (index) => {
-      return references.passwordRequirementsRef.current.querySelector(
-        `p:nth-of-type(${index})`
-      );
-    };
-
     const checkRequirement = (requirement, paragraphIndex) => {
       const requirementParagraph = getRequirementParagraph(paragraphIndex);
       if (requirement) {
@@ -81,6 +66,12 @@ export default function useValidation(references, inputs) {
         }, 500);
         requirementParagraph.style.opacity = "1";
       }
+    };
+
+    const getRequirementParagraph = (index) => {
+      return references.passwordRequirementsRef.current.querySelector(
+        `p:nth-of-type(${index})`
+      );
     };
 
     const requirements = {
@@ -129,6 +120,16 @@ export default function useValidation(references, inputs) {
     setValidationStyle(isValid, references.lastNameRef);
 
     return isValid;
+  };
+
+  const setValidationStyle = (isValid, fieldRef) => {
+    if (isValid) {
+      fieldRef.current.classList.add("correct");
+      fieldRef.current.classList.remove("incorrect");
+    } else {
+      fieldRef.current.classList.add("incorrect");
+      fieldRef.current.classList.remove("correct");
+    }
   };
 
   return { validations, setValidations, validateField };

@@ -1,9 +1,12 @@
 import { useEffect } from "react";
-import { StyledFixedErrorModal } from "../styles/FixedErrorModal.styled";
 import { useDispatch } from "react-redux";
-import { setErrMsg } from "../slices/globalStatesSlice";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+
+import { setErrMsg } from "../slices/globalStatesSlice";
+
+import { StyledFixedErrorModal } from "../styles/FixedErrorModal.styled";
 
 export default function FixedErrorModal({ message }) {
   const dispatch = useDispatch();

@@ -4,31 +4,33 @@ import { useDispatch } from "react-redux";
 
 import { setCredentials } from "../slices/authSlice";
 import { useLoginMutation } from "../slices/authApiSlice";
+import { setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import usePersist from "../../../hooks/usePersist";
 import useAuth from "../../../hooks/useAuth";
 
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import LoginForm from "./LoginForm";
-import { StyledAuth } from "../styles/Login.styled";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+import { StyledAuth } from "../styles/Auth.styled";
 
 export default function Login() {
   const { setIsLogged, isLogged } = useAuth();
+
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
-
-  const [errMsg, setErrMsg] = useState("");
-
-  const [persist, setPersist] = usePersist();
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isLogged) {
       navigate(from, { replace: true });
     }
   }, []);
+
+  const dispatch = useDispatch();
+  const [persist, setPersist] = usePersist();
+  const [login, { isLoading }] = useLoginMutation();
+
+  const [errMsg, setErrMsg] = useState("");
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +44,14 @@ export default function Login() {
     setErrMsg("");
   }, [username, password]);
 
-  const [login, { isLoading }] = useLoginMutation();
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(setIsLoading(true));
+      return;
+    } else {
+      dispatch(setIsLoading(false));
+    }
+  }, [isLoading]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,15 +90,6 @@ export default function Login() {
   const handleUserInput = (e) => setUsername(e.target.value);
   const handlePwdInput = (e) => setPassword(e.target.value);
   const handlePersistToggle = () => setPersist((prev) => !prev);
-
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(setIsLoading(true));
-      return;
-    } else {
-      dispatch(setIsLoading(false));
-    }
-  }, [isLoading]);
 
   const canSubmit = username && password;
 

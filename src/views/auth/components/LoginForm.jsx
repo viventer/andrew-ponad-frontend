@@ -1,5 +1,5 @@
 import { StyledButton } from "../../global/styles/Button.styled";
-import { StyledAuthForm } from "../styles/Login.styled";
+import { StyledAuthForm } from "../styles/AuthForm.styled";
 
 export default function LoginForm({
   handlers,

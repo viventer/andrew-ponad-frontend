@@ -1,13 +1,16 @@
 import { useSelector } from "react-redux";
-import { selectCurrentToken } from "../views/auth/slices/authSlice";
 import jwtDecode from "jwt-decode";
+
+import { selectCurrentToken } from "../views/auth/slices/authSlice";
 import useLocalStorage from "./useLocalStorage";
 
 const useAuth = () => {
   const token = useSelector(selectCurrentToken);
   let isEditor = false;
   let isAdmin = false;
-  let status = "User";
+  let isCreator = false;
+  let isVerified = false;
+  let mainRole = "User";
   const [isLogged, setIsLogged] = useLocalStorage("isLogged", false);
 
   if (token) {
@@ -18,31 +21,39 @@ const useAuth = () => {
     const decoded = jwtDecode(token);
     const { username, roles } = decoded.UserInfo;
 
-    isEditor = roles?.editor ? true : false;
-    isAdmin = roles?.admin ? true : false;
+    if (roles.includes("Admin")) isAdmin = true;
+    if (roles.includes("Editor")) isEditor = true;
+    if (roles.includes("Creator")) isCreator = true;
+    if (roles.includes("Verified")) isVerified = true;
 
-    if (isAdmin) status = "Admin";
-    if (isEditor) status = "Editor";
+    if (isAdmin) mainRole = "Admin";
+    if (isEditor) mainRole = "Editor";
+    if (isCreator) mainRole = "Creator";
+    if (isVerified) mainRole = "Verified";
 
     return {
       username,
       roles,
-      status,
-      isEditor,
-      isAdmin,
+      mainRole,
       isLogged,
       setIsLogged,
+      isEditor,
+      isAdmin,
+      isCreator,
+      isVerified,
     };
   }
 
   return {
     username: "",
     roles: {},
-    isEditor,
-    isAdmin,
-    status,
+    mainRole,
     isLogged,
     setIsLogged,
+    isEditor,
+    isAdmin,
+    isCreator,
+    isVerified,
   };
 };
 export default useAuth;

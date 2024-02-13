@@ -2,34 +2,36 @@ import styled from "styled-components";
 
 export const StyledUserInfo = styled.div`
   & > button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.5rem;
-    box-shadow: -0.1rem 0 0 white;
-    margin-left: 3rem;
-    padding-left: 1rem;
-    transition: all 0.15s ease-in-out;
     display: flex;
     align-items: center;
+    margin-left: 3rem;
+    border: none;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    background: none;
+    box-shadow: -0.1rem 0 0 white;
+    transition: all 0.15s ease-in-out;
   }
 
   & > article {
     position: absolute;
     right: 0;
     top: calc(100% + 0.1rem);
-    border: none;
-    min-width: 30rem;
     z-index: 2000;
-    padding: 1rem 2rem;
-    background-color: ${({ theme }) => theme.colors.darkGray};
+    min-width: 30rem;
+    border: none;
     border-left: 0.1rem solid ${({ theme }) => theme.colors.navy};
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
-    display: none;
+    padding: 1rem 2rem;
+    background-color: ${({ theme }) => theme.colors.darkGray};
   }
 
-  & > article.visible {
-    display: block;
+  & > article > .flex {
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 0.5rem;
   }
 
   & header.flex {
@@ -38,9 +40,9 @@ export const StyledUserInfo = styled.div`
   }
 
   & h2 {
+    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
     padding-bottom: 0.2rem;
     font-size: 1.4rem;
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
 
   & .userInfo > section:first-of-type {
@@ -51,20 +53,13 @@ export const StyledUserInfo = styled.div`
   }
 
   & p {
-    color: ${({ theme }) => theme.colors.sunset};
     font-weight: 700;
+    color: ${({ theme }) => theme.colors.sunset};
   }
 
   & p > span {
     color: white;
     font-weight: 400;
-  }
-
-  & > article > .flex {
-    align-items: end;
-    justify-content: space-between;
-    margin-top: 0.5rem;
-    gap: 2rem;
   }
 
   & section.flex-column {
@@ -86,18 +81,17 @@ export const StyledUserInfo = styled.div`
 
   & .buttonsSection {
     display: flex;
-    margin-top: 1rem;
-    justify-content: space-between;
-    width: 100%;
     justify-content: center;
     gap: 1rem;
+    width: 100%;
+    margin-top: 1rem;
   }
 
   & .buttonsSection .reactRouterLink {
-    width: 100%;
     display: flex;
-    gap: 0.75rem;
     justify-content: center;
+    gap: 0.75rem;
+    width: 100%;
     font-size: 1.25rem;
   }
 
@@ -112,13 +106,13 @@ export const StyledUserInfo = styled.div`
     }
 
     & section.flex-column button:last-child:hover {
-      box-shadow: inset 3rem 0 2rem rgba(255, 0, 0, 0.75);
       outline: none;
+      box-shadow: inset 3rem 0 2rem rgba(255, 0, 0, 0.75);
     }
   }
 
   @media (max-width: 650px) {
-    & > article.visible {
+    & > article {
       width: 100lvw;
       border-left: none;
     }
@@ -127,6 +121,16 @@ export const StyledUserInfo = styled.div`
   @media (max-width: 553px) {
     & section.flex-column > button:first-child {
       margin-top: 2rem;
+    }
+
+    & section.flex-column {
+      align-items: center;
+      width: 100%;
+    }
+
+    & section:last-child > button {
+      justify-content: center;
+      width: 100%;
     }
 
     & > article {
@@ -138,23 +142,13 @@ export const StyledUserInfo = styled.div`
       align-items: start;
       justify-content: center;
     }
-
-    & section.flex-column {
-      align-items: center;
-      width: 100%;
-    }
-
-    & section:last-child > button {
-      width: 100%;
-      justify-content: center;
-    }
   }
 
   @media (max-width: 450px) {
     .buttonsSection {
       flex-direction: column;
-      margin-top: 2rem;
       gap: 1rem;
+      margin-top: 2rem;
     }
   }
 

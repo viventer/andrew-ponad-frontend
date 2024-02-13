@@ -1,4 +1,4 @@
-import { StyledSearchBar } from "../styles/Header.styled";
+import { StyledSearchBar } from "../styles/SearchBar.styled";
 
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

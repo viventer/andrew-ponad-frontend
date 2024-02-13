@@ -1,15 +1,16 @@
 import Header from "./Header";
+import FixedErrorModal from "./FixedErrorModal";
+import ConfirmationDialog from "./ConfirmationDialog";
 
 import { Outlet } from "react-router-dom";
 
 import { useSelector } from "react-redux";
-import FixedErrorModal from "./FixedErrorModal";
-import ConfirmationDialog from "./ConfirmationDialog";
 import {
   selectDialogMsg,
   selectErrMsg,
   selectIsLoading,
 } from "../slices/globalStatesSlice";
+
 import { HashLoader } from "react-spinners";
 
 export default function Layout() {
