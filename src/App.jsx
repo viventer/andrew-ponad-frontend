@@ -9,6 +9,7 @@ import PostEditor from "./views/post/components/PostEditor";
 import Missing from "./views/global/components/Missing";
 import Register from "./views/auth/components/Register";
 import PersistLogin from "./views/auth/components/PersistLogin";
+import RequireAuth from "./views/auth/components/RequireAuth";
 
 function App() {
   return (
@@ -19,9 +20,15 @@ function App() {
         <Route element={<PersistLogin />}>
           <Route index element={<Home />} />
           <Route path="post/:id" element={<Post />} />
-          <Route path="adminpanel" element={<AdminPanel />} />
-          <Route path="post/:id/edit" element={<PostEditor />} />
-          <Route path="post/create" element={<PostEditor />} />
+          <Route
+            element={
+              <RequireAuth allowedRoles={["Admin", "Editor", "Creator"]} />
+            }
+          >
+            <Route path="adminpanel" element={<AdminPanel />} />
+            <Route path="post/:id/edit" element={<PostEditor />} />
+            <Route path="post/create" element={<PostEditor />} />
+          </Route>
         </Route>
         <Route path="*" element={<Missing />} />
       </Route>

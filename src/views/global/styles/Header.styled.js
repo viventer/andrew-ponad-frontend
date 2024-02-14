@@ -51,6 +51,19 @@ export const StyledHeader = styled.header`
     color: ${({ theme }) => theme.colors.sunset};
   }
 
+  & > button {
+    display: flex;
+    align-items: center;
+    margin-left: 3rem;
+    border: none;
+    padding-left: 1rem;
+    font-size: 1.5rem;
+    color: white;
+    background: none;
+    box-shadow: -0.1rem 0 0 white;
+    transition: all 0.15s ease-in-out;
+  }
+
   @media (max-width: 650px) {
     &.flex {
       gap: 0;
@@ -71,6 +84,11 @@ export const StyledHeader = styled.header`
   @media (hover: hover) {
     & h1 > .reactRouterLink:hover .icon {
       box-shadow: 0.5rem 0 0 ${({ theme }) => theme.colors.sunset};
+    }
+
+    & > button:hover {
+      cursor: pointer;
+      box-shadow: -0.5rem 0 0 ${({ theme }) => theme.colors.sunset};
     }
   }
 

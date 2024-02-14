@@ -2,9 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-
 import useAuth from "../../../hooks/useAuth";
 
 import { selectUserId } from "../../auth/slices/authSlice";
@@ -20,15 +17,14 @@ import LoginButton from "./LoginButton";
 import RegisterButton from "./RegisterButton";
 import ChangePasswordWindow from "./ChangePasswordWindow";
 
-export default function UserInfo() {
+export default function UserInfo({ setIsUserInfoVisible }) {
   const currentLocation = useLocation();
 
   const userId = useSelector(selectUserId);
   const { data: userRawData } = useGetUserByIdQuery(userId);
 
-  const { setIsLogged, mainRole, isLogged } = useAuth();
+  const { setIsLogged, mainRole } = useAuth();
 
-  const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
   const [isChangePwdWindowVisible, setIsChangePwdWindowVisible] =
     useState(false);
   const [finishedPwdChange, setFinishedPwdChange] = useState(false);
@@ -66,11 +62,8 @@ export default function UserInfo() {
 
   return (
     <StyledUserInfo>
-      <button onClick={() => setIsUserInfoVisible((prev) => !prev)}>
-        <FontAwesomeIcon icon={faUser} className="icon" />
-      </button>
       {userData ? (
-        <article className={!isUserInfoVisible ? "hide" : ""}>
+        <article>
           <header className="flex">
             <h2>Informacje o koncie</h2>
           </header>
@@ -113,7 +106,7 @@ export default function UserInfo() {
           )}
         </article>
       ) : (
-        <article className={!isUserInfoVisible ? "hide" : ""}>
+        <article>
           <header className="flex">
             <h2>Nie jesteś zalogowany</h2>
           </header>

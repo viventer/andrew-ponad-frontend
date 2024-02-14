@@ -1,16 +1,19 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
+import useAuth from "../../../hooks/useAuth";
+import Forbidden from "../../global/components/Forbidden";
 
-import { selectCurrentToken } from "./authSlice";
+const RequireAuth = ({ allowedRoles }) => {
+  const { roles } = useAuth();
 
-const RequireAuth = () => {
-  const token = useSelector(selectCurrentToken);
-  const location = useLocation();
+  const isAllowed =
+    Array.isArray(roles) && roles.some((role) => allowedRoles.includes(role));
 
-  return token ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/login" state={{ from: location }} replace />
-  );
+  if (isAllowed) {
+    return <Outlet />;
+  } else if (!isAllowed && Array.isArray(roles)) {
+    return <Forbidden />;
+  } else {
+    return null;
+  }
 };
 export default RequireAuth;

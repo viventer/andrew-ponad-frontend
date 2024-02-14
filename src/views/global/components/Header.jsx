@@ -6,9 +6,12 @@ import { StyledHeader } from "../styles/Header.styled";
 import { Link } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faServer } from "@fortawesome/free-solid-svg-icons";
+import { faServer, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function Header() {
+  const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
+
   return (
     <StyledHeader className="flex">
       <div className="flex">
@@ -21,7 +24,12 @@ export default function Header() {
         <SearchBar />
       </div>
       <Navigation />
-      <UserInfo />
+      <button onClick={() => setIsUserInfoVisible((prev) => !prev)}>
+        <FontAwesomeIcon icon={faUser} className="icon" />
+      </button>
+      {isUserInfoVisible && (
+        <UserInfo setIsUserInfoVisible={setIsUserInfoVisible} />
+      )}
     </StyledHeader>
   );
 }
