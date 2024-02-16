@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Provider } from "react-redux";
 import { ThemeProvider } from "styled-components";
+import { Provider } from "react-redux";
+import { store, persistor } from "./redux/store.js";
+import { PersistGate } from "redux-persist/integration/react";
 
 import { GlobalStyles } from "./views/global/styles/GlobalStyles.js";
-import { store } from "./redux/store.js";
 
 import App from "./App.jsx";
 
@@ -32,11 +33,13 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/*" element={<App />} />
-          </Routes>
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/*" element={<App />} />
+            </Routes>
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>

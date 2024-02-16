@@ -14,8 +14,6 @@ import {
 import { HashLoader } from "react-spinners";
 
 export default function Layout() {
-  const override = {};
-
   const errMsg = useSelector(selectErrMsg);
   const dialogMsg = useSelector(selectDialogMsg);
   const isLoading = useSelector(selectIsLoading);
@@ -27,7 +25,7 @@ export default function Layout() {
       <ConfirmationDialog message={dialogMsg} />
       {isLoading && (
         <div className="blur">
-          <HashLoader color="white" cssOverride={override} />
+          <HashLoader color="white" />
         </div>
       )}
       <Outlet />

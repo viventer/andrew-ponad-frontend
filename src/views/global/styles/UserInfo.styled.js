@@ -88,6 +88,13 @@ export const StyledUserInfo = styled.div`
     color: white;
   }
 
+  & .loader {
+    width: fit-content;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+  }
+
   @media (hover: hover) {
     & > button:hover {
       cursor: pointer;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import useAuth from "../../../hooks/useAuth";
@@ -16,14 +16,19 @@ import ChangePasswordButton from "./ChangePasswordButton";
 import LoginButton from "./LoginButton";
 import RegisterButton from "./RegisterButton";
 import ChangePasswordWindow from "./ChangePasswordWindow";
+import { HashLoader } from "react-spinners";
+import { selectUserData, setUserData } from "../slices/globalStatesSlice";
 
 export default function UserInfo({ setIsUserInfoVisible }) {
   const currentLocation = useLocation();
-
-  const userId = useSelector(selectUserId);
-  const { data: userRawData } = useGetUserByIdQuery(userId);
-
+  const dispatch = useDispatch();
   const { setIsLogged, mainRole } = useAuth();
+  const userId = useSelector(selectUserId);
+  const userData = useSelector(selectUserData);
+
+  const { data: userRawData, isLoading } = useGetUserByIdQuery(userId, {
+    skip: !!userData.username,
+  });
 
   const [isChangePwdWindowVisible, setIsChangePwdWindowVisible] =
     useState(false);
@@ -39,30 +44,28 @@ export default function UserInfo({ setIsUserInfoVisible }) {
     }
   }, [currentLocation]);
 
-  let userRole;
-  let userData;
-  if (userRawData) userData = userRawData.entities[userId];
-
-  if (userData) {
-    userRole =
-      mainRole == "Admin"
-        ? "Admin"
-        : mainRole == "Editor"
-        ? "Edytor"
-        : mainRole == "Creator"
-        ? "Twórca"
-        : mainRole == "Verified"
-        ? "Zweryfikowany"
-        : "Niezweryfikowany";
-  }
-
   useEffect(() => {
-    userRawData ? setIsLogged(true) : setIsLogged(false);
-  }, [userRawData]);
+    if (userRawData) {
+      dispatch(setUserData(userRawData.entities[userId]));
+      setIsLogged(true);
+    }
+    userRawData || userData.username ? setIsLogged(true) : setIsLogged(false);
+  }, [userRawData, userData]);
+
+  const userRole =
+    mainRole === "Admin"
+      ? "Admin"
+      : mainRole === "Editor"
+      ? "Edytor"
+      : mainRole === "Creator"
+      ? "Twórca"
+      : mainRole === "Verified"
+      ? "Zweryfikowany"
+      : "Niezweryfikowany";
 
   return (
     <StyledUserInfo>
-      {userData ? (
+      {userData.username ? (
         <article>
           <header className="flex">
             <h2>Informacje o koncie</h2>
@@ -107,13 +110,21 @@ export default function UserInfo({ setIsUserInfoVisible }) {
         </article>
       ) : (
         <article>
-          <header className="flex">
-            <h2>Nie jesteś zalogowany</h2>
-          </header>
-          <section className="buttonsSection">
-            <LoginButton />
-            <RegisterButton />
-          </section>
+          {isLoading ? (
+            <div className="loader">
+              <HashLoader color="white" />
+            </div>
+          ) : (
+            <>
+              <header className="flex">
+                <h2>Nie jesteś zalogowany</h2>
+              </header>
+              <section className="buttonsSection">
+                <LoginButton />
+                <RegisterButton />
+              </section>
+            </>
+          )}
         </article>
       )}
     </StyledUserInfo>

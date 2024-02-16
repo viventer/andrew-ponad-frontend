@@ -5,12 +5,16 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
-import { setErrMsg, setIsLoading } from "../slices/globalStatesSlice";
+import {
+  setErrMsg,
+  setIsLoading,
+  setUserData,
+} from "../slices/globalStatesSlice";
 
 import useAuth from "../../../hooks/useAuth";
 
 import { StyledButton } from "../styles/Button.styled";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function LogoutButton({ setIsUserInfoVisible }) {
   const dispatch = useDispatch();
@@ -28,6 +32,7 @@ export default function LogoutButton({ setIsUserInfoVisible }) {
       return;
     } else {
       setIsLogged(false);
+      dispatch(setUserData({}));
       navigate("/");
     }
   }
