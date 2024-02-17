@@ -22,12 +22,12 @@ import { selectUserData, setUserData } from "../slices/globalStatesSlice";
 export default function UserInfo({ setIsUserInfoVisible }) {
   const currentLocation = useLocation();
   const dispatch = useDispatch();
-  const { setIsLogged, mainRole } = useAuth();
+  const { setIsLogged, mainRole, isLogged } = useAuth();
   const userId = useSelector(selectUserId);
   const userData = useSelector(selectUserData);
 
   const { data: userRawData, isLoading } = useGetUserByIdQuery(userId, {
-    skip: !!userData.username,
+    skip: !!userData.username || !isLogged,
   });
 
   const [isChangePwdWindowVisible, setIsChangePwdWindowVisible] =
