@@ -1,20 +1,23 @@
 import { useRef, useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { setCredentials } from "../slices/authSlice";
 import { useLoginMutation } from "../slices/authApiSlice";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+import {
+  selectIsLogged,
+  setIsLoading,
+  setIsLogged,
+} from "../../global/slices/globalStatesSlice";
 
 import usePersist from "../../../hooks/usePersist";
-import useAuth from "../../../hooks/useAuth";
 
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import LoginForm from "./LoginForm";
 import { StyledAuth } from "../styles/Auth.styled";
 
 export default function Login() {
-  const { setIsLogged, isLogged } = useAuth();
+  const isLogged = useSelector(selectIsLogged);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,7 +67,7 @@ export default function Login() {
       setUsername("");
       setPassword("");
       if (!isLogged) {
-        setIsLogged(true);
+        dispatch(setIsLogged(true));
       }
       navigate(from, { replace: true });
     } catch (err) {

@@ -8,6 +8,7 @@ const globalStatesSlice = createSlice({
     dialogAnswer: null,
     isLoading: false,
     userData: null,
+    isLogged: false,
   },
   reducers: {
     setErrMsg: (state, action) => {
@@ -25,6 +26,9 @@ const globalStatesSlice = createSlice({
     setUserData: (state, action) => {
       state.userData = action.payload;
     },
+    setIsLogged: (state, action) => {
+      state.isLogged = action.payload;
+    },
   },
 });
 
@@ -34,6 +38,7 @@ export const {
   setDialogAnswer,
   setIsLoading,
   setUserData,
+  setIsLogged,
 } = globalStatesSlice.actions;
 
 export const selectErrMsg = (state) => state.globalStates.errMsg;
@@ -41,5 +46,6 @@ export const selectDialogMsg = (state) => state.globalStates.dialogMsg;
 export const selectDialogAnswer = (state) => state.globalStates.dialogAnswer;
 export const selectIsLoading = (state) => state.globalStates.isLoading;
 export const selectUserData = (state) => state.globalStates.userData;
+export const selectIsLogged = (state) => state.globalStates.isLogged;
 
 export default globalStatesSlice.reducer;

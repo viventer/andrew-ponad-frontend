@@ -8,6 +8,7 @@ import { useLogoutMutation } from "../../auth/slices/authApiSlice";
 import {
   setErrMsg,
   setIsLoading,
+  setIsLogged,
   setUserData,
 } from "../slices/globalStatesSlice";
 
@@ -20,8 +21,6 @@ export default function LogoutButton({ setIsUserInfoVisible }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { setIsLogged } = useAuth();
-
   const [signOut, { isLoading, isError, error }] = useLogoutMutation();
 
   async function handleLogOut() {
@@ -31,7 +30,7 @@ export default function LogoutButton({ setIsUserInfoVisible }) {
       dispatch(setErrMsg(error));
       return;
     } else {
-      setIsLogged(false);
+      dispatch(setIsLogged(false));
       dispatch(setUserData({}));
       navigate("/");
     }

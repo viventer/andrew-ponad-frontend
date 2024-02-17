@@ -1,21 +1,27 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import jwtDecode from "jwt-decode";
 
 import { selectCurrentToken } from "../views/auth/slices/authSlice";
-import useLocalStorage from "./useLocalStorage";
+import {
+  selectIsLogged,
+  setIsLogged,
+} from "../views/global/slices/globalStatesSlice";
 
 const useAuth = () => {
-  const token = useSelector(selectCurrentToken);
   let isEditor = false;
   let isAdmin = false;
   let isCreator = false;
   let isVerified = false;
   let mainRole = "User";
-  const [isLogged, setIsLogged] = useLocalStorage("isLogged", false);
+
+  const token = useSelector(selectCurrentToken);
+  const isLogged = useSelector(selectIsLogged);
+
+  const dispatch = useDispatch();
 
   if (token) {
     if (!isLogged) {
-      setIsLogged(true);
+      dispatch(setIsLogged(true));
     }
 
     const decoded = jwtDecode(token);

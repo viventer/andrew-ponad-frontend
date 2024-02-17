@@ -17,14 +17,20 @@ import LoginButton from "./LoginButton";
 import RegisterButton from "./RegisterButton";
 import ChangePasswordWindow from "./ChangePasswordWindow";
 import { HashLoader } from "react-spinners";
-import { selectUserData, setUserData } from "../slices/globalStatesSlice";
+import {
+  selectIsLogged,
+  selectUserData,
+  setIsLogged,
+  setUserData,
+} from "../slices/globalStatesSlice";
 
 export default function UserInfo({ setIsUserInfoVisible }) {
   const currentLocation = useLocation();
   const dispatch = useDispatch();
-  const { setIsLogged, mainRole, isLogged } = useAuth();
+  const { mainRole } = useAuth();
   const userId = useSelector(selectUserId);
   const userData = useSelector(selectUserData);
+  const isLogged = useSelector(selectIsLogged);
 
   const { data: userRawData, isLoading } = useGetUserByIdQuery(userId, {
     skip: !!userData.username || !isLogged,
@@ -47,10 +53,8 @@ export default function UserInfo({ setIsUserInfoVisible }) {
   useEffect(() => {
     if (userRawData) {
       dispatch(setUserData(userRawData.entities[userId]));
-      setIsLogged(true);
     }
-    userRawData || userData.username ? setIsLogged(true) : setIsLogged(false);
-  }, [userRawData, userData]);
+  }, [userRawData]);
 
   const userRole =
     mainRole === "Admin"

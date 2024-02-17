@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { useRefreshMutation } from "../slices/authApiSlice";
 import { selectCurrentToken } from "../slices/authSlice";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+import {
+  selectIsLogged,
+  setIsLoading,
+  setIsLogged,
+} from "../../global/slices/globalStatesSlice";
 
 import useAuth from "../../../hooks/useAuth";
 import usePersist from "../../../hooks/usePersist";
@@ -14,9 +18,9 @@ const PersistLogin = () => {
 
   const [persist] = usePersist();
   const token = useSelector(selectCurrentToken);
-  const effectRan = useRef(false);
+  const isLogged = useSelector(selectIsLogged);
 
-  const { setIsLogged, isLogged } = useAuth();
+  const effectRan = useRef(false);
 
   const [trueSuccess, setTrueSuccess] = useState(false);
 
@@ -56,11 +60,11 @@ const PersistLogin = () => {
     return;
   } else if (isError) {
     if (isLogged) {
-      setIsLogged(false);
+      dispatch(setIsLogged(false));
     }
   } else if ((isSuccess && trueSuccess) || (token && isUninitialized)) {
     if (!isLogged) {
-      setIsLogged(true);
+      dispatch(setIsLogged(true));
     }
   }
 

@@ -15,6 +15,7 @@ import {
   setDialogMsg,
   setErrMsg,
   setIsLoading,
+  setIsLogged,
 } from "../slices/globalStatesSlice";
 
 import { StyledButton } from "../styles/Button.styled";
@@ -28,8 +29,6 @@ export default function DeleteAccountButton() {
   const [deleteUser, { isDeletingLoading }] = useDeleteUserMutation(userId);
   const [signOut, { isLoggingOutLoading, isError, error }] =
     useLogoutMutation();
-
-  const { setIsLogged } = useAuth();
 
   useEffect(() => {
     if (dialogAnswer == "yes") {
@@ -58,7 +57,7 @@ export default function DeleteAccountButton() {
         dispatch(setIsLoading(true));
         return;
       } else {
-        setIsLogged(false);
+        dispatch(setIsLogged(false));
         dispatch(setIsLoading(false));
         window.location.reload();
       }

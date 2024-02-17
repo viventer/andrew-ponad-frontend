@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { setCredentials } from "../slices/authSlice";
 import { useRegisterMutation, useLoginMutation } from "../slices/authApiSlice";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+import {
+  selectIsLogged,
+  setIsLoading,
+  setIsLogged,
+} from "../../global/slices/globalStatesSlice";
 
 import usePersist from "../../../hooks/usePersist";
 import useAuth from "../../../hooks/useAuth";
@@ -15,7 +19,7 @@ import { RegisterForm } from "./RegisterForm";
 import { StyledAuth } from "../styles/Auth.styled";
 
 export default function Register() {
-  const { setIsLogged, isLogged } = useAuth();
+  const isLogged = useSelector(selectIsLogged);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -97,7 +101,7 @@ export default function Register() {
       );
       setInputs({});
       if (!isLogged) {
-        setIsLogged(true);
+        dispatch(setIsLogged(true));
       }
       navigate(from, { replace: true });
     } catch (err) {
