@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
 import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
+import { selectThumbnailUrl } from "../slices/postSlice";
 
-export default function ThumbnailBar({ thumbnailUrl }) {
+export default function ThumbnailBar() {
+  const thumbnailUrl = useSelector(selectThumbnailUrl);
+
   const images = [];
   for (let i = 0; i < 3; i++) {
     images.push(

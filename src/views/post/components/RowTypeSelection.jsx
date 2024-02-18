@@ -6,20 +6,17 @@ import {
   faClose,
   faImage,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
-import { setPostRows } from "../slices/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectPostRows, setPostRows } from "../slices/postSlice";
 
 export default function RowTypeSelection({ index, updateElement }) {
   const dispatch = useDispatch();
 
-  const deleteRow = (rowIndex) => {
-    dispatch(
-      setPostRows((prevRows) => {
-        const newPostRows = prevRows.filter((row, index) => index !== rowIndex);
+  const postRows = useSelector(selectPostRows);
 
-        return newPostRows;
-      })
-    );
+  const deleteRow = (rowIndex) => {
+    const newRows = postRows.filter((row, index) => index !== rowIndex);
+    dispatch(setPostRows(newRows));
   };
 
   return (

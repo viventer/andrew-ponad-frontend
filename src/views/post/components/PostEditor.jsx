@@ -10,13 +10,12 @@ import {
   selectThumbnailUrl,
   setPostRows,
 } from "../slices/postSlice";
+import CategorySelector from "./CategorySelector";
 
 export default function PostEditor() {
   const thumbnailUrl = useSelector(selectThumbnailUrl);
   const postRows = useSelector(selectPostRows);
   const postTitle = useSelector(selectPostTitle);
-
-  const dispatch = useDispatch();
 
   const postContent = {
     thumbnailUrl: thumbnailUrl,
@@ -27,8 +26,9 @@ export default function PostEditor() {
   return (
     <>
       <StyledPostEditor>
-        {thumbnailUrl && <ThumbnailBar thumbnailUrl={thumbnailUrl} />}
+        {thumbnailUrl && <ThumbnailBar />}
         <ImageDropzone isThumbnail={true} imageUrl={thumbnailUrl} />
+        <CategorySelector />
         <div className="input">
           <PostTitleInput />
         </div>

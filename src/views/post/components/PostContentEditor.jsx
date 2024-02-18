@@ -30,25 +30,20 @@ export default function PostContentEditor() {
   }
 
   function updateElement(rowIndex, elementIndex, updatedFields) {
-    dispatch(
-      setPostRows((prevRows) => {
-        const newPostRows = [...prevRows];
-        const newRow = [...newPostRows[rowIndex]];
+    const newPostRows = [...postRows];
+    const newRow = [...newPostRows[rowIndex]];
 
-        Object.keys(updatedFields).forEach((field) => {
-          newRow[elementIndex] = {
-            ...newRow[elementIndex],
-            [field]: updatedFields[field],
-          };
-        });
-        newPostRows[rowIndex] = newRow;
+    Object.keys(updatedFields).forEach((field) => {
+      newRow[elementIndex] = {
+        ...newRow[elementIndex],
+        [field]: updatedFields[field],
+      };
+    });
 
-        return newPostRows;
-      })
-    );
+    newPostRows[rowIndex] = newRow;
+
+    dispatch(setPostRows(newPostRows));
   }
-
-  console.log(postRows);
 
   return (
     <StyledPostContentEditor>

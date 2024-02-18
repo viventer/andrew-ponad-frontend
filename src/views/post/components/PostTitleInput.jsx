@@ -1,15 +1,18 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyledPostTitleInput } from "../styles/PostEditor.styled";
 import { setErrMsg } from "../../global/slices/globalStatesSlice";
+import { selectPostTitle, setPostTitle } from "../slices/postSlice";
 
-export default function PostTitleInput({ postTitle, setPostTitle }) {
+export default function PostTitleInput() {
   const dispatch = useDispatch();
+
+  const postTitle = useSelector(selectPostTitle);
 
   return (
     <StyledPostTitleInput
       placeholder="Tytuł posta"
       value={postTitle}
-      onChange={(e) => setPostTitle(e.target.value)}
+      onChange={(e) => dispatch(setPostTitle(e.target.value))}
       maxLength={40}
       onKeyDown={() => {
         if (postTitle.length >= 40) {
