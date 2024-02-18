@@ -8,9 +8,9 @@ export const StyledPostEditor = styled.main`
   flex-direction: column;
   margin-top: 4rem;
 
-  & > .input {
+  & > .thumbnailBarOverlay {
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     width: 100%;
     max-width: 80vw;
   }
@@ -48,7 +48,7 @@ export const StyledPostEditor = styled.main`
   }
 
   @media (max-width: 1100px) {
-    & > .input {
+    & > .thumbnailBarOverlay {
       width: 80vw;
       max-width: 40rem;
     }
@@ -57,7 +57,7 @@ export const StyledPostEditor = styled.main`
   @media (max-width: 500px) {
     margin-top: 3rem;
 
-    & > .input {
+    & > .thumbnailBarOverlay {
       width: calc(80vw + 0.3rem);
       margin-top: 0.3rem;
     }

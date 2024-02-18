@@ -11,6 +11,7 @@ import {
   setPostRows,
 } from "../slices/postSlice";
 import CategorySelector from "./CategorySelector";
+import VisibilitySelector from "./VisibilitySelector";
 
 export default function PostEditor() {
   const thumbnailUrl = useSelector(selectThumbnailUrl);
@@ -28,13 +29,14 @@ export default function PostEditor() {
       <StyledPostEditor>
         {thumbnailUrl && <ThumbnailBar />}
         <ImageDropzone isThumbnail={true} imageUrl={thumbnailUrl} />
-        <CategorySelector />
-        <div className="input">
+        <div className="thumbnailBarOverlay">
           <PostTitleInput />
+          <CategorySelector />
         </div>
         <PostContentEditor />
         <footer>
           <button onClick={() => console.log(postContent)}>Dodaj posta</button>
+          <VisibilitySelector />
         </footer>
       </StyledPostEditor>
     </>
