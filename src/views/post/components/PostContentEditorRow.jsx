@@ -10,7 +10,6 @@ export default function PostContentEditorRow({
   index,
   rowData,
   updateElement,
-  deleteRow,
 }) {
   let toolbarOptions = [
     ["bold", "italic", "underline", "strike", "code-block"],
@@ -24,11 +23,7 @@ export default function PostContentEditorRow({
   return (
     <StyledPostContentEditorRow>
       {activeRowNumber == index && (
-        <RowTypeSelection
-          index={index}
-          updateElement={updateElement}
-          deleteRow={deleteRow}
-        />
+        <RowTypeSelection index={index} updateElement={updateElement} />
       )}
       <div
         className={`flex flex-center ${

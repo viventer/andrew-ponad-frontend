@@ -10,7 +10,6 @@ import {
   setIsLogged,
 } from "../../global/slices/globalStatesSlice";
 
-import useAuth from "../../../hooks/useAuth";
 import usePersist from "../../../hooks/usePersist";
 
 const PersistLogin = () => {

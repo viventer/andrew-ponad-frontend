@@ -20,7 +20,6 @@ import { HashLoader } from "react-spinners";
 import {
   selectIsLogged,
   selectUserData,
-  setIsLogged,
   setUserData,
 } from "../slices/globalStatesSlice";
 

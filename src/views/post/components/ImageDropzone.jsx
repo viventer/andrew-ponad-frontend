@@ -6,6 +6,7 @@ import { faExchange, faUpload } from "@fortawesome/free-solid-svg-icons";
 import { useDropzone } from "react-dropzone";
 import { useDispatch } from "react-redux";
 import { setErrMsg } from "../../global/slices/globalStatesSlice";
+import { setThumbnailUrl } from "../slices/postSlice";
 
 export default function ImageDropzone({ imageUrl, setImageUrl, isThumbnail }) {
   const dispatch = useDispatch();
@@ -18,7 +19,12 @@ export default function ImageDropzone({ imageUrl, setImageUrl, isThumbnail }) {
     maxSize: 1048576,
     onDrop: (acceptedFiles) => {
       if (acceptedFiles) dispatch(setErrMsg(""));
-      setImageUrl(URL.createObjectURL(acceptedFiles[0]));
+      const url = URL.createObjectURL(acceptedFiles[0]);
+      if (isThumbnail) {
+        dispatch(setThumbnailUrl(url));
+      } else {
+        setImageUrl(url);
+      }
     },
     onError: () => {
       dispatch(

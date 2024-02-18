@@ -11,7 +11,6 @@ import {
 } from "../../global/slices/globalStatesSlice";
 
 import usePersist from "../../../hooks/usePersist";
-import useAuth from "../../../hooks/useAuth";
 import useValidation from "../../../hooks/useValidation";
 
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";

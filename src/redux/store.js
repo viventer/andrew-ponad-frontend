@@ -16,9 +16,15 @@ import storage from "redux-persist/lib/storage";
 import { apiSlice } from "./apiSlice";
 import authReducer from "../views/auth/slices/authSlice";
 import globalStatesReducer from "../views/global/slices/globalStatesSlice";
+import postReducer from "../views/post/slices/postSlice";
 
 const globalStatesPersistConfig = {
   key: "globalStates",
+  storage,
+};
+
+const postPersistConfig = {
+  key: "posts",
   storage,
 };
 
@@ -26,6 +32,7 @@ const rootReducer = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer,
   auth: authReducer,
   globalStates: persistReducer(globalStatesPersistConfig, globalStatesReducer),
+  post: persistReducer(postPersistConfig, postReducer),
 });
 
 export const store = configureStore({

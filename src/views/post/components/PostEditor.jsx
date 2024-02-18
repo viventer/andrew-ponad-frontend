@@ -3,27 +3,20 @@ import ImageDropzone from "./ImageDropzone";
 import ThumbnailBar from "./ThumbnailBar";
 import PostTitleInput from "./PostTitleInput";
 import PostContentEditor from "./PostContentEditor";
-
-import useLocalStorage from "../../../hooks/useLocalStorage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectPostRows,
+  selectPostTitle,
+  selectThumbnailUrl,
+  setPostRows,
+} from "../slices/postSlice";
 
 export default function PostEditor() {
-  const [thumbnailUrl, setThumbnailUrl] = useLocalStorage("thumbnailUrl", "");
-  const [postTitle, setPostTitle] = useLocalStorage("postTitle", "");
-  const [postRows, setPostRows] = useLocalStorage("postRows", [
-    [
-      {
-        type: "textEditor",
-        textEditorContent: "",
-        imageUrl: "",
-      },
-      {
-        type: "image",
-        textEditorContent: "",
-        imageUrl: "",
-      },
-    ],
-  ]);
+  const thumbnailUrl = useSelector(selectThumbnailUrl);
+  const postRows = useSelector(selectPostRows);
+  const postTitle = useSelector(selectPostTitle);
+
+  const dispatch = useDispatch();
 
   const postContent = {
     thumbnailUrl: thumbnailUrl,
@@ -31,49 +24,15 @@ export default function PostEditor() {
     postTitle: postTitle,
   };
 
-  function updateElement(rowIndex, elementIndex, updatedFields) {
-    setPostRows((prevRows) => {
-      const newPostRows = [...prevRows];
-      const newRow = [...newPostRows[rowIndex]];
-
-      Object.keys(updatedFields).forEach((field) => {
-        newRow[elementIndex] = {
-          ...newRow[elementIndex],
-          [field]: updatedFields[field],
-        };
-      });
-      newPostRows[rowIndex] = newRow;
-
-      return newPostRows;
-    });
-  }
-
-  const deleteRow = (rowIndex) => {
-    setPostRows((prevRows) => {
-      const newPostRows = prevRows.filter((row, index) => index !== rowIndex);
-
-      return newPostRows;
-    });
-  };
-
   return (
     <>
       <StyledPostEditor>
         {thumbnailUrl && <ThumbnailBar thumbnailUrl={thumbnailUrl} />}
-        <ImageDropzone
-          isThumbnail={true}
-          imageUrl={thumbnailUrl}
-          setImageUrl={setThumbnailUrl}
-        />
+        <ImageDropzone isThumbnail={true} imageUrl={thumbnailUrl} />
         <div className="input">
-          <PostTitleInput postTitle={postTitle} setPostTitle={setPostTitle} />
+          <PostTitleInput />
         </div>
-        <PostContentEditor
-          postRows={postRows}
-          setPostRows={setPostRows}
-          updateElement={updateElement}
-          deleteRow={deleteRow}
-        />
+        <PostContentEditor />
         <footer>
           <button onClick={() => console.log(postContent)}>Dodaj posta</button>
         </footer>

@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
 
-import useAuth from "../../../hooks/useAuth";
-
 import { useDeleteUserMutation } from "../slices/usersApiSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";

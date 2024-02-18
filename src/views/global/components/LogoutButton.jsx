@@ -12,8 +12,6 @@ import {
   setUserData,
 } from "../slices/globalStatesSlice";
 
-import useAuth from "../../../hooks/useAuth";
-
 import { StyledButton } from "../styles/Button.styled";
 import { useEffect } from "react";
 

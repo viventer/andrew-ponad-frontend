@@ -1,15 +1,16 @@
+import { useDispatch, useSelector } from "react-redux";
 import { StyledPostContentEditor } from "../styles/PostContentEditor.styled";
 import PostContentEditorRow from "./PostContentEditorRow";
 
 import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
+import { selectPostRows, setPostRows } from "../slices/postSlice";
 
-export default function PostContentEditor({
-  postRows,
-  setPostRows,
-  updateElement,
-  deleteRow,
-}) {
+export default function PostContentEditor() {
+  const dispatch = useDispatch();
+
+  const postRows = useSelector(selectPostRows);
+
   const [activeRowNumber, setActiveRowNumber] = useState(0);
 
   function addRow() {
@@ -25,8 +26,29 @@ export default function PostContentEditor({
         imageUrl: "",
       },
     ];
-    setPostRows([...postRows, newRow]);
+    dispatch(setPostRows([...postRows, newRow]));
   }
+
+  function updateElement(rowIndex, elementIndex, updatedFields) {
+    dispatch(
+      setPostRows((prevRows) => {
+        const newPostRows = [...prevRows];
+        const newRow = [...newPostRows[rowIndex]];
+
+        Object.keys(updatedFields).forEach((field) => {
+          newRow[elementIndex] = {
+            ...newRow[elementIndex],
+            [field]: updatedFields[field],
+          };
+        });
+        newPostRows[rowIndex] = newRow;
+
+        return newPostRows;
+      })
+    );
+  }
+
+  console.log(postRows);
 
   return (
     <StyledPostContentEditor>
@@ -38,7 +60,6 @@ export default function PostContentEditor({
           setActiveRowNumber={setActiveRowNumber}
           rowData={postRow}
           updateElement={updateElement}
-          deleteRow={deleteRow}
         />
       ))}
       <button onClick={addRow}>
