@@ -7,6 +7,7 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     -webkit-tap-highlight-color: transparent;
+    font-family: 'Ubuntu', sans-serif;
   }
   
   p, h1, h2, h3, h4, h5, h6 {
@@ -18,7 +19,6 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     margin-bottom: 2rem;
-    font-family: 'Ubuntu', sans-serif;
     color: white;
     background-color: black;
     background-color: ${({ theme }) => theme.colors.almostBlack};

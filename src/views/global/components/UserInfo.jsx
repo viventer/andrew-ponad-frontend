@@ -32,7 +32,7 @@ export default function UserInfo({ setIsUserInfoVisible }) {
   const isLogged = useSelector(selectIsLogged);
 
   const { data: userRawData, isLoading } = useGetUserByIdQuery(userId, {
-    skip: !!userData.username || !isLogged,
+    skip: !!userData?.username || !isLogged,
   });
 
   const [isChangePwdWindowVisible, setIsChangePwdWindowVisible] =
@@ -68,7 +68,7 @@ export default function UserInfo({ setIsUserInfoVisible }) {
 
   return (
     <StyledUserInfo>
-      {userData.username ? (
+      {userData?.username ? (
         <article>
           <header className="flex">
             <h2>Informacje o koncie</h2>

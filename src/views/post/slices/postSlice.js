@@ -19,7 +19,7 @@ const postSlice = createSlice({
         },
       ],
     ],
-    postCategory: "",
+    postCategory: "Wybierz kategorię",
     postVisibility: "",
   },
   reducers: {

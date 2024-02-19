@@ -9,8 +9,10 @@ export const StyledPostEditor = styled.main`
   margin-top: 4rem;
 
   & > .thumbnailBarOverlay {
+    position: relative;
     display: flex;
     justify-content: space-between;
+    align-items: end;
     width: 100%;
     max-width: 80vw;
   }
