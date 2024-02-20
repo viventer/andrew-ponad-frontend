@@ -6,12 +6,11 @@ export default function SelectorOption({
   value,
   areOptionsVisible,
   setAreOptionsVisible,
+  setValue,
 }) {
-  const dispatch = useDispatch();
-
   const selectOption = (e) => {
     e.preventDefault();
-    dispatch(setPostCategory(value));
+    setValue(value);
     setAreOptionsVisible(false);
   };
 

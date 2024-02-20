@@ -20,7 +20,7 @@ const postSlice = createSlice({
       ],
     ],
     postCategory: "Wybierz kategorię",
-    postVisibility: "",
+    postVisibility: "Wybierz widoczność",
   },
   reducers: {
     setThumbnailUrl: (state, action) => {
@@ -35,15 +35,24 @@ const postSlice = createSlice({
     setPostCategory: (state, action) => {
       state.postCategory = action.payload;
     },
+    setPostVisibility: (state, action) => {
+      state.postVisibility = action.payload;
+    },
   },
 });
 
-export const { setThumbnailUrl, setPostTitle, setPostRows, setPostCategory } =
-  postSlice.actions;
+export const {
+  setThumbnailUrl,
+  setPostTitle,
+  setPostRows,
+  setPostCategory,
+  setPostVisibility,
+} = postSlice.actions;
 
 export const selectThumbnailUrl = (state) => state.post.thumbnailUrl;
 export const selectPostTitle = (state) => state.post.postTitle;
 export const selectPostRows = (state) => state.post.postRows;
 export const selectPostCategory = (state) => state.post.postCategory;
+export const selectPostVisibility = (state) => state.post.postVisibility;
 
 export default postSlice.reducer;

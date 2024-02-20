@@ -2,8 +2,8 @@ import { useState } from "react";
 import { StyledSelector } from "../styles/Selector.styled";
 import SelectedSelectorOption from "./SelectedSelectorOption";
 import SelectorOption from "./SelectorOption";
-import { useSelector } from "react-redux";
-import { selectPostCategory } from "../slices/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectPostCategory, setPostCategory } from "../slices/postSlice";
 
 export default function CategorySelector() {
   const categoryList = [
@@ -14,15 +14,20 @@ export default function CategorySelector() {
     "inne",
   ];
 
+  const dispatch = useDispatch();
   const selectedCategory = useSelector(selectPostCategory);
 
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
+
+  const setSelectorValue = (value) => dispatch(setPostCategory(value));
 
   return (
     <StyledSelector>
       <SelectedSelectorOption
         setAreOptionsVisible={setAreOptionsVisible}
         areOptionsVisible={areOptionsVisible}
+        direction="down"
+        selectedValue={selectedCategory}
       />
       <div className="selectorOptions">
         {categoryList.map((category) => {
@@ -30,9 +35,10 @@ export default function CategorySelector() {
             return (
               <SelectorOption
                 key={category}
-                areOptionsVisible={areOptionsVisible}
                 value={category}
+                areOptionsVisible={areOptionsVisible}
                 setAreOptionsVisible={setAreOptionsVisible}
+                setValue={setSelectorValue}
               />
             );
           }

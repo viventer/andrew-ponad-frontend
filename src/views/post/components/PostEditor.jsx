@@ -5,8 +5,10 @@ import PostTitleInput from "./PostTitleInput";
 import PostContentEditor from "./PostContentEditor";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  selectPostCategory,
   selectPostRows,
   selectPostTitle,
+  selectPostVisibility,
   selectThumbnailUrl,
   setPostRows,
 } from "../slices/postSlice";
@@ -17,11 +19,15 @@ export default function PostEditor() {
   const thumbnailUrl = useSelector(selectThumbnailUrl);
   const postRows = useSelector(selectPostRows);
   const postTitle = useSelector(selectPostTitle);
+  const postCategory = useSelector(selectPostCategory);
+  const postVisiblity = useSelector(selectPostVisibility);
 
   const postContent = {
-    thumbnailUrl: thumbnailUrl,
-    postRows: postRows,
-    postTitle: postTitle,
+    thumbnailUrl,
+    postRows,
+    postTitle,
+    postCategory,
+    postVisiblity,
   };
 
   return (

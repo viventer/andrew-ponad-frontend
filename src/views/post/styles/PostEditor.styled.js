@@ -25,17 +25,22 @@ export const StyledPostEditor = styled.main`
     z-index: 10000;
     background-color: rgba(0, 0, 0, 0.5);
     transition: all 0.15s ease-in-out;
+    display: flex;
+    align-items: end;
+    height: 2.5rem;
+    gap: 2rem;
   }
 
   & > footer > button {
-    padding: 0.5rem 1rem;
+    padding: 0 1rem;
     border: 0.1rem solid rgba(21, 49, 92, 1);
     box-shadow: inset 0 0 5rem rgba(21, 49, 92, 0.3);
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: white;
     background-color: rgba(0, 0, 0, 0);
     transition: all 0.15s ease-in-out;
+    height: 2.5rem;
   }
 
   & > footer > button:active {
@@ -53,6 +58,19 @@ export const StyledPostEditor = styled.main`
     & > .thumbnailBarOverlay {
       width: 80vw;
       max-width: 40rem;
+    }
+  }
+
+  @media (max-width: 750px) {
+    & > .thumbnailBarOverlay {
+      display: flex;
+    }
+
+    & > .thumbnailBarOverlay > ul {
+      position: absolute;
+      right: 0;
+      bottom: 1rem;
+      max-width: 12rem;
     }
   }
 
@@ -86,7 +104,7 @@ export const StyledPostTitleInput = styled.input`
     border-color: rgba(241, 196, 123, 1);
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 750px) {
     transform: translate(0, 0);
     width: 100%;
     padding: 0.3rem 1.5rem;

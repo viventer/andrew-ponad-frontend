@@ -5,7 +5,7 @@ export const StyledSelector = styled.ul`
   position: relative;
   & > .selectorOptions {
     position: absolute;
-    top: 0;
+    top: -0.3rem;
     display: flex;
     white-space: nowrap;
     flex-direction: column;
@@ -31,7 +31,6 @@ export const StyledSelectorOption = styled.li`
   }
 
   & > button.selected {
-    transform: translate(0, -100%);
     display: flex;
     gap: 1rem;
     min-width: 12rem;
@@ -39,6 +38,14 @@ export const StyledSelectorOption = styled.li`
     justify-content: space-between;
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     font-weight: 700;
+  }
+
+  & > button.selected.down {
+    transform: translate(0, calc(-100% - 0.3rem));
+  }
+
+  & > button.selected.up {
+    height: 2.5rem;
   }
 
   list-style: none;

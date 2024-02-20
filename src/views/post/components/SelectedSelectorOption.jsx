@@ -7,9 +7,9 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 export default function SelectedSelectorOption({
   setAreOptionsVisible,
   areOptionsVisible,
+  direction,
+  selectedValue,
 }) {
-  const selectedCategory = useSelector(selectPostCategory);
-
   const toggleOptionsVisibility = (e) => {
     e.preventDefault();
     setAreOptionsVisible((prev) => !prev);
@@ -21,13 +21,20 @@ export default function SelectedSelectorOption({
         onClick={(e) => {
           toggleOptionsVisibility(e);
         }}
-        className="selected"
+        className={`selected ${direction}`}
       >
-        <p>{selectedCategory}</p>
-        <FontAwesomeIcon
-          icon={areOptionsVisible ? faChevronUp : faChevronDown}
-          className="icon"
-        />
+        <p>{selectedValue}</p>
+        {direction === "down" ? (
+          <FontAwesomeIcon
+            icon={areOptionsVisible ? faChevronUp : faChevronDown}
+            className="icon"
+          />
+        ) : (
+          <FontAwesomeIcon
+            icon={areOptionsVisible ? faChevronDown : faChevronUp}
+            className="icon"
+          />
+        )}
       </button>
     </StyledSelectorOption>
   );
