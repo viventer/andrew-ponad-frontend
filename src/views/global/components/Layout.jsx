@@ -24,7 +24,7 @@ export default function Layout() {
       <FixedErrorModal message={errMsg} />
       <ConfirmationDialog message={dialogMsg} />
       {isLoading && (
-        <div className="blur">
+        <div className="blur maxZIndex">
           <HashLoader color="white" />
         </div>
       )}

@@ -65,9 +65,14 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       query: (initialPostData) => ({
         url: "/posts",
         method: "POST",
-        body: {
-          ...initialPostData,
-        },
+        body: JSON.stringify(initialPostData),
+      }),
+      invalidatesTags: [{ type: "Post", id: "LIST" }],
+    }),
+    addPostView: builder.mutation({
+      query: (postId) => ({
+        url: `/posts/${postId}/addview`,
+        method: "PATCH",
       }),
       invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),
@@ -80,6 +85,7 @@ export const {
   useAddNewPostMutation,
   useUpdatePostMutation,
   useDeletePostMutation,
+  useAddPostViewMutation,
 } = postsApiSlice;
 
 export const selectPostsResult = postsApiSlice.endpoints.getPosts.select();

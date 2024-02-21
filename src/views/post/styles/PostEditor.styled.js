@@ -32,26 +32,7 @@ export const StyledPostEditor = styled.main`
   }
 
   & > footer > button {
-    padding: 0 1rem;
-    border: 0.1rem solid rgba(21, 49, 92, 1);
-    box-shadow: inset 0 0 5rem rgba(21, 49, 92, 0.3);
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: white;
-    background-color: rgba(0, 0, 0, 0);
-    transition: all 0.15s ease-in-out;
     height: 2.5rem;
-  }
-
-  & > footer > button:active {
-    filter: brightness(1.75);
-  }
-
-  @media (hover: hover) {
-    & > footer > button:hover {
-      box-shadow: inset 2rem 0rem 5rem rgba(21, 49, 92, 0.5);
-      cursor: pointer;
-    }
   }
 
   @media (max-width: 1100px) {

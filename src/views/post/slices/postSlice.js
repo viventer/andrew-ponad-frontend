@@ -47,6 +47,7 @@ export const {
   setPostRows,
   setPostCategory,
   setPostVisibility,
+  resetPostState,
 } = postSlice.actions;
 
 export const selectThumbnailUrl = (state) => state.post.thumbnailUrl;

@@ -45,6 +45,17 @@ export default function PostContentEditor() {
     dispatch(setPostRows(newPostRows));
   }
 
+  function changeRowType(rowIndex, firstElementType, secondElementType) {
+    const newPostRows = [...postRows];
+    const newPostRow = [...newPostRows[rowIndex]];
+    newPostRow[0] = { ...newPostRow[0], type: firstElementType };
+    newPostRow[1] = { ...newPostRow[1], type: secondElementType };
+
+    newPostRows[rowIndex] = newPostRow;
+
+    dispatch(setPostRows(newPostRows));
+  }
+
   return (
     <StyledPostContentEditor>
       {postRows.map((postRow, i) => (
@@ -55,6 +66,7 @@ export default function PostContentEditor() {
           setActiveRowNumber={setActiveRowNumber}
           rowData={postRow}
           updateElement={updateElement}
+          changeRowType={changeRowType}
         />
       ))}
       <button onClick={addRow}>

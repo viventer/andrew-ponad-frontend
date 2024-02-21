@@ -9,7 +9,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectPostRows, setPostRows } from "../slices/postSlice";
 
-export default function RowTypeSelection({ index, updateElement }) {
+export default function RowTypeSelection({
+  index,
+  updateElement,
+  changeRowType,
+}) {
   const dispatch = useDispatch();
 
   const postRows = useSelector(selectPostRows);
@@ -24,24 +28,21 @@ export default function RowTypeSelection({ index, updateElement }) {
       <div>
         <div
           onClick={() => {
-            updateElement(index, 0, { type: "textEditor" });
-            updateElement(index, 1, { type: "none" });
+            changeRowType(index, "textEditor", "none");
           }}
         >
           <FontAwesomeIcon icon={faAlignLeft} />
         </div>
         <div
           onClick={() => {
-            updateElement(index, 0, { type: "image" });
-            updateElement(index, 1, { type: "none" });
+            changeRowType(index, "image", "none");
           }}
         >
           <FontAwesomeIcon icon={faImage} />
         </div>
         <div
           onClick={() => {
-            updateElement(index, 0, { type: "textEditor" });
-            updateElement(index, 1, { type: "image" });
+            changeRowType(index, "textEditor", "image");
           }}
         >
           <FontAwesomeIcon icon={faAlignLeft} />
@@ -49,8 +50,7 @@ export default function RowTypeSelection({ index, updateElement }) {
         </div>
         <div
           onClick={() => {
-            updateElement(index, 0, { type: "image" });
-            updateElement(index, 1, { type: "textEditor" });
+            changeRowType(index, "image", "textEditor");
           }}
         >
           <FontAwesomeIcon icon={faImage} />
@@ -58,8 +58,7 @@ export default function RowTypeSelection({ index, updateElement }) {
         </div>
         <div
           onClick={() => {
-            updateElement(index, 0, { type: "image" });
-            updateElement(index, 1, { type: "image" });
+            changeRowType(index, "image", "image");
           }}
         >
           <FontAwesomeIcon icon={faImage} />

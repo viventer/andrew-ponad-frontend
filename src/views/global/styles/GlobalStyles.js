@@ -79,6 +79,10 @@ export const GlobalStyles = createGlobalStyle`
     backdrop-filter: blur(0.1rem);
   }
 
+  .maxZIndex {
+    z-index: 99999999;
+  }
+
   .responsivePostElement {
     width: 90vw;
     height: calc(0.5625 * 90vw);
