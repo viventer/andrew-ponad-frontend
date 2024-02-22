@@ -76,7 +76,7 @@ export default function Login() {
   };
 
   const handleLoginError = (err) => {
-    if (!err.originalStatus && !err.status) {
+    if (!err?.originalStatus && !err?.status) {
       console.log(err);
       setErrMsg("Brak odpowiedzi serwera");
     } else if (err.originalStatus === 400) {

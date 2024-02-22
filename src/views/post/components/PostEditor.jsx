@@ -11,15 +11,15 @@ import {
   selectPostTitle,
   selectPostVisibility,
   selectThumbnailUrl,
-  setPostRows,
 } from "../slices/postSlice";
 import CategorySelector from "./CategorySelector";
 import VisibilitySelector from "./VisibilitySelector";
-import { selectCurrentUser, selectUserId } from "../../auth/slices/authSlice";
+import { selectUserId } from "../../auth/slices/authSlice";
 import { useEffect } from "react";
 import { useAddNewPostMutation } from "../slices/postsApiSlice";
 import { StyledButton } from "../../global/styles/Button.styled";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function PostEditor() {
   const dispatch = useDispatch();
@@ -30,11 +30,34 @@ export default function PostEditor() {
   const postVisiblity = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
 
+  useEffect(() => {
+    dispatch(resetPostState());
+  }, []);
+
+  let translatedVisibility;
+  switch (postVisiblity) {
+    case "Publiczny":
+      translatedVisibility = "public";
+      break;
+    case "Prywatny":
+      translatedVisibility = "private";
+      break;
+    case "Niepubliczny":
+      translatedVisibility = "unlisted";
+      break;
+    case "Szkic":
+      translatedVisibility = "draft";
+      break;
+    case "Dla zweryfikowanych":
+      translatedVisibility = "verifiedOnly";
+      break;
+  }
+
   const postData = {
     author: userId,
     title: postTitle,
     thumbnail: thumbnailUrl,
-    visibility: postVisiblity,
+    visibility: translatedVisibility,
     content: postRows,
     category: postCategory,
   };
@@ -51,16 +74,46 @@ export default function PostEditor() {
   };
 
   const isAllDataExist = Object.values(postData).every(
-    (value) => value !== null && value !== undefined
+    (value) =>
+      value !== null &&
+      value !== undefined &&
+      value !== "" &&
+      !value?.includes("Wybierz")
   );
 
   const canAdd = isPostContentValid(postRows) && isAllDataExist;
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const [addNewPost, { isLoading, isSuccess, isError, error }] =
     useAddNewPostMutation();
   const addPost = async (e, postData) => {
     e.preventDefault();
-    await addNewPost(postData);
+    try {
+      await addNewPost(postData).unwrap();
+      dispatch(resetPostState());
+      navigate(from, { replace: true });
+    } catch (err) {
+      handleAddPostError(err);
+    }
+  };
+
+  const handleAddPostError = (err) => {
+    if (
+      (!err?.originalStatus && !err?.status) ||
+      err?.status === "FETCH_ERROR"
+    ) {
+      console.log(err);
+      dispatch(setErrMsg("Brak odpowiedzi serwera"));
+    } else if (err.originalStatus === 400 || err.status === 400) {
+      dispatch(setErrMsg("Uzupełnij wymagane pola"));
+    } else if (err.status === 409 || err.originalStatus === 409) {
+      dispatch(setErrMsg("Post o takim tytule już istnieje"));
+    } else if (err.status === 403 || err.originalStatus === 403) {
+      dispatch(setErrMsg("Nie masz uprawnień do dodania posta"));
+    }
   };
 
   useEffect(() => {

@@ -1,27 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
+
+const initialState = {
+  thumbnailUrl: "",
+  postTitle: "",
+  postRows: [
+    [
+      {
+        type: "textEditor",
+        textEditorContent: "",
+        imageUrl: "",
+      },
+      {
+        type: "image",
+        textEditorContent: "",
+        imageUrl: "",
+      },
+    ],
+  ],
+  postCategory: "Wybierz kategorię",
+  postVisibility: "Wybierz widoczność",
+};
 
 const postSlice = createSlice({
   name: "post",
-  initialState: {
-    thumbnailUrl: "",
-    postTitle: "",
-    postRows: [
-      [
-        {
-          type: "textEditor",
-          textEditorContent: "",
-          imageUrl: "",
-        },
-        {
-          type: "image",
-          textEditorContent: "",
-          imageUrl: "",
-        },
-      ],
-    ],
-    postCategory: "Wybierz kategorię",
-    postVisibility: "Wybierz widoczność",
-  },
+  initialState: initialState,
   reducers: {
     setThumbnailUrl: (state, action) => {
       state.thumbnailUrl = action.payload;
@@ -37,6 +40,9 @@ const postSlice = createSlice({
     },
     setPostVisibility: (state, action) => {
       state.postVisibility = action.payload;
+    },
+    resetPostState: (state) => {
+      return initialState;
     },
   },
 });

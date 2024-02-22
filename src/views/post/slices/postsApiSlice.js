@@ -65,7 +65,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       query: (initialPostData) => ({
         url: "/posts",
         method: "POST",
-        body: JSON.stringify(initialPostData),
+        body: { ...initialPostData },
       }),
       invalidatesTags: [{ type: "Post", id: "LIST" }],
     }),

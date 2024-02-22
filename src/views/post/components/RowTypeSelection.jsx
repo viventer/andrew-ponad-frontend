@@ -9,11 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { selectPostRows, setPostRows } from "../slices/postSlice";
 
-export default function RowTypeSelection({
-  index,
-  updateElement,
-  changeRowType,
-}) {
+export default function RowTypeSelection({ index, changeRowType }) {
   const dispatch = useDispatch();
 
   const postRows = useSelector(selectPostRows);
