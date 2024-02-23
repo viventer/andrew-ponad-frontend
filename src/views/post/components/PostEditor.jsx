@@ -18,7 +18,16 @@ import { selectUserId } from "../../auth/slices/authSlice";
 import { useEffect } from "react";
 import { useAddNewPostMutation } from "../slices/postsApiSlice";
 import { StyledButton } from "../../global/styles/Button.styled";
-import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+import {
+  selectDialogAction,
+  selectDialogAnswer,
+  setDialogAction,
+  setDialogAnswer,
+  setDialogMsg,
+  setDialogOptions,
+  setErrMsg,
+  setIsLoading,
+} from "../../global/slices/globalStatesSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export default function PostEditor() {
@@ -94,11 +103,27 @@ export default function PostEditor() {
     try {
       await addNewPost(postData).unwrap();
       dispatch(resetPostState());
-      navigate(from, { replace: true });
+      showDialog();
     } catch (err) {
       handleAddPostError(err);
     }
   };
+
+  const showDialog = () => {
+    dispatch(setDialogOptions(["Dodaj kolejny", "Zakończ dodawanie"]));
+    dispatch(setDialogAction("postAdded"));
+    dispatch(setDialogMsg("Post został dodany, co chcesz zrobić?"));
+  };
+
+  const dialogAnswer = useSelector(selectDialogAnswer);
+  const dialogAction = useSelector(selectDialogAction);
+  useEffect(() => {
+    if (dialogAnswer == "Zakończ dodawanie" && dialogAction == "postAdded") {
+      navigate(from, { replace: true });
+    }
+    dispatch(setDialogAnswer(null));
+    dispatch(setDialogAction(null));
+  }, [dialogAnswer]);
 
   const handleAddPostError = (err) => {
     if (
@@ -128,7 +153,7 @@ export default function PostEditor() {
   return (
     <>
       <StyledPostEditor>
-        {thumbnailUrl && <ThumbnailBar />}
+        <ThumbnailBar />
         <ImageDropzone isThumbnail={true} imageUrl={thumbnailUrl} />
         <div className="thumbnailBarOverlay">
           <PostTitleInput />

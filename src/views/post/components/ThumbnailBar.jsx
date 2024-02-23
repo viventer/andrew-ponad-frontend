@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
 import { selectThumbnailUrl } from "../slices/postSlice";
 
+import thumbnailPlaceholder from "../image/thumbnailPlaceholder.png";
+
 export default function ThumbnailBar() {
   const thumbnailUrl = useSelector(selectThumbnailUrl);
 
@@ -10,7 +12,7 @@ export default function ThumbnailBar() {
     images.push(
       <img
         key={i}
-        src={thumbnailUrl}
+        src={thumbnailUrl || thumbnailPlaceholder}
         onLoad={() => {
           URL.revokeObjectURL(thumbnailUrl);
         }}

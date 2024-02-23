@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledConfirmationDialog = styled.article`
+export const StyledDialogWindow = styled.article`
   position: fixed;
   bottom: 0;
   z-index: 141414;
@@ -13,6 +13,7 @@ export const StyledConfirmationDialog = styled.article`
   background-color: rgba(0, 0, 0, 0.25);
 
   & > dialog {
+    border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -20,7 +21,6 @@ export const StyledConfirmationDialog = styled.article`
     max-width: 40rem;
     margin-right: auto;
     margin-left: auto;
-    border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     padding: 1rem 1rem;
     font-size: 1.2rem;
     font-weight: 500;
@@ -94,11 +94,11 @@ export const StyledConfirmationDialog = styled.article`
   }
 
   @media (hover: hover) {
-    & button:first-of-type:hover {
+    &.confirmation button:first-of-type:hover {
       outline-color: ${({ theme }) => theme.colors.green};
     }
 
-    & button:nth-of-type(2):hover {
+    &.confirmation button:nth-of-type(2):hover {
       outline-color: ${({ theme }) => theme.colors.red};
     }
   }

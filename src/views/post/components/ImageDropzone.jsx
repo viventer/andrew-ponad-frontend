@@ -42,21 +42,14 @@ export default function ImageDropzone({ imageUrl, setImageUrl, isThumbnail }) {
   return (
     <StyledImageDropzone
       {...getRootProps()}
-      $isabsolute={imageUrl && isThumbnail ? 1 : 0}
+      $isabsolute={isThumbnail ? 1 : 0}
       className="imageDropzone responsivePostElement"
     >
       <input {...getInputProps()} />
-      {!imageUrl ? (
-        <div>
-          <p>Przeciągnij obraz tutaj lub kliknij aby wybrać</p>
-          <FontAwesomeIcon icon={faUpload} className="icon" />
-        </div>
-      ) : (
-        <div className="hover-effect">
-          <FontAwesomeIcon icon={faExchange} className="change-icon" />
-          <p className="change-paragraph">Zmień zdjęcie</p>
-        </div>
-      )}
+      <div className="hover-effect">
+        <FontAwesomeIcon icon={faExchange} className="change-icon" />
+        <p className="change-paragraph">Zmień zdjęcie</p>
+      </div>
     </StyledImageDropzone>
   );
 }

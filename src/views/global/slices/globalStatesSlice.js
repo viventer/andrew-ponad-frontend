@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import storage from "redux-persist/lib/storage";
 
 const globalStatesSlice = createSlice({
   name: "globalStates",
@@ -6,6 +7,8 @@ const globalStatesSlice = createSlice({
     errMsg: null,
     dialogMsg: null,
     dialogAnswer: null,
+    dialogOptions: [],
+    dialogAction: null,
     isLoading: false,
     userData: null,
     isLogged: false,
@@ -23,6 +26,12 @@ const globalStatesSlice = createSlice({
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
     },
+    setDialogOptions: (state, action) => {
+      state.dialogOptions = action.payload;
+    },
+    setDialogAction: (state, action) => {
+      state.dialogAction = action.payload;
+    },
     setUserData: (state, action) => {
       state.userData = action.payload;
     },
@@ -36,6 +45,8 @@ export const {
   setErrMsg,
   setDialogMsg,
   setDialogAnswer,
+  setDialogOptions,
+  setDialogAction,
   setIsLoading,
   setUserData,
   setIsLogged,
@@ -44,6 +55,8 @@ export const {
 export const selectErrMsg = (state) => state.globalStates.errMsg;
 export const selectDialogMsg = (state) => state.globalStates.dialogMsg;
 export const selectDialogAnswer = (state) => state.globalStates.dialogAnswer;
+export const selectDialogOptions = (state) => state.globalStates.dialogOptions;
+export const selectDialogAction = (state) => state.globalStates.dialogAction;
 export const selectIsLoading = (state) => state.globalStates.isLoading;
 export const selectUserData = (state) => state.globalStates.userData;
 export const selectIsLogged = (state) => state.globalStates.isLogged;

@@ -1,12 +1,13 @@
 import Header from "./Header";
 import FixedErrorModal from "./FixedErrorModal";
-import ConfirmationDialog from "./ConfirmationDialog";
+import DialogWindow from "./DialogWindow";
 
 import { Outlet } from "react-router-dom";
 
 import { useSelector } from "react-redux";
 import {
   selectDialogMsg,
+  selectDialogOptions,
   selectErrMsg,
   selectIsLoading,
 } from "../slices/globalStatesSlice";
@@ -16,13 +17,14 @@ import { HashLoader } from "react-spinners";
 export default function Layout() {
   const errMsg = useSelector(selectErrMsg);
   const dialogMsg = useSelector(selectDialogMsg);
+  const dialogOptions = useSelector(selectDialogOptions);
   const isLoading = useSelector(selectIsLoading);
 
   return (
     <div className="App">
       <Header />
       <FixedErrorModal message={errMsg} />
-      <ConfirmationDialog message={dialogMsg} />
+      <DialogWindow message={dialogMsg} options={dialogOptions} />
       {isLoading && (
         <div className="blur maxZIndex">
           <HashLoader color="white" />

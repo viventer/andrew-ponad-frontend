@@ -8,9 +8,12 @@ import { useDeleteUserMutation } from "../slices/usersApiSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
 import {
+  selectDialogAction,
   selectDialogAnswer,
+  setDialogAction,
   setDialogAnswer,
   setDialogMsg,
+  setDialogOptions,
   setErrMsg,
   setIsLoading,
   setIsLogged,
@@ -23,19 +26,23 @@ export default function DeleteAccountButton() {
 
   const userId = useSelector(selectUserId) || 0;
   const dialogAnswer = useSelector(selectDialogAnswer);
+  const dialogAction = useSelector(selectDialogAction);
 
   const [deleteUser, { isDeletingLoading }] = useDeleteUserMutation(userId);
   const [signOut, { isLoggingOutLoading, isError, error }] =
     useLogoutMutation();
 
   useEffect(() => {
-    if (dialogAnswer == "yes") {
+    if (dialogAnswer == "Tak" && dialogAction == "deleteAccount") {
       deleteAccount();
     }
     dispatch(setDialogAnswer(null));
+    dispatch(setDialogAction(null));
   }, [dialogAnswer]);
 
   const showDialog = () => {
+    dispatch(setDialogOptions(["Tak", "Nie"]));
+    dispatch(setDialogAction("deleteAccount"));
     dispatch(
       setDialogMsg(
         "Czy na pewno chcesz usunąć konto? Ta operacja jest nieodwracalna."

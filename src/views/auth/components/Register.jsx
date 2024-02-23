@@ -116,7 +116,7 @@ export default function Register() {
     } else if (err.status === 422) {
       setErrMsg("Wprowadzone dane zawierają obraźliwe słowa");
     } else if (err.originalStatus === 409) {
-      setErrMsg("Nazwa użytkownika jest zajęta");
+      setErrMsg("Nazwa użytkownika lub email jest zajęty");
     } else {
       setErrMsg(err.data?.message);
     }
