@@ -9,6 +9,10 @@ export const StyledPostContentEditorRow = styled.section`
     max-width: fit-content;
   }
 
+  & .onlyOneElement {
+    height: calc(0.5625 * 75rem);
+  }
+
   & .flex:not(.active) {
     cursor: pointer;
   }
@@ -26,6 +30,10 @@ export const StyledPostContentEditorRow = styled.section`
   }
 
   @media (max-width: 1600px) {
+    & .onlyOneElement {
+      height: calc(0.5625 * 67rem);
+    }
+
     & .onlyOneElement .responsivePostElement {
       max-width: 67rem;
       max-height: calc(0.5625 * 67rem);
@@ -33,9 +41,12 @@ export const StyledPostContentEditorRow = styled.section`
   }
 
   @media (max-width: 1414px) {
+    & .onlyOneElement {
+      height: calc(0.5625 * 59rem);
+    }
+
     & .onlyOneElement .responsivePostElement {
       width: 140vw;
-      height: calc(0.5625 * 140vw);
       max-width: 59rem;
       max-height: calc(0.5625 * 59rem);
     }
@@ -44,7 +55,6 @@ export const StyledPostContentEditorRow = styled.section`
   @media (max-width: 1100px) {
     & .onlyOneElement .responsivePostElement {
       width: 80vw;
-      height: calc(0.5625 * 80vw);
       max-width: 40rem;
       max-height: calc(22.5rem);
     }
@@ -52,6 +62,10 @@ export const StyledPostContentEditorRow = styled.section`
     & .flex {
       width: 80vw;
       max-width: 40rem;
+    }
+
+    & .onlyOneElement {
+      height: 22.5rem;
     }
   }
 

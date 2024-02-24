@@ -11,6 +11,8 @@ import { setThumbnailUrl } from "../slices/postSlice";
 export default function ImageDropzone({ imageUrl, setImageUrl, isThumbnail }) {
   const dispatch = useDispatch();
 
+  let url;
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
@@ -19,7 +21,7 @@ export default function ImageDropzone({ imageUrl, setImageUrl, isThumbnail }) {
     maxSize: 1048576,
     onDrop: (acceptedFiles) => {
       if (acceptedFiles) dispatch(setErrMsg(""));
-      const url = URL.createObjectURL(acceptedFiles[0]);
+      url = URL.createObjectURL(acceptedFiles[0]);
       if (isThumbnail) {
         dispatch(setThumbnailUrl(url));
       } else {

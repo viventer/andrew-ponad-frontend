@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
 import { selectThumbnailUrl } from "../slices/postSlice";
 
-import thumbnailPlaceholder from "../image/thumbnailPlaceholder.png";
+import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
 
 export default function ThumbnailBar() {
   const thumbnailUrl = useSelector(selectThumbnailUrl);

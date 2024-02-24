@@ -4,6 +4,8 @@ import ImageDropzone from "./ImageDropzone";
 
 import ReactQuill from "react-quill";
 
+import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
+
 export default function PostContentEditorRow({
   activeRowNumber,
   setActiveRowNumber,
@@ -47,7 +49,7 @@ export default function PostContentEditorRow({
           if (elementData.type === "image") {
             return (
               <div className="responsivePostElement" key={i}>
-                {imageUrl && <img src={imageUrl} />}
+                <img src={imageUrl || thumbnailPlaceholder} />
                 <ImageDropzone
                   rowIndex={index}
                   imageUrl={rowData[i].imageUrl}

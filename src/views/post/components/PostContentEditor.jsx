@@ -6,6 +6,8 @@ import { useState } from "react";
 import "react-quill/dist/quill.snow.css";
 import { selectPostRows, setPostRows } from "../slices/postSlice";
 
+import { StyledButton } from "../../global/styles/Button.styled";
+
 export default function PostContentEditor() {
   const dispatch = useDispatch();
 
@@ -69,9 +71,7 @@ export default function PostContentEditor() {
           changeRowType={changeRowType}
         />
       ))}
-      <button onClick={addRow}>
-        <p>Dodaj nowy wiersz</p>
-      </button>
+      <StyledButton onClick={addRow}>Dodaj nowy wiersz</StyledButton>
     </StyledPostContentEditor>
   );
 }

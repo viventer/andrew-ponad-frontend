@@ -74,32 +74,22 @@ export const StyledPostContentEditor = styled.section`
 
   & > button {
     width: 100%;
-    margin-bottom: 2rem;
+    margin-bottom: 5rem;
     padding: 2rem;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: white;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0.1rem solid ${({ theme }) => theme.colors.navy};
-    transition: all 0.15s ease-in-out;
-    box-shadow: inset 0 0 10rem rgba(21, 49, 92, 0.15);
-  }
-
-  & > button:active {
-    filter: brightness(1.75);
-  }
-
-  @media (hover: hover) {
-    & > button:hover {
-      cursor: pointer;
-      box-shadow: inset 20rem 0 10rem rgba(21, 49, 92, 0.2);
-    }
+    font-size: 1.4rem;
+    justify-content: center;
+    box-shadow: inset 0 0 0rem rgba(21, 49, 92, 0.5);
   }
 
   @media (max-width: 1100px) {
     & > button {
       width: 80vw;
       max-width: 40rem;
+    }
+
+    & > button:not([disabled]):hover {
+      box-shadow: inset 10rem 0 0rem rgba(21, 49, 92, 1);
+      outline: none;
     }
   }
 
