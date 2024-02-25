@@ -1,7 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { resetPostState } from "../slices/postSlice";
+import {
+  resetPostState,
+  setPostCategory,
+  setPostRows,
+  setPostTitle,
+  setPostVisibility,
+  setThumbnailUrl,
+} from "../slices/postSlice";
 import { useEffect } from "react";
-import { useAddNewPostMutation } from "../slices/postsApiSlice";
+import {
+  useAddNewPostMutation,
+  useGetPostByIdQuery,
+  useUpdatePostMutation,
+} from "../slices/postsApiSlice";
 import {
   selectDialogAction,
   selectDialogAnswer,
@@ -12,7 +23,7 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import PostEditForm from "./PostEditForm";
 
 export default function PostEditPage() {
@@ -21,37 +32,64 @@ export default function PostEditPage() {
   const from = location.state?.from?.pathname || "/";
   const dispatch = useDispatch();
 
-  const [addNewPost, { isLoading, isSuccess, isError, error }] =
-    useAddNewPostMutation();
-  const addPost = async (postData) => {
+  const { id } = useParams();
+  const {
+    data: rawPostData,
+    isLoading: isGettingLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetPostByIdQuery(id);
+
+  if (isError) {
+    dispatch(setErrMsg(error?.data?.message));
+  }
+
+  if (isSuccess) {
+    const postData = rawPostData.entities[id];
+    dispatch(setThumbnailUrl(postData.thumbnail));
+    dispatch(setPostTitle(postData.title));
+    dispatch(setPostRows(postData.content));
+    dispatch(setPostCategory(postData.category));
+
+    let translatedVisibility;
+    switch (postData.visibility) {
+      case "public":
+        translatedVisibility = "Publiczny";
+        break;
+      case "private":
+        translatedVisibility = "Prywatny";
+        break;
+      case "unlisted":
+        translatedVisibility = "Niepubliczny";
+        break;
+      case "draft":
+        translatedVisibility = "Szkic";
+        break;
+      case "verifiedOnly":
+        translatedVisibility = "Dla zweryfikowanych";
+        break;
+    }
+
+    dispatch(setPostVisibility(translatedVisibility));
+  }
+
+  const [updatePost, { isLoading }] = useUpdatePostMutation();
+  const editPost = async (postData) => {
     try {
-      await addNewPost(postData).unwrap();
+      await updatePost({ postId: id, postData }).unwrap();
       dispatch(resetPostState());
       showDialog();
     } catch (err) {
-      handleAddPostError(err);
+      handleEditPostError(err);
     }
   };
 
   const showDialog = () => {
-    dispatch(setDialogOptions(["Dodaj kolejny", "Zakończ dodawanie"]));
-    dispatch(setDialogAction("postAdded"));
-    dispatch(setDialogMsg("Post został dodany, co chcesz zrobić?"));
+    /* todo */
   };
 
-  const dialogAnswer = useSelector(selectDialogAnswer);
-  const dialogAction = useSelector(selectDialogAction);
-  useEffect(() => {
-    if (dialogAnswer == "Zakończ dodawanie" && dialogAction == "postAdded") {
-      navigate(from, { replace: true });
-    } else if (dialogAnswer == "Dodaj kolejny" && dialogAction == "postAdded") {
-      dispatch(resetPostState());
-    }
-    dispatch(setDialogAnswer(null));
-    dispatch(setDialogAction(null));
-  }, [dialogAnswer]);
-
-  const handleAddPostError = (err) => {
+  const handleEditPostError = (err) => {
     if (
       (!err?.originalStatus && !err?.status) ||
       err?.status === "FETCH_ERROR"
@@ -63,22 +101,22 @@ export default function PostEditPage() {
     } else if (err.status === 409 || err.originalStatus === 409) {
       dispatch(setErrMsg("Post o takim tytule już istnieje"));
     } else if (err.status === 403 || err.originalStatus === 403) {
-      dispatch(setErrMsg("Nie masz uprawnień do dodania posta"));
+      dispatch(setErrMsg("Nie masz uprawnień do edycji posta"));
     }
   };
 
   useEffect(() => {
-    if (isLoading) {
+    if (isLoading || isGettingLoading) {
       dispatch(setIsLoading(true));
       return;
     } else {
       dispatch(setIsLoading(false));
     }
-  }, [isLoading]);
+  }, [isLoading, isGettingLoading]);
 
   return (
     <PostEditForm
-      handleClick={(postData) => addPost(postData)}
+      handleClick={(postData) => editPost(postData)}
       buttonText="Dodaj posta"
     />
   );
