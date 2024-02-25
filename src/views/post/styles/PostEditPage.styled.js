@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledPostEditor = styled.main`
+export const StyledPostEditPage = styled.main`
   position: relative;
   display: flex;
   align-items: center;

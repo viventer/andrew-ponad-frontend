@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { StyledPostTitleInput } from "../styles/PostEditor.styled";
+import { StyledPostTitleInput } from "../styles/PostEditPage.styled";
 import { setErrMsg } from "../../global/slices/globalStatesSlice";
 import { selectPostTitle, setPostTitle } from "../slices/postSlice";
 

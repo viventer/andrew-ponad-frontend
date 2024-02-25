@@ -5,7 +5,7 @@ import AdminPanel from "./views/admin-panel/components/AdminPanel";
 import Home from "./views/home/components/Home";
 import Login from "./views/auth/components/Login";
 import Post from "./views/post/components/Post";
-import PostEditor from "./views/post/components/PostEditor";
+import PostEditPage from "./views/post/components/PostEditPage";
 import Missing from "./views/global/components/Missing";
 import Register from "./views/auth/components/Register";
 import PersistLogin from "./views/auth/components/PersistLogin";
@@ -26,8 +26,8 @@ function App() {
             }
           >
             <Route path="adminpanel" element={<AdminPanel />} />
-            <Route path="post/:id/edit" element={<PostEditor />} />
-            <Route path="post/create" element={<PostEditor />} />
+            <Route path="post/:id/edit" element={<PostEditPage />} />
+            <Route path="post/create" element={<PostEditPage />} />
           </Route>
         </Route>
         <Route path="*" element={<Missing />} />

@@ -81,15 +81,15 @@ export const StyledPostContentEditor = styled.section`
     box-shadow: inset 0 0 0rem rgba(21, 49, 92, 0.5);
   }
 
+  & > button:not([disabled]):hover {
+    box-shadow: inset 10rem 0 0rem rgba(21, 49, 92, 1);
+    outline: none;
+  }
+
   @media (max-width: 1100px) {
     & > button {
       width: 80vw;
       max-width: 40rem;
-    }
-
-    & > button:not([disabled]):hover {
-      box-shadow: inset 10rem 0 0rem rgba(21, 49, 92, 1);
-      outline: none;
     }
   }
 
