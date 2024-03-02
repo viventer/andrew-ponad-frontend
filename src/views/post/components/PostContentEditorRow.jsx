@@ -41,19 +41,19 @@ export default function PostContentEditorRow({
         }}
       >
         {rowData.map((elementData, i) => {
-          const imageUrl = rowData[i].imageUrl;
-          const setImageUrl = (url) => {
-            updateElement(index, i, { imageUrl: url });
+          const imagePreview = rowData[i].imagePreview;
+          const setImagePreview = (url) => {
+            updateElement(index, i, { imagePreview: url });
           };
 
           if (elementData.type === "image") {
             return (
               <div className="responsivePostElement" key={i}>
-                <img src={imageUrl || thumbnailPlaceholder} />
+                <img src={imagePreview || thumbnailPlaceholder} />
                 <ImageDropzone
                   rowIndex={index}
-                  imageUrl={rowData[i].imageUrl}
-                  setImageUrl={setImageUrl}
+                  imagePreview={rowData[i].imagePreview}
+                  setImagePreview={setImagePreview}
                 />
               </div>
             );

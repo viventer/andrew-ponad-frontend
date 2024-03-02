@@ -2,19 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
 
 const initialState = {
-  thumbnailUrl: "",
+  thumbnailPreview: null,
+  editedPostId: null,
   postTitle: "",
   postRows: [
     [
       {
         type: "textEditor",
         textEditorContent: "",
-        imageUrl: "",
+        imagePreview: null,
       },
       {
         type: "image",
         textEditorContent: "",
-        imageUrl: "",
+        imagePreview: null,
       },
     ],
   ],
@@ -26,8 +27,11 @@ const postSlice = createSlice({
   name: "post",
   initialState: initialState,
   reducers: {
-    setThumbnailUrl: (state, action) => {
-      state.thumbnailUrl = action.payload;
+    setThumbnailPreview: (state, action) => {
+      state.thumbnailPreview = action.payload;
+    },
+    setEditedPostId: (state, action) => {
+      state.editedPostId = action.payload;
     },
     setPostTitle: (state, action) => {
       state.postTitle = action.payload;
@@ -48,18 +52,21 @@ const postSlice = createSlice({
 });
 
 export const {
-  setThumbnailUrl,
-  setPostTitle,
+  setThumbnailPreview,
   setPostRows,
+  setPostTitle,
   setPostCategory,
   setPostVisibility,
+  setEditedPostId,
   resetPostState,
 } = postSlice.actions;
 
-export const selectThumbnailUrl = (state) => state.post.thumbnailUrl;
+export const selectThumbnailPreview = (state) => state.post.thumbnailPreview;
+export const selectThumbnailFile = (state) => state.post.thumbnailPreview;
 export const selectPostTitle = (state) => state.post.postTitle;
 export const selectPostRows = (state) => state.post.postRows;
 export const selectPostCategory = (state) => state.post.postCategory;
 export const selectPostVisibility = (state) => state.post.postVisibility;
+export const selectEditedPostId = (state) => state.post.editedPostId;
 
 export default postSlice.reducer;

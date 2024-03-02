@@ -15,7 +15,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import PostEditForm from "./PostEditForm";
 
-export default function PostEditPage() {
+export default function PostCreatePage() {
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";

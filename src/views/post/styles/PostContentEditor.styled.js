@@ -69,7 +69,7 @@ export const StyledPostContentEditor = styled.section`
     top: 0;
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   & > button {

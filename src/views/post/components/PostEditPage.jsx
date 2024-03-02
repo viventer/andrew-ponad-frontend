@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
 import {
   resetPostState,
+  selectEditedPostId,
+  setEditedPostId,
   setPostCategory,
   setPostRows,
   setPostTitle,
   setPostVisibility,
-  setThumbnailUrl,
+  setThumbnailPreview,
 } from "../slices/postSlice";
 import { useEffect } from "react";
 import {
@@ -32,6 +34,8 @@ export default function PostEditPage() {
   const from = location.state?.from?.pathname || "/";
   const dispatch = useDispatch();
 
+  const editedPostId = useSelector(selectEditedPostId);
+
   const { id } = useParams();
   const {
     data: rawPostData,
@@ -39,7 +43,15 @@ export default function PostEditPage() {
     isSuccess,
     isError,
     error,
-  } = useGetPostByIdQuery(id);
+  } = useGetPostByIdQuery(id, {
+    skip: editedPostId == id,
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setEditedPostId(id));
+    }
+  }, [isSuccess, id]);
 
   if (isError) {
     dispatch(setErrMsg(error?.data?.message));
@@ -47,7 +59,7 @@ export default function PostEditPage() {
 
   if (isSuccess) {
     const postData = rawPostData.entities[id];
-    dispatch(setThumbnailUrl(postData.thumbnail));
+    dispatch(setThumbnailPreview(postData.thumbnail));
     dispatch(setPostTitle(postData.title));
     dispatch(setPostRows(postData.content));
     dispatch(setPostCategory(postData.category));
@@ -117,7 +129,7 @@ export default function PostEditPage() {
   return (
     <PostEditForm
       handleClick={(postData) => editPost(postData)}
-      buttonText="Dodaj posta"
+      buttonText="Zapisz zmiany"
     />
   );
 }

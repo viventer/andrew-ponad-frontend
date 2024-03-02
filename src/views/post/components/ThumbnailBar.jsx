@@ -1,20 +1,20 @@
 import { useSelector } from "react-redux";
 import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
-import { selectThumbnailUrl } from "../slices/postSlice";
+import { selectThumbnailPreview } from "../slices/postSlice";
 
 import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
 
 export default function ThumbnailBar() {
-  const thumbnailUrl = useSelector(selectThumbnailUrl);
+  const thumbnailPreview = useSelector(selectThumbnailPreview);
 
   const images = [];
   for (let i = 0; i < 3; i++) {
     images.push(
       <img
         key={i}
-        src={thumbnailUrl || thumbnailPlaceholder}
+        src={thumbnailPreview || thumbnailPlaceholder}
         onLoad={() => {
-          URL.revokeObjectURL(thumbnailUrl);
+          URL.revokeObjectURL(thumbnailPreview);
         }}
         className={i == 1 ? "responsivePostElement" : ""}
       />

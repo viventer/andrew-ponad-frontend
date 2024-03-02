@@ -16,7 +16,7 @@ export default function RowTypeSelection({ index, changeRowType }) {
 
   const deleteRow = (rowIndex) => {
     const newRows = postRows.filter((row, index) => index !== rowIndex);
-    dispatch(setPostRows(newRows));
+    dispatch(setPostRows([...newRows]));
   };
 
   return (

@@ -11,13 +11,13 @@ import {
   selectPostRows,
   selectPostTitle,
   selectPostVisibility,
-  selectThumbnailUrl,
+  selectThumbnailPreview,
 } from "../slices/postSlice";
 import { useSelector } from "react-redux";
 import { selectUserId } from "../../auth/slices/authSlice";
 
 export default function PostEditForm({ handleClick, buttonText }) {
-  const thumbnailUrl = useSelector(selectThumbnailUrl);
+  const thumbnailPreview = useSelector(selectThumbnailPreview);
   const postRows = useSelector(selectPostRows);
   const postTitle = useSelector(selectPostTitle);
   const postCategory = useSelector(selectPostCategory);
@@ -46,7 +46,7 @@ export default function PostEditForm({ handleClick, buttonText }) {
   const postData = {
     author: userId,
     title: postTitle,
-    thumbnail: thumbnailUrl,
+    thumbnail: thumbnailPreview,
     visibility: translatedVisibility,
     content: postRows,
     category: postCategory,
@@ -55,7 +55,7 @@ export default function PostEditForm({ handleClick, buttonText }) {
   const isPostContentValid = (postRows) => {
     for (const row of postRows) {
       for (const item of row) {
-        if (item.textEditorContent == "" && !item.imageUrl) {
+        if (item.textEditorContent == "" && !item.imagePreview) {
           return false;
         }
       }
@@ -76,7 +76,7 @@ export default function PostEditForm({ handleClick, buttonText }) {
   return (
     <StyledPostEditPage>
       <ThumbnailBar />
-      <ImageDropzone isThumbnail={true} imageUrl={thumbnailUrl} />
+      <ImageDropzone isThumbnail={true} imagePreview={thumbnailPreview} />
       <div className="thumbnailBarOverlay">
         <PostTitleInput />
         <CategorySelector />

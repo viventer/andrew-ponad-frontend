@@ -20,12 +20,12 @@ export default function PostContentEditor() {
       {
         type: "textEditor",
         textEditorContent: "",
-        imageUrl: "",
+        imagePreview: null,
       },
       {
         type: "image",
         textEditorContent: "",
-        imageUrl: "",
+        imagePreview: null,
       },
     ];
     dispatch(setPostRows([...postRows, newRow]));

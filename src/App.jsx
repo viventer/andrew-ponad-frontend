@@ -10,6 +10,7 @@ import Missing from "./views/global/components/Missing";
 import Register from "./views/auth/components/Register";
 import PersistLogin from "./views/auth/components/PersistLogin";
 import RequireAuth from "./views/auth/components/RequireAuth";
+import PostCreatePage from "./views/post/components/PostCreatePage";
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           >
             <Route path="adminpanel" element={<AdminPanel />} />
             <Route path="post/:id/edit" element={<PostEditPage />} />
-            <Route path="post/create" element={<PostEditPage />} />
+            <Route path="post/create" element={<PostCreatePage />} />
           </Route>
         </Route>
         <Route path="*" element={<Missing />} />
