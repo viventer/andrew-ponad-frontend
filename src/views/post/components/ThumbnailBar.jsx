@@ -4,7 +4,7 @@ import { selectThumbnailPreview } from "../slices/postSlice";
 
 import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
 
-export default function ThumbnailBar() {
+export default function ThumbnailBar({ thumbnailFile }) {
   const thumbnailPreview = useSelector(selectThumbnailPreview);
 
   const images = [];
@@ -12,9 +12,10 @@ export default function ThumbnailBar() {
     images.push(
       <img
         key={i}
-        src={thumbnailPreview || thumbnailPlaceholder}
+        src={thumbnailFile || thumbnailPreview || thumbnailPlaceholder}
         onLoad={() => {
           URL.revokeObjectURL(thumbnailPreview);
+          URL.revokeObjectURL(thumbnailFile);
         }}
         className={i == 1 ? "responsivePostElement" : ""}
       />

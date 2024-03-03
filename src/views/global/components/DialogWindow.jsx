@@ -10,7 +10,7 @@ import {
   setDialogOptions,
 } from "../slices/globalStatesSlice";
 
-import { StyledDialogWindow } from "../styles/DialogWindow.styled";
+import { StyledFixedModal } from "../styles/FixedModal.styled";
 import { StyledButton } from "../styles/Button.styled";
 
 export default function DialogWindow({ message, options }) {
@@ -24,13 +24,13 @@ export default function DialogWindow({ message, options }) {
   };
 
   return (
-    <StyledDialogWindow
+    <StyledFixedModal
       style={{ display: message ? "flex" : "none" }}
       className={`transition ${
-        action == "deleteAccount" ? "confirmation" : "success"
+        action == "deleteAccount" ? "confirmation" : ""
       }`}
     >
-      <dialog>
+      <dialog className="container">
         <h2>
           <div>
             <FontAwesomeIcon icon={faCircleQuestion} className="icon" />
@@ -46,6 +46,6 @@ export default function DialogWindow({ message, options }) {
           </StyledButton>
         </section>
       </dialog>
-    </StyledDialogWindow>
+    </StyledFixedModal>
   );
 }

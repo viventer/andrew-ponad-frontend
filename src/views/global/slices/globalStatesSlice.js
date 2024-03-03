@@ -6,6 +6,7 @@ const globalStatesSlice = createSlice({
   initialState: {
     errMsg: null,
     dialogMsg: null,
+    successMsg: null,
     dialogAnswer: null,
     dialogOptions: [],
     dialogAction: null,
@@ -19,6 +20,9 @@ const globalStatesSlice = createSlice({
     },
     setDialogMsg: (state, action) => {
       state.dialogMsg = action.payload;
+    },
+    setSuccessMsg: (state, action) => {
+      state.successMsg = action.payload;
     },
     setDialogAnswer: (state, action) => {
       state.dialogAnswer = action.payload;
@@ -44,6 +48,7 @@ const globalStatesSlice = createSlice({
 export const {
   setErrMsg,
   setDialogMsg,
+  setSuccessMsg,
   setDialogAnswer,
   setDialogOptions,
   setDialogAction,
@@ -54,6 +59,7 @@ export const {
 
 export const selectErrMsg = (state) => state.globalStates.errMsg;
 export const selectDialogMsg = (state) => state.globalStates.dialogMsg;
+export const selectSuccessMsg = (state) => state.globalStates.successMsg;
 export const selectDialogAnswer = (state) => state.globalStates.dialogAnswer;
 export const selectDialogOptions = (state) => state.globalStates.dialogOptions;
 export const selectDialogAction = (state) => state.globalStates.dialogAction;

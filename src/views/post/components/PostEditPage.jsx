@@ -11,19 +11,13 @@ import {
 } from "../slices/postSlice";
 import { useEffect } from "react";
 import {
-  useAddNewPostMutation,
   useGetPostByIdQuery,
   useUpdatePostMutation,
 } from "../slices/postsApiSlice";
 import {
-  selectDialogAction,
-  selectDialogAnswer,
-  setDialogAction,
-  setDialogAnswer,
-  setDialogMsg,
-  setDialogOptions,
   setErrMsg,
   setIsLoading,
+  setSuccessMsg,
 } from "../../global/slices/globalStatesSlice";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import PostEditForm from "./PostEditForm";
@@ -91,14 +85,11 @@ export default function PostEditPage() {
     try {
       await updatePost({ postId: id, postData }).unwrap();
       dispatch(resetPostState());
-      showDialog();
+      dispatch(setSuccessMsg("Zmiany zostały zapisane"));
+      navigate(from, { replace: true });
     } catch (err) {
       handleEditPostError(err);
     }
-  };
-
-  const showDialog = () => {
-    /* todo */
   };
 
   const handleEditPostError = (err) => {

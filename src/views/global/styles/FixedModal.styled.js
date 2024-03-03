@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledDialogWindow = styled.article`
+export const StyledFixedModal = styled.section`
   position: fixed;
   bottom: 0;
   z-index: 141414;
@@ -12,8 +12,15 @@ export const StyledDialogWindow = styled.article`
   backdrop-filter: blur(0.1rem);
   background-color: rgba(0, 0, 0, 0.25);
 
-  & > dialog {
+  & .success {
+    border: 0.1rem solid ${({ theme }) => theme.colors.green};
+  }
+
+  & dialog {
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
+  }
+
+  & > .container {
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -28,9 +35,21 @@ export const StyledDialogWindow = styled.article`
     background-color: ${({ theme }) => theme.colors.darkGray};
   }
 
+  & > .container > div {
+    display: flex;
+    align-items: center;
+  }
+
   & .icon {
     margin-right: 1rem;
     font-size: 1.6rem;
+  }
+
+  & .success .icon {
+    color: ${({ theme }) => theme.colors.green};
+  }
+
+  & dialog .icon {
     color: ${({ theme }) => theme.colors.sunset};
   }
 
@@ -44,7 +63,7 @@ export const StyledDialogWindow = styled.article`
     border-right: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
 
-  & > dialog > section {
+  & > .container > section {
     display: flex;
     align-items: center;
     justify-content: right;
@@ -52,7 +71,7 @@ export const StyledDialogWindow = styled.article`
   }
 
   @media (max-width: 800px) {
-    & > dialog {
+    & > div {
       max-width: 35rem;
       min-width: 20rem;
     }
@@ -67,7 +86,7 @@ export const StyledDialogWindow = styled.article`
   }
 
   @media (max-width: 650px) {
-    & > dialog {
+    & > div {
       width: 90%;
       max-width: 90%;
       min-width: 90%;
