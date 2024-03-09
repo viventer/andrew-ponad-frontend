@@ -55,6 +55,7 @@ export default function PostEditForm({ handleClick, buttonText }) {
   const isPostContentValid = (postRows) => {
     for (const row of postRows) {
       for (const item of row) {
+        if (item.type == "none") continue;
         if (item.textEditorContent == "" && !item.imagePreview) {
           return false;
         }
@@ -62,6 +63,8 @@ export default function PostEditForm({ handleClick, buttonText }) {
     }
     return true;
   };
+
+  console.log("postEditForm rerender");
 
   const isAllDataExist = Object.values(postData).every(
     (value) =>

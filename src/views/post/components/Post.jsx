@@ -5,6 +5,7 @@ import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import ThumbnailBar from "./ThumbnailBar";
 import { useEffect } from "react";
 import { StyledPost } from "../styles/Post.styled";
+import PostContent from "./PostContent";
 
 export default function Post() {
   const { id } = useParams();
@@ -59,7 +60,12 @@ export default function Post() {
 
   return (
     <StyledPost>
-      <ThumbnailBar thumbnailFile={postData?.thumbnail} />
+      {postData && (
+        <>
+          <ThumbnailBar thumbnailFile={postData?.thumbnail} />
+          <PostContent postContentData={postData?.content} />
+        </>
+      )}
     </StyledPost>
   );
 }

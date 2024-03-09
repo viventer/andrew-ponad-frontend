@@ -9,17 +9,8 @@ export const StyledPostContentEditorRow = styled.section`
     max-width: fit-content;
   }
 
-  & .onlyOneElement {
-    height: calc(0.5625 * 75rem);
-  }
-
   & .flex:not(.active) {
     cursor: pointer;
-  }
-
-  & .onlyOneElement .responsivePostElement {
-    max-width: 75rem;
-    max-height: calc(0.5625 * 75rem);
   }
 
   @media (hover: hover) {
@@ -29,56 +20,10 @@ export const StyledPostContentEditorRow = styled.section`
     }
   }
 
-  @media (max-width: 1600px) {
-    & .onlyOneElement {
-      height: calc(0.5625 * 67rem);
-    }
-
-    & .onlyOneElement .responsivePostElement {
-      max-width: 67rem;
-      max-height: calc(0.5625 * 67rem);
-    }
-  }
-
-  @media (max-width: 1414px) {
-    & .onlyOneElement {
-      height: calc(0.5625 * 59rem);
-    }
-
-    & .onlyOneElement .responsivePostElement {
-      width: 140vw;
-      max-width: 59rem;
-      max-height: calc(0.5625 * 59rem);
-    }
-  }
-
   @media (max-width: 1100px) {
-    & .onlyOneElement .responsivePostElement {
-      width: 80vw;
-      max-width: 40rem;
-      max-height: calc(22.5rem);
-    }
-
     & .flex {
       width: 80vw;
       max-width: 40rem;
     }
-
-    & .onlyOneElement {
-      height: 22.5rem;
-    }
-  }
-
-  & .onlyOneElement .quillEditor {
-    height: 100%;
-    max-height: calc(80vh + 42px);
-  }
-
-  & .onlyOneElement .ql-container {
-    max-height: 80vh;
-  }
-
-  & .onlyOneElement .ql-editor {
-    max-height: 80vh;
   }
 `;

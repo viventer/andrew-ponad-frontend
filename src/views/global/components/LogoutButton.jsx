@@ -31,6 +31,7 @@ export default function LogoutButton({ setIsUserInfoVisible }) {
       dispatch(setIsLogged(false));
       dispatch(setUserData({}));
       navigate("/");
+      window.location.reload();
     }
   }
 

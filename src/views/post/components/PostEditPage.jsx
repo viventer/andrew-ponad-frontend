@@ -15,6 +15,7 @@ import {
   useUpdatePostMutation,
 } from "../slices/postsApiSlice";
 import {
+  selectSuccessMsg,
   setErrMsg,
   setIsLoading,
   setSuccessMsg,
@@ -79,6 +80,7 @@ export default function PostEditPage() {
 
     dispatch(setPostVisibility(translatedVisibility));
   }
+  console.log("tak");
 
   const [updatePost, { isLoading }] = useUpdatePostMutation();
   const editPost = async (postData) => {
@@ -108,8 +110,12 @@ export default function PostEditPage() {
     }
   };
 
+  const successMsg = useSelector(selectSuccessMsg);
+
   useEffect(() => {
-    if (isLoading || isGettingLoading) {
+    console.log("isLoading: ", isLoading);
+    console.log("isGettingLoading: ", isGettingLoading);
+    if ((isLoading || isGettingLoading) && !successMsg) {
       dispatch(setIsLoading(true));
       return;
     } else {
