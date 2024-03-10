@@ -15,10 +15,17 @@ export const StyledPostRow = styled.section`
   & img {
     object-fit: contain;
     border-radius: 0.3rem;
+    border: 0.15rem solid rgba(255, 255, 255, 0.15);
   }
 
   & article {
     overflow: auto;
     height: fit-content;
+  }
+
+  @media (max-width: 1100px) {
+    &:not(.onlyOneElement) {
+      flex-direction: column;
+    }
   }
 `;

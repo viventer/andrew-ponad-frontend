@@ -6,11 +6,19 @@ export const StyledPostContent = styled.section`
   display: flex;
   flex-direction: column;
 
-  & > section:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.3);
+  & > section:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.75);
   }
 
-  & > section:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.1);
+  & h1 {
+    font-size: 1.8rem;
+  }
+
+  & h2 {
+    font-size: 1.4rem;
+  }
+
+  & p {
+    font-size: 1.1rem;
   }
 `;
