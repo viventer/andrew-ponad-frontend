@@ -6,6 +6,7 @@ import ThumbnailBar from "./ThumbnailBar";
 import { useEffect } from "react";
 import { StyledPost } from "../styles/Post.styled";
 import PostContent from "./PostContent";
+import PostInfo from "./PostInfo";
 
 export default function Post() {
   const { id } = useParams();
@@ -63,6 +64,7 @@ export default function Post() {
       {postData && (
         <>
           <ThumbnailBar thumbnailFile={postData?.thumbnail} />
+          <PostInfo postData={postData} />
           <PostContent postContentData={postData?.content} />
         </>
       )}
