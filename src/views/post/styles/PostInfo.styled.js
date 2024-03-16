@@ -17,7 +17,7 @@ export const StyledPostInfo = styled.section`
   }
 
   & h2 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1.25rem;
   }
@@ -41,20 +41,15 @@ export const StyledPostInfo = styled.section`
     color: white;
   }
 
-  @media (max-width: 800px) {
-    & h2 {
-      font-size: 1.5rem;
-    }
-  }
-
   @media (max-width: 650px) {
-    width: 80vw;
+    width: 100vw;
 
     & div {
-      position: relative;
-      transform: translateY(0%);
-      margin-top: 1rem;
-      border-left: 0.5rem solid ${({ theme }) => theme.colors.navy};
+      width: 100%;
+      margin-top: 0rem;
+      transform: translateY(-100%);
+      border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
+      border-left: none;
     }
 
     & h2 {
@@ -72,7 +67,7 @@ export const StyledPostInfo = styled.section`
     }
   }
 
-  @media (max-width: 450px) {
+  @media (max-width: 500px) {
     & h2 {
       font-size: 1.1rem;
       margin-bottom: 0.5rem;
@@ -80,7 +75,9 @@ export const StyledPostInfo = styled.section`
 
     & div {
       padding: 0.5rem 1rem;
-      border-left: 0.25rem solid ${({ theme }) => theme.colors.navy};
+      position: relative;
+      transform: translateY(0);
+      background-color: rgba(0, 0, 0, 0);
     }
   }
 `;

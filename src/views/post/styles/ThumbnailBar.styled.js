@@ -92,4 +92,11 @@ export const StyledThumbnailBar = styled.section`
       max-height: 22.5rem;
     }
   }
+
+  @media (max-width: 650px) {
+    & img:nth-child(2) {
+      width: 100vw;
+      height: calc(0.5625 * 100vw);
+    }
+  }
 `;

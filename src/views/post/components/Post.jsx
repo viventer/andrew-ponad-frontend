@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
-import { useGetPostByIdQuery } from "../slices/postsApiSlice";
+import {
+  useAddPostViewMutation,
+  useGetPostByIdQuery,
+} from "../slices/postsApiSlice";
 import { useDispatch } from "react-redux";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import ThumbnailBar from "./ThumbnailBar";
@@ -17,6 +20,8 @@ export default function Post() {
     isError,
     error,
   } = useGetPostByIdQuery(id);
+  const [addPostView, { isError: isAddPostViewError }] =
+    useAddPostViewMutation();
 
   const dispatch = useDispatch();
 
@@ -28,8 +33,6 @@ export default function Post() {
   let translatedVisibility;
   if (isSuccess) {
     postData = rawPostData.entities[id];
-
-    console.log(postData);
 
     switch (postData.visibility) {
       case "public":
@@ -56,6 +59,9 @@ export default function Post() {
       return;
     } else {
       dispatch(setIsLoading(false));
+      (async () => {
+        await addPostView(id);
+      })();
     }
   }, [isGettingLoading]);
 
