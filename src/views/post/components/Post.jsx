@@ -1,15 +1,17 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import {
   useAddPostViewMutation,
   useGetPostByIdQuery,
 } from "../slices/postsApiSlice";
-import { useDispatch } from "react-redux";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+
 import ThumbnailBar from "./ThumbnailBar";
-import { useEffect } from "react";
-import { StyledPost } from "../styles/Post.styled";
 import PostContent from "./PostContent";
 import PostInfo from "./PostInfo";
+import { StyledPost } from "../styles/Post.styled";
 
 export default function Post() {
   const { id } = useParams();
@@ -17,15 +19,18 @@ export default function Post() {
     data: rawPostData,
     isLoading: isGettingLoading,
     isSuccess,
-    isError,
-    error,
+    isError: isGetDataError,
+    error: getDataError,
   } = useGetPostByIdQuery(id);
-  const [addPostView, { isError: isAddPostViewError }] =
-    useAddPostViewMutation();
+  const [
+    addPostView,
+    { isError: isAddPostViewError, error: addPostViewError },
+  ] = useAddPostViewMutation();
 
   const dispatch = useDispatch();
 
-  if (isError) {
+  if (isGetDataError || isAddPostViewError) {
+    const error = getDataError || addPostViewError;
     dispatch(setErrMsg(error?.data?.message));
   }
 

@@ -20,6 +20,26 @@ export const StyledFixedErrorModal = styled.section`
     color: ${({ theme }) => theme.colors.red};
   }
 
+  & button {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    border: none;
+    width: 4rem;
+    font-size: 2rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    color: ${({ theme }) => theme.colors.red};
+  }
+
+  & button:hover {
+    cursor: pointer;
+  }
+
+  & > button:hover > .icon {
+    filter: brightness(2);
+    transform: scale(0.75);
+  }
+
   @media (orientation: portrait) {
     bottom: 70vh;
   }

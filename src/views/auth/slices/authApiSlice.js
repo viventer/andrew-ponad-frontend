@@ -1,6 +1,8 @@
+import { useDispatch } from "react-redux";
 import { apiSlice } from "../../../redux/apiSlice";
 
 import { logOut, setCredentials } from "./authSlice";
+import { setErrMsg } from "../../global/slices/globalStatesSlice";
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -25,6 +27,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
           }, 1000);
         } catch (err) {
           console.log(err);
+          dispatch(setErrMsg("Błąd wylogowywania, odśwież aplikacje"));
         }
       },
     }),
@@ -39,6 +42,9 @@ export const authApiSlice = apiSlice.injectEndpoints({
           const { accessToken, userId } = data;
           dispatch(setCredentials({ accessToken, userId }));
         } catch (err) {
+          if (err?.error?.status == "FETCH_ERROR") {
+            dispatch(setErrMsg("Błąd serwera, sprawdź połączenie sieciowe"));
+          }
           console.log(err);
         }
       },

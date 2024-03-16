@@ -1,12 +1,14 @@
-import { StyledImageDropzone } from "../styles/ImageDropzone.styled";
-
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExchange, faUpload } from "@fortawesome/free-solid-svg-icons";
-import { useDropzone } from "react-dropzone";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+
+import { useDropzone } from "react-dropzone";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExchange } from "@fortawesome/free-solid-svg-icons";
+
 import { setErrMsg } from "../../global/slices/globalStatesSlice";
 import { setThumbnailPreview } from "../slices/postSlice";
+
+import { StyledImageDropzone } from "../styles/ImageDropzone.styled";
 
 export default function ImageDropzone({
   imagePreview,

@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { selectPostCategory, setPostCategory } from "../slices/postSlice";
+
 import { StyledSelector } from "../styles/Selector.styled";
 import SelectedSelectorOption from "./SelectedSelectorOption";
 import SelectorOption from "./SelectorOption";
-import { useDispatch, useSelector } from "react-redux";
-import { selectPostCategory, setPostCategory } from "../slices/postSlice";
 
 export default function CategorySelector() {
   const categoryList = [
@@ -15,10 +17,10 @@ export default function CategorySelector() {
   ];
 
   const dispatch = useDispatch();
-  const selectedCategory = useSelector(selectPostCategory);
 
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
 
+  const selectedCategory = useSelector(selectPostCategory);
   const setSelectorValue = (value) => dispatch(setPostCategory(value));
 
   return (
