@@ -1,4 +1,4 @@
-import { StyledRowTypeSelection } from "../styles/RowTypeSelection.styled";
+import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,8 +6,10 @@ import {
   faClose,
   faImage,
 } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch, useSelector } from "react-redux";
+
 import { selectPostRows, setPostRows } from "../slices/postSlice";
+
+import { StyledRowTypeSelection } from "../styles/RowTypeSelection.styled";
 
 export default function RowTypeSelection({ index, changeRowType }) {
   const dispatch = useDispatch();

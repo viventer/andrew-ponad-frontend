@@ -1,4 +1,10 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+import useAuth from "../../../hooks/useAuth";
+import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
+
 import {
   resetPostState,
   selectEditedPostId,
@@ -9,7 +15,6 @@ import {
   setPostVisibility,
   setThumbnailPreview,
 } from "../slices/postSlice";
-import { useEffect } from "react";
 import {
   useGetPostByIdQuery,
   useUpdatePostMutation,
@@ -20,7 +25,7 @@ import {
   setIsLoading,
   setSuccessMsg,
 } from "../../global/slices/globalStatesSlice";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+
 import PostEditForm from "./PostEditForm";
 
 export default function PostEditPage() {
@@ -28,6 +33,7 @@ export default function PostEditPage() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const dispatch = useDispatch();
+  const isLogged = useAuth();
 
   const editedPostId = useSelector(selectEditedPostId);
 
@@ -38,9 +44,12 @@ export default function PostEditPage() {
     isSuccess,
     isError,
     error,
-  } = useGetPostByIdQuery(id, {
-    skip: editedPostId == id,
-  });
+  } = useGetPostByIdQuery(
+    { postId: id, isLogged },
+    {
+      skip: editedPostId == id,
+    }
+  );
 
   useEffect(() => {
     if (isSuccess) {
@@ -52,6 +61,8 @@ export default function PostEditPage() {
     dispatch(setErrMsg(error?.data?.message));
   }
 
+  const translateVisibility = useTranslateVisibility();
+
   if (isSuccess) {
     const postData = rawPostData.entities[id];
     dispatch(setThumbnailPreview(postData.thumbnail));
@@ -59,28 +70,13 @@ export default function PostEditPage() {
     dispatch(setPostRows(postData.content));
     dispatch(setPostCategory(postData.category));
 
-    let translatedVisibility;
-    switch (postData.visibility) {
-      case "public":
-        translatedVisibility = "Publiczny";
-        break;
-      case "private":
-        translatedVisibility = "Prywatny";
-        break;
-      case "unlisted":
-        translatedVisibility = "Niepubliczny";
-        break;
-      case "draft":
-        translatedVisibility = "Szkic";
-        break;
-      case "verifiedOnly":
-        translatedVisibility = "Dla zweryfikowanych";
-        break;
-    }
+    const translatedVisibility = translateVisibility(
+      postData.visibility,
+      "polish"
+    );
 
     dispatch(setPostVisibility(translatedVisibility));
   }
-  console.log("tak");
 
   const [updatePost, { isLoading }] = useUpdatePostMutation();
   const editPost = async (postData) => {

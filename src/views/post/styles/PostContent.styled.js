@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const StyledPostContent = styled.section`
-  margin-top: 5rem;
   display: flex;
   flex-direction: column;
+  margin-top: 5rem;
   border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset};
 
   & > section:nth-child(odd) {

@@ -10,7 +10,7 @@ export const StyledFixedErrorModal = styled.section`
   gap: 0.5rem;
   border: 0.2rem solid ${({ theme }) => theme.colors.red};
   border-radius: 0.1rem;
-  padding: 1rem 2rem;
+  padding: 1rem 6rem 1rem 2rem;
   font-size: 1.1rem;
   font-weight: 500;
   color: white;

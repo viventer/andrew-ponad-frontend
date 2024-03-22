@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { selectPostCategory } from "../slices/postSlice";
-import { StyledSelectorOption } from "../styles/Selector.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+
+import { StyledSelectorOption } from "../styles/Selector.styled";
 
 export default function SelectedSelectorOption({
   setAreOptionsVisible,

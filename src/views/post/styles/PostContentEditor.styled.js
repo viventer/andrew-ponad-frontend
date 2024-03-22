@@ -73,11 +73,11 @@ export const StyledPostContentEditor = styled.section`
   }
 
   & > button {
+    justify-content: center;
     width: 100%;
     margin-bottom: 5rem;
     padding: 2rem;
     font-size: 1.4rem;
-    justify-content: center;
     box-shadow: inset 0 0 0rem rgba(21, 49, 92, 0.5);
   }
 

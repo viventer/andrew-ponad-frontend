@@ -1,8 +1,10 @@
 import { useSelector } from "react-redux";
-import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
+
 import { selectThumbnailPreview } from "../slices/postSlice";
 
 import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
+
+import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
 
 export default function ThumbnailBar({ thumbnailFile }) {
   const thumbnailPreview = useSelector(selectThumbnailPreview);

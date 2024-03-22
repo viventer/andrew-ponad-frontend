@@ -1,28 +1,31 @@
 import styled from "styled-components";
 
 export const StyledSelector = styled.ul`
-  z-index: 1000;
   position: relative;
+  z-index: 1000;
+
   & > .selectorOptions {
     position: absolute;
     top: -0.3rem;
     display: flex;
-    white-space: nowrap;
     flex-direction: column;
     width: 100%;
+    white-space: nowrap;
   }
 `;
 
 export const StyledSelectorOption = styled.li`
+  list-style: none;
+
   & > button {
     width: 100%;
     border: none;
-    text-align: left;
     padding: 0.5rem;
-    background-color: ${({ theme }) => theme.colors.darkGray};
-    color: white;
+    text-align: left;
     font-size: 0.9rem;
+    color: white;
     transition: all 0.05s ease-in-out;
+    background-color: ${({ theme }) => theme.colors.darkGray};
   }
 
   & > button:hover {
@@ -32,10 +35,10 @@ export const StyledSelectorOption = styled.li`
 
   & > button.selected {
     display: flex;
-    gap: 1rem;
-    min-width: 12rem;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
+    min-width: 12rem;
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     font-weight: 700;
   }
@@ -47,6 +50,4 @@ export const StyledSelectorOption = styled.li`
   & > button.selected.up {
     height: 2.5rem;
   }
-
-  list-style: none;
 `;

@@ -7,32 +7,32 @@ export const StyledPostInfo = styled.section`
   margin-right: auto;
 
   & div {
-    background-color: rgba(0, 0, 0, 0.5);
     position: absolute;
     transform: translateY(-100%);
     z-index: 1000;
-    backdrop-filter: blur(1rem);
     padding: 1rem 2rem;
     border-left: 0.75rem solid ${({ theme }) => theme.colors.navy};
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1rem);
   }
 
   & h2 {
+    margin-bottom: 1.25rem;
     font-size: 1.5rem;
     font-weight: bold;
-    margin-bottom: 1.25rem;
   }
 
   & p {
-    font-size: 1rem;
-    line-height: 1.75rem;
-    font-weight: 700;
     display: flex;
     align-items: center;
+    line-height: 1.75rem;
+    font-size: 1rem;
+    font-weight: 700;
   }
 
   & p > span {
-    font-weight: 400;
     margin-left: 1rem;
+    font-weight: 400;
     color: ${({ theme }) => theme.colors.sunset};
   }
 
@@ -45,21 +45,21 @@ export const StyledPostInfo = styled.section`
     width: 100vw;
 
     & div {
-      width: 100%;
-      margin-top: 0rem;
       transform: translateY(-100%);
+      margin-top: 0rem;
+      width: 100%;
       border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
       border-left: none;
     }
 
     & h2 {
-      font-size: 1.25rem;
       margin-bottom: 0.75rem;
+      font-size: 1.25rem;
     }
 
     & p {
-      font-size: 0.9rem;
       line-height: 1.5rem;
+      font-size: 0.9rem;
     }
 
     & p > span {
@@ -69,14 +69,14 @@ export const StyledPostInfo = styled.section`
 
   @media (max-width: 500px) {
     & h2 {
-      font-size: 1.1rem;
       margin-bottom: 0.5rem;
+      font-size: 1.1rem;
     }
 
     & div {
-      padding: 0.5rem 1rem;
-      position: relative;
       transform: translateY(0);
+      position: relative;
+      padding: 0.5rem 1rem;
       background-color: rgba(0, 0, 0, 0);
     }
   }

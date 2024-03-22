@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import { StyledPostContentEditor } from "../styles/PostContentEditor.styled";
-import PostContentEditorRow from "./PostContentEditorRow";
-
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import "react-quill/dist/quill.snow.css";
+
 import { selectPostRows, setPostRows } from "../slices/postSlice";
 
+import PostContentEditorRow from "./PostContentEditorRow";
+import { StyledPostContentEditor } from "../styles/PostContentEditor.styled";
 import { StyledButton } from "../../global/styles/Button.styled";
 
 export default function PostContentEditor() {
   const dispatch = useDispatch();
-
   const postRows = useSelector(selectPostRows);
 
   const [activeRowNumber, setActiveRowNumber] = useState(0);

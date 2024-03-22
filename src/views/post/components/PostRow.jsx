@@ -1,4 +1,5 @@
 import DOMPurify from "dompurify";
+
 import { StyledPostRow } from "../styles/PostRow.styled";
 
 export default function PostRow({ rowData }) {

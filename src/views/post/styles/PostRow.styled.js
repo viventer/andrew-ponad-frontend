@@ -4,9 +4,9 @@ export const StyledPostRow = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem;
-  width: 100%;
   gap: 2.5rem;
+  width: 100%;
+  padding: 2.5rem;
 
   &.onlyOneElement {
     height: fit-content;

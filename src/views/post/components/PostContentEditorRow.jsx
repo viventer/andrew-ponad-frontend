@@ -1,10 +1,10 @@
-import { StyledPostContentEditorRow } from "../styles/PostContentEditorRow.styled";
-import RowTypeSelection from "./RowTypeSelection";
+import ReactQuill from "react-quill";
 import ImageDropzone from "./ImageDropzone";
 
-import ReactQuill from "react-quill";
-
 import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
+
+import RowTypeSelection from "./RowTypeSelection";
+import { StyledPostContentEditorRow } from "../styles/PostContentEditorRow.styled";
 
 export default function PostContentEditorRow({
   activeRowNumber,

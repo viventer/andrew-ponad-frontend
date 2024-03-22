@@ -1,11 +1,8 @@
-import { StyledPostEditPage } from "../styles/PostEditPage.styled";
-import ThumbnailBar from "./ThumbnailBar";
+import { useSelector } from "react-redux";
 import ImageDropzone from "./ImageDropzone";
-import PostTitleInput from "./PostTitleInput";
-import CategorySelector from "./CategorySelector";
-import PostContentEditor from "./PostContentEditor";
-import { StyledButton } from "../../global/styles/Button.styled";
-import VisibilitySelector from "./VisibilitySelector";
+
+import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
+
 import {
   selectPostCategory,
   selectPostRows,
@@ -13,8 +10,15 @@ import {
   selectPostVisibility,
   selectThumbnailPreview,
 } from "../slices/postSlice";
-import { useSelector } from "react-redux";
+
+import ThumbnailBar from "./ThumbnailBar";
+import PostTitleInput from "./PostTitleInput";
+import CategorySelector from "./CategorySelector";
+import PostContentEditor from "./PostContentEditor";
+import VisibilitySelector from "./VisibilitySelector";
+import { StyledButton } from "../../global/styles/Button.styled";
 import { selectUserId } from "../../auth/slices/authSlice";
+import { StyledPostEditPage } from "../styles/PostEditPage.styled";
 
 export default function PostEditForm({ handleClick, buttonText }) {
   const thumbnailPreview = useSelector(selectThumbnailPreview);
@@ -24,24 +28,9 @@ export default function PostEditForm({ handleClick, buttonText }) {
   const postVisiblity = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
 
-  let translatedVisibility;
-  switch (postVisiblity) {
-    case "Publiczny":
-      translatedVisibility = "public";
-      break;
-    case "Prywatny":
-      translatedVisibility = "private";
-      break;
-    case "Niepubliczny":
-      translatedVisibility = "unlisted";
-      break;
-    case "Szkic":
-      translatedVisibility = "draft";
-      break;
-    case "Dla zweryfikowanych":
-      translatedVisibility = "verifiedOnly";
-      break;
-  }
+  const translateVisibility = useTranslateVisibility();
+
+  const translatedVisibility = translateVisibility(postVisiblity, "english");
 
   const postData = {
     author: userId,

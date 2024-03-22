@@ -11,7 +11,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: "/posts",
         validateStatus: (response, result) => {
-          return response.status === 20 && !result.isError;
+          return response.status === 200 && !result.isError;
         },
       }),
       transformResponse: (responseData) => {
@@ -31,8 +31,11 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       },
     }),
     getPostById: builder.query({
-      query: (postId) => ({
+      query: ({ postId, isLogged }) => ({
         url: `/posts/${postId}`,
+        headers: {
+          isLogged: isLogged,
+        },
         validateStatus: (response, result) => {
           return response.status === 200 && !result.isError;
         },

@@ -1,6 +1,8 @@
-import { useDispatch, useSelector } from "react-redux";
-import { resetPostState } from "../slices/postSlice";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+
+import { resetPostState } from "../slices/postSlice";
 import { useAddNewPostMutation } from "../slices/postsApiSlice";
 import {
   selectDialogAction,
@@ -12,7 +14,7 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
-import { useLocation, useNavigate } from "react-router-dom";
+
 import PostEditForm from "./PostEditForm";
 
 export default function PostCreatePage() {

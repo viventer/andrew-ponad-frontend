@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -12,8 +12,11 @@ import ThumbnailBar from "./ThumbnailBar";
 import PostContent from "./PostContent";
 import PostInfo from "./PostInfo";
 import { StyledPost } from "../styles/Post.styled";
+import useAuth from "../../../hooks/useAuth";
 
 export default function Post() {
+  const { isLogged } = useAuth();
+
   const { id } = useParams();
   const {
     data: rawPostData,
@@ -21,7 +24,7 @@ export default function Post() {
     isSuccess,
     isError: isGetDataError,
     error: getDataError,
-  } = useGetPostByIdQuery(id);
+  } = useGetPostByIdQuery({ postId: id, isLogged });
   const [
     addPostView,
     { isError: isAddPostViewError, error: addPostViewError },

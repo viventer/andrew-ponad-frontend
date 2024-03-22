@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyledSelector } from "../styles/Selector.styled";
+
 import { selectPostVisibility, setPostVisibility } from "../slices/postSlice";
+
 import SelectedSelectorOption from "./SelectedSelectorOption";
 import SelectorOption from "./SelectorOption";
-import { useState } from "react";
+import { StyledSelector } from "../styles/Selector.styled";
 
 export default function VisibilitySelector() {
   const visibilityOptions = [

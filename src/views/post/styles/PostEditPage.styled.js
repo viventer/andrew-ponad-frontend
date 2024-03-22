@@ -22,13 +22,13 @@ export const StyledPostEditPage = styled.main`
     left: 0;
     right: 0;
     bottom: 0;
+    display: flex;
+    align-items: end;
+    gap: 2rem;
+    height: 2.5rem;
     z-index: 10000;
     background-color: rgba(0, 0, 0, 0.5);
     transition: all 0.15s ease-in-out;
-    display: flex;
-    align-items: end;
-    height: 2.5rem;
-    gap: 2rem;
   }
 
   & > footer > button {

@@ -1,15 +1,21 @@
 import { useEffect } from "react";
-import { useGetUserByIdQuery } from "../../global/slices/usersApiSlice";
-import { StyledPostInfo } from "../styles/PostInfo.styled";
 import { useDispatch } from "react-redux";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faIcons, faUser } from "@fortawesome/free-solid-svg-icons";
 
+import { useGetUserByIdQuery } from "../../global/slices/usersApiSlice";
+import { setIsLoading } from "../../global/slices/globalStatesSlice";
+
+import { StyledPostInfo } from "../styles/PostInfo.styled";
+
 export default function PostInfo({ postData }) {
   const { data: authorData, isLoading } = useGetUserByIdQuery(postData.author);
-  const authorUsername = authorData?.entities[postData.author].username;
+  const authorUsername =
+    authorData?.entities[postData?.author]?.username ||
+    authorData?.entities[undefined].username;
   const dispatch = useDispatch();
+  console.log(authorData);
 
   useEffect(() => {
     if (isLoading) {

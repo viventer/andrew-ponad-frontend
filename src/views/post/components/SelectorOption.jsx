@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux";
 import { StyledSelectorOption } from "../styles/Selector.styled";
-import { setPostCategory } from "../slices/postSlice";
 
 export default function SelectorOption({
   value,
