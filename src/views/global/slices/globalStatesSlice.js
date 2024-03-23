@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import storage from "redux-persist/lib/storage";
 
 const globalStatesSlice = createSlice({
   name: "globalStates",
@@ -13,6 +12,13 @@ const globalStatesSlice = createSlice({
     isLoading: false,
     userData: null,
     isLogged: false,
+    availablePostCategories: [
+      "Windows Server",
+      "Urządzenia sieciowe",
+      "Ubuntu Server",
+      "openSUSE Server",
+      "inne",
+    ],
   },
   reducers: {
     setErrMsg: (state, action) => {
@@ -42,6 +48,9 @@ const globalStatesSlice = createSlice({
     setIsLogged: (state, action) => {
       state.isLogged = action.payload;
     },
+    setAvailablePostCategories: (state, action) => {
+      state.availablePostCategories = action.payload;
+    },
   },
 });
 
@@ -55,6 +64,7 @@ export const {
   setIsLoading,
   setUserData,
   setIsLogged,
+  setAvailablePostCategories,
 } = globalStatesSlice.actions;
 
 export const selectErrMsg = (state) => state.globalStates.errMsg;
@@ -66,5 +76,7 @@ export const selectDialogAction = (state) => state.globalStates.dialogAction;
 export const selectIsLoading = (state) => state.globalStates.isLoading;
 export const selectUserData = (state) => state.globalStates.userData;
 export const selectIsLogged = (state) => state.globalStates.isLogged;
+export const selectAvailablePostCategories = (state) =>
+  state.globalStates.availablePostCategories;
 
 export default globalStatesSlice.reducer;

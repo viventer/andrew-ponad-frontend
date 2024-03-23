@@ -1,20 +1,16 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import useGetVisibilityOptions from "../../../hooks/useGetVisibilityOptions";
+
 import { selectPostVisibility, setPostVisibility } from "../slices/postSlice";
 
-import SelectedSelectorOption from "./SelectedSelectorOption";
-import SelectorOption from "./SelectorOption";
-import { StyledSelector } from "../styles/Selector.styled";
+import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
+import SelectorOption from "../../global/components/SelectorOption";
+import { StyledSelector } from "../../global/styles/Selector.styled";
 
 export default function VisibilitySelector() {
-  const visibilityOptions = [
-    "Publiczny",
-    "Niepubliczny",
-    "Prywatny",
-    "Szkic",
-    "Dla zweryfikowanych",
-  ];
+  const visibilityOptions = useGetVisibilityOptions();
 
   const dispatch = useDispatch();
   const selectedVisibility = useSelector(selectPostVisibility);

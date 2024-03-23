@@ -3,18 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { selectPostCategory, setPostCategory } from "../slices/postSlice";
 
-import { StyledSelector } from "../styles/Selector.styled";
-import SelectedSelectorOption from "./SelectedSelectorOption";
-import SelectorOption from "./SelectorOption";
+import { StyledSelector } from "../../global/styles/Selector.styled";
+import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
+import SelectorOption from "../../global/components/SelectorOption";
+import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
 
 export default function CategorySelector() {
-  const categoryList = [
-    "Windows Server",
-    "Urządzenia sieciowe",
-    "Ubuntu Server",
-    "openSUSE Server",
-    "inne",
-  ];
+  const categoryList = useSelector(selectAvailablePostCategories);
 
   const dispatch = useDispatch();
 

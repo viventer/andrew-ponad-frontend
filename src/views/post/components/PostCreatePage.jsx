@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { resetPostState } from "../slices/postSlice";
+import { resetPostState, selectEditedPostId } from "../slices/postSlice";
 import { useAddNewPostMutation } from "../slices/postsApiSlice";
 import {
   selectDialogAction,
@@ -22,6 +22,15 @@ export default function PostCreatePage() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const dispatch = useDispatch();
+  const editedPostId = useSelector(selectEditedPostId);
+
+  useEffect(() => {
+    if (editedPostId) {
+      localStorage.removeItem("persist:posts");
+      dispatch(resetPostState());
+      console.log("wywołało się");
+    }
+  }, []);
 
   const [addNewPost, { isLoading }] = useAddNewPostMutation();
   const addPost = async (postData) => {

@@ -19,6 +19,7 @@ import VisibilitySelector from "./VisibilitySelector";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { StyledPostEditPage } from "../styles/PostEditPage.styled";
+import { useEffect } from "react";
 
 export default function PostEditForm({ handleClick, buttonText }) {
   const thumbnailPreview = useSelector(selectThumbnailPreview);
@@ -52,8 +53,6 @@ export default function PostEditForm({ handleClick, buttonText }) {
     }
     return true;
   };
-
-  console.log("postEditForm rerender");
 
   const isAllDataExist = Object.values(postData).every(
     (value) =>
