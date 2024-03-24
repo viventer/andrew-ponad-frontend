@@ -25,15 +25,17 @@ export const StyledAdminPanel = styled.div`
     border-radius: 1rem 0 1rem 0;
   }
 
-  & li {
+  & nav li {
     padding-bottom: 0.2rem;
+    border-bottom: 0.1rem solid rgba(255, 255, 255, 0);
+    transition: all 0.15s ease-in-out;
   }
 
-  & li.selected {
+  & nav li.selected {
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
 
-  & li:not(.selected):hover {
+  & nav li:not(.selected):hover {
     border-bottom: 0.1rem solid rgba(255, 255, 255, 0.25);
     cursor: pointer;
   }
