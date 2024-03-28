@@ -51,6 +51,8 @@ export default function PostEditPage() {
     }
   );
 
+  console.log(editedPostId);
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(setEditedPostId(id));

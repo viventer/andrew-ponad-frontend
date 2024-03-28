@@ -1,20 +1,24 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledPostsTab } from "../styles/PostsTab.styled";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import VisibilityFilterSelector from "./VisibilityFilterSelector";
 import PostsFilters from "./PostsFilters";
+import PostsList from "./PostsList";
 
 export default function PostsTab() {
   const [selectedVisibilityFilter, setSelectedVisibilityFilter] =
     useState("Widoczność");
+
+  const [selectedCategoryFilter, setSelectedCategoryFilter] =
+    useState("Kategoria");
 
   return (
     <StyledPostsTab>
       <PostsFilters
         selectedVisibilityFilter={selectedVisibilityFilter}
         setSelectedVisibilityFilter={setSelectedVisibilityFilter}
+        selectedCategoryFilter={selectedCategoryFilter}
+        setSelectedCategoryFilter={setSelectedCategoryFilter}
       />
+      <PostsList />
     </StyledPostsTab>
   );
 }
