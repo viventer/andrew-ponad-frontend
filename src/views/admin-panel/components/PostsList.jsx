@@ -38,7 +38,6 @@ export default function PostsList() {
     <StyledPostsList>
       {postsData &&
         postsData.map(([id, postData]) => {
-          console.log(postData.thumbnail);
           return (
             <PostFromList
               thumbnail={postData.thumbnail}

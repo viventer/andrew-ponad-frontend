@@ -27,7 +27,7 @@ export default function DialogWindow({ message, options }) {
     <StyledFixedModal
       style={{ display: message ? "flex" : "none" }}
       className={`transition ${
-        action == "deleteAccount" ? "confirmation" : ""
+        action?.includes("delete") ? "confirmation" : ""
       }`}
     >
       <dialog className="container">

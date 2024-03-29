@@ -13,6 +13,11 @@ export const StyledAdminPanel = styled.div`
     border-radius: 1rem;
   }
 
+  & nav {
+    position: sticky;
+    top: 0;
+  }
+
   & nav > ul {
     display: flex;
     list-style: none;

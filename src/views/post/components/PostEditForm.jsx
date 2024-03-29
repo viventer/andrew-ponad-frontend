@@ -61,7 +61,9 @@ export default function PostEditForm({ handleClick, buttonText }) {
       !value?.includes("Wybierz")
   );
 
-  const canSave = isPostContentValid(postRows) && isAllDataExist;
+  const canSave =
+    (isPostContentValid(postRows) && isAllDataExist) ||
+    postVisiblity == "Szkic";
 
   return (
     <StyledPostEditPage>

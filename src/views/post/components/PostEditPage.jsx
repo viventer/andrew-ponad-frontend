@@ -33,7 +33,7 @@ export default function PostEditPage() {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
   const dispatch = useDispatch();
-  const isLogged = useAuth();
+  const { isLogged } = useAuth();
 
   const editedPostId = useSelector(selectEditedPostId);
 
@@ -50,8 +50,6 @@ export default function PostEditPage() {
       skip: editedPostId == id,
     }
   );
-
-  console.log(editedPostId);
 
   useEffect(() => {
     if (isSuccess) {
