@@ -9,7 +9,7 @@ export const StyledSearchBar = styled.nav`
   & input,
   & .icon {
     border: 0.1rem solid rgba(255, 255, 255, 0.4);
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 1rem;
     font-size: 1rem;
     color: white;
     transition: all ease-in-out 0.15s;
@@ -55,13 +55,15 @@ export const StyledSearchBar = styled.nav`
   }
 
   @media (max-width: 650px) {
-    width: fit-content;
+    &:not(.adminPanelSearchBar) {
+      width: fit-content;
+    }
 
-    & input {
+    &:not(.adminPanelSearchBar) input {
       display: none;
     }
 
-    & .icon {
+    &:not(.adminPanelSearchBar) .icon {
       border: none;
       padding: 0;
       font-size: 1.4rem;

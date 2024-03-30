@@ -4,8 +4,13 @@ import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
 import { StyledPostsList } from "../styles/PostsTab.styled";
 import PostFromList from "./PostFromList";
 import { useEffect } from "react";
+import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 
-export default function PostsList() {
+export default function PostsList({
+  categoryFilter,
+  visibilityFilter,
+  searchQuery,
+}) {
   const {
     data: postsRawData,
     isLoading,
@@ -15,9 +20,35 @@ export default function PostsList() {
   } = useGetPostsQuery();
 
   let postsData;
+  let filteredPostData;
+  const translateVisibility = useTranslateVisibility();
   if (isSuccess) {
     postsData = Object.entries(postsRawData.entities);
-    console.log(postsData);
+    filteredPostData = postsData.filter((post) => {
+      const postData = post[1];
+      const translatedVisibility = translateVisibility(
+        visibilityFilter,
+        "english"
+      );
+
+      if (
+        categoryFilter != "Kategoria" &&
+        categoryFilter != "Dowolna" &&
+        postData.category != categoryFilter
+      ) {
+        return false;
+      } else if (
+        visibilityFilter != "Widoczność" &&
+        visibilityFilter != "Dowolna" &&
+        postData.visibility != translatedVisibility
+      ) {
+        return false;
+      } else if (searchQuery && !postData.title.includes(searchQuery)) {
+        return false;
+      } else {
+        return true;
+      }
+    });
   }
   if (isError) {
     dispatch(setErrMsg(error));
@@ -36,8 +67,8 @@ export default function PostsList() {
 
   return (
     <StyledPostsList>
-      {postsData &&
-        postsData.map(([id, postData]) => {
+      {filteredPostData &&
+        filteredPostData.map(([id, postData]) => {
           return (
             <PostFromList
               thumbnail={postData.thumbnail}

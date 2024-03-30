@@ -53,7 +53,7 @@ export default function PostCreatePage() {
   const dialogAction = useSelector(selectDialogAction);
   useEffect(() => {
     if (dialogAnswer == "Zakończ dodawanie" && dialogAction == "postAdded") {
-      navigate(from, { replace: true });
+      navigate("/adminpanel", { replace: true });
     } else if (dialogAnswer == "Dodaj kolejny" && dialogAction == "postAdded") {
       dispatch(resetPostState());
     }

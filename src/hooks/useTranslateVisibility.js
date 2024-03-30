@@ -1,7 +1,7 @@
 const useTranslateVisibility = () => {
   const translateVisibility = (postVisibility, targetLanguage) => {
     if (!postVisibility || !targetLanguage) {
-      return null; // Obsługa błędów, gdy brakuje argumentów
+      return null;
     }
 
     if (targetLanguage === "english") {
@@ -17,7 +17,7 @@ const useTranslateVisibility = () => {
         case "Dla zweryfikowanych":
           return "verifiedOnly";
         default:
-          return null; // Obsługa błędów
+          return null;
       }
     } else if (targetLanguage === "polish") {
       switch (postVisibility) {
@@ -32,7 +32,7 @@ const useTranslateVisibility = () => {
         case "verifiedOnly":
           return "Dla zweryfikowanych";
         default:
-          return null; // Obsługa błędów
+          return null;
       }
     }
   };

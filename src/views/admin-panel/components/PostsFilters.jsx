@@ -5,19 +5,24 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import useGetVisibilityOptions from "../../../hooks/useGetVisibilityOptions";
 import { useSelector } from "react-redux";
 import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
+import SearchBar from "../../global/components/SearchBar";
 
 export default function PostsFilters({
   selectedVisibilityFilter,
   setSelectedVisibilityFilter,
   selectedCategoryFilter,
   setSelectedCategoryFilter,
+  searchQuery,
+  setSearchQuery,
 }) {
   const visibilityOptions = useGetVisibilityOptions();
   const availableCategories = useSelector(selectAvailablePostCategories);
+  visibilityOptions.push("Dowolna");
+  const categoryOptions = [...availableCategories, "Dowolna"];
 
   return (
     <StyledPostsFilters>
-      <FontAwesomeIcon icon={faFilter} />
+      <FontAwesomeIcon icon={faFilter} className="icon" />
       <FilterSelector
         selectedFilter={selectedVisibilityFilter}
         setFilter={setSelectedVisibilityFilter}
@@ -26,7 +31,12 @@ export default function PostsFilters({
       <FilterSelector
         selectedFilter={selectedCategoryFilter}
         setFilter={setSelectedCategoryFilter}
-        options={availableCategories}
+        options={categoryOptions}
+      />
+      <SearchBar
+        view="adminPanel"
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
     </StyledPostsFilters>
   );

@@ -10,6 +10,7 @@ export const StyledAdminPanel = styled.div`
     margin-top: 5vh;
     border: 0.1rem solid rgba(255, 255, 255, 0.1);
     width: 90%;
+    max-width: 1400px;
     border-radius: 1rem;
   }
 

@@ -84,7 +84,7 @@ export default function PostEditPage() {
       await updatePost({ postId: id, postData }).unwrap();
       dispatch(resetPostState());
       dispatch(setSuccessMsg("Zmiany zostały zapisane"));
-      navigate(from, { replace: true });
+      navigate("/adminpanel", { replace: true });
     } catch (err) {
       handleEditPostError(err);
     }
