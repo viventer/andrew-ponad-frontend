@@ -21,7 +21,7 @@ export default function Header() {
             <p>Andrzej Pławecki</p>
           </Link>
         </h1>
-        <SearchBar />
+        <SearchBar placeholder="Czego szukasz?" />
       </div>
       <Navigation />
       <button onClick={() => setIsUserInfoVisible((prev) => !prev)}>

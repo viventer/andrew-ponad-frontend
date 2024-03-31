@@ -37,6 +37,7 @@ export default function PostsFilters({
         view="adminPanel"
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        placeholder="Czego szukasz?"
       />
     </StyledPostsFilters>
   );

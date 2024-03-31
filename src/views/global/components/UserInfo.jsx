@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 
 import useAuth from "../../../hooks/useAuth";
 
@@ -22,6 +22,9 @@ import {
   selectUserData,
   setUserData,
 } from "../slices/globalStatesSlice";
+import { StyledButton } from "../styles/Button.styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHammer } from "@fortawesome/free-solid-svg-icons";
 
 export default function UserInfo({ setIsUserInfoVisible }) {
   const currentLocation = useLocation();
@@ -66,6 +69,9 @@ export default function UserInfo({ setIsUserInfoVisible }) {
       ? "Zweryfikowany"
       : "Niezweryfikowany";
 
+  const adminPanelAccessRoles = ["Edytor", "Admin", "Twórca"];
+  const navigate = useNavigate();
+
   return (
     <StyledUserInfo>
       {userData?.username && isLogged ? (
@@ -93,6 +99,17 @@ export default function UserInfo({ setIsUserInfoVisible }) {
               {/* {userRole == "Niezweryfikowany" && <VerificationButton />} To be done on the backend*/}
             </section>
             <section className="flex-column">
+              {adminPanelAccessRoles.includes(mainRole) && (
+                <StyledButton
+                  onClick={() => {
+                    navigate("/adminpanel");
+                    setIsUserInfoVisible(false);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faHammer} />
+                  Admin panel
+                </StyledButton>
+              )}
               <LogoutButton setIsUserInfoVisible={setIsUserInfoVisible} />
               <ChangePasswordButton
                 setIsChangePwdWindowVisible={setIsChangePwdWindowVisible}

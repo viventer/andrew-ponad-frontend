@@ -3,12 +3,17 @@ import { StyledSearchBar } from "../styles/SearchBar.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-export default function SearchBar({ searchQuery, setSearchQuery, view }) {
+export default function SearchBar({
+  searchQuery,
+  setSearchQuery,
+  view,
+  placeholder,
+}) {
   return (
     <StyledSearchBar className={view == "adminPanel" && "adminPanelSearchBar"}>
       <form onSubmit={(e) => e.preventDefault()}>
         <input
-          placeholder="Czego szukasz?"
+          placeholder={placeholder}
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}

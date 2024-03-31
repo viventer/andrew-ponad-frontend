@@ -7,6 +7,10 @@ export const StyledPostsFilters = styled.section`
   column-gap: 2rem;
   row-gap: 1rem;
 
+  & button.down:first-of-type {
+    min-width: 12.5rem;
+  }
+
   & ul {
     transform: translate(0, calc(100% + 0.3rem));
   }
