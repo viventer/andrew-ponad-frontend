@@ -61,4 +61,28 @@ export const StyledPostFromList = styled.li`
     color: ${({ theme }) => theme.colors.sunset};
     cursor: pointer;
   }
+
+  @media (max-width: 650px) {
+    padding-left: 0;
+
+    & > div:first-of-type {
+      min-width: 0;
+      width: 35vw;
+    }
+  }
+
+  @media (max-width: 400px) {
+    & > div:first-of-type {
+      width: 30vw;
+    }
+
+    & > img {
+      height: 2.5rem;
+      width: calc(2.5rem / 9 * 16);
+    }
+
+    & > div:last-of-type {
+      gap: 1.5rem;
+    }
+  }
 `;

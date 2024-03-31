@@ -60,11 +60,11 @@ export const StyledPostContentEditor = styled.section`
     border-bottom: 0.1rem solid rgba(255, 255, 255, 0.5);
   }
 
-  .responsivePostElement {
+  & .responsivePostElement {
     position: relative;
   }
 
-  .responsivePostElement > img {
+  & .responsivePostElement > img {
     position: absolute;
     top: 0;
     height: 100%;

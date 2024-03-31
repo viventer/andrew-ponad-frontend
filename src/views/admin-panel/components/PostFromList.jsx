@@ -16,7 +16,7 @@ import {
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
 import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function PostFromList({ thumbnail, title, id }) {
   const base64Regex = /^data:image\/[^;]+;base64,/;
@@ -73,6 +73,24 @@ export default function PostFromList({ thumbnail, title, id }) {
     }
   };
 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  // Funkcja do skracania tytułu
+  const shortenTitle = (title, maxWidth) => {
+    if (windowWidth <= maxWidth) {
+      return title.length > 18 ? title.slice(0, 18) + "..." : title;
+    }
+    return title;
+  };
+
   return (
     <StyledPostFromList>
       <img
@@ -80,7 +98,7 @@ export default function PostFromList({ thumbnail, title, id }) {
         onClick={viewPost}
       />
       <div onClick={viewPost}>
-        <h2>{title}</h2>
+        <h2>{shortenTitle(title, 650)}</h2>
       </div>
       <div>
         <button onClick={editPost}>
