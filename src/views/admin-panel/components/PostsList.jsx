@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
-import { StyledPostsList } from "../styles/PostsTab.styled";
 import PostFromList from "./PostFromList";
 import { useEffect } from "react";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
+import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 
 export default function PostsList({
   categoryFilter,
@@ -66,7 +66,7 @@ export default function PostsList({
   }, [isLoading]);
 
   return (
-    <StyledPostsList>
+    <StyledAdminPanelList>
       {filteredPostData &&
         filteredPostData.map(([id, postData]) => {
           return (
@@ -78,6 +78,6 @@ export default function PostsList({
             />
           );
         })}
-    </StyledPostsList>
+    </StyledAdminPanelList>
   );
 }

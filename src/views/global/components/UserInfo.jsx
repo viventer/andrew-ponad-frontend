@@ -72,6 +72,11 @@ export default function UserInfo({ setIsUserInfoVisible }) {
   const adminPanelAccessRoles = ["Edytor", "Admin", "Twórca"];
   const navigate = useNavigate();
 
+  const shortenedEmail =
+    userData?.email?.length > 24
+      ? userData?.email?.slice(0, 24) + "..."
+      : userData?.email;
+
   return (
     <StyledUserInfo>
       {userData?.username && isLogged ? (
@@ -85,7 +90,7 @@ export default function UserInfo({ setIsUserInfoVisible }) {
                 login: <span>{userData.username}</span>
               </p>
               <p>
-                email: <span>{userData.email}</span>
+                email: <span>{shortenedEmail}</span>
               </p>
               <p>
                 imię: <span>{userData.firstName}</span>

@@ -17,7 +17,7 @@ export default function FixedErrorModal({ message }) {
   return (
     <StyledFixedErrorModal style={{ display: message ? "flex" : "none" }}>
       <FontAwesomeIcon icon={faTriangleExclamation} className="icon" />
-      <p>{message?.error || message?.message || message}</p>
+      <p>{message?.error || message?.message || JSON.stringify(message)}</p>
       <button onClick={() => dispatch(setErrMsg(""))}>
         <FontAwesomeIcon icon={faClose} className="icon transition" />
       </button>

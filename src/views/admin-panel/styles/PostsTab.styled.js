@@ -20,16 +20,6 @@ export const StyledPostsTab = styled.main`
   }
 `;
 
-export const StyledPostsList = styled.ul`
-  list-style: none;
-  margin-top: 2rem;
-  height: 100%;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
 export const StyledAddPostButton = styled.button`
   color: white;
   border: none;

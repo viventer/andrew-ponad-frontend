@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyledUsersTab } from "../styles/UsersTab.styled";
 import UsersFilters from "./UsersFilters";
-import SearchBar from "../../global/components/SearchBar";
+import UsersList from "./UsersList";
 
 export default function UsersTab() {
   const [roleFilter, setRoleFilter] = useState("Wybierz rolę");
@@ -15,7 +15,7 @@ export default function UsersTab() {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-      <UsersList />
+      <UsersList roleFilter={roleFilter} searchQuery={searchQuery} />
     </StyledUsersTab>
   );
 }

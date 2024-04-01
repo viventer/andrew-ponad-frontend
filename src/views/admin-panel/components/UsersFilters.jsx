@@ -15,7 +15,7 @@ export default function UsersFilters({
     "Edytor",
     "Twórca",
     "Zweryfikowany",
-    "Użytkownik",
+    "Niezweryfikowany",
     "Dowolna",
   ];
 
