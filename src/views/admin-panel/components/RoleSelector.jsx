@@ -3,10 +3,11 @@ import { StyledSelector } from "../../global/styles/Selector.styled";
 import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
 import SelectorOption from "../../global/components/SelectorOption";
 
-export default function RoleSelector({ mainRole }) {
+export default function RoleSelector({
+  selectedMainRole,
+  setSelectedMainRole,
+}) {
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
-
-  const [selectedRole, setSelectedRole] = useState(mainRole);
 
   const availableRoles = [
     "Admin",
@@ -22,18 +23,18 @@ export default function RoleSelector({ mainRole }) {
         setAreOptionsVisible={setAreOptionsVisible}
         areOptionsVisible={areOptionsVisible}
         direction="down"
-        selectedValue={selectedRole}
+        selectedValue={selectedMainRole}
       />
       <div className="selectorOptions">
         {availableRoles.map((role) => {
-          if (role !== selectedRole) {
+          if (role !== selectedMainRole) {
             return (
               <SelectorOption
                 key={role}
                 value={role}
                 areOptionsVisible={areOptionsVisible}
                 setAreOptionsVisible={setAreOptionsVisible}
-                setValue={setSelectedRole}
+                setValue={setSelectedMainRole}
               />
             );
           }

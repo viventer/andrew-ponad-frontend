@@ -20,7 +20,7 @@ export default function SelectedSelectorOption({
         onClick={(e) => {
           toggleOptionsVisibility(e);
         }}
-        className={`selected ${direction}`}
+        className={`selected ${direction} selectorButton`}
       >
         <p>{selectedValue}</p>
         {direction === "down" ? (

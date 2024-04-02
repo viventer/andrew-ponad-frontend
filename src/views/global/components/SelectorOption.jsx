@@ -18,6 +18,7 @@ export default function SelectorOption({
         onClick={(e) => {
           selectOption(e);
         }}
+        className="selectorButton"
       >
         <p>{value}</p>
       </button>

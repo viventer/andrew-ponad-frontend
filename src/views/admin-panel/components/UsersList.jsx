@@ -72,10 +72,16 @@ export default function UsersList({ roleFilter, searchQuery }) {
         filteredUsersData.map(([id, userData]) => {
           return (
             <UserFromList
-              username={userData.username}
-              mainRole={mainRole}
-              id={id}
               key={id}
+              userInfo={{
+                username: userData.username,
+                id: id,
+                mainRole: mainRole,
+                email: userData.email,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                roles: userData.roles,
+              }}
             />
           );
         })}

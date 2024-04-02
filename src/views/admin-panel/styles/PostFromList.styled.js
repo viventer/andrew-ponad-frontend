@@ -7,7 +7,6 @@ export const StyledPostFromList = styled.li`
   width: fit-content;
   padding-left: 1rem;
   padding-right: 1rem;
-  border-radius: 0.25rem;
   background-color: rgba(255, 255, 255, 0.1);
   transition: all 0.15s ease-in-out;
 
