@@ -75,4 +75,12 @@ export const StyledUserFromList = styled.li`
   & > .shortInfo button:not(.selectorButton):active {
     transform: scale(0.75);
   }
+
+  & .successIcon {
+    color: ${({ theme }) => theme.colors.green};
+  }
+
+  & .deleteIcon:hover {
+    color: ${({ theme }) => theme.colors.red};
+  }
 `;

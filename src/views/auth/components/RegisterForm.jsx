@@ -27,6 +27,7 @@ export function RegisterForm({
           <p>&bull; od 3 do 20 znaków</p>
           <p>&bull; min. 2 litery</p>
           <p>&bull; dozwolony znak specjalny: "_"</p>
+          <p>&bull; brak polskich znaków</p>
         </section>
       </div>
 

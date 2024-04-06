@@ -9,12 +9,24 @@ import {
 import RoleSelector from "./RoleSelector";
 import UserFromListInfo from "./UserFromListInfo";
 import { useEffect, useState } from "react";
-import { useUpdateUserMutation } from "../../global/slices/usersApiSlice";
-import { useDispatch } from "react-redux";
-import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+import {
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} from "../../global/slices/usersApiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectDialogAction,
+  selectDialogAnswer,
+  setDialogAction,
+  setDialogAnswer,
+  setDialogMsg,
+  setDialogOptions,
+  setErrMsg,
+  setIsLoading,
+} from "../../global/slices/globalStatesSlice";
 import useTranslateRole from "../../../hooks/useTranslateRole";
 
-export default function UserFromList({ userInfo }) {
+export default function UserFromList({ userInfo, setReloadComponent }) {
   const [showInfo, setShowInfo] = useState(false);
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
 
@@ -22,6 +34,14 @@ export default function UserFromList({ userInfo }) {
     updateUser,
     { isLoading: isUpdateLoading, isSuccess: isUpdateSuccess },
   ] = useUpdateUserMutation();
+  const [
+    deleteUserMutation,
+    {
+      isLoading: isDeleteLoading,
+      isSuccess: isDeleteSuccess,
+      error: deleteError,
+    },
+  ] = useDeleteUserMutation();
 
   const [selectedMainRole, setSelectedMainRole] = useState(userInfo.mainRole);
   const dispatch = useDispatch();
@@ -43,9 +63,6 @@ export default function UserFromList({ userInfo }) {
 
     const translatedMainRole = translateRole(userInfo.mainRole, "english");
 
-    console.log(userInfo.mainRole);
-    console.log(selectedMainRole);
-
     if (userInfo.mainRole == selectedMainRole) {
       dispatch(setErrMsg("Użytkownik posiada już wybraną rolę"));
       return;
@@ -64,7 +81,6 @@ export default function UserFromList({ userInfo }) {
     }
 
     try {
-      console.log(updatedRoles);
       await updateUser({
         userId: userInfo.id,
         initialUserData: { username: userInfo.username, roles: updatedRoles },
@@ -78,20 +94,57 @@ export default function UserFromList({ userInfo }) {
     }
   };
 
+  const deleteUser = async () => {
+    try {
+      await deleteUserMutation(userInfo.id).unwrap();
+    } catch (err) {
+      if (!err?.status && !err?.originalStatus) {
+        dispatch(setErrMsg("Brak odpowiedzi serwera"));
+      } else {
+        setErrMsg(err?.data?.message);
+      }
+    }
+  };
+
+  const showDialog = () => {
+    dispatch(setDialogOptions(["Tak", "Nie"]));
+    dispatch(setDialogAction(`deleteUser${userInfo.id}`));
+    dispatch(
+      setDialogMsg(
+        `Czy na pewno chcesz usunąć użytkownika ${userInfo.username}? Ta operacja jest nieodwracalna.`
+      )
+    );
+  };
+
+  const dialogAnswer = useSelector(selectDialogAnswer);
+  const dialogAction = useSelector(selectDialogAction);
   useEffect(() => {
-    if (isUpdateLoading) {
+    if (dialogAnswer == "Tak" && dialogAction == `deleteUser${userInfo.id}`) {
+      deleteUser();
+    }
+    dispatch(setDialogAction(null));
+    dispatch(setDialogAnswer(null));
+  }, [dialogAnswer]);
+
+  useEffect(() => {
+    if (isUpdateLoading || isDeleteLoading) {
       dispatch(setIsLoading(true));
     } else if (isUpdateSuccess) {
       dispatch(setIsLoading(false));
       setShowSuccessIcon(true);
       setTimeout(() => {
         setShowSuccessIcon(false);
-        window.location.reload();
+        setReloadComponent((prev) => !prev);
+      }, 1500);
+    } else if (isDeleteSuccess) {
+      dispatch(setIsLoading(false));
+      setTimeout(() => {
+        setReloadComponent((prev) => !prev);
       }, 1000);
     } else {
       dispatch(setIsLoading(false));
     }
-  }, [isUpdateSuccess, isUpdateLoading]);
+  }, [isUpdateSuccess, isUpdateLoading, isDeleteSuccess, isDeleteLoading]);
 
   return (
     <StyledUserFromList>
@@ -107,7 +160,9 @@ export default function UserFromList({ userInfo }) {
             setSelectedMainRole={setSelectedMainRole}
           />
           <button onClick={changeMainRole}>
-            <FontAwesomeIcon icon={faSave} className="icon" />
+            {!showSuccessIcon && (
+              <FontAwesomeIcon icon={faSave} className="saveIcon icon" />
+            )}
             {showSuccessIcon && (
               <FontAwesomeIcon
                 icon={faCheckCircle}
@@ -116,8 +171,8 @@ export default function UserFromList({ userInfo }) {
             )}
           </button>
         </div>
-        <button>
-          <FontAwesomeIcon icon={faTrash} className="icon" />
+        <button onClick={showDialog}>
+          <FontAwesomeIcon icon={faTrash} className="deleteIcon icon" />
         </button>
       </div>
       {showInfo && <UserFromListInfo userInfo={userInfo} />}

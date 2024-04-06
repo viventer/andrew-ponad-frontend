@@ -104,7 +104,7 @@ export default function PostFromList({ thumbnail, title, id }) {
         <button onClick={editPost}>
           <FontAwesomeIcon icon={faPencil} />
         </button>
-        <button onClick={showDialog}>
+        <button onClick={showDialog} className="deleteButton">
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </div>

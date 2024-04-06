@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
 import PostFromList from "./PostFromList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 

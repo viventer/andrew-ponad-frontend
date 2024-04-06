@@ -61,6 +61,10 @@ export const StyledPostFromList = styled.li`
     cursor: pointer;
   }
 
+  & .deleteButton:hover {
+    color: ${({ theme }) => theme.colors.red};
+  }
+
   @media (max-width: 650px) {
     padding-left: 0;
 

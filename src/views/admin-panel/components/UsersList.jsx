@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useGetUsersQuery } from "../../global/slices/usersApiSlice";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import UserFromList from "./UserFromList";
 import useTranslateRole from "../../../hooks/useTranslateRole";
 
@@ -15,32 +15,32 @@ export default function UsersList({ roleFilter, searchQuery }) {
     error,
   } = useGetUsersQuery();
 
+  const getMainRole = (userData) => {
+    if (userData.roles.includes("Admin")) {
+      return "Admin";
+    } else if (userData.roles.includes("Editor")) {
+      return "Edytor";
+    } else if (userData.roles.includes("Creator")) {
+      return "Twórca";
+    } else if (userData.roles.includes("Verified")) {
+      return "Zweryfikowany";
+    } else {
+      return "Niezweryfikowany";
+    }
+  };
+
   let usersData;
   let filteredUsersData;
-  let mainRole;
-  const translateRole = useTranslateRole();
   if (isSuccess) {
     usersData = Object.entries(usersRawData.entities);
-
-    const translatedRoleFilter = translateRole(roleFilter, "english");
     filteredUsersData = usersData.filter((user) => {
       const userData = user[1];
-      if (userData.roles.includes("Admin")) {
-        mainRole = "Admin";
-      } else if (userData.roles.includes("Editor")) {
-        mainRole = "Edytor";
-      } else if (userData.roles.includes("Creator")) {
-        mainRole = "Twórca";
-      } else if (userData.roles.includes("Verified")) {
-        mainRole = "Zweryfikowany";
-      } else {
-        mainRole = "Niezweryfikowany";
-      }
+      const mainRole = getMainRole(userData);
 
       if (
         roleFilter != "Dowolna" &&
         roleFilter != "Wybierz rolę" &&
-        mainRole != translatedRoleFilter
+        mainRole != roleFilter
       ) {
         return false;
       } else if (searchQuery && !userData.username.includes(searchQuery)) {
@@ -66,12 +66,16 @@ export default function UsersList({ roleFilter, searchQuery }) {
     }
   }, [isLoading]);
 
+  const [reloadComponent, setReloadComponent] = useState(false);
+
   return (
     <StyledAdminPanelList>
       {filteredUsersData &&
         filteredUsersData.map(([id, userData]) => {
+          const mainRole = getMainRole(userData);
           return (
             <UserFromList
+              setReloadComponent={setReloadComponent}
               key={id}
               userInfo={{
                 username: userData.username,
