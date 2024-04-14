@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyledPostsFilters } from "../styles/PostsFilters.styled";
+import { StyledAdminPanelFilters } from "../styles/AdminPanelFilters.styled";
 import FilterSelector from "./FilterSelector";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import useGetVisibilityOptions from "../../../hooks/useGetVisibilityOptions";
@@ -21,8 +21,8 @@ export default function PostsFilters({
   const categoryOptions = [...availableCategories, "Dowolna"];
 
   return (
-    <StyledPostsFilters>
-      <FontAwesomeIcon icon={faFilter} className="icon" />
+    <StyledAdminPanelFilters>
+      <FontAwesomeIcon icon={faFilter} className="icon postsFiltersIcon" />
       <FilterSelector
         selectedFilter={selectedVisibilityFilter}
         setFilter={setSelectedVisibilityFilter}
@@ -39,6 +39,6 @@ export default function PostsFilters({
         setSearchQuery={setSearchQuery}
         placeholder="Czego szukasz?"
       />
-    </StyledPostsFilters>
+    </StyledAdminPanelFilters>
   );
 }

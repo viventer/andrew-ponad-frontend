@@ -13,29 +13,37 @@ export const StyledUserFromList = styled.li`
     padding: 0 2rem;
   }
 
-  & > .shortInfo > div:nth-of-type(2) {
+  & .rightSectionWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-width: 18rem;
+  }
+
+  & > .shortInfo > div {
     display: flex;
     gap: 1rem;
   }
 
-  & > .shortInfo > div > ul {
+  & .rightSectionWrapper > div > ul {
     transform: translate(0, calc(100% + 0.3rem));
     z-index: 1000;
   }
 
-  & > .shortInfo > div > ul button {
+  & .rightSectionWrapper > div > ul button {
     font-size: 0.8rem;
   }
 
-  & > .shortInfo > div > ul .icon {
+  & .rightSectionWrapper > div > ul .icon {
     font-size: 1rem;
   }
 
-  & > .shortInfo > div > ul:has(.hide) {
+  & .rightSectionWrapper > div > ul:has(.hide) {
     z-index: 1;
   }
 
-  & > .shortInfo > div:first-of-type {
+  & .rightSectionWrapper > div:first-of-type {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -82,5 +90,12 @@ export const StyledUserFromList = styled.li`
 
   & .deleteIcon:hover {
     color: ${({ theme }) => theme.colors.red};
+  }
+
+  @media (max-width: 730px) {
+    .shortInfo {
+      min-width: 20rem;
+      flex-wrap: wrap;
+    }
   }
 `;

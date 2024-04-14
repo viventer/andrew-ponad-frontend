@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import FilterSelector from "./FilterSelector";
-import { StyledUsersFilters } from "../styles/UsersFilters.styled";
 import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import SearchBar from "../../global/components/SearchBar";
+import { StyledAdminPanelFilters } from "../styles/AdminPanelFilters.styled";
 
 export default function UsersFilters({
   roleFilter,
@@ -20,7 +20,7 @@ export default function UsersFilters({
   ];
 
   return (
-    <StyledUsersFilters>
+    <StyledAdminPanelFilters>
       <FontAwesomeIcon icon={faFilter} className="icon" />
       <FilterSelector
         selectedFilter={roleFilter}
@@ -33,6 +33,6 @@ export default function UsersFilters({
         setSearchQuery={setSearchQuery}
         placeholder="Kogo szukasz?"
       />
-    </StyledUsersFilters>
+    </StyledAdminPanelFilters>
   );
 }

@@ -5,8 +5,12 @@ export const StyledAdminPanel = styled.div`
   align-items: center;
   justify-content: center;
 
+  & .adminPanelListWrapper {
+    height: 60vh;
+  }
+
   & > div {
-    height: 80vh;
+    /* height: 80vh; */
     margin-top: 5vh;
     border: 0.1rem solid rgba(255, 255, 255, 0.1);
     width: 90%;

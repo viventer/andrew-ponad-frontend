@@ -154,26 +154,28 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
 
           <p>{userInfo.username}</p>
         </div>
-        <div>
-          <RoleSelector
-            selectedMainRole={selectedMainRole}
-            setSelectedMainRole={setSelectedMainRole}
-          />
-          <button onClick={changeMainRole}>
-            {!showSuccessIcon && (
-              <FontAwesomeIcon icon={faSave} className="saveIcon icon" />
-            )}
-            {showSuccessIcon && (
-              <FontAwesomeIcon
-                icon={faCheckCircle}
-                className="successIcon icon"
-              />
-            )}
+        <div className="rightSectionWrapper">
+          <div>
+            <RoleSelector
+              selectedMainRole={selectedMainRole}
+              setSelectedMainRole={setSelectedMainRole}
+            />
+            <button onClick={changeMainRole}>
+              {!showSuccessIcon && (
+                <FontAwesomeIcon icon={faSave} className="saveIcon icon" />
+              )}
+              {showSuccessIcon && (
+                <FontAwesomeIcon
+                  icon={faCheckCircle}
+                  className="successIcon icon"
+                />
+              )}
+            </button>
+          </div>
+          <button onClick={showDialog}>
+            <FontAwesomeIcon icon={faTrash} className="deleteIcon icon" />
           </button>
         </div>
-        <button onClick={showDialog}>
-          <FontAwesomeIcon icon={faTrash} className="deleteIcon icon" />
-        </button>
       </div>
       {showInfo && <UserFromListInfo userInfo={userInfo} />}
     </StyledUserFromList>

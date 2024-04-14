@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledPostsFilters = styled.section`
+export const StyledAdminPanelFilters = styled.section`
   display: flex;
   align-items: center;
   justify-content: start;
@@ -28,8 +28,8 @@ export const StyledPostsFilters = styled.section`
     }
   }
 
-  @media (max-width: 550px) {
-    & > .icon {
+  @media (max-width: 570px) {
+    & > .postsFiltersIcon {
       display: none;
     }
 
