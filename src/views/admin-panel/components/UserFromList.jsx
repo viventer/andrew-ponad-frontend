@@ -172,7 +172,7 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
               )}
             </button>
           </div>
-          <button onClick={showDialog}>
+          <button onClick={showDialog} className="deleteButton">
             <FontAwesomeIcon icon={faTrash} className="deleteIcon icon" />
           </button>
         </div>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledUserFromList = styled.li`
-  .shortInfo {
+  & .shortInfo {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,11 +52,11 @@ export const StyledUserFromList = styled.li`
     transition: all 0.15s ease-in-out;
   }
 
-  & .shortInfo:nth-of-type(odd) {
+  &:nth-of-type(odd) .shortInfo {
     box-shadow: 0.15rem 0.15rem 0 ${({ theme }) => theme.colors.sunset};
   }
 
-  & .shortInfo:nth-of-type(even) {
+  &:nth-of-type(even) .shortInfo {
     box-shadow: 0.15rem 0.15rem 0 rgba(255, 255, 255, 0.5);
   }
 
@@ -93,9 +93,54 @@ export const StyledUserFromList = styled.li`
   }
 
   @media (max-width: 730px) {
-    .shortInfo {
-      min-width: 20rem;
+    & .shortInfo {
+      min-width: 0rem;
       flex-wrap: wrap;
+      width: 95%;
+      padding: 0.5rem 2rem;
+      row-gap: 0.5rem;
+    }
+
+    & .shortInfo > div:first-of-type {
+      min-width: 12rem;
+    }
+
+    & .shortInfo .selectorButton {
+      min-width: 10rem;
+    }
+
+    & .shortInfo .rightSectionWrapper {
+      justify-content: left;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 390px) {
+    & .shortInfo .rightSectionWrapper {
+      gap: 2rem;
+    }
+
+    & ::-webkit-scrollbar {
+      display: none;
+    }
+
+    & {
+      scrollbar-width: 0;
+    }
+
+    & .shortInfo {
+      padding: 0.5rem 1rem;
+    }
+  }
+
+  @media (max-width: 350px) {
+    & .shortInfo .rightSectionWrapper {
+      gap: 1.5rem;
+    }
+
+    & .shortInfo {
+      row-gap: 0.5rem;
+      overflow: hidden;
     }
   }
 `;
