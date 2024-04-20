@@ -1,16 +1,20 @@
-import { useDispatch } from "react-redux";
-import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
-import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
-import PostFromList from "./PostFromList";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
+
+import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+import {
+  selectCategoryFilter,
+  selectPostsTabSearchQuery,
+  selectVisibilityFilter,
+} from "../slices/adminPanelSlice";
+import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
+
+import PostFromList from "./PostFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 
-export default function PostsList({
-  categoryFilter,
-  visibilityFilter,
-  searchQuery,
-}) {
+export default function PostsList() {
   const {
     data: postsRawData,
     isLoading,
@@ -18,6 +22,10 @@ export default function PostsList({
     isError,
     error,
   } = useGetPostsQuery();
+
+  const categoryFilter = useSelector(selectCategoryFilter);
+  const visibilityFilter = useSelector(selectVisibilityFilter);
+  const searchQuery = useSelector(selectPostsTabSearchQuery);
 
   let postsData;
   let filteredPostData;

@@ -21,6 +21,7 @@ import {
 import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
 
 import { StyledPostFromList } from "../styles/PostFromList.styled";
+import useShorten from "../../../hooks/useShorten";
 
 export default function PostFromList({
   thumbnail,
@@ -95,12 +96,7 @@ export default function PostFromList({
     };
   }, []);
 
-  const shortenTitle = (title, maxWidth) => {
-    if (windowWidth <= maxWidth) {
-      return title.length > 18 ? title.slice(0, 18) + "..." : title;
-    }
-    return title;
-  };
+  const shortenTitle = useShorten();
 
   return (
     <StyledPostFromList className={isDeleted && "hide"}>
@@ -109,7 +105,7 @@ export default function PostFromList({
         onClick={viewPost}
       />
       <div onClick={viewPost}>
-        <h2>{shortenTitle(title, 650)}</h2>
+        <h2>{shortenTitle(title, 18, 650, windowWidth)}</h2>
       </div>
       <div>
         <button onClick={editPost}>

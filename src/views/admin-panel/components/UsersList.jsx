@@ -1,12 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetUsersQuery } from "../../global/slices/usersApiSlice";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import { useEffect, useState } from "react";
 import UserFromList from "./UserFromList";
-import useTranslateRole from "../../../hooks/useTranslateRole";
+import {
+  selectRoleFilter,
+  selectUsersTabSearchQuery,
+} from "../slices/adminPanelSlice";
 
-export default function UsersList({ roleFilter, searchQuery }) {
+export default function UsersList() {
   const {
     data: usersRawData,
     isLoading,
@@ -14,6 +17,9 @@ export default function UsersList({ roleFilter, searchQuery }) {
     isError,
     error,
   } = useGetUsersQuery();
+
+  const roleFilter = useSelector(selectRoleFilter);
+  const searchQuery = useSelector(selectUsersTabSearchQuery);
 
   const getMainRole = (userData) => {
     if (userData.roles.includes("Admin")) {
