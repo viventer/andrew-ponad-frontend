@@ -36,6 +36,7 @@ export default function UsersList({ roleFilter, searchQuery }) {
     filteredUsersData = usersData.filter((user) => {
       const userData = user[1];
       const mainRole = getMainRole(userData);
+      const username = userData.username.toLowerCase();
 
       if (
         roleFilter != "Dowolna" &&
@@ -43,7 +44,7 @@ export default function UsersList({ roleFilter, searchQuery }) {
         mainRole != roleFilter
       ) {
         return false;
-      } else if (searchQuery && !userData.username.includes(searchQuery)) {
+      } else if (searchQuery && !username.includes(searchQuery.toLowerCase())) {
         return false;
       } else {
         return true;
@@ -54,7 +55,7 @@ export default function UsersList({ roleFilter, searchQuery }) {
   const dispatch = useDispatch();
 
   if (isError) {
-    dispatch(setErrMsg(error));
+    dispatch(setErrMsg(error?.data?.errorMessage + ". Odśwież stronę."));
   }
 
   useEffect(() => {

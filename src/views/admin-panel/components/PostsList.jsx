@@ -30,6 +30,7 @@ export default function PostsList({
         visibilityFilter,
         "english"
       );
+      const postTitle = postData.title.toLowerCase();
 
       if (
         categoryFilter != "Kategoria" &&
@@ -43,7 +44,10 @@ export default function PostsList({
         postData.visibility != translatedVisibility
       ) {
         return false;
-      } else if (searchQuery && !postData.title.includes(searchQuery)) {
+      } else if (
+        searchQuery &&
+        !postTitle.includes(searchQuery.toLowerCase())
+      ) {
         return false;
       } else {
         return true;
@@ -65,6 +69,8 @@ export default function PostsList({
     }
   }, [isLoading]);
 
+  const [reloadComponent, setReloadComponent] = useState(false);
+
   return (
     <StyledAdminPanelList>
       {filteredPostData &&
@@ -75,6 +81,7 @@ export default function PostsList({
               title={postData.title}
               id={id}
               key={id}
+              setReloadComponent={setReloadComponent}
             />
           );
         })}

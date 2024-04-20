@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -13,7 +14,6 @@ import {
 } from "../slices/globalStatesSlice";
 
 import { StyledButton } from "../styles/Button.styled";
-import { useEffect } from "react";
 
 export default function LogoutButton({ setIsUserInfoVisible }) {
   const dispatch = useDispatch();

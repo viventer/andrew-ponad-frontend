@@ -5,12 +5,12 @@ export const StyledUserFromList = styled.li`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     width: 50%;
     min-width: 37rem;
-    gap: 1rem;
+    padding: 0 2rem;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.1);
-    padding: 0 2rem;
   }
 
   & .rightSectionWrapper {
@@ -27,8 +27,8 @@ export const StyledUserFromList = styled.li`
   }
 
   & .rightSectionWrapper > div > ul {
-    transform: translate(0, calc(100% + 0.3rem));
     z-index: 1000;
+    transform: translate(0, calc(100% + 0.3rem));
   }
 
   & .rightSectionWrapper > div > ul button {
@@ -65,9 +65,9 @@ export const StyledUserFromList = styled.li`
   }
 
   & > .shortInfo button:not(.selectorButton) {
+    border: none;
     color: white;
     background-color: rgba(0, 0, 0, 0);
-    border: none;
     transition: all 0.15s ease-in-out;
   }
 
@@ -94,11 +94,11 @@ export const StyledUserFromList = styled.li`
 
   @media (max-width: 730px) {
     & .shortInfo {
-      min-width: 0rem;
+      row-gap: 0.5rem;
       flex-wrap: wrap;
       width: 95%;
+      min-width: 0rem;
       padding: 0.5rem 2rem;
-      row-gap: 0.5rem;
     }
 
     & .shortInfo > div:first-of-type {

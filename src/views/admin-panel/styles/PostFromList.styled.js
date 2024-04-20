@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const StyledPostFromList = styled.li`
   display: flex;
-  gap: 1rem;
   align-items: center;
+  gap: 1rem;
   width: fit-content;
   padding-left: 1rem;
   padding-right: 1rem;
@@ -50,9 +50,9 @@ export const StyledPostFromList = styled.li`
 
   & > div > button {
     background-color: rgba(0, 0, 0, 0);
-    color: white;
     border: none;
     font-size: 1rem;
+    color: white;
     transition: all 0.15s ease-in-out;
   }
 
@@ -69,8 +69,8 @@ export const StyledPostFromList = styled.li`
     padding-left: 0;
 
     & > div:first-of-type {
-      min-width: 0;
       width: 35vw;
+      min-width: 0;
     }
   }
 

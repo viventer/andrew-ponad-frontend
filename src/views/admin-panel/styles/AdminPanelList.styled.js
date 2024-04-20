@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const StyledAdminPanelList = styled.ul`
-  list-style: none;
-  margin-top: 2rem;
-  overflow: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   height: 65vh;
+  margin-top: 2rem;
   margin-bottom: 1rem;
+  overflow: auto;
+  list-style: none;
 
   @media (max-width: 1200px) {
     height: 60vh;

@@ -1,9 +1,12 @@
-import { StyledPostFromList } from "../styles/PostFromList.styled";
-import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
+
 import { resetPostState } from "../../post/slices/postSlice";
 import {
   selectDialogAction,
@@ -16,9 +19,17 @@ import {
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
 import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
-import { useEffect, useState } from "react";
 
-export default function PostFromList({ thumbnail, title, id }) {
+import { StyledPostFromList } from "../styles/PostFromList.styled";
+
+export default function PostFromList({
+  thumbnail,
+  title,
+  id,
+  setReloadComponent,
+}) {
+  const [isDeleted, setIsDeleted] = useState(false);
+
   const base64Regex = /^data:image\/[^;]+;base64,/;
   const isThumbnailCorrect = base64Regex.test(thumbnail);
 
@@ -65,7 +76,8 @@ export default function PostFromList({ thumbnail, title, id }) {
         return;
       } else {
         dispatch(setIsLoading(false));
-        window.location.reload();
+        setReloadComponent((prev) => !prev);
+        setIsDeleted(true);
       }
     } catch (err) {
       setErrMsg(err);
@@ -83,7 +95,6 @@ export default function PostFromList({ thumbnail, title, id }) {
     };
   }, []);
 
-  // Funkcja do skracania tytułu
   const shortenTitle = (title, maxWidth) => {
     if (windowWidth <= maxWidth) {
       return title.length > 18 ? title.slice(0, 18) + "..." : title;
@@ -92,7 +103,7 @@ export default function PostFromList({ thumbnail, title, id }) {
   };
 
   return (
-    <StyledPostFromList>
+    <StyledPostFromList className={isDeleted && "hide"}>
       <img
         src={isThumbnailCorrect ? thumbnail : thumbnailPlaceholder}
         onClick={viewPost}

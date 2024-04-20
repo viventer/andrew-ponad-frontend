@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledSearchBar = styled.nav`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   width: 100%;
 
   & input,

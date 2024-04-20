@@ -7,7 +7,7 @@ export const StyledNavigation = styled.nav`
   gap: 2rem;
   height: 100%;
 
-  .icon {
+  & .icon {
     display: flex;
     align-items: center;
     justify-content: center;
