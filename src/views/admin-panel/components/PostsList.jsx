@@ -40,22 +40,22 @@ export default function PostsList() {
       );
       const postTitle = postData.title.toLowerCase();
 
-      if (
-        categoryFilter != "Kategoria" &&
-        categoryFilter != "Dowolna" &&
-        postData.category != categoryFilter
-      ) {
+      const isCategoryFilterSet =
+        categoryFilter != "Kategoria" && categoryFilter != "Dowolna";
+      const isCategoryFilterMatch = postData.category == categoryFilter;
+
+      const isVisibilityFilterSet =
+        visibilityFilter != "Widoczność" && visibilityFilter != "Dowolna";
+      const isVisibilityFilterMatch =
+        postData.visibility == translatedVisibility;
+
+      const isSearchQueryMatch = postTitle.includes(searchQuery.toLowerCase());
+
+      if (isCategoryFilterSet && !isCategoryFilterMatch) {
         return false;
-      } else if (
-        visibilityFilter != "Widoczność" &&
-        visibilityFilter != "Dowolna" &&
-        postData.visibility != translatedVisibility
-      ) {
+      } else if (isVisibilityFilterSet && !isVisibilityFilterMatch) {
         return false;
-      } else if (
-        searchQuery &&
-        !postTitle.includes(searchQuery.toLowerCase())
-      ) {
+      } else if (searchQuery && !isSearchQueryMatch) {
         return false;
       } else {
         return true;

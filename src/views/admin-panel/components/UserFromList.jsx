@@ -1,19 +1,20 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyledUserFromList } from "../styles/UserFromList.styled";
 import {
   faCheckCircle,
   faSave,
   faTrash,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import RoleSelector from "./RoleSelector";
-import UserFromListInfo from "./UserFromListInfo";
-import { useEffect, useState } from "react";
+
+import useTranslateRole from "../../../hooks/useTranslateRole";
+
 import {
   useDeleteUserMutation,
   useUpdateUserMutation,
 } from "../../global/slices/usersApiSlice";
-import { useDispatch, useSelector } from "react-redux";
 import {
   selectDialogAction,
   selectDialogAnswer,
@@ -24,7 +25,10 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
-import useTranslateRole from "../../../hooks/useTranslateRole";
+
+import RoleSelector from "./RoleSelector";
+import UserFromListInfo from "./UserFromListInfo";
+import { StyledUserFromList } from "../styles/UserFromList.styled";
 
 export default function UserFromList({ userInfo, setReloadComponent }) {
   const [showInfo, setShowInfo] = useState(false);
@@ -36,11 +40,7 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
   ] = useUpdateUserMutation();
   const [
     deleteUserMutation,
-    {
-      isLoading: isDeleteLoading,
-      isSuccess: isDeleteSuccess,
-      error: deleteError,
-    },
+    { isLoading: isDeleteLoading, isSuccess: isDeleteSuccess },
   ] = useDeleteUserMutation();
 
   const [selectedMainRole, setSelectedMainRole] = useState(userInfo.mainRole);

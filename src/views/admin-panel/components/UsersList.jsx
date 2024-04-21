@@ -1,13 +1,15 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useGetUsersQuery } from "../../global/slices/usersApiSlice";
-import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
-import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import { useEffect, useState } from "react";
-import UserFromList from "./UserFromList";
+import { useDispatch, useSelector } from "react-redux";
+
+import { useGetUsersQuery } from "../../global/slices/usersApiSlice";
+import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import {
   selectRoleFilter,
   selectUsersTabSearchQuery,
 } from "../slices/adminPanelSlice";
+
+import UserFromList from "./UserFromList";
+import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 
 export default function UsersList() {
   const {
