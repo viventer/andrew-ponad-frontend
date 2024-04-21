@@ -59,6 +59,10 @@ export const GlobalStyles = createGlobalStyle`
     display: none;
   }
 
+  .transparent {
+    visibility: hidden;
+  }
+
   .bold {
     font-weight: 700;
   }

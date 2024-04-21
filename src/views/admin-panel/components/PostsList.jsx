@@ -85,9 +85,7 @@ export default function PostsList() {
         filteredPostData.map(([id, postData]) => {
           return (
             <PostFromList
-              thumbnail={postData.thumbnail}
-              title={postData.title}
-              id={id}
+              postData={postData}
               key={id}
               setReloadComponent={setReloadComponent}
             />

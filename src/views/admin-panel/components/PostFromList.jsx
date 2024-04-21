@@ -3,7 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronDown,
+  faChevronUp,
+  faPencil,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
 
@@ -22,38 +27,37 @@ import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
 
 import { StyledPostFromList } from "../styles/PostFromList.styled";
 import useShorten from "../../../hooks/useShorten";
+import useAuth from "../../../hooks/useAuth";
+import PostFromListInfo from "./PostFromListInfo";
 
-export default function PostFromList({
-  thumbnail,
-  title,
-  id,
-  setReloadComponent,
-}) {
+export default function PostFromList({ postData, setReloadComponent }) {
   const [isDeleted, setIsDeleted] = useState(false);
 
   const base64Regex = /^data:image\/[^;]+;base64,/;
-  const isThumbnailCorrect = base64Regex.test(thumbnail);
+  const isThumbnailCorrect = base64Regex.test(postData.thumbnail);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const editPost = () => {
     dispatch(resetPostState());
-    navigate(`/post/${id}/edit`);
+    navigate(`/post/${postData.id}/edit`);
   };
 
   const viewPost = () => {
-    navigate(`/post/${id}`);
+    navigate(`/post/${postData.id}`);
   };
 
   const dialogAnswer = useSelector(selectDialogAnswer);
   const dialogAction = useSelector(selectDialogAction);
 
-  const [deletePostMutation, { isDeletingLoading }] = useDeletePostMutation(id);
+  const [deletePostMutation, { isDeletingLoading }] = useDeletePostMutation(
+    postData.id
+  );
 
   const showDialog = () => {
     dispatch(setDialogOptions(["Tak", "Nie"]));
-    dispatch(setDialogAction(`deletePost${id}`));
+    dispatch(setDialogAction(`deletePost${postData.id}`));
     dispatch(
       setDialogMsg(
         "Czy na pewno chcesz usunąć posta? Ta operacja jest nieodwracalna."
@@ -62,7 +66,7 @@ export default function PostFromList({
   };
 
   useEffect(() => {
-    if (dialogAnswer == "Tak" && dialogAction == `deletePost${id}`) {
+    if (dialogAnswer == "Tak" && dialogAction == `deletePost${postData.id}`) {
       deletePost();
     }
     dispatch(setDialogAnswer(null));
@@ -71,7 +75,7 @@ export default function PostFromList({
 
   const deletePost = async () => {
     try {
-      await deletePostMutation(id).unwrap();
+      await deletePostMutation(postData.id).unwrap();
       if (isDeletingLoading) {
         dispatch(setIsLoading(true));
         return;
@@ -98,23 +102,37 @@ export default function PostFromList({
 
   const shortenTitle = useShorten();
 
+  const { mainRole, username } = useAuth();
+  const canEdit = mainRole == "Admin" || username == postData.username;
+
+  const [showInfo, setShowInfo] = useState(false);
+
   return (
     <StyledPostFromList className={isDeleted && "hide"}>
-      <img
-        src={isThumbnailCorrect ? thumbnail : thumbnailPlaceholder}
-        onClick={viewPost}
-      />
-      <div onClick={viewPost}>
-        <h2>{shortenTitle(title, 18, 650, windowWidth)}</h2>
-      </div>
-      <div>
-        <button onClick={editPost}>
-          <FontAwesomeIcon icon={faPencil} />
+      <div className="flex">
+        <button onClick={() => setShowInfo((prev) => !prev)}>
+          <FontAwesomeIcon icon={showInfo ? faChevronUp : faChevronDown} />
         </button>
-        <button onClick={showDialog} className="deleteButton">
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
+        <img
+          src={isThumbnailCorrect ? postData.thumbnail : thumbnailPlaceholder}
+          onClick={viewPost}
+        />
+        <div onClick={viewPost}>
+          <h2>{shortenTitle(postData.title, 18, 650, windowWidth)}</h2>
+        </div>
+        <div>
+          <button onClick={editPost} className={!canEdit && "transparent"}>
+            <FontAwesomeIcon icon={faPencil} />
+          </button>
+          <button
+            onClick={showDialog}
+            className={`deleteButton ${!canEdit && "transparent"}`}
+          >
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
       </div>
+      {showInfo && <PostFromListInfo postData={postData} />}
     </StyledPostFromList>
   );
 }

@@ -1,8 +1,8 @@
-import { StyledUserFromListInfo } from "../styles/UserFromListInfo.styled";
+import { StyledElementFromListInfo } from "../styles/ElementFromListInfo.styled";
 
 export default function UserFromListInfo({ userInfo }) {
   return (
-    <StyledUserFromListInfo>
+    <StyledElementFromListInfo>
       <p>
         <span>email: </span>
         {userInfo.email}
@@ -19,6 +19,6 @@ export default function UserFromListInfo({ userInfo }) {
         <span>rola: </span>
         {userInfo.mainRole}
       </p>
-    </StyledUserFromListInfo>
+    </StyledElementFromListInfo>
   );
 }
