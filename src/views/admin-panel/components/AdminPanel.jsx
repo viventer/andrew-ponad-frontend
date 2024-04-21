@@ -3,9 +3,13 @@ import { useState } from "react";
 import { StyledAdminPanel } from "../styles/AdminPanel.styled";
 import UsersTab from "./UsersTab";
 import PostsTab from "./PostsTab";
+import useAuth from "../../../hooks/useAuth";
 
 export default function AdminPanel() {
   const [selectedTab, setSelectedTab] = useState("posts");
+
+  const { mainRole } = useAuth();
+  const hasUsersTabAccess = mainRole == "Admin";
 
   return (
     <StyledAdminPanel>
@@ -19,13 +23,15 @@ export default function AdminPanel() {
             >
               Posty
             </li>
-            <li
-              className={selectedTab == "users" ? "selected" : ""}
-              onClick={() => setSelectedTab("users")}
-              aria-selected={selectedTab == "users" ? true : false}
-            >
-              Użytkownicy
-            </li>
+            {hasUsersTabAccess && (
+              <li
+                className={selectedTab == "users" ? "selected" : ""}
+                onClick={() => setSelectedTab("users")}
+                aria-selected={selectedTab == "users" ? true : false}
+              >
+                Użytkownicy
+              </li>
+            )}
           </ul>
         </nav>
         {selectedTab == "users" ? <UsersTab /> : <PostsTab />}

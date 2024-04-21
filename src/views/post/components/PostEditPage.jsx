@@ -102,7 +102,7 @@ export default function PostEditPage() {
     } else if (err.status === 409 || err.originalStatus === 409) {
       dispatch(setErrMsg("Post o takim tytule już istnieje"));
     } else if (err.status === 403 || err.originalStatus === 403) {
-      dispatch(setErrMsg("Nie masz uprawnień do edycji posta"));
+      dispatch(setErrMsg("Nie masz uprawnień do edycji tego posta"));
     }
   };
 

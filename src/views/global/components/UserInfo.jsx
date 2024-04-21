@@ -69,7 +69,7 @@ export default function UserInfo({ setIsUserInfoVisible }) {
       ? "Zweryfikowany"
       : "Niezweryfikowany";
 
-  const adminPanelAccessRoles = ["Edytor", "Admin", "Twórca"];
+  const adminPanelAccessRoles = ["Editor", "Admin", "Creator"];
   const navigate = useNavigate();
 
   const shortenedEmail =

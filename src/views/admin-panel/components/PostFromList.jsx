@@ -81,7 +81,7 @@ export default function PostFromList({
         setIsDeleted(true);
       }
     } catch (err) {
-      setErrMsg(err);
+      dispatch(setErrMsg(err?.data?.message));
       dispatch(setIsLoading(false));
     }
   };
