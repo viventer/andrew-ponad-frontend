@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledDynamicErrorNotification = styled.section`
   width: 100%;
-  max-width: 20rem;
+  max-width: 17rem;
   margin-top: 1rem;
   text-align: center;
   border: 0.1rem solid red;

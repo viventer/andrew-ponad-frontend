@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { setCredentials, logOut } from "../views/auth/slices/authSlice";
+import { setErrMsg } from "../views/global/slices/globalStatesSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3500",
@@ -27,6 +28,13 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     } else {
       api.dispatch(logOut());
     }
+  } else if (result?.error?.originalStatus === 429) {
+    api.dispatch(
+      setErrMsg(
+        result?.error?.data ||
+          "Wysyłasz za dużo zapytań do serwera! Spróbuj ponownie za minutę."
+      )
+    );
   }
 
   return result;

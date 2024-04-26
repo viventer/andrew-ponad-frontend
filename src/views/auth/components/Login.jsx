@@ -83,8 +83,8 @@ export default function Login() {
       setErrMsg("Uzupełnij wymagane pola");
     } else if (err.status === 401 || err.originalStatus === 401) {
       setErrMsg("Błędny login lub/i hasło");
-    } else if (err.status === 429) {
-      setErrMsg("Za dużo prób logowania, spróbuj ponownie za 60 sekund");
+    } else if (err.status === 429 || err.originalStatus === 429) {
+      setErrMsg("Za dużo prób logowania! Spróbuj ponownie za minutę.");
     } else {
       setErrMsg(err.data?.message);
     }

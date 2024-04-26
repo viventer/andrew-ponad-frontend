@@ -14,4 +14,8 @@ export const StyledElementFromListInfo = styled.section`
     font-weight: 700;
     color: ${({ theme }) => theme.colors.sunset};
   }
+
+  @media (max-width: 400px) {
+    font-size: 0.9rem;
+  }
 `;

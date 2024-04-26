@@ -86,7 +86,7 @@ export const StyledFixedModal = styled.section`
   }
 
   @media (max-width: 650px) {
-    & > div {
+    & > .container {
       width: 90%;
       max-width: 90%;
       min-width: 90%;
@@ -103,12 +103,9 @@ export const StyledFixedModal = styled.section`
     }
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: 370px) {
     & h2 > div {
       display: none;
-    }
-
-    h2 {
     }
   }
 
