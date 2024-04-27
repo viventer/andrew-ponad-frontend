@@ -6,6 +6,10 @@ export const StyledSearchBar = styled.nav`
   justify-content: left;
   width: 100%;
 
+  &:not(.adminPanelSearchBar) {
+    justify-content: center;
+  }
+
   & input,
   & .icon {
     border: 0.1rem solid rgba(255, 255, 255, 0.4);
