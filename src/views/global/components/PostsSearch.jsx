@@ -13,7 +13,7 @@ export default function PostsSearch() {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-      <PostsSearchBox />
+      <PostsSearchBox searchQuery={searchQuery} />
     </StyledPostsSearch>
   );
 }

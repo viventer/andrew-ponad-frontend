@@ -12,4 +12,8 @@ export const StyledPostsSearchBox = styled.section`
   & .selectorIcon {
     color: ${({ theme }) => theme.colors.sunset};
   }
+
+  & ul {
+    transform: translate(0, calc(100% + 0.3rem));
+  }
 `;
