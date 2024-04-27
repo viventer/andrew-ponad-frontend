@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledSelectorOption } from "../styles/Selector.styled";
 
 export default function SelectorOption({
@@ -5,6 +6,7 @@ export default function SelectorOption({
   areOptionsVisible,
   setAreOptionsVisible,
   setValue,
+  icon,
 }) {
   const selectOption = (e) => {
     e.preventDefault();
@@ -20,6 +22,7 @@ export default function SelectorOption({
         }}
         className="selectorButton"
       >
+        {icon && <FontAwesomeIcon icon={icon} className="selectorIcon" />}
         <p>{value}</p>
       </button>
     </StyledSelectorOption>

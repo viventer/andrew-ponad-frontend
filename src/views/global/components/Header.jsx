@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faServer, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import PostsSearch from "./PostsSearch";
 
 export default function Header() {
   const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
@@ -21,9 +22,9 @@ export default function Header() {
             <p>Andrzej Pławecki</p>
           </Link>
         </h1>
-        <SearchBar placeholder="Czego szukasz?" />
+        <PostsSearch />
       </div>
-      <Navigation />
+      {/* <Navigation /> can be done after the app is released*/}
       <button onClick={() => setIsUserInfoVisible((prev) => !prev)}>
         <FontAwesomeIcon icon={faUser} className="icon" />
       </button>

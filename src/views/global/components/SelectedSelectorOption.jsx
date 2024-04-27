@@ -8,6 +8,7 @@ export default function SelectedSelectorOption({
   areOptionsVisible,
   direction,
   selectedValue,
+  icon,
 }) {
   const toggleOptionsVisibility = (e) => {
     e.preventDefault();
@@ -22,7 +23,10 @@ export default function SelectedSelectorOption({
         }}
         className={`selected ${direction} selectorButton`}
       >
-        <p>{selectedValue}</p>
+        <div className="flex-center">
+          {icon && <FontAwesomeIcon icon={icon} className="selectorIcon" />}
+          <p>{selectedValue}</p>
+        </div>
         {direction === "down" ? (
           <FontAwesomeIcon
             icon={areOptionsVisible ? faChevronUp : faChevronDown}

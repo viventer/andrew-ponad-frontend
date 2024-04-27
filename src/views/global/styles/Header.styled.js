@@ -75,7 +75,7 @@ export const StyledHeader = styled.header`
     }
   }
 
-  @media (max-width: 385px) {
+  @media (max-width: 400px) {
     & > .flex {
       gap: 1rem;
     }
@@ -92,7 +92,7 @@ export const StyledHeader = styled.header`
     }
   }
 
-  @media (max-width: 350px) {
+  @media (max-width: 370px) {
     & h1 > .reactRouterLink > p {
       display: none;
     }

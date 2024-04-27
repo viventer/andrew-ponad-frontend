@@ -17,6 +17,10 @@ export const StyledSelector = styled.ul`
 export const StyledSelectorOption = styled.li`
   list-style: none;
 
+  & .flex-center {
+    gap: 0.5rem;
+  }
+
   & > button {
     width: 100%;
     border: none;
@@ -24,12 +28,15 @@ export const StyledSelectorOption = styled.li`
     text-align: left;
     font-size: 0.9rem;
     color: white;
-    transition: all 0.05s ease-in-out;
+    transition: all 0.1s ease-in-out;
     background-color: ${({ theme }) => theme.colors.darkGray};
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   & > button:hover {
-    filter: brightness(150%);
+    background-color: #3a3a3a;
     cursor: pointer;
   }
 
