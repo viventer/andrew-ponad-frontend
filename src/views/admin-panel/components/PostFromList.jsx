@@ -103,7 +103,10 @@ export default function PostFromList({ postData, setReloadComponent }) {
   const shortenTitle = useShorten();
 
   const { mainRole, username } = useAuth();
-  const canEdit = mainRole == "Admin" || username == postData.username;
+  const canEdit =
+    mainRole == "Admin" ||
+    mainRole == "Editor" ||
+    username == postData.username;
 
   const [showInfo, setShowInfo] = useState(false);
 
