@@ -1,4 +1,4 @@
-import { StyledElementFromListInfo } from "../styles/ElementFromListInfo.styled";
+import { StyledElementFromListInfo } from "../../global/styles/ElementFromListInfo.styled";
 
 export default function UserFromListInfo({ userInfo }) {
   return (

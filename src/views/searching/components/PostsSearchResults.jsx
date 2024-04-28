@@ -18,6 +18,8 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
   } = useGetPostsQuery({ isLogged });
   const dispatch = useDispatch();
 
+  console.log(postsRawData);
+
   let postsData;
   let filteredPostsData;
   if (isSuccess) {
@@ -57,7 +59,13 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
     <StyledPostsSearchResults>
       {filteredPostsData &&
         filteredPostsData.map(([id, postData]) => {
-          return <PostFromList postData={postData} key={id} />;
+          return (
+            <PostFromList
+              postData={postData}
+              key={id}
+              view="postsSearchResults"
+            />
+          );
         })}
     </StyledPostsSearchResults>
   );

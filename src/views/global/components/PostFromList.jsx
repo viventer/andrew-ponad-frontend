@@ -25,12 +25,12 @@ import {
 } from "../slices/globalStatesSlice";
 import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
 
-import { StyledPostFromList } from "../../admin-panel/styles/PostFromList.styled";
+import { StyledPostFromList } from "../styles/PostFromList.styled";
 import useShorten from "../../../hooks/useShorten";
 import useAuth from "../../../hooks/useAuth";
 import PostFromListInfo from "./PostFromListInfo";
 
-export default function PostFromList({ postData, setReloadComponent }) {
+export default function PostFromList({ postData, setReloadComponent, view }) {
   const [isDeleted, setIsDeleted] = useState(false);
 
   const base64Regex = /^data:image\/[^;]+;base64,/;
@@ -111,7 +111,11 @@ export default function PostFromList({ postData, setReloadComponent }) {
   const [showInfo, setShowInfo] = useState(false);
 
   return (
-    <StyledPostFromList className={isDeleted && "hide"}>
+    <StyledPostFromList
+      className={`${isDeleted ? "hide" : ""} ${
+        view == "postsSearchResults" ? "postsSearchResults" : ""
+      }`}
+    >
       <div className="flex">
         <button onClick={() => setShowInfo((prev) => !prev)}>
           <FontAwesomeIcon icon={showInfo ? faChevronUp : faChevronDown} />
@@ -124,12 +128,19 @@ export default function PostFromList({ postData, setReloadComponent }) {
           <h2>{shortenTitle(postData.title, 18, 650, windowWidth)}</h2>
         </div>
         <div>
-          <button onClick={editPost} className={!canEdit && "transparent"}>
+          <button
+            onClick={editPost}
+            className={
+              !canEdit || (view == "postsSearchResults" && "transparent")
+            }
+          >
             <FontAwesomeIcon icon={faPencil} />
           </button>
           <button
             onClick={showDialog}
-            className={`deleteButton ${!canEdit && "transparent"}`}
+            className={`deleteButton ${
+              !canEdit || (view == "postsSearchResults" && "transparent")
+            }`}
           >
             <FontAwesomeIcon icon={faTrash} />
           </button>

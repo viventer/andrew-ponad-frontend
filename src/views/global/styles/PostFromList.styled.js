@@ -5,8 +5,20 @@ export const StyledPostFromList = styled.li`
   flex-direction: column;
   width: fit-content;
 
+  &.postsSearchResults {
+    max-width: 95%;
+  }
+
+  &.postsSearchResults > .flex {
+    max-width: 100%;
+  }
+
   & > .info {
     min-width: 0;
+    width: 100%;
+  }
+
+  &.postsSearchResults > .info {
     width: 100%;
   }
 

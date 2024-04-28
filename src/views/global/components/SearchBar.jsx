@@ -8,6 +8,7 @@ export default function SearchBar({
   setSearchQuery,
   view,
   placeholder,
+  setShowSearchBox,
 }) {
   return (
     <StyledSearchBar className={view == "adminPanel" && "adminPanelSearchBar"}>
