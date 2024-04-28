@@ -11,9 +11,9 @@ import {
   setIsLoading,
   setIsLogged,
   setUserData,
-} from "../slices/globalStatesSlice";
+} from "../../global/slices/globalStatesSlice";
 
-import { StyledButton } from "../styles/Button.styled";
+import { StyledButton } from "../../global/styles/Button.styled";
 
 export default function LogoutButton({ setIsUserInfoVisible }) {
   const dispatch = useDispatch();

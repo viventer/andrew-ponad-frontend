@@ -8,8 +8,11 @@ const initialState = postsAdapter.getInitialState();
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => ({
+      query: ({ isLogged }) => ({
         url: "/posts",
+        headers: {
+          isLogged: isLogged,
+        },
         validateStatus: (response, result) => {
           return response.status === 200 && !result.isError;
         },

@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 import Navigation from "./Navigation";
-import UserInfo from "./UserInfo";
+import UserInfo from "../../user-info/components/UserInfo";
 import { StyledHeader } from "../styles/Header.styled";
 
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faServer, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import PostsSearch from "./PostsSearch";
+import PostsSearch from "../../searching/components/PostsSearch";
 
 export default function Header() {
   const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);

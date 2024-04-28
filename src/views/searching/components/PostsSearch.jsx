@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { StyledPostsSearch } from "../styles/PostsSearch.styled";
-import SearchBar from "./SearchBar";
+import SearchBar from "../../global/components/SearchBar";
 import PostsSearchBox from "./PostsSearchBox";
 
 export default function PostsSearch() {

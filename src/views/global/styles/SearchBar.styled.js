@@ -5,6 +5,7 @@ export const StyledSearchBar = styled.nav`
   align-items: center;
   justify-content: left;
   width: 100%;
+  z-index: 99999;
 
   &:not(.adminPanelSearchBar) {
     justify-content: center;

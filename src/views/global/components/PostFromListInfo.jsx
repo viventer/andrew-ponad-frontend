@@ -1,5 +1,5 @@
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
-import { StyledElementFromListInfo } from "../styles/ElementFromListInfo.styled";
+import { StyledElementFromListInfo } from "../../admin-panel/styles/ElementFromListInfo.styled";
 
 export default function PostFromListInfo({ postData }) {
   const translateVisibility = useTranslateVisibility();

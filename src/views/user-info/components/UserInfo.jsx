@@ -5,7 +5,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
 
 import { selectUserId } from "../../auth/slices/authSlice";
-import { useGetUserByIdQuery } from "../slices/usersApiSlice";
+import { useGetUserByIdQuery } from "../../global/slices/usersApiSlice";
 
 import { StyledUserInfo } from "../styles/UserInfo.styled";
 
@@ -21,8 +21,8 @@ import {
   selectIsLogged,
   selectUserData,
   setUserData,
-} from "../slices/globalStatesSlice";
-import { StyledButton } from "../styles/Button.styled";
+} from "../../global/slices/globalStatesSlice";
+import { StyledButton } from "../../global/styles/Button.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHammer } from "@fortawesome/free-solid-svg-icons";
 

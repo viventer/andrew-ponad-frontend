@@ -1,5 +1,5 @@
 import { StyledAuthForm } from "../../auth/styles/AuthForm.styled";
-import { StyledButton } from "../styles/Button.styled";
+import { StyledButton } from "../../global/styles/Button.styled";
 
 export default function ChangePasswordForm({
   handlers,

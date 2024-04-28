@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { StyledSelector } from "../styles/Selector.styled";
+import { StyledSelector } from "../../global/styles/Selector.styled";
 import { useSelector } from "react-redux";
-import { selectAvailablePostCategories } from "../slices/globalStatesSlice";
-import SelectedSelectorOption from "./SelectedSelectorOption";
-import SelectorOption from "./SelectorOption";
+import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
+import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
+import SelectorOption from "../../global/components/SelectorOption";
 import {
   faCircleQuestion,
   faCompass,
@@ -34,7 +34,7 @@ export default function CategorySelector({
   };
 
   return (
-    <StyledSelector>
+    <StyledSelector className="selectorUl">
       <SelectedSelectorOption
         setAreOptionsVisible={setAreOptionsVisible}
         areOptionsVisible={areOptionsVisible}

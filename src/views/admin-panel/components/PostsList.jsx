@@ -11,17 +11,20 @@ import {
 } from "../slices/adminPanelSlice";
 import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
 
-import PostFromList from "./PostFromList";
+import PostFromList from "../../global/components/PostFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
+import useAuth from "../../../hooks/useAuth";
 
 export default function PostsList() {
+  const { isLogged } = useAuth();
+
   const {
     data: postsRawData,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetPostsQuery();
+  } = useGetPostsQuery({ isLogged });
 
   const categoryFilter = useSelector(selectCategoryFilter);
   const visibilityFilter = useSelector(selectVisibilityFilter);
@@ -62,11 +65,11 @@ export default function PostsList() {
       }
     });
   }
+
+  const dispatch = useDispatch();
   if (isError) {
     dispatch(setErrMsg(error));
   }
-
-  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isLoading) {

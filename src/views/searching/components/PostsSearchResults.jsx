@@ -1,19 +1,21 @@
 import { useDispatch } from "react-redux";
 import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
 import { StyledPostsSearchResults } from "../styles/PostsSearchResults.styled";
-import { setErrMsg, setIsLoading } from "../slices/globalStatesSlice";
+import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import { useEffect } from "react";
-import PostFromSearchResults from "./PostFromSearchResults";
-import PostFromList from "../../admin-panel/components/PostFromList";
+import PostFromList from "../../global/components/PostFromList";
+import useAuth from "../../../hooks/useAuth";
 
 export default function PostsSearchResults({ searchQuery, categoryFilter }) {
+  const { isLogged } = useAuth();
+
   const {
     data: postsRawData,
     isLoading,
     isSuccess,
     isError,
     error,
-  } = useGetPostsQuery();
+  } = useGetPostsQuery({ isLogged });
   const dispatch = useDispatch();
 
   let postsData;
@@ -41,7 +43,6 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
   if (isError) {
     dispatch(setErrMsg(error));
   }
-  console.log(filteredPostsData);
 
   useEffect(() => {
     if (isLoading) {
@@ -56,7 +57,7 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
     <StyledPostsSearchResults>
       {filteredPostsData &&
         filteredPostsData.map(([id, postData]) => {
-          return <PostFromSearchResults postData={postData} key={id} />;
+          return <PostFromList postData={postData} key={id} />;
         })}
     </StyledPostsSearchResults>
   );

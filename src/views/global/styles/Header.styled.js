@@ -8,6 +8,7 @@ export const StyledHeader = styled.header`
   padding: 0 1rem;
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
   background-color: ${({ theme }) => theme.colors.darkGray};
+  z-index: 9999;
 
   h1 {
     display: flex;

@@ -22,10 +22,10 @@ import {
   setDialogOptions,
   setErrMsg,
   setIsLoading,
-} from "../../global/slices/globalStatesSlice";
+} from "../slices/globalStatesSlice";
 import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
 
-import { StyledPostFromList } from "../styles/PostFromList.styled";
+import { StyledPostFromList } from "../../admin-panel/styles/PostFromList.styled";
 import useShorten from "../../../hooks/useShorten";
 import useAuth from "../../../hooks/useAuth";
 import PostFromListInfo from "./PostFromListInfo";

@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 
 import useValidation from "../../../hooks/useValidation";
-import { useUpdateUserMutation } from "../slices/usersApiSlice";
+import { useUpdateUserMutation } from "../../global/slices/usersApiSlice";
 import { useLoginMutation } from "../../auth/slices/authApiSlice";
 
 import ChangePasswordForm from "./ChangePasswordForm";
-import DynamicErrorNotification from "./DynamicErrorNotification";
-import SuccessInfo from "./SuccessInfo";
+import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
+import SuccessInfo from "../../global/components/SuccessInfo";
 import { StyledAuth } from "../../auth/styles/Auth.styled";
 
 export default function ChangePasswordWindow({

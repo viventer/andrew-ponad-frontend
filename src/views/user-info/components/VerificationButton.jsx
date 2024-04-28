@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
-import { StyledButton } from "../styles/Button.styled";
+import { StyledButton } from "../../global/styles/Button.styled";
 
 export default function VerificationButton() {
   return (

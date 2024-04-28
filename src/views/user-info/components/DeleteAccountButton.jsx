@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
 
-import { useDeleteUserMutation } from "../slices/usersApiSlice";
+import { useDeleteUserMutation } from "../../global/slices/usersApiSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { useLogoutMutation } from "../../auth/slices/authApiSlice";
 import {
@@ -17,9 +17,9 @@ import {
   setErrMsg,
   setIsLoading,
   setIsLogged,
-} from "../slices/globalStatesSlice";
+} from "../../global/slices/globalStatesSlice";
 
-import { StyledButton } from "../styles/Button.styled";
+import { StyledButton } from "../../global/styles/Button.styled";
 
 export default function DeleteAccountButton() {
   const dispatch = useDispatch();
