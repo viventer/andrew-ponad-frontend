@@ -110,6 +110,8 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
 
   const [showInfo, setShowInfo] = useState(false);
 
+  const shortenTitleMaxWidth = view == "postsSearchResults" ? 450 : 650;
+
   return (
     <StyledPostFromList
       className={`${isDeleted ? "hide" : ""} ${
@@ -125,7 +127,14 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
           onClick={viewPost}
         />
         <div onClick={viewPost}>
-          <h2>{shortenTitle(postData.title, 18, 650, windowWidth)}</h2>
+          <h2>
+            {shortenTitle(
+              postData.title,
+              18,
+              shortenTitleMaxWidth,
+              windowWidth
+            )}
+          </h2>
         </div>
         <div>
           <button

@@ -16,14 +16,16 @@ export default function PostsSearchBox({
   if (showSearchBox)
     return (
       <StyledPostsSearchBox>
-        <CategorySelector
-          categoryFilter={categoryFilter}
-          setCategoryFilter={setCategoryFilter}
-        />
-        <PostsSearchResults
-          categoryFilter={categoryFilter}
-          searchQuery={searchQuery}
-        />
+        <div>
+          <CategorySelector
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
+          />
+          <PostsSearchResults
+            categoryFilter={categoryFilter}
+            searchQuery={searchQuery}
+          />
+        </div>
         <StyledButton
           className="expandButton"
           onClick={() => setShowSearchBox(false)}

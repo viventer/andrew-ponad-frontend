@@ -5,6 +5,9 @@ export const StyledPostsSearchResults = styled.section`
   flex-direction: column;
   gap: 1rem;
   max-height: 40vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 0.5rem 0;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
 `;

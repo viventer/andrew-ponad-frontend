@@ -7,9 +7,9 @@ export const StyledSearchBar = styled.nav`
   width: 100%;
   z-index: 99999;
 
-  &:not(.adminPanelSearchBar) {
+  /* &:not(.adminPanelSearchBar) {
     justify-content: center;
-  }
+  } */
 
   & input,
   & .icon {

@@ -111,18 +111,18 @@ export const StyledPostFromList = styled.li`
   @media (max-width: 650px) {
     padding-left: 0;
 
-    & .flex > div:first-of-type {
+    &:not(.postsSearchResults) .flex > div:first-of-type {
       width: 35vw;
       min-width: 0;
     }
   }
 
   @media (max-width: 400px) {
-    & .flex > div:first-of-type {
+    &:not(.postsSearchResults) .flex > div:first-of-type {
       width: 30vw;
     }
 
-    & .flex > img {
+    &:not(.postsSearchResults) .flex > img {
       height: 2.5rem;
       width: calc(2.5rem / 9 * 16);
     }
