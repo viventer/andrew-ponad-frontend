@@ -2,13 +2,15 @@ import { useState } from "react";
 import { StyledPostsSearch } from "../styles/PostsSearch.styled";
 import SearchBar from "../../global/components/SearchBar";
 import PostsSearchBox from "./PostsSearchBox";
+import { useDispatch } from "react-redux";
+import { setIsSearchBoxVisible } from "../../global/slices/globalStatesSlice";
 
 export default function PostsSearch() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [showSearchBox, setShowSearchBox] = useState(false);
+  const dispatch = useDispatch();
 
   return (
-    <StyledPostsSearch onFocus={() => setShowSearchBox(true)}>
+    <StyledPostsSearch onFocus={() => dispatch(setIsSearchBoxVisible(true))}>
       <SearchBar
         placeholder="Czego szukasz?"
         searchQuery={searchQuery}
@@ -16,8 +18,8 @@ export default function PostsSearch() {
       />
       <PostsSearchBox
         searchQuery={searchQuery}
-        setShowSearchBox={setShowSearchBox}
-        showSearchBox={showSearchBox}
+        setSearchQuery={setSearchQuery}
+        placeholder="Czego szukasz?"
       />
     </StyledPostsSearch>
   );

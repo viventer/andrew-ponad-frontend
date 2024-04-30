@@ -10,19 +10,20 @@ import {
   setErrMsg,
   setIsLoading,
   setIsLogged,
+  setIsUserInfoVisible,
   setUserData,
 } from "../../global/slices/globalStatesSlice";
 
 import { StyledButton } from "../../global/styles/Button.styled";
 
-export default function LogoutButton({ setIsUserInfoVisible }) {
+export default function LogoutButton() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [signOut, { isLoading, isError, error }] = useLogoutMutation();
 
   async function handleLogOut() {
-    setIsUserInfoVisible(false);
+    dispatch(setIsUserInfoVisible(false));
     await signOut();
     if (isError) {
       dispatch(setErrMsg(error));

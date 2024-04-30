@@ -9,9 +9,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faServer, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import PostsSearch from "../../searching/components/PostsSearch";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsUserInfoVisible,
+  toggleIsUserInfoVisible,
+} from "../slices/globalStatesSlice";
 
 export default function Header() {
-  const [isUserInfoVisible, setIsUserInfoVisible] = useState(false);
+  const isUserInfoVisible = useSelector(selectIsUserInfoVisible);
+  const dispatch = useDispatch();
 
   return (
     <StyledHeader className="flex">
@@ -25,12 +31,10 @@ export default function Header() {
         <PostsSearch />
       </div>
       {/* <Navigation /> can be done after the app is released*/}
-      <button onClick={() => setIsUserInfoVisible((prev) => !prev)}>
+      <button onClick={() => dispatch(toggleIsUserInfoVisible())}>
         <FontAwesomeIcon icon={faUser} className="icon" />
       </button>
-      {isUserInfoVisible && (
-        <UserInfo setIsUserInfoVisible={setIsUserInfoVisible} />
-      )}
+      {isUserInfoVisible && <UserInfo />}
     </StyledHeader>
   );
 }

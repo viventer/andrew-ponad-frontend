@@ -12,7 +12,7 @@ export const StyledPostsSearchBox = styled.section`
   padding: 1rem 0;
   padding-bottom: 0;
   border: 0.1rem solid ${({ theme }) => theme.colors.navy};
-  z-index: 0;
+  z-index: 99;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

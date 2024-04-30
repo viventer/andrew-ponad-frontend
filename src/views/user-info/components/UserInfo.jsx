@@ -20,13 +20,14 @@ import { HashLoader } from "react-spinners";
 import {
   selectIsLogged,
   selectUserData,
+  setIsUserInfoVisible,
   setUserData,
 } from "../../global/slices/globalStatesSlice";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHammer } from "@fortawesome/free-solid-svg-icons";
 
-export default function UserInfo({ setIsUserInfoVisible }) {
+export default function UserInfo() {
   const currentLocation = useLocation();
   const dispatch = useDispatch();
   const { mainRole } = useAuth();
@@ -48,7 +49,7 @@ export default function UserInfo({ setIsUserInfoVisible }) {
     const isOnRegistrationPage = /register/i.test(currentUrl);
 
     if (isOnLoginPage || isOnRegistrationPage) {
-      setIsUserInfoVisible(false);
+      dispatch(setIsUserInfoVisible(false));
     }
   }, [currentLocation]);
 
@@ -108,14 +109,14 @@ export default function UserInfo({ setIsUserInfoVisible }) {
                 <StyledButton
                   onClick={() => {
                     navigate("/adminpanel");
-                    setIsUserInfoVisible(false);
+                    dispatch(setIsUserInfoVisible(false));
                   }}
                 >
                   <FontAwesomeIcon icon={faHammer} />
                   Admin panel
                 </StyledButton>
               )}
-              <LogoutButton setIsUserInfoVisible={setIsUserInfoVisible} />
+              <LogoutButton />
               <ChangePasswordButton
                 setIsChangePwdWindowVisible={setIsChangePwdWindowVisible}
                 setFinishedPwdChange={setFinishedPwdChange}

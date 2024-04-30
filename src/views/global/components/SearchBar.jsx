@@ -2,16 +2,24 @@ import { StyledSearchBar } from "../styles/SearchBar.styled";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function SearchBar({
   searchQuery,
   setSearchQuery,
   view,
   placeholder,
-  setShowSearchBox,
 }) {
   return (
-    <StyledSearchBar className={view == "adminPanel" && "adminPanelSearchBar"}>
+    <StyledSearchBar
+      className={
+        view == "adminPanel"
+          ? "adminPanelSearchBar"
+          : view == "searchBox"
+          ? "searchBoxSearchBar"
+          : ""
+      }
+    >
       <form onSubmit={(e) => e.preventDefault()}>
         <input
           placeholder={placeholder}
@@ -19,9 +27,9 @@ export default function SearchBar({
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <div className="icon">
+        <button className="icon">
           <FontAwesomeIcon icon={faSearch} />
-        </div>
+        </button>
       </form>
     </StyledSearchBar>
   );

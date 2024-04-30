@@ -19,6 +19,8 @@ const globalStatesSlice = createSlice({
       "openSUSE Server",
       "inne",
     ],
+    isUserInfoVisible: false,
+    isSearchBoxVisible: false,
   },
   reducers: {
     setErrMsg: (state, action) => {
@@ -51,6 +53,15 @@ const globalStatesSlice = createSlice({
     setAvailablePostCategories: (state, action) => {
       state.availablePostCategories = action.payload;
     },
+    setIsUserInfoVisible: (state, action) => {
+      state.isUserInfoVisible = action.payload;
+    },
+    setIsSearchBoxVisible: (state, action) => {
+      state.isSearchBoxVisible = action.payload;
+    },
+    toggleIsUserInfoVisible: (state) => {
+      state.isUserInfoVisible = !state.isUserInfoVisible;
+    },
   },
 });
 
@@ -65,6 +76,9 @@ export const {
   setUserData,
   setIsLogged,
   setAvailablePostCategories,
+  setIsUserInfoVisible,
+  setIsSearchBoxVisible,
+  toggleIsUserInfoVisible,
 } = globalStatesSlice.actions;
 
 export const selectErrMsg = (state) => state.globalStates.errMsg;
@@ -78,5 +92,9 @@ export const selectUserData = (state) => state.globalStates.userData;
 export const selectIsLogged = (state) => state.globalStates.isLogged;
 export const selectAvailablePostCategories = (state) =>
   state.globalStates.availablePostCategories;
+export const selectIsUserInfoVisible = (state) =>
+  state.globalStates.isUserInfoVisible;
+export const selectIsSearchBoxVisible = (state) =>
+  state.globalStates.isSearchBoxVisible;
 
 export default globalStatesSlice.reducer;

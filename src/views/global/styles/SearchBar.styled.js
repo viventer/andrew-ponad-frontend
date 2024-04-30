@@ -5,11 +5,7 @@ export const StyledSearchBar = styled.nav`
   align-items: center;
   justify-content: left;
   width: 100%;
-  z-index: 99999;
-
-  /* &:not(.adminPanelSearchBar) {
-    justify-content: center;
-  } */
+  z-index: 3000;
 
   & input,
   & .icon {
@@ -59,6 +55,10 @@ export const StyledSearchBar = styled.nav`
     border-left: none;
   }
 
+  &.searchBoxSearchBar {
+    display: none;
+  }
+
   @media (max-width: 650px) {
     &:not(.adminPanelSearchBar) {
       width: fit-content;
@@ -68,7 +68,18 @@ export const StyledSearchBar = styled.nav`
       display: none;
     }
 
-    &:not(.adminPanelSearchBar) .icon {
+    &.searchBoxSearchBar input {
+      display: block;
+    }
+
+    &.searchBoxSearchBar {
+      display: block;
+      margin: 1rem;
+      margin-top: 0;
+      width: calc(100% - 2rem);
+    }
+
+    &:not(.adminPanelSearchBar, .searchBoxSearchBar) .icon {
       border: none;
       padding: 0;
       font-size: 1.4rem;
