@@ -12,6 +12,7 @@ import PostsSearch from "../../searching/components/PostsSearch";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsUserInfoVisible,
+  setIsSearchBoxVisible,
   toggleIsUserInfoVisible,
 } from "../slices/globalStatesSlice";
 
@@ -31,7 +32,12 @@ export default function Header() {
         <PostsSearch />
       </div>
       {/* <Navigation /> can be done after the app is released*/}
-      <button onClick={() => dispatch(toggleIsUserInfoVisible())}>
+      <button
+        onClick={() => {
+          dispatch(toggleIsUserInfoVisible());
+          dispatch(setIsSearchBoxVisible(false));
+        }}
+      >
         <FontAwesomeIcon icon={faUser} className="icon" />
       </button>
       {isUserInfoVisible && <UserInfo />}

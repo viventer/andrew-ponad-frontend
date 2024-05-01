@@ -22,6 +22,7 @@ import {
   setDialogOptions,
   setErrMsg,
   setIsLoading,
+  setIsSearchBoxVisible,
 } from "../slices/globalStatesSlice";
 import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
 
@@ -45,6 +46,7 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
   };
 
   const viewPost = () => {
+    dispatch(setIsSearchBoxVisible(false));
     navigate(`/post/${postData.id}`);
   };
 

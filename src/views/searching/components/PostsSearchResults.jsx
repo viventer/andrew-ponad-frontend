@@ -18,8 +18,6 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
   } = useGetPostsQuery({ isLogged });
   const dispatch = useDispatch();
 
-  console.log(postsRawData);
-
   let postsData;
   let filteredPostsData;
   if (isSuccess) {

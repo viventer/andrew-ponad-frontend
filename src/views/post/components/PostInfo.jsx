@@ -15,7 +15,6 @@ export default function PostInfo({ postData }) {
     authorData?.entities[postData?.author]?.username ||
     authorData?.entities[undefined].username;
   const dispatch = useDispatch();
-  console.log(authorData);
 
   useEffect(() => {
     if (isLoading) {
