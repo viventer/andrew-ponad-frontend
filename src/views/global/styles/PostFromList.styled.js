@@ -14,8 +14,8 @@ export const StyledPostFromList = styled.li`
   }
 
   & > .info {
-    min-width: 0;
     width: 100%;
+    min-width: 0;
   }
 
   &.postsSearchResults > .info {

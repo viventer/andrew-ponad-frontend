@@ -1,10 +1,13 @@
-import { useDispatch } from "react-redux";
-import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
-import { StyledPostsSearchResults } from "../styles/PostsSearchResults.styled";
-import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import { useEffect } from "react";
-import PostFromList from "../../global/components/PostFromList";
+import { useDispatch } from "react-redux";
+
+import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
+import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+
 import useAuth from "../../../hooks/useAuth";
+
+import PostFromList from "../../global/components/PostFromList";
+import { StyledPostsSearchResults } from "../styles/PostsSearchResults.styled";
 
 export default function PostsSearchResults({ searchQuery, categoryFilter }) {
   const { isLogged } = useAuth();
@@ -65,6 +68,9 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
             />
           );
         })}
+      {filteredPostsData && filteredPostsData.length == 0 && (
+        <p>Nie znaleziono postów. Zmień kryteria wyszukiwania.</p>
+      )}
     </StyledPostsSearchResults>
   );
 }

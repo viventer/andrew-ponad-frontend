@@ -1,4 +1,5 @@
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
+
 import { StyledElementFromListInfo } from "../styles/ElementFromListInfo.styled";
 
 export default function PostFromListInfo({ postData }) {

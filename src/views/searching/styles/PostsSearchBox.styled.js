@@ -4,19 +4,18 @@ export const StyledPostsSearchBox = styled.section`
   position: absolute;
   bottom: -0.5rem;
   left: 0;
-  transform: translateY(100%);
-  width: 100%;
-  min-height: 17rem;
-  max-width: 35rem;
-  background-color: ${({ theme }) => theme.colors.darkGray};
-  padding: 1rem 0;
-  padding-bottom: 0;
-  border: 0.1rem solid ${({ theme }) => theme.colors.navy};
-  z-index: 99;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
+  z-index: 99;
+  transform: translateY(100%);
+  width: 100%;
+  max-width: 35rem;
+  min-height: 17rem;
+  padding-top: 1rem;
+  border: 0.1rem solid ${({ theme }) => theme.colors.navy};
+  background-color: ${({ theme }) => theme.colors.darkGray};
 
   & .selectorIcon {
     color: ${({ theme }) => theme.colors.sunset};
@@ -30,18 +29,18 @@ export const StyledPostsSearchBox = styled.section`
   }
 
   & > button {
+    justify-content: center;
     width: 100%;
     border-radius: 0;
-    justify-content: center;
   }
 
   @media (max-width: 930px) {
-    width: 100vw;
-    max-width: 100vw;
     position: fixed;
     bottom: unset;
     top: 3.075rem;
     transform: none;
+    width: 100vw;
+    max-width: 100vw;
   }
 
   @media (max-width: 650px) {

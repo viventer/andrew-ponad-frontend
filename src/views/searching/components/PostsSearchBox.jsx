@@ -1,16 +1,19 @@
 import { useState } from "react";
-import { StyledPostsSearchBox } from "../styles/PostsSearchBox.styled";
-import CategorySelector from "./CategorySelector";
-import PostsSearchResults from "./PostsSearchResults";
-import { StyledButton } from "../../global/styles/Button.styled";
+import { useDispatch, useSelector } from "react-redux";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import SearchBar from "../../global/components/SearchBar";
-import { useDispatch, useSelector } from "react-redux";
+
 import {
   selectIsSearchBoxVisible,
   setIsSearchBoxVisible,
 } from "../../global/slices/globalStatesSlice";
+
+import SearchBar from "../../global/components/SearchBar";
+import CategorySelector from "./PostsSearchCategorySelector";
+import PostsSearchResults from "./PostsSearchResults";
+import { StyledPostsSearchBox } from "../styles/PostsSearchBox.styled";
+import { StyledButton } from "../../global/styles/Button.styled";
 
 export default function PostsSearchBox({
   searchQuery,

@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { StyledPostsSearch } from "../styles/PostsSearch.styled";
-import SearchBar from "../../global/components/SearchBar";
-import PostsSearchBox from "./PostsSearchBox";
 import { useDispatch } from "react-redux";
+
 import {
   setIsSearchBoxVisible,
   setIsUserInfoVisible,
 } from "../../global/slices/globalStatesSlice";
+
+import PostsSearchBox from "./PostsSearchBox";
+import SearchBar from "../../global/components/SearchBar";
+import { StyledPostsSearch } from "../styles/PostsSearch.styled";
 
 export default function PostsSearch() {
   const [searchQuery, setSearchQuery] = useState("");

@@ -26,9 +26,10 @@ import {
 } from "../slices/globalStatesSlice";
 import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
 
-import { StyledPostFromList } from "../styles/PostFromList.styled";
 import useShorten from "../../../hooks/useShorten";
 import useAuth from "../../../hooks/useAuth";
+
+import { StyledPostFromList } from "../styles/PostFromList.styled";
 import PostFromListInfo from "./PostFromListInfo";
 
 export default function PostFromList({ postData, setReloadComponent, view }) {

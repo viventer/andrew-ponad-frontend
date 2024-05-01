@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { StyledSelector } from "../../global/styles/Selector.styled";
 import { useSelector } from "react-redux";
-import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
-import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
-import SelectorOption from "../../global/components/SelectorOption";
+
 import {
   faCircleQuestion,
   faCompass,
@@ -15,6 +12,12 @@ import {
   faUbuntu,
   faWindows,
 } from "@fortawesome/free-brands-svg-icons";
+
+import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
+
+import SelectorOption from "../../global/components/SelectorOption";
+import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
+import { StyledSelector } from "../../global/styles/Selector.styled";
 
 export default function CategorySelector({
   categoryFilter,

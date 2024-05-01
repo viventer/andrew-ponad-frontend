@@ -5,11 +5,15 @@ export const StyledPostsSearchResults = styled.section`
   flex-direction: column;
   gap: 1rem;
   max-height: 40vh;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0.5rem 0;
-  margin-left: 1rem;
-  margin-top: 0.5rem;
+
+  & > p {
+    padding-right: 0.5rem;
+  }
 
   @media (max-width: 930px) {
     max-height: 60vh;
