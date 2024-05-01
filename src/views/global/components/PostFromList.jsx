@@ -143,7 +143,7 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
           <button
             onClick={editPost}
             className={
-              !canEdit || (view == "postsSearchResults" && "transparent")
+              !canEdit || view == "postsSearchResults" ? "transparent" : ""
             }
           >
             <FontAwesomeIcon icon={faPencil} />
@@ -151,7 +151,7 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
           <button
             onClick={showDialog}
             className={`deleteButton ${
-              !canEdit || (view == "postsSearchResults" && "transparent")
+              !canEdit || view == "postsSearchResults" ? "transparent" : ""
             }`}
           >
             <FontAwesomeIcon icon={faTrash} />

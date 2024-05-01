@@ -34,8 +34,8 @@ export default function PostContentEditorRow({
       )}
       <div
         className={`flex flex-center ${
-          rowData[1].type == "none" && "onlyOneElement"
-        } ${activeRowNumber == index && "active"}`}
+          rowData[1].type == "none" ? "onlyOneElement" : ""
+        } ${activeRowNumber == index ? "active" : ""}`}
         onClick={() => {
           setActiveRowNumber(index);
         }}

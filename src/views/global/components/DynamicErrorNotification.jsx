@@ -2,7 +2,7 @@ import { StyledDynamicErrorNotification } from "../styles/DynamicErrorNotificati
 
 export default function DynamicErrorNotification({ message }) {
   return (
-    <StyledDynamicErrorNotification className={!message && "hide"}>
+    <StyledDynamicErrorNotification className={!message ? "hide" : ""}>
       <p>{message?.error || message?.message || message}</p>
     </StyledDynamicErrorNotification>
   );
