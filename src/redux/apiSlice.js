@@ -17,9 +17,9 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   let result = await baseQuery(args, api, extraOptions);
-  console.log("sending refresh token");
 
-  if (result?.error?.originalStatus === 403) {
+  if (result?.error?.status === 403 || result?.error?.originalStatus === 403) {
+    console.log("sending refresh token");
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
     if (refreshResult?.data) {
       const user = api.getState().auth.user;
@@ -28,13 +28,21 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     } else {
       api.dispatch(logOut());
     }
-  } else if (result?.error?.originalStatus === 429) {
+  } else if (
+    result?.error?.status === 429 ||
+    result?.error?.originalStatus === 429
+  ) {
     api.dispatch(
       setErrMsg(
         result?.error?.data ||
           "Wysyłasz za dużo zapytań do serwera! Spróbuj ponownie za minutę."
       )
     );
+  } else if (
+    result?.error?.status === 401 ||
+    result?.error?.originalStatus === 401
+  ) {
+    api.dispatch(setErrMsg("Sesja wygasła. Zaloguj się ponownie."));
   }
 
   return result;
@@ -42,5 +50,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
+  tagTypes: ["Post", "User"],
   endpoints: (builder) => ({}),
 });

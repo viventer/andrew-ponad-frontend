@@ -8,15 +8,9 @@ import useAuth from "../../../hooks/useAuth";
 
 import PostFromList from "../../global/components/PostFromList";
 import { StyledPostsSearchResults } from "../styles/PostsSearchResults.styled";
-import useRefresh from "../../../hooks/useRefresh";
 
 export default function PostsSearchResults({ searchQuery, categoryFilter }) {
   const { isLogged } = useAuth();
-
-  const refresh = useRefresh();
-  useEffect(() => {
-    refresh();
-  }, []);
 
   const {
     data: postsRawData,
