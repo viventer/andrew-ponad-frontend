@@ -24,7 +24,12 @@ const globalStatesSlice = createSlice({
   },
   reducers: {
     setErrMsg: (state, action) => {
-      state.errMsg = action.payload;
+      if (action.payload == "" && state.errMsg.includes("Sesja wygasła")) {
+        state.errMsg = action.payload;
+        window.location.reload();
+      } else if (!state.errMsg.includes("Sesja wygasła")) {
+        state.errMsg = action.payload;
+      }
     },
     setDialogMsg: (state, action) => {
       state.dialogMsg = action.payload;

@@ -68,7 +68,7 @@ export default function PostsList() {
 
   const dispatch = useDispatch();
   if (isError) {
-    dispatch(setErrMsg(error));
+    dispatch(setErrMsg(error?.data?.message || "Błąd pobierania postów."));
   }
 
   useEffect(() => {

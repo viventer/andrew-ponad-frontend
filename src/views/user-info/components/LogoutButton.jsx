@@ -26,7 +26,9 @@ export default function LogoutButton() {
     dispatch(setIsUserInfoVisible(false));
     await signOut();
     if (isError) {
-      dispatch(setErrMsg(error));
+      dispatch(
+        setErrMsg(error?.data?.message || "Bład wylogowywania. Odśwież stronę.")
+      );
       return;
     } else {
       dispatch(setIsLogged(false));

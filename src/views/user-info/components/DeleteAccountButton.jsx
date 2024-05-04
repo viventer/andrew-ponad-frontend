@@ -55,7 +55,7 @@ export default function DeleteAccountButton() {
       await deleteUser(userId).unwrap();
       await signOut();
       if (isError) {
-        dispatch(setErrMsg(error));
+        dispatch(setErrMsg(error?.data?.message || "Błąd usuwania konta."));
         dispatch(setIsLoading(false));
         return;
       } else if (isDeletingLoading || isLoggingOutLoading) {

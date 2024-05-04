@@ -25,8 +25,8 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       const user = api.getState().auth.user;
       api.dispatch(setCredentials({ ...refreshResult.data, user }));
       result = await baseQuery(args, api, extraOptions);
-    } else {
-      api.dispatch(logOut());
+    } else if (refreshResult?.error?.originalStatus === 401) {
+      api.dispatch(setErrMsg("Sesja wygasła. Zaloguj się ponownie."));
     }
   } else if (
     result?.error?.status === 429 ||
@@ -34,17 +34,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
   ) {
     api.dispatch(
       setErrMsg(
-        result?.error?.data ||
-          "Wysyłasz za dużo zapytań do serwera! Spróbuj ponownie za minutę."
+        "Wysyłasz za dużo zapytań do serwera! Spróbuj ponownie za minutę."
       )
     );
-  } else if (
-    result?.error?.status === 401 ||
-    result?.error?.originalStatus === 401
-  ) {
-    api.dispatch(setErrMsg("Sesja wygasła. Zaloguj się ponownie."));
   }
-
   return result;
 };
 

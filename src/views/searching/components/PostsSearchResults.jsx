@@ -44,7 +44,14 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
     });
   }
   if (isError) {
-    dispatch(setErrMsg(error?.message));
+    if (![401, 403].includes(error.status)) {
+      dispatch(
+        setErrMsg(
+          error?.data?.message ||
+            "Błąd pobierania wyników wyszukiwania. Odśwież stronę."
+        )
+      );
+    }
   }
 
   useEffect(() => {

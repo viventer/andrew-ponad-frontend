@@ -34,7 +34,7 @@ export default function Post() {
 
   if (isGetDataError || isAddPostViewError) {
     const error = getDataError || addPostViewError;
-    dispatch(setErrMsg(error?.data?.message));
+    dispatch(setErrMsg(error?.data?.message || "Błąd otwierania posta."));
   }
 
   let postData;

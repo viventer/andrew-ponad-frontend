@@ -58,7 +58,7 @@ export default function PostEditPage() {
   }, [isSuccess, id]);
 
   if (isError) {
-    dispatch(setErrMsg(error?.data?.message));
+    dispatch(setErrMsg(error?.data?.message || "Błąd edycji posta."));
   }
 
   const translateVisibility = useTranslateVisibility();

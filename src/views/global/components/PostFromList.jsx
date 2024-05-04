@@ -88,7 +88,7 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
         setIsDeleted(true);
       }
     } catch (err) {
-      dispatch(setErrMsg(err?.data?.message));
+      dispatch(setErrMsg(err?.data?.message || "Błąd usuwania posta."));
       dispatch(setIsLoading(false));
     }
   };
