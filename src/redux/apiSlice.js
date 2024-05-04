@@ -1,7 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 import { setCredentials, logOut } from "../views/auth/slices/authSlice";
-import { setErrMsg } from "../views/global/slices/globalStatesSlice";
+import {
+  selectIsLogged,
+  setErrMsg,
+  setIsLogged,
+} from "../views/global/slices/globalStatesSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://localhost:3500",
@@ -25,8 +29,13 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
       const user = api.getState().auth.user;
       api.dispatch(setCredentials({ ...refreshResult.data, user }));
       result = await baseQuery(args, api, extraOptions);
-    } else if (refreshResult?.error?.originalStatus === 401) {
+    } else if (
+      refreshResult?.error?.originalStatus === 401 &&
+      JSON.parse(localStorage.getItem("persist"))
+    ) {
       api.dispatch(setErrMsg("Sesja wygasła. Zaloguj się ponownie."));
+    } else {
+      api.dispatch(setIsLogged(false));
     }
   } else if (
     result?.error?.status === 429 ||
