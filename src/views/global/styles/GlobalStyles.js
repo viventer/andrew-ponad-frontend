@@ -18,7 +18,6 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    margin-bottom: 2rem;
     color: white;
     background-color: black;
     background-color: ${({ theme }) => theme.colors.almostBlack};

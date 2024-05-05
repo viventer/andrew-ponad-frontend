@@ -1,8 +1,9 @@
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
+import { StyledSliderPostInfo } from "../../home/styles/SliderElement.styled";
 
 import { StyledElementFromListInfo } from "../styles/ElementFromListInfo.styled";
 
-export default function PostFromListInfo({ postData }) {
+export default function PostFromListInfo({ postData, view }) {
   const translateVisibility = useTranslateVisibility();
   const translatedVisibility = translateVisibility(
     postData.visibility,
@@ -11,8 +12,8 @@ export default function PostFromListInfo({ postData }) {
 
   const creationDate = new Date(postData.createdAt).toLocaleDateString("PL");
 
-  return (
-    <StyledElementFromListInfo className="info">
+  const content = (
+    <>
       <p>
         <span>autor: </span>
         {postData.username}
@@ -35,6 +36,14 @@ export default function PostFromListInfo({ postData }) {
         <span>data utworzenia: </span>
         {creationDate}
       </p>
+    </>
+  );
+
+  return view != "slider" ? (
+    <StyledElementFromListInfo className="info">
+      {content}
     </StyledElementFromListInfo>
+  ) : (
+    <StyledSliderPostInfo>{content}</StyledSliderPostInfo>
   );
 }
