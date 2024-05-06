@@ -5,7 +5,7 @@ export const StyledHome = styled.main`
   align-items: center;
   height: 94vh;
   border: 0.1rem solid red;
-  width: 80vw;
+  width: 90vw;
   max-width: 1600px;
   margin: 0 auto 0 auto;
 
