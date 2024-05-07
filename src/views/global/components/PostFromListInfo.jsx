@@ -1,7 +1,15 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 import { StyledSliderPostInfo } from "../../home/styles/SliderElement.styled";
 
 import { StyledElementFromListInfo } from "../styles/ElementFromListInfo.styled";
+import {
+  faBinoculars,
+  faCalendar,
+  faCompass,
+  faEye,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function PostFromListInfo({ postData, view }) {
   const translateVisibility = useTranslateVisibility();
@@ -14,28 +22,37 @@ export default function PostFromListInfo({ postData, view }) {
 
   const content = (
     <>
-      <p>
-        <span>autor: </span>
-        {postData.username}
-      </p>
-      {postData.category != "Wybierz kategorię" && (
+      {postData.category != "Wybierz kategorię" && view != "slider" && (
         <p>
+          <FontAwesomeIcon icon={faCompass} className="icon" />
           <span>kategoria: </span>
           {postData.category}
         </p>
       )}
       <p>
-        <span>widoczność: </span>
-        {translatedVisibility}
+        <FontAwesomeIcon icon={faUser} className="icon" />
+        <span>autor: </span>
+        {postData.username}
       </p>
       <p>
+        <FontAwesomeIcon icon={faEye} className="icon" />
         <span>wyświetlenia: </span>
         {postData.views}
       </p>
-      <p>
-        <span>data utworzenia: </span>
-        {creationDate}
-      </p>
+      {view != "slider" && (
+        <p>
+          <FontAwesomeIcon icon={faCalendar} className="icon" />
+          <span>data utworzenia: </span>
+          {creationDate}
+        </p>
+      )}
+      {view != "slider" && (
+        <p>
+          <FontAwesomeIcon icon={faBinoculars} className="icon" />
+          <span>widoczność: </span>
+          {translatedVisibility}
+        </p>
+      )}
     </>
   );
 

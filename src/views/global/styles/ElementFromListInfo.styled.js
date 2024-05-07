@@ -8,11 +8,18 @@ export const StyledElementFromListInfo = styled.section`
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+  color: ${({ theme }) => theme.colors.sunset};
 
   & span {
     margin-right: 0.5rem;
     font-weight: 700;
-    color: ${({ theme }) => theme.colors.sunset};
+    color: white;
+  }
+
+  & .icon {
+    color: white;
+    margin-right: 0.4rem;
+    width: 1rem;
   }
 
   @media (max-width: 400px) {

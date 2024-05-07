@@ -9,15 +9,15 @@ export default function Home() {
     <StyledHome>
       <div className="container">
         <Slider />
-        <div className="section">
+        <section className="headingSection">
           <h2>Andrzej Pławecki</h2>
-          <p>
+          <div>
             <span>
               <FontAwesomeIcon icon={faAnglesRight} />
             </span>
-            wymiana informacji pomiędzy uczniami
-          </p>
-        </div>
+            <p>wymiana informacji pomiędzy uczniami</p>
+          </div>
+        </section>
       </div>
     </StyledHome>
   );

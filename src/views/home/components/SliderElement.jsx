@@ -1,6 +1,7 @@
 import { StyledSliderElement } from "../styles/SliderElement.styled";
 import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
 import PostFromListInfo from "../../global/components/PostFromListInfo";
+import { useNavigate } from "react-router-dom";
 
 export default function SliderElement({
   postData,
@@ -20,12 +21,17 @@ export default function SliderElement({
     visibleElementClassName = "sliderElement" + order.toString();
   }
 
+  const navigate = useNavigate();
+
   return (
     <StyledSliderElement
       className={isVisible ? visibleElementClassName : "hide"}
+      onClick={() => navigate(`/post/${postData._id}`)}
     >
       <img src={thumbnailUrl} />
-      {/* <h3>{postData.title}</h3> */}
+      <div>
+        <h3>{postData.title}</h3>
+      </div>
       <PostFromListInfo postData={postData} view="slider" />
     </StyledSliderElement>
   );

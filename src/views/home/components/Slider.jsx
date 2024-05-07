@@ -10,7 +10,7 @@ export default function Slider() {
   const { isLogged } = useAuth();
 
   const [visibleElementsIndexes, setVisibleElementsIndexes] = useState([
-    0, 1, 2,
+    1, 2, 3, 4,
   ]);
 
   const {
@@ -39,16 +39,16 @@ export default function Slider() {
       setVisibleElementsIndexes((prevIndexes) => {
         console.log(prevIndexes);
         const newVisibleElementsIndexes = prevIndexes.map((index) => {
-          if (index < elements?.length - 1) {
-            return index + 1;
+          if (index > 0) {
+            return index - 1;
           } else {
-            return index % 3;
+            return elements?.length - 1;
           }
         });
 
         return [...newVisibleElementsIndexes];
       });
-    }, 100000000);
+    }, 5000);
 
     return () => clearInterval(intervalId);
   }, [elements]);
