@@ -4,11 +4,11 @@ export const StyledSliderElement = styled.article`
   position: absolute;
   backdrop-filter: blur(4px);
   background-color: rgba(0, 0, 0, 0.75);
-  transition: left 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transition: left 1s ease-in-out, opacity 1s ease-in-out;
 
   & img {
     object-fit: contain;
-    transition: all 0.5s ease-in-out;
+    transition: all 1s ease-in-out;
     transition: filter 0s;
   }
 
@@ -51,9 +51,9 @@ export const StyledSliderElement = styled.article`
   }
 
   &.sliderElement3 img {
-    transition: all 0.5s ease-in-out;
-    height: 10vw;
-    width: calc(10vw * 1.78);
+    transition: all 1s ease-in-out;
+    height: 14vw;
+    width: calc(14vw * 1.78);
   }
 
   & div {
@@ -68,7 +68,7 @@ export const StyledSliderElement = styled.article`
     opacity: 0;
     border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset};
     transition: opacity 1s ease-in-out 0.5s, border-top 1s ease-in-out 0.5s,
-      filter 0.5s ease-in-out 0s, font-size 0.5s ease-in-out 0s;
+      filter 1s ease-in-out 0s, font-size 1s ease-in-out 0s;
   }
 
   &.sliderElement2 div {
@@ -92,17 +92,83 @@ export const StyledSliderElement = styled.article`
     filter: brightness(1.1);
   }
 
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
+    transition: left 1s ease-in-out, transform 1s ease-in-out;
+
     &.sliderElement0 {
-      display: none;
+      left: 0;
+      display: block;
+      filter: blur(1px) brightness(0.8);
     }
 
     &.sliderElement1 {
-      left: 0;
+      filter: blur(0) brightness(1);
+      /* position: static; */
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
     }
 
     &.sliderElement2 {
-      left: 14vw;
+      filter: blur(1px) brightness(0.8);
+      right: 0;
+      left: auto;
+      z-index: 1;
+    }
+
+    &.sliderElement3 {
+      display: none;
+    }
+
+    &.sliderElement0 img,
+    &.sliderElement2 img {
+      height: 22vw;
+      width: calc(22vw * 1.78);
+    }
+
+    &.sliderElement1 img {
+      transition: all 0.5s ease-in-out;
+      height: 30vw;
+      width: calc(30vw * 1.78);
+    }
+
+    &.sliderElement2 div {
+      opacity: 0;
+    }
+
+    &.sliderElement1 div {
+      opacity: 1;
+    }
+
+    &.sliderElement1:hover > article {
+      opacity: 1;
+    }
+
+    &.sliderElement1:hover {
+      cursor: pointer;
+    }
+
+    &.sliderElement1:hover img {
+      filter: brightness(1.1);
+    }
+
+    &.sliderElement2 div {
+      filter: opacity(0);
+      font-size: 0;
+    }
+  }
+
+  @media (max-width: 1050px) {
+    &.sliderElement0 img,
+    &.sliderElement2 img {
+      height: 24vw;
+      width: calc(24vw * 1.78);
+    }
+
+    &.sliderElement1 img {
+      transition: all 0.5s ease-in-out;
+      height: 34vw;
+      width: calc(34vw * 1.78);
     }
   }
 `;
