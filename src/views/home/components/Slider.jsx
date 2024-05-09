@@ -48,7 +48,7 @@ export default function Slider() {
 
         return [...newVisibleElementsIndexes];
       });
-    }, 5000);
+    }, 500000000);
 
     return () => clearInterval(intervalId);
   }, [elements]);

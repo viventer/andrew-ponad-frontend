@@ -122,14 +122,14 @@ export const StyledSliderElement = styled.article`
 
     &.sliderElement0 img,
     &.sliderElement2 img {
-      height: 22vw;
-      width: calc(22vw * 1.78);
+      height: 20vw;
+      width: calc(20vw * 1.78);
     }
 
     &.sliderElement1 img {
       transition: all 0.5s ease-in-out;
-      height: 30vw;
-      width: calc(30vw * 1.78);
+      height: 28vw;
+      width: calc(28vw * 1.78);
     }
 
     &.sliderElement2 div {
@@ -161,14 +161,89 @@ export const StyledSliderElement = styled.article`
   @media (max-width: 1050px) {
     &.sliderElement0 img,
     &.sliderElement2 img {
+      height: 22vw;
+      width: calc(22vw * 1.78);
+    }
+
+    &.sliderElement1 img {
+      transition: all 0.5s ease-in-out;
+      height: 32vw;
+      width: calc(32vw * 1.78);
+    }
+  }
+
+  @media (max-width: 800px) {
+    & div {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+    }
+
+    &.sliderElement0 img,
+    &.sliderElement2 img {
       height: 24vw;
       width: calc(24vw * 1.78);
     }
 
     &.sliderElement1 img {
       transition: all 0.5s ease-in-out;
-      height: 34vw;
-      width: calc(34vw * 1.78);
+      height: 36vw;
+      width: calc(36vw * 1.78);
+    }
+  }
+
+  @media (max-width: 650px) {
+    &.sliderElement2 {
+      left: 75%;
+      right: unset;
+      transform: translateX(-100%);
+      transition: opacity 1s ease-in-out, left 1s ease-in-out;
+      opacity: 0;
+    }
+
+    &.sliderElement1 {
+      left: 100%;
+      transform: translateX(-100%);
+    }
+
+    &.sliderElement1 img {
+      height: 44vw;
+      width: calc(44vw * 1.78);
+    }
+
+    &.sliderElement0 img {
+      height: 30vw;
+      width: calc(30vw * 1.78);
+    }
+
+    & div {
+      font-size: 1.1rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    &.sliderElement0 img,
+    &.sliderElement1 img,
+    &.sliderElement2 img {
+      height: calc(90vw / 1.78);
+      width: 90vw;
+    }
+
+    &.sliderElement0,
+    &.sliderElement2 {
+      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+      opacity: 0;
+    }
+
+    &.sliderElement0 {
+      left: 0;
+      right: unset;
+      transform: translateX(-35%);
+    }
+
+    &.sliderElement2 {
+      left: 100%;
+      right: unset;
+      transform: translateX(35%);
     }
   }
 `;
