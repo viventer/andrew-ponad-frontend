@@ -77,41 +77,33 @@ export const StyledHome = styled.main`
   }
 
   @media (max-width: 1300px) {
-    height: 50vh;
+    height: 28vw;
     margin-top: 3rem;
     overflow-x: visible;
     justify-content: end;
 
     & .headingSection {
       position: absolute;
-      left: 0;
-      bottom: 0;
       right: auto;
+      bottom: -1.5rem;
       transform: translateY(100%);
     }
   }
 
-  @media (max-width: 1000px) {
-    & .headingSection {
-      bottom: 1.5rem;
-    }
+  @media (max-width: 1050px) {
+    height: 32vw;
   }
 
   @media (max-width: 800px) {
+    height: 36vw;
     width: 90vw;
   }
 
-  @media (max-width: 700px) {
-    & .headingSection {
-      bottom: 3rem;
-    }
-  }
-
   @media (max-width: 650px) {
-    height: 60vh;
+    height: 44vw;
 
     & .headingSection {
-      bottom: 4rem;
+      border-left-width: 0.1rem;
     }
   }
 
@@ -119,7 +111,6 @@ export const StyledHome = styled.main`
     & .headingSection {
       padding: 0.5rem 1rem;
       width: 100%;
-      bottom: 6rem;
     }
 
     & .headingSection > h2 {
@@ -134,20 +125,27 @@ export const StyledHome = styled.main`
   }
 
   @media (max-width: 500px) {
-    height: 40vh;
+    height: calc(90vw / 1.78);
     justify-content: center;
     overflow-x: visible;
-
-    & .headingSection {
-      bottom: 0rem;
-    }
-  }
-
-  @media (max-width: 450px) {
-    height: 35vh;
   }
 
   @media (max-width: 400px) {
-    height: 30vh;
+    & .headingSection {
+      padding: 0.4rem 0.8rem;
+    }
+
+    & .headingSection div {
+      font-size: 0.95rem;
+    }
+  }
+
+  @media (max-width: 360px) {
+    & .headingSection .icon {
+      display: none;
+    }
+    & .headingSection span {
+      margin: 0;
+    }
   }
 `;

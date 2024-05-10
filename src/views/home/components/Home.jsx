@@ -12,7 +12,7 @@ export default function Home() {
         <h2>Andrzej Pławecki</h2>
         <div>
           <span>
-            <FontAwesomeIcon icon={faAnglesRight} />
+            <FontAwesomeIcon icon={faAnglesRight} className="icon" />
           </span>
           <p>wymiana informacji pomiędzy uczniami</p>
         </div>

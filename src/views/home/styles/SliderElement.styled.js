@@ -270,4 +270,8 @@ export const StyledSliderPostInfo = styled.article`
     margin-right: 0.4rem;
     width: 1rem;
   }
+
+  @media (max-width: 650px) {
+    font-size: 0.9rem;
+  }
 `;
