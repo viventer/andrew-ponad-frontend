@@ -1,45 +1,45 @@
 import styled from "styled-components";
 
 export const StyledHome = styled.main`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: left;
   flex-direction: column;
   height: 80vh;
   width: 70vw;
-  margin: 0 auto 0 auto;
-  position: relative;
   overflow-x: hidden;
+  margin: 0 auto 0 auto;
 
   & .headingSection {
     position: absolute;
     right: 0;
+    z-index: 10;
+    transform: translateY(50%);
     padding: 0.75rem 2rem;
     border-left: 0.5rem solid ${({ theme }) => theme.colors.sunset};
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(4px);
-    transform: translateY(50%);
+    background-color: rgba(0, 0, 0, 0.5);
   }
 
   & .headingSection > h2 {
+    width: fit-content;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
+    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
     font-size: 2rem;
     font-weight: 700;
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
-    width: fit-content;
-    padding-bottom: 0.25rem;
-    margin-bottom: 0.75rem;
   }
 
   & .headingSection span {
-    color: ${({ theme }) => theme.colors.sunset};
     margin-right: 0.5rem;
     margin-top: 0.1rem;
+    color: ${({ theme }) => theme.colors.sunset};
   }
 
   & .headingSection div {
-    font-size: 1.3rem;
     display: flex;
+    font-size: 1.3rem;
   }
 
   @media (max-width: 2200px) {
@@ -77,13 +77,12 @@ export const StyledHome = styled.main`
   }
 
   @media (max-width: 1300px) {
-    height: 28vw;
-    margin-top: 3rem;
-    overflow-x: visible;
     justify-content: end;
+    height: 28vw;
+    overflow-x: visible;
+    margin-top: 3rem;
 
     & .headingSection {
-      position: absolute;
       right: auto;
       bottom: -1.5rem;
       transform: translateY(100%);
@@ -109,14 +108,14 @@ export const StyledHome = styled.main`
 
   @media (max-width: 550px) {
     & .headingSection {
-      padding: 0.5rem 1rem;
       width: 100%;
+      padding: 0.5rem 1rem;
     }
 
     & .headingSection > h2 {
-      font-size: 1.4rem;
-      padding-bottom: 0.2rem;
       margin-bottom: 0.4rem;
+      padding-bottom: 0.2rem;
+      font-size: 1.4rem;
     }
 
     & .headingSection div {
@@ -125,9 +124,9 @@ export const StyledHome = styled.main`
   }
 
   @media (max-width: 500px) {
-    height: calc(90vw / 1.78);
     justify-content: center;
     overflow-x: visible;
+    height: calc(90vw / 1.78);
   }
 
   @media (max-width: 400px) {
@@ -144,6 +143,7 @@ export const StyledHome = styled.main`
     & .headingSection .icon {
       display: none;
     }
+
     & .headingSection span {
       margin: 0;
     }

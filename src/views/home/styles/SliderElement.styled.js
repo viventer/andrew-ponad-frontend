@@ -14,14 +14,14 @@ export const StyledSliderElement = styled.article`
 
   &.sliderElement0 {
     left: 0;
-    filter: blur(2px) brightness(0.6);
     z-index: 0;
+    filter: blur(2px) brightness(0.6);
   }
 
   &.sliderElement1 {
     left: 10vw;
-    filter: blur(1px) brightness(0.8);
     z-index: 1;
+    filter: blur(1px) brightness(0.8);
   }
 
   &.sliderElement2 {
@@ -51,22 +51,22 @@ export const StyledSliderElement = styled.article`
   }
 
   &.sliderElement3 img {
-    transition: all 1s ease-in-out;
     height: 14vw;
     width: calc(14vw * 1.78);
+    transition: all 1s ease-in-out;
   }
 
   & div {
     position: absolute;
-    padding: 0.75rem 1.25rem;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
     width: 100%;
+    opacity: 0;
+    padding: 0.75rem 1.25rem;
+    border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+    backdrop-filter: blur(4px);
     font-size: 1.3rem;
     font-weight: 500;
-    opacity: 0;
-    border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+    background-color: rgba(0, 0, 0, 0.5);
     transition: opacity 1s ease-in-out 0.5s, border-top 1s ease-in-out 0.5s,
       filter 1s ease-in-out 0s, font-size 1s ease-in-out 0s;
   }
@@ -84,12 +84,34 @@ export const StyledSliderElement = styled.article`
     opacity: 1;
   }
 
-  &.sliderElement2:hover {
+  &:hover {
     cursor: pointer;
   }
 
-  &.sliderElement2:hover img {
+  &:hover img {
     filter: brightness(1.1);
+  }
+
+  @media (max-width: 1600px) {
+    &.sliderElement0 img {
+      height: 14vw;
+      width: calc(14vw * 1.78);
+    }
+
+    &.sliderElement1 img {
+      height: 18vw;
+      width: calc(18vw * 1.78);
+    }
+
+    &.sliderElement2 img {
+      height: 22vw;
+      width: calc(22vw * 1.78);
+    }
+
+    &.sliderElement3 img {
+      height: 18vw;
+      width: calc(18vw * 1.78);
+    }
   }
 
   @media (max-width: 1300px) {
@@ -102,18 +124,17 @@ export const StyledSliderElement = styled.article`
     }
 
     &.sliderElement1 {
-      filter: blur(0) brightness(1);
-      /* position: static; */
       left: 50%;
-      transform: translateX(-50%);
       z-index: 2;
+      filter: blur(0) brightness(1);
+      transform: translateX(-50%);
     }
 
     &.sliderElement2 {
-      filter: blur(1px) brightness(0.8);
-      right: 0;
       left: auto;
+      right: 0;
       z-index: 1;
+      filter: blur(1px) brightness(0.8);
     }
 
     &.sliderElement3 {
@@ -127,9 +148,9 @@ export const StyledSliderElement = styled.article`
     }
 
     &.sliderElement1 img {
-      transition: all 0.5s ease-in-out;
       height: 28vw;
       width: calc(28vw * 1.78);
+      transition: all 0.5s ease-in-out;
     }
 
     &.sliderElement2 div {
@@ -153,8 +174,8 @@ export const StyledSliderElement = styled.article`
     }
 
     &.sliderElement2 div {
-      filter: opacity(0);
       font-size: 0;
+      filter: opacity(0);
     }
   }
 
@@ -166,16 +187,16 @@ export const StyledSliderElement = styled.article`
     }
 
     &.sliderElement1 img {
-      transition: all 0.5s ease-in-out;
       height: 32vw;
       width: calc(32vw * 1.78);
+      transition: all 0.5s ease-in-out;
     }
   }
 
   @media (max-width: 800px) {
     & div {
-      font-size: 1.2rem;
       padding: 0.5rem 1rem;
+      font-size: 1.2rem;
     }
 
     &.sliderElement0 img,
@@ -185,9 +206,9 @@ export const StyledSliderElement = styled.article`
     }
 
     &.sliderElement1 img {
-      transition: all 0.5s ease-in-out;
       height: 36vw;
       width: calc(36vw * 1.78);
+      transition: all 0.5s ease-in-out;
     }
   }
 
@@ -196,8 +217,8 @@ export const StyledSliderElement = styled.article`
       left: 75%;
       right: unset;
       transform: translateX(-100%);
-      transition: opacity 1s ease-in-out, left 1s ease-in-out;
       opacity: 0;
+      transition: opacity 1s ease-in-out, left 1s ease-in-out;
     }
 
     &.sliderElement1 {
@@ -230,8 +251,8 @@ export const StyledSliderElement = styled.article`
 
     &.sliderElement0,
     &.sliderElement2 {
-      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
       opacity: 0;
+      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
     }
 
     &.sliderElement0 {
@@ -245,33 +266,5 @@ export const StyledSliderElement = styled.article`
       right: unset;
       transform: translateX(35%);
     }
-  }
-`;
-
-export const StyledSliderPostInfo = styled.article`
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  padding: 0.5rem 1rem;
-  color: ${({ theme }) => theme.colors.sunset};
-  box-shadow: 0.1rem 0.1rem;
-  transition: opacity 0.3s ease-in-out;
-
-  & span {
-    color: white;
-    font-weight: bold;
-    margin-right: 0.5rem;
-  }
-
-  & .icon {
-    color: white;
-    margin-right: 0.4rem;
-    width: 1rem;
-  }
-
-  @media (max-width: 650px) {
-    font-size: 0.9rem;
   }
 `;

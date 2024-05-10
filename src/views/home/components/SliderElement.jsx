@@ -1,9 +1,12 @@
-import { StyledSliderElement } from "../styles/SliderElement.styled";
-import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
-import PostFromListInfo from "../../global/components/PostFromListInfo";
-import { useNavigate } from "react-router-dom";
-import useShorten from "../../../hooks/useShorten";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import useShorten from "../../../hooks/useShorten";
+
+import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
+
+import PostFromListInfo from "../../global/components/PostFromListInfo";
+import { StyledSliderElement } from "../styles/SliderElement.styled";
 
 export default function SliderElement({
   postData,
@@ -24,19 +27,6 @@ export default function SliderElement({
   }
 
   const navigate = useNavigate();
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const shortenTitle = useShorten();
-  const shortenTitleMaxWidth = 450;
 
   return (
     <StyledSliderElement

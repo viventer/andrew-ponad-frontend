@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { StyledSlider } from "../styles/Slider.styled";
-import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
-import useAuth from "../../../hooks/useAuth";
-import SliderElement from "./SliderElement";
 import { useDispatch } from "react-redux";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+
+import useAuth from "../../../hooks/useAuth";
+
+import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
+import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+
+import { StyledSlider } from "../styles/Slider.styled";
+import SliderElement from "./SliderElement";
 
 export default function Slider() {
   const { isLogged } = useAuth();
@@ -32,12 +35,15 @@ export default function Slider() {
         visibleElementsIndexes={visibleElementsIndexes}
       />
     ));
+  } else if (isError) {
+    setErrMsg(
+      error?.message || "Nie udało się załadować postów. Odśwież stronę."
+    );
   }
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setVisibleElementsIndexes((prevIndexes) => {
-        console.log(prevIndexes);
         const newVisibleElementsIndexes = prevIndexes.map((index) => {
           if (index > 0) {
             return index - 1;

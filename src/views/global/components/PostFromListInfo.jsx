@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
-import { StyledSliderPostInfo } from "../../home/styles/SliderElement.styled";
+import { StyledSliderPostInfo } from "../../home/styles/SliderPostInfo.styled";
 
 import { StyledElementFromListInfo } from "../styles/ElementFromListInfo.styled";
 import {
