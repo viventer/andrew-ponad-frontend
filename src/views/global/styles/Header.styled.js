@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const StyledHeader = styled.header`
-  position: relative;
+  position: sticky;
+  top: 0;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
   padding: 0 1rem;
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.navy};
   background-color: ${({ theme }) => theme.colors.darkGray};
-  z-index: 9999;
+  z-index: 999999999;
 
   h1 {
     display: flex;
