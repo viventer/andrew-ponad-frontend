@@ -8,7 +8,6 @@ export const StyledHome = styled.main`
   flex-direction: column;
   height: 80vh;
   width: 70vw;
-  overflow-x: hidden;
   margin: 0 auto 0 auto;
 
   & .headingSection {
@@ -79,7 +78,7 @@ export const StyledHome = styled.main`
   @media (max-width: 1300px) {
     justify-content: end;
     height: 28vw;
-    overflow-x: visible;
+    /* overflow-x: visible; */
     margin-top: 3rem;
 
     & .headingSection {
@@ -125,7 +124,6 @@ export const StyledHome = styled.main`
 
   @media (max-width: 500px) {
     justify-content: center;
-    overflow-x: visible;
     height: calc(90vw / 1.78);
   }
 
@@ -147,5 +145,9 @@ export const StyledHome = styled.main`
     & .headingSection span {
       margin: 0;
     }
+  }
+
+  @media (orientation: portrait) {
+    margin-top: 15vh;
   }
 `;

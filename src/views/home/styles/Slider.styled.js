@@ -9,10 +9,10 @@ export const StyledSlider = styled.section`
     justify-content: center;
     width: 100%;
     height: 100%;
+    overflow: hidden;
   }
 
   @media (max-width: 500px) {
     height: 50vh;
-    overflow: hidden;
   }
 `;
