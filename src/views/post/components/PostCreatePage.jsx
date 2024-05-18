@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-import { resetPostState, selectEditedPostId } from "../slices/postSlice";
 import { useAddNewPostMutation } from "../slices/postsApiSlice";
 import {
   selectDialogAction,
@@ -19,24 +18,12 @@ import PostEditForm from "./PostEditForm";
 
 export default function PostCreatePage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
   const dispatch = useDispatch();
-  const editedPostId = useSelector(selectEditedPostId);
-
-  useEffect(() => {
-    if (editedPostId) {
-      localStorage.removeItem("persist:posts");
-      dispatch(resetPostState());
-      console.log("wywołało się");
-    }
-  }, []);
 
   const [addNewPost, { isLoading }] = useAddNewPostMutation();
   const addPost = async (postData) => {
     try {
       await addNewPost(postData).unwrap();
-      dispatch(resetPostState());
       showDialog();
     } catch (err) {
       handleAddPostError(err);
@@ -55,7 +42,7 @@ export default function PostCreatePage() {
     if (dialogAnswer == "Zakończ dodawanie" && dialogAction == "postAdded") {
       navigate("/adminpanel", { replace: true });
     } else if (dialogAnswer == "Dodaj kolejny" && dialogAction == "postAdded") {
-      dispatch(resetPostState());
+      window.location.reload();
     }
     dispatch(setDialogAnswer(null));
     dispatch(setDialogAction(null));
@@ -86,10 +73,27 @@ export default function PostCreatePage() {
     }
   }, [isLoading]);
 
+  const [postRows, setPostRows] = useState([
+    [
+      {
+        type: "textEditor",
+        textEditorContent: "",
+        imagePreview: null,
+      },
+      {
+        type: "image",
+        textEditorContent: "",
+        imagePreview: null,
+      },
+    ],
+  ]);
+
   return (
     <PostEditForm
       handleClick={(postData) => addPost(postData)}
       buttonText="Dodaj posta"
+      postRows={postRows}
+      setPostRows={setPostRows}
     />
   );
 }

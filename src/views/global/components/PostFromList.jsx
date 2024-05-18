@@ -12,7 +12,6 @@ import {
 
 import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
 
-import { resetPostState } from "../../post/slices/postSlice";
 import {
   selectDialogAction,
   selectDialogAnswer,
@@ -42,7 +41,6 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
   const dispatch = useDispatch();
 
   const editPost = () => {
-    dispatch(resetPostState());
     navigate(`/post/${postData.id}/edit`);
   };
 

@@ -7,19 +7,10 @@ import {
   faImage,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { selectPostRows, setPostRows } from "../slices/postSlice";
-
 import { StyledRowTypeSelection } from "../styles/RowTypeSelection.styled";
 
-export default function RowTypeSelection({ index, changeRowType }) {
+export default function RowTypeSelection({ index, changeRowType, deleteRow }) {
   const dispatch = useDispatch();
-
-  const postRows = useSelector(selectPostRows);
-
-  const deleteRow = (rowIndex) => {
-    const newRows = postRows.filter((row, index) => index !== rowIndex);
-    dispatch(setPostRows([...newRows]));
-  };
 
   return (
     <StyledRowTypeSelection>

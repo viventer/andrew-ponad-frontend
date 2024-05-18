@@ -4,22 +4,8 @@ const initialState = {
   thumbnailPreview: null,
   editedPostId: null,
   postTitle: "",
-  postRows: [
-    [
-      {
-        type: "textEditor",
-        textEditorContent: "",
-        imagePreview: null,
-      },
-      {
-        type: "image",
-        textEditorContent: "",
-        imagePreview: null,
-      },
-    ],
-  ],
   postCategory: "Wybierz kategorię",
-  postVisibility: "Wybierz widoczność",
+  postVisibility: "Szkic",
 };
 
 const postSlice = createSlice({
@@ -35,16 +21,13 @@ const postSlice = createSlice({
     setPostTitle: (state, action) => {
       state.postTitle = action.payload;
     },
-    setPostRows: (state, action) => {
-      state.postRows = action.payload;
-    },
     setPostCategory: (state, action) => {
       state.postCategory = action.payload;
     },
     setPostVisibility: (state, action) => {
       state.postVisibility = action.payload;
     },
-    resetPostState: (state) => {
+    resetPostState: (state, action) => {
       return initialState;
     },
   },
@@ -52,7 +35,6 @@ const postSlice = createSlice({
 
 export const {
   setThumbnailPreview,
-  setPostRows,
   setPostTitle,
   setPostCategory,
   setPostVisibility,
@@ -63,7 +45,6 @@ export const {
 export const selectThumbnailPreview = (state) => state.post.thumbnailPreview;
 export const selectThumbnailFile = (state) => state.post.thumbnailPreview;
 export const selectPostTitle = (state) => state.post.postTitle;
-export const selectPostRows = (state) => state.post.postRows;
 export const selectPostCategory = (state) => state.post.postCategory;
 export const selectPostVisibility = (state) => state.post.postVisibility;
 export const selectEditedPostId = (state) => state.post.editedPostId;

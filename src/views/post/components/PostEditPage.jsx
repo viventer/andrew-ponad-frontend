@@ -1,16 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import useAuth from "../../../hooks/useAuth";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 
 import {
-  resetPostState,
-  selectEditedPostId,
-  setEditedPostId,
   setPostCategory,
-  setPostRows,
   setPostTitle,
   setPostVisibility,
   setThumbnailPreview,
@@ -30,12 +26,8 @@ import PostEditForm from "./PostEditForm";
 
 export default function PostEditPage() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
   const dispatch = useDispatch();
   const { isLogged } = useAuth();
-
-  const editedPostId = useSelector(selectEditedPostId);
 
   const { id } = useParams();
   const {
@@ -44,18 +36,7 @@ export default function PostEditPage() {
     isSuccess,
     isError,
     error,
-  } = useGetPostByIdQuery(
-    { postId: id, isLogged },
-    {
-      skip: editedPostId == id,
-    }
-  );
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(setEditedPostId(id));
-    }
-  }, [isSuccess, id]);
+  } = useGetPostByIdQuery({ postId: id, isLogged });
 
   if (isError) {
     dispatch(setErrMsg(error?.data?.message || "Błąd edycji posta."));
@@ -63,26 +44,30 @@ export default function PostEditPage() {
 
   const translateVisibility = useTranslateVisibility();
 
-  if (isSuccess) {
-    const postData = rawPostData.entities[id];
-    dispatch(setThumbnailPreview(postData.thumbnail));
-    dispatch(setPostTitle(postData.title));
-    dispatch(setPostRows(postData.content));
-    dispatch(setPostCategory(postData.category));
+  const [postRows, setPostRows] = useState();
 
-    const translatedVisibility = translateVisibility(
-      postData.visibility,
-      "polish"
-    );
+  useEffect(() => {
+    if (isSuccess) {
+      const postData = rawPostData.entities[id];
+      dispatch(setThumbnailPreview(postData.thumbnail));
+      dispatch(setPostTitle(postData.title));
+      dispatch(setPostCategory(postData.category));
+      setPostRows(postData.content);
 
-    dispatch(setPostVisibility(translatedVisibility));
-  }
+      const translatedVisibility = translateVisibility(
+        postData.visibility,
+        "polish"
+      );
+
+      dispatch(setPostVisibility(translatedVisibility));
+    }
+  }, [isSuccess]);
 
   const [updatePost, { isLoading }] = useUpdatePostMutation();
   const editPost = async (postData) => {
     try {
+      console.log(postData);
       await updatePost({ postId: id, postData }).unwrap();
-      dispatch(resetPostState());
       dispatch(setSuccessMsg("Zmiany zostały zapisane"));
       navigate("/adminpanel", { replace: true });
     } catch (err) {
@@ -109,20 +94,24 @@ export default function PostEditPage() {
   const successMsg = useSelector(selectSuccessMsg);
 
   useEffect(() => {
-    console.log("isLoading: ", isLoading);
-    console.log("isGettingLoading: ", isGettingLoading);
-    if ((isLoading || isGettingLoading) && !successMsg) {
+    if ((isLoading || isGettingLoading || !postRows) && !successMsg) {
       dispatch(setIsLoading(true));
       return;
     } else {
       dispatch(setIsLoading(false));
     }
-  }, [isLoading, isGettingLoading]);
+  }, [isLoading, isGettingLoading, postRows]);
 
   return (
-    <PostEditForm
-      handleClick={(postData) => editPost(postData)}
-      buttonText="Zapisz zmiany"
-    />
+    <>
+      {postRows ? (
+        <PostEditForm
+          handleClick={(postData) => editPost(postData)}
+          buttonText="Zapisz zmiany"
+          postRows={postRows}
+          setPostRows={setPostRows}
+        />
+      ) : null}
+    </>
   );
 }

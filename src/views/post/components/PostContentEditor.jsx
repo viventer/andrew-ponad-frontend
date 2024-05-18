@@ -1,21 +1,16 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import "react-quill/dist/quill.snow.css";
-
-import { selectPostRows, setPostRows } from "../slices/postSlice";
 
 import PostContentEditorRow from "./PostContentEditorRow";
 import { StyledPostContentEditor } from "../styles/PostContentEditor.styled";
 import { StyledButton } from "../../global/styles/Button.styled";
 
-export default function PostContentEditor() {
-  const dispatch = useDispatch();
-  const postRows = useSelector(selectPostRows);
-
+export default function PostContentEditor({ postRows, setPostRows }) {
   const [activeRowNumber, setActiveRowNumber] = useState(0);
 
-  function addRow() {
+  const addRow = useCallback(() => {
     const newRow = [
       {
         type: "textEditor",
@@ -28,35 +23,48 @@ export default function PostContentEditor() {
         imagePreview: null,
       },
     ];
-    dispatch(setPostRows([...postRows, newRow]));
-  }
+    setPostRows((prevPostRows) => [...prevPostRows, newRow]);
+  }, [setPostRows]);
 
-  function updateElement(rowIndex, elementIndex, updatedFields) {
-    const newPostRows = [...postRows];
-    const newRow = [...newPostRows[rowIndex]];
+  const updateElement = useCallback(
+    (rowIndex, elementIndex, updatedFields) => {
+      setPostRows((prevPostRows) => {
+        const newPostRows = [...prevPostRows];
+        const newRow = [...newPostRows[rowIndex]];
 
-    Object.keys(updatedFields).forEach((field) => {
-      newRow[elementIndex] = {
-        ...newRow[elementIndex],
-        [field]: updatedFields[field],
-      };
-    });
+        Object.keys(updatedFields).forEach((field) => {
+          newRow[elementIndex] = {
+            ...newRow[elementIndex],
+            [field]: updatedFields[field],
+          };
+        });
 
-    newPostRows[rowIndex] = newRow;
+        newPostRows[rowIndex] = newRow;
+        return newPostRows;
+      });
+    },
+    [setPostRows]
+  );
 
-    dispatch(setPostRows(newPostRows));
-  }
+  const changeRowType = useCallback(
+    (rowIndex, firstElementType, secondElementType) => {
+      setPostRows((prevPostRows) => {
+        const newPostRows = [...prevPostRows];
+        const newPostRow = [...newPostRows[rowIndex]];
+        newPostRow[0] = { ...newPostRow[0], type: firstElementType };
+        newPostRow[1] = { ...newPostRow[1], type: secondElementType };
 
-  function changeRowType(rowIndex, firstElementType, secondElementType) {
-    const newPostRows = [...postRows];
-    const newPostRow = [...newPostRows[rowIndex]];
-    newPostRow[0] = { ...newPostRow[0], type: firstElementType };
-    newPostRow[1] = { ...newPostRow[1], type: secondElementType };
+        newPostRows[rowIndex] = newPostRow;
+        return newPostRows;
+      });
+    },
+    [setPostRows]
+  );
 
-    newPostRows[rowIndex] = newPostRow;
-
-    dispatch(setPostRows(newPostRows));
-  }
+  const deleteRow = (rowIndex) => {
+    const newRows = postRows.filter((row, index) => index !== rowIndex);
+    setPostRows([...newRows]);
+  };
 
   return (
     <StyledPostContentEditor>
@@ -69,6 +77,7 @@ export default function PostContentEditor() {
           rowData={postRow}
           updateElement={updateElement}
           changeRowType={changeRowType}
+          deleteRow={deleteRow}
         />
       ))}
       <StyledButton onClick={addRow}>Dodaj nowy wiersz</StyledButton>

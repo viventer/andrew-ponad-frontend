@@ -1,11 +1,11 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ImageDropzone from "./ImageDropzone";
 
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 
 import {
+  resetPostState,
   selectPostCategory,
-  selectPostRows,
   selectPostTitle,
   selectPostVisibility,
   selectThumbnailPreview,
@@ -19,10 +19,20 @@ import VisibilitySelector from "./VisibilitySelector";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { StyledPostEditPage } from "../styles/PostEditPage.styled";
+import { useEffect } from "react";
 
-export default function PostEditForm({ handleClick, buttonText }) {
+export default function PostEditForm({
+  handleClick,
+  buttonText,
+  postRows,
+  setPostRows,
+}) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(resetPostState());
+  }, []);
+
   const thumbnailPreview = useSelector(selectThumbnailPreview);
-  const postRows = useSelector(selectPostRows);
   const postTitle = useSelector(selectPostTitle);
   const postCategory = useSelector(selectPostCategory);
   const postVisiblity = useSelector(selectPostVisibility);
@@ -73,7 +83,7 @@ export default function PostEditForm({ handleClick, buttonText }) {
         <PostTitleInput />
         <CategorySelector />
       </div>
-      <PostContentEditor />
+      <PostContentEditor postRows={postRows} setPostRows={setPostRows} />
       <footer>
         <StyledButton disabled={!canSave} onClick={() => handleClick(postData)}>
           {buttonText}

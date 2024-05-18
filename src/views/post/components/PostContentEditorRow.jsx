@@ -13,6 +13,7 @@ export default function PostContentEditorRow({
   rowData,
   updateElement,
   changeRowType,
+  deleteRow,
 }) {
   let toolbarOptions = [
     ["bold", "italic", "underline", "strike", "code-block"],
@@ -30,6 +31,7 @@ export default function PostContentEditorRow({
           index={index}
           updateElement={updateElement}
           changeRowType={changeRowType}
+          deleteRow={deleteRow}
         />
       )}
       <div
