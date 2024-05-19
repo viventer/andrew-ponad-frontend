@@ -53,6 +53,7 @@ export default function PostEditPage() {
       dispatch(setPostTitle(postData.title));
       dispatch(setPostCategory(postData.category));
       setPostRows(postData.content);
+      console.log(postRows);
 
       const translatedVisibility = translateVisibility(
         postData.visibility,

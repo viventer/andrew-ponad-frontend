@@ -20,6 +20,7 @@ import { StyledButton } from "../../global/styles/Button.styled";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { StyledPostEditPage } from "../styles/PostEditPage.styled";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export default function PostEditForm({
   handleClick,
@@ -27,11 +28,6 @@ export default function PostEditForm({
   postRows,
   setPostRows,
 }) {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(resetPostState());
-  }, []);
-
   const thumbnailPreview = useSelector(selectThumbnailPreview);
   const postTitle = useSelector(selectPostTitle);
   const postCategory = useSelector(selectPostCategory);
