@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   useAddNewPostMutation,
   useGetPostByIdQuery,
+  useUpdatePostMutation,
 } from "../slices/postsApiSlice";
 import {
   selectDialogAction,
@@ -20,6 +21,10 @@ import {
 import PostEditForm from "./PostEditForm";
 import {
   resetPostState,
+  selectPostCategory,
+  selectPostTitle,
+  selectPostVisibility,
+  selectThumbnailFile,
   setPostCategory,
   setPostTitle,
   setPostVisibility,
@@ -57,16 +62,50 @@ export default function PostCreatePage() {
     isError,
     error,
   } = useGetPostByIdQuery({ postId: id, isLogged });
+  const [addNewPost, { isLoading: isAddingLoading }] = useAddNewPostMutation();
+  const [updatePostMutation, { isLoading: isUpdatingLoading }] =
+    useUpdatePostMutation();
 
-  const [addNewPost, { isLoading }] = useAddNewPostMutation();
   useEffect(() => {
     dispatch(resetPostState());
+    setInterval(() => {
+      (async () => {
+        updatePost();
+      })();
+    }, 300000);
   }, []);
 
-  const translateVisibility = useTranslateVisibility();
+  const thumbnail = useSelector(selectThumbnailFile);
+  const title = useSelector(selectPostTitle);
+  const category = useSelector(selectPostCategory);
+  const visibility = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
+  const content = postRows;
+  const [oldPostData, setOldPostData] = useState();
+  const updatePost = async () => {
+    const newPostData = {
+      thumbnail,
+      title,
+      category,
+      author: userId,
+      content,
+      visibility,
+    };
+
+    if (newPostData != oldPostData) {
+      await updatePostMutation({ postId: id, postData: newPostData }).unwrap();
+      setOldPostData(newPostData);
+    }
+  };
+
+  const finishCreation = async () => {
+    await updatePost();
+    showDialog();
+  };
+
+  const translateVisibility = useTranslateVisibility();
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && rawPostData.entities[id]) {
       const postData = rawPostData.entities[id];
       dispatch(setThumbnailPreview(postData.thumbnail));
       dispatch(setPostTitle(postData.title));
@@ -114,6 +153,7 @@ export default function PostCreatePage() {
     if (dialogAnswer == "Zakończ dodawanie" && dialogAction == "postAdded") {
       navigate("/adminpanel", { replace: true });
     } else if (dialogAnswer == "Dodaj kolejny" && dialogAction == "postAdded") {
+      navigate("/post/create");
       window.location.reload();
     }
     dispatch(setDialogAnswer(null));
@@ -137,17 +177,17 @@ export default function PostCreatePage() {
   };
 
   useEffect(() => {
-    if (isLoading || isGettingLoading) {
+    if (isUpdatingLoading || isGettingLoading || isAddingLoading) {
       dispatch(setIsLoading(true));
       return;
     } else {
       dispatch(setIsLoading(false));
     }
-  }, [isLoading, isGettingLoading]);
+  }, [isUpdatingLoading, isGettingLoading, isAddingLoading]);
 
   return (
     <PostEditForm
-      handleClick={(postData) => addPost(postData)}
+      handleClick={() => finishCreation()}
       buttonText="Dodaj posta"
       postRows={postRows}
       setPostRows={setPostRows}

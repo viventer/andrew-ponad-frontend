@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import useGetVisibilityOptions from "../../../hooks/useGetVisibilityOptions";
@@ -18,6 +18,11 @@ export default function VisibilitySelector() {
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
 
   const setSelectorValue = (value) => dispatch(setPostVisibility(value));
+  useEffect(() => {
+    if (!selectedVisibility) {
+      setSelectorValue("Szkic");
+    }
+  }, []);
 
   return (
     <StyledSelector>
