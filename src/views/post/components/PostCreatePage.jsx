@@ -33,6 +33,7 @@ import {
 import useAuth from "../../../hooks/useAuth";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 import { selectUserId } from "../../auth/slices/authSlice";
+import useUpdatePost from "../../../hooks/useUpdatePost";
 
 export default function PostCreatePage() {
   const [postRows, setPostRows] = useState([
@@ -66,13 +67,10 @@ export default function PostCreatePage() {
   const [updatePostMutation, { isLoading: isUpdatingLoading }] =
     useUpdatePostMutation();
 
+  const updatePost = useUpdatePost();
+
   useEffect(() => {
     dispatch(resetPostState());
-    setInterval(() => {
-      (async () => {
-        updatePost();
-      })();
-    }, 300000);
   }, []);
 
   const thumbnail = useSelector(selectThumbnailFile);
@@ -80,26 +78,27 @@ export default function PostCreatePage() {
   const category = useSelector(selectPostCategory);
   const visibility = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
-  const content = postRows;
-  const [oldPostData, setOldPostData] = useState();
-  const updatePost = async () => {
-    const newPostData = {
-      thumbnail,
-      title,
-      category,
-      author: userId,
-      content,
-      visibility,
-    };
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      (async () => {
+        const newPostData = {
+          thumbnail,
+          title,
+          category,
+          author: userId,
+          content: postRows,
+          visibility,
+        };
 
-    if (newPostData != oldPostData) {
-      await updatePostMutation({ postId: id, postData: newPostData }).unwrap();
-      setOldPostData(newPostData);
-    }
-  };
+        updatePost(newPostData, id);
+      })();
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [thumbnail, title, category, visibility, postRows]);
 
   const finishCreation = async () => {
-    await updatePost();
+    await updatePost(postRows, id);
     showDialog();
   };
 
@@ -107,17 +106,12 @@ export default function PostCreatePage() {
   useEffect(() => {
     if (isSuccess && rawPostData.entities[id]) {
       const postData = rawPostData.entities[id];
+      console.log("siema");
       dispatch(setThumbnailPreview(postData.thumbnail));
       dispatch(setPostTitle(postData.title));
       dispatch(setPostCategory(postData.category));
       setPostRows(postData.content);
-
-      const translatedVisibility = translateVisibility(
-        postData.visibility,
-        "polish"
-      );
-
-      dispatch(setPostVisibility(translatedVisibility));
+      dispatch(setPostVisibility(postData.visibility));
     } else if (isError) {
       (async () => {
         const initialPostData = {
