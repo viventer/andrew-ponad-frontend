@@ -27,6 +27,10 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
     postsData = Object.entries(postsRawData.entities);
     filteredPostsData = postsData.filter((post) => {
       const postData = post[1];
+      if (postData.visibility == "draft") {
+        return false;
+      }
+
       const postTitle = postData.title.toLowerCase();
       const postCategory = postData.category;
 

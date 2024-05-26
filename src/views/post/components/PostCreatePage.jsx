@@ -80,7 +80,6 @@ export default function PostCreatePage() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       const translatedVisibility = translateVisibility(visibility, "english");
-
       (async () => {
         const newPostData = {
           thumbnail,
@@ -99,6 +98,8 @@ export default function PostCreatePage() {
   }, [thumbnail, title, category, visibility, postRows]);
 
   const finishCreation = async () => {
+    const translatedVisibility = translateVisibility(visibility, "english");
+
     await updatePost(
       {
         thumbnail,
@@ -106,7 +107,7 @@ export default function PostCreatePage() {
         category,
         author: userId,
         content: postRows,
-        visibility,
+        visibility: translatedVisibility,
       },
       id
     );
@@ -130,7 +131,7 @@ export default function PostCreatePage() {
       (async () => {
         const initialPostData = {
           author: userId,
-          visibility: "Szkic",
+          visibility: "draft",
           content: postRows,
           category: "Wybierz kategorię",
         };
