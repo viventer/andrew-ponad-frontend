@@ -5,7 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import {
   useAddNewPostMutation,
   useGetPostByIdQuery,
-  useUpdatePostMutation,
 } from "../slices/postsApiSlice";
 import {
   selectDialogAction,
@@ -17,6 +16,9 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
+
+import useAuth from "../../../hooks/useAuth";
+import useUpdatePost from "../../../hooks/useUpdatePost";
 
 import PostEditForm from "./PostEditForm";
 import {
@@ -30,10 +32,8 @@ import {
   setPostVisibility,
   setThumbnailPreview,
 } from "../slices/postSlice";
-import useAuth from "../../../hooks/useAuth";
-import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 import { selectUserId } from "../../auth/slices/authSlice";
-import useUpdatePost from "../../../hooks/useUpdatePost";
+import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 
 export default function PostCreatePage() {
   const [postRows, setPostRows] = useState([
@@ -64,8 +64,6 @@ export default function PostCreatePage() {
     error,
   } = useGetPostByIdQuery({ postId: id, isLogged });
   const [addNewPost, { isLoading: isAddingLoading }] = useAddNewPostMutation();
-  const [updatePostMutation, { isLoading: isUpdatingLoading }] =
-    useUpdatePostMutation();
 
   const updatePost = useUpdatePost();
 
@@ -78,8 +76,11 @@ export default function PostCreatePage() {
   const category = useSelector(selectPostCategory);
   const visibility = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
+  const translateVisibility = useTranslateVisibility();
   useEffect(() => {
     const intervalId = setInterval(() => {
+      const translatedVisibility = translateVisibility(visibility, "english");
+
       (async () => {
         const newPostData = {
           thumbnail,
@@ -87,36 +88,49 @@ export default function PostCreatePage() {
           category,
           author: userId,
           content: postRows,
-          visibility,
+          visibility: translatedVisibility,
         };
 
         updatePost(newPostData, id);
       })();
-    }, 3000);
+    }, 300000);
 
     return () => clearInterval(intervalId);
   }, [thumbnail, title, category, visibility, postRows]);
 
   const finishCreation = async () => {
-    await updatePost(postRows, id);
+    await updatePost(
+      {
+        thumbnail,
+        title,
+        category,
+        author: userId,
+        content: postRows,
+        visibility,
+      },
+      id
+    );
     showDialog();
   };
 
-  const translateVisibility = useTranslateVisibility();
   useEffect(() => {
     if (isSuccess && rawPostData.entities[id]) {
       const postData = rawPostData.entities[id];
-      console.log("siema");
       dispatch(setThumbnailPreview(postData.thumbnail));
       dispatch(setPostTitle(postData.title));
       dispatch(setPostCategory(postData.category));
       setPostRows(postData.content);
-      dispatch(setPostVisibility(postData.visibility));
+
+      const translatedVisibility = translateVisibility(
+        postData.visibility,
+        "polish"
+      );
+      dispatch(setPostVisibility(translatedVisibility));
     } else if (isError) {
       (async () => {
         const initialPostData = {
           author: userId,
-          visibility: "draft",
+          visibility: "Szkic",
           content: postRows,
           category: "Wybierz kategorię",
         };
@@ -171,13 +185,13 @@ export default function PostCreatePage() {
   };
 
   useEffect(() => {
-    if (isUpdatingLoading || isGettingLoading || isAddingLoading) {
+    if (isGettingLoading || isAddingLoading) {
       dispatch(setIsLoading(true));
       return;
     } else {
       dispatch(setIsLoading(false));
     }
-  }, [isUpdatingLoading, isGettingLoading, isAddingLoading]);
+  }, [isGettingLoading, isAddingLoading]);
 
   return (
     <PostEditForm

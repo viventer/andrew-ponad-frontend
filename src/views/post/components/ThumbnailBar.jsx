@@ -6,8 +6,9 @@ import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
 
 import { StyledThumbnailBar } from "../styles/ThumbnailBar.styled";
 
-export default function ThumbnailBar({ thumbnailFile }) {
-  const thumbnailPreview = useSelector(selectThumbnailPreview);
+export default function ThumbnailBar({ thumbnailFile, view }) {
+  const thumbnailPreview =
+    view == "edit" && useSelector(selectThumbnailPreview);
 
   const images = [];
   for (let i = 0; i < 3; i++) {

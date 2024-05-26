@@ -6,6 +6,11 @@ import useAuth from "../../../hooks/useAuth";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 
 import {
+  resetPostState,
+  selectPostCategory,
+  selectPostTitle,
+  selectPostVisibility,
+  selectThumbnailFile,
   setPostCategory,
   setPostTitle,
   setPostVisibility,
@@ -23,6 +28,8 @@ import {
 } from "../../global/slices/globalStatesSlice";
 
 import PostEditForm from "./PostEditForm";
+import { selectUserId } from "../../auth/slices/authSlice";
+import useUpdatePost from "../../../hooks/useUpdatePost";
 
 export default function PostEditPage() {
   const navigate = useNavigate();
@@ -47,13 +54,16 @@ export default function PostEditPage() {
   const [postRows, setPostRows] = useState();
 
   useEffect(() => {
+    dispatch(resetPostState());
+  }, []);
+
+  useEffect(() => {
     if (isSuccess) {
       const postData = rawPostData.entities[id];
       dispatch(setThumbnailPreview(postData.thumbnail));
       dispatch(setPostTitle(postData.title));
       dispatch(setPostCategory(postData.category));
       setPostRows(postData.content);
-      console.log(postRows);
 
       const translatedVisibility = translateVisibility(
         postData.visibility,
@@ -64,11 +74,38 @@ export default function PostEditPage() {
     }
   }, [isSuccess]);
 
-  const [updatePost, { isLoading }] = useUpdatePostMutation();
+  const thumbnail = useSelector(selectThumbnailFile);
+  const title = useSelector(selectPostTitle);
+  const category = useSelector(selectPostCategory);
+  const visibility = useSelector(selectPostVisibility);
+  const userId = useSelector(selectUserId);
+  const updatePost = useUpdatePost();
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const translatedVisibility = translateVisibility(visibility, "english");
+
+      (async () => {
+        const newPostData = {
+          thumbnail,
+          title,
+          category,
+          author: userId,
+          content: postRows,
+          visibility: translatedVisibility,
+        };
+
+        updatePost(newPostData, id);
+      })();
+    }, 300000);
+
+    return () => clearInterval(intervalId);
+  }, [thumbnail, title, category, visibility, postRows]);
+
+  const [updatePostMutation, { isLoading }] = useUpdatePostMutation();
   const editPost = async (postData) => {
     try {
       console.log(postData);
-      await updatePost({ postId: id, postData }).unwrap();
+      await updatePostMutation({ postId: id, postData }).unwrap();
       dispatch(setSuccessMsg("Zmiany zostały zapisane"));
       navigate("/adminpanel", { replace: true });
     } catch (err) {

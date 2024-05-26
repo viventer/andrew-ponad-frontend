@@ -19,8 +19,6 @@ import VisibilitySelector from "./VisibilitySelector";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { StyledPostEditPage } from "../styles/PostEditPage.styled";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 export default function PostEditForm({
   handleClick,
@@ -73,7 +71,7 @@ export default function PostEditForm({
 
   return (
     <StyledPostEditPage>
-      <ThumbnailBar />
+      <ThumbnailBar view="edit" />
       <ImageDropzone isThumbnail={true} imagePreview={thumbnailPreview} />
       <div className="thumbnailBarOverlay">
         <PostTitleInput />
