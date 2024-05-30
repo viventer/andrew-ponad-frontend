@@ -111,7 +111,7 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
 
   const [showInfo, setShowInfo] = useState(false);
 
-  const shortenTitleMaxWidth = view == "postsSearchResults" ? 450 : 650;
+  const shortenTitleMaxWidth = view == "postsSearchResults" ? 475 : 650;
 
   return (
     <StyledPostFromList
@@ -126,6 +126,7 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
         <img
           src={isThumbnailCorrect ? postData.thumbnail : thumbnailPlaceholder}
           onClick={viewPost}
+          className={view == "postsSearchResults" && "postsSearchResultsImg"}
         />
         <div onClick={viewPost}>
           <h2>

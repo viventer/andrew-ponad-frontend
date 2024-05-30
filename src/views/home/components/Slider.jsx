@@ -27,7 +27,10 @@ export default function Slider() {
   let elements;
   if (isSuccess) {
     const postsData = Object.entries(postsRawData.entities);
-    elements = postsData.map(([id, postData], index) => (
+    const filteredPostsData = postsData.filter(([id, postData]) =>
+      postData.visibility != "draft" ? true : false
+    );
+    elements = filteredPostsData.map(([id, postData], index) => (
       <SliderElement
         postData={postData}
         key={id}

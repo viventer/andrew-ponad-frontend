@@ -22,6 +22,10 @@ export const StyledPostFromList = styled.li`
     width: 100%;
   }
 
+  & .postsSearchResultsImg {
+    /* width: ; */
+  }
+
   & .flex {
     display: flex;
     align-items: center;
@@ -75,7 +79,8 @@ export const StyledPostFromList = styled.li`
 
   & .flex > img {
     height: 3rem;
-    width: calc(3rem / 9 * 16);
+    width: 5.33rem;
+    min-width: 5.33rem;
     object-fit: contain;
     transition: all 0.15s ease-in-out;
   }
