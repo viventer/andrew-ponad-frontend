@@ -6,6 +6,7 @@ import { faServer, faUser } from "@fortawesome/free-solid-svg-icons";
 
 import {
   selectIsUserInfoVisible,
+  setIsErrorReportVisible,
   setIsSearchBoxVisible,
   toggleIsUserInfoVisible,
 } from "../slices/globalStatesSlice";
@@ -35,6 +36,7 @@ export default function Header() {
         onClick={() => {
           dispatch(toggleIsUserInfoVisible());
           dispatch(setIsSearchBoxVisible(false));
+          dispatch(setIsErrorReportVisible(false));
         }}
       >
         <FontAwesomeIcon icon={faUser} className="icon" />

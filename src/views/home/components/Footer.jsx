@@ -2,11 +2,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBucket, faBug } from "@fortawesome/free-solid-svg-icons";
 
 import { StyledFooter } from "../styles/Footer.styled";
+import ErrorReport from "../../error-reports/components/ErrorReport";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectIsErrorReportVisible,
+  setIsSearchBoxVisible,
+  setIsUserInfoVisible,
+  toggleIsErrorReportVisible,
+} from "../../global/slices/globalStatesSlice";
 
 export default function Footer() {
+  const dispatch = useDispatch();
+  const isErrorReportVisible = useSelector(selectIsErrorReportVisible);
+
   return (
     <StyledFooter>
-      <button>
+      {isErrorReportVisible && <ErrorReport />}
+      <button
+        onClick={() => {
+          dispatch(toggleIsErrorReportVisible());
+          dispatch(setIsUserInfoVisible(false));
+          dispatch(setIsSearchBoxVisible(false));
+        }}
+      >
         <FontAwesomeIcon icon={faBug} />
         <p>Zgłoś błąd</p>
       </button>

@@ -21,6 +21,7 @@ const globalStatesSlice = createSlice({
     ],
     isUserInfoVisible: false,
     isSearchBoxVisible: false,
+    isErrorReportVisible: false,
   },
   reducers: {
     setErrMsg: (state, action) => {
@@ -67,6 +68,12 @@ const globalStatesSlice = createSlice({
     toggleIsUserInfoVisible: (state) => {
       state.isUserInfoVisible = !state.isUserInfoVisible;
     },
+    setIsErrorReportVisible: (state, action) => {
+      state.isErrorReportVisible = action.payload;
+    },
+    toggleIsErrorReportVisible: (state) => {
+      state.isErrorReportVisible = !state.isErrorReportVisible;
+    },
   },
 });
 
@@ -84,6 +91,8 @@ export const {
   setIsUserInfoVisible,
   setIsSearchBoxVisible,
   toggleIsUserInfoVisible,
+  setIsErrorReportVisible,
+  toggleIsErrorReportVisible,
 } = globalStatesSlice.actions;
 
 export const selectErrMsg = (state) => state.globalStates.errMsg;
@@ -101,5 +110,7 @@ export const selectIsUserInfoVisible = (state) =>
   state.globalStates.isUserInfoVisible;
 export const selectIsSearchBoxVisible = (state) =>
   state.globalStates.isSearchBoxVisible;
+export const selectIsErrorReportVisible = (state) =>
+  state.globalStates.isErrorReportVisible;
 
 export default globalStatesSlice.reducer;

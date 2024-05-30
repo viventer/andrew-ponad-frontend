@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import {
+  setIsErrorReportVisible,
   setIsSearchBoxVisible,
   setIsUserInfoVisible,
 } from "../../global/slices/globalStatesSlice";
@@ -19,6 +20,7 @@ export default function PostsSearch() {
       onFocus={() => {
         dispatch(setIsSearchBoxVisible(true));
         dispatch(setIsUserInfoVisible(false));
+        dispatch(setIsErrorReportVisible(false));
       }}
     >
       <SearchBar
