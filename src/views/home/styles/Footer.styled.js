@@ -10,8 +10,9 @@ export const StyledFooter = styled.footer`
   padding: 0.5rem 1rem;
   border-top: 0.1rem solid ${({ theme }) => theme.colors.navy};
   background-color: ${({ theme }) => theme.colors.darkGray};
+  z-index: 100;
 
-  & button {
+  & > button {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -23,19 +24,19 @@ export const StyledFooter = styled.footer`
     background-color: rgba(0, 0, 0, 0);
   }
 
-  & button p {
+  & > button p {
     border-left: 0.15rem solid ${({ theme }) => theme.colors.red};
     padding-left: 0.5rem;
     color: white;
     transition: border-left 0.2s ease-in-out;
   }
 
-  & button:hover p {
+  & > button:hover p {
     border-left-width: 0.5rem;
     cursor: pointer;
   }
 
-  & article {
+  & > article {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -43,14 +44,14 @@ export const StyledFooter = styled.footer`
     color: ${({ theme }) => theme.colors.sunset};
   }
 
-  & article p {
+  & > article p {
     border-left: 0.15rem solid ${({ theme }) => theme.colors.sunset};
     padding-left: 0.5rem;
     color: white;
   }
 
   @media (max-width: 400px) {
-    & article span {
+    & > article span {
       display: none;
     }
   }

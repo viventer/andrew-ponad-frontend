@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { setCredentials, logOut } from "../views/auth/slices/authSlice";
+import { setCredentials } from "../views/auth/slices/authSlice";
 import {
-  selectIsLogged,
   setErrMsg,
   setIsLogged,
 } from "../views/global/slices/globalStatesSlice";
@@ -52,6 +51,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
   baseQuery: baseQueryWithReauth,
-  tagTypes: ["Post", "User"],
+  tagTypes: ["Post", "User", "ErrorReport"],
   endpoints: (builder) => ({}),
 });

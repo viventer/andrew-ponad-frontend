@@ -5,10 +5,10 @@ import { useDropzone } from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExchange } from "@fortawesome/free-solid-svg-icons";
 
-import { setErrMsg } from "../../global/slices/globalStatesSlice";
-import { setThumbnailPreview } from "../slices/postSlice";
+import { setErrMsg } from "../slices/globalStatesSlice";
+import { setThumbnailPreview } from "../../post/slices/postSlice";
 
-import { StyledImageDropzone } from "../styles/ImageDropzone.styled";
+import { StyledImageDropzone } from "../../post/styles/ImageDropzone.styled";
 
 export default function ImageDropzone({
   imagePreview,

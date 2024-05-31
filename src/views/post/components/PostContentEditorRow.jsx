@@ -1,5 +1,5 @@
 import ReactQuill from "react-quill";
-import ImageDropzone from "./ImageDropzone";
+import ImageDropzone from "../../global/components/ImageDropzone";
 
 import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
 
@@ -15,7 +15,7 @@ export default function PostContentEditorRow({
   changeRowType,
   deleteRow,
 }) {
-  let toolbarOptions = [
+  const toolbarOptions = [
     ["bold", "italic", "underline", "strike", "code-block"],
     [{ list: "ordered" }, { list: "bullet" }],
     [{ header: [1, 2, false] }],

@@ -18,6 +18,7 @@ import authReducer from "../views/auth/slices/authSlice";
 import globalStatesReducer from "../views/global/slices/globalStatesSlice";
 import postReducer from "../views/post/slices/postSlice";
 import adminPanelReducer from "../views/admin-panel/slices/adminPanelSlice";
+import errorReportReducer from "../views/error-reports/slices/errorReportSlice";
 
 const globalStatesPersistConfig = {
   key: "globalStates",
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   globalStates: persistReducer(globalStatesPersistConfig, globalStatesReducer),
   post: persistReducer(postPersistConfig, postReducer),
   adminPanel: adminPanelReducer,
+  errorReport: errorReportReducer,
 });
 
 export const store = configureStore({

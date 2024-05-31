@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import ImageDropzone from "./ImageDropzone";
+import ImageDropzone from "../../global/components/ImageDropzone";
 
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 

@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBucket, faBug } from "@fortawesome/free-solid-svg-icons";
 
 import { StyledFooter } from "../styles/Footer.styled";
-import ErrorReport from "../../error-reports/components/ErrorReport";
+import ErrorReport from "../../error-reports/components/CreateErrorReport";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
