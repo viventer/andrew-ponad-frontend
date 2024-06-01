@@ -12,23 +12,22 @@ export default function ErrorReportTitleInput() {
 
   return (
     <StyledErrorReportTitleInput>
-      <div className="flex">
-        <label htmlFor="titleInput">Tytuł zgłoszenia</label>
-        <input
-          type="text"
-          placeholder="Błąd przy przeglądaniu posta"
-          value={title}
-          onChange={(e) => dispatch(setErrorReportTitle(e.target.value))}
-          maxLength={40}
-          onKeyDown={() => {
-            if (title.length >= 40) {
-              dispatch(setErrMsg("Tytuł może zawierać maksymalnie 40 znaków"));
-            }
-          }}
-          id="titleInput"
-        />
-        <p>*</p>
-      </div>
+      <label htmlFor="titleInput">
+        Tytuł zgłoszenia <span className="sunset">*</span>
+      </label>
+      <input
+        type="text"
+        placeholder="Błąd przy przeglądaniu posta"
+        value={title}
+        onChange={(e) => dispatch(setErrorReportTitle(e.target.value))}
+        maxLength={40}
+        onKeyDown={() => {
+          if (title.length >= 40) {
+            dispatch(setErrMsg("Tytuł może zawierać maksymalnie 40 znaków"));
+          }
+        }}
+        id="titleInput"
+      />
     </StyledErrorReportTitleInput>
   );
 }

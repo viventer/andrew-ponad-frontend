@@ -100,18 +100,22 @@ export default function PostCreatePage() {
   const finishCreation = async () => {
     const translatedVisibility = translateVisibility(visibility, "english");
 
-    await updatePost(
-      {
-        thumbnail,
-        title,
-        category,
-        author: userId,
-        content: postRows,
-        visibility: translatedVisibility,
-      },
-      id
-    );
-    showDialog();
+    try {
+      await updatePost(
+        {
+          thumbnail,
+          title,
+          category,
+          author: userId,
+          content: postRows,
+          visibility: translatedVisibility,
+        },
+        id
+      );
+      showDialog();
+    } catch (err) {
+      handleAddPostError(err);
+    }
   };
 
   useEffect(() => {

@@ -21,7 +21,9 @@ export default function ErrorReportContentEditorDescription() {
 
   return (
     <StyledErrorReportContentEditorDescription>
-      <h3>Opis błędu</h3>
+      <h3>
+        Opis błędu <span className="sunset">*</span>
+      </h3>
       <ReactQuill
         theme="snow"
         value={errorReportDescription}
@@ -29,6 +31,7 @@ export default function ErrorReportContentEditorDescription() {
           dispatch(setErrorReportDescription(content));
         }}
         modules={quillModules}
+        className="quill"
       />
     </StyledErrorReportContentEditorDescription>
   );
