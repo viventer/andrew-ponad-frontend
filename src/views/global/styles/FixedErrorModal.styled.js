@@ -4,7 +4,7 @@ export const StyledFixedErrorModal = styled.section`
   position: fixed;
   left: 6rem;
   bottom: 6rem;
-  z-index: 141414;
+  z-index: 999999991;
   display: flex;
   align-items: center;
   gap: 0.5rem;

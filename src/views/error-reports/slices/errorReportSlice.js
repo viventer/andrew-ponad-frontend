@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   title: "",
   description: "",
-  images: [],
+  images: ["placeholder"],
 };
 
 const errorReportSlice = createSlice({

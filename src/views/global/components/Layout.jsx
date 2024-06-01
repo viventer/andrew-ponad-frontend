@@ -10,11 +10,13 @@ import {
   selectDialogMsg,
   selectDialogOptions,
   selectErrMsg,
+  selectIsErrorReportVisible,
   selectIsLoading,
   selectSuccessMsg,
 } from "../slices/globalStatesSlice";
 
 import { HashLoader } from "react-spinners";
+import CreateErrorReport from "../../error-reports/components/CreateErrorReport";
 
 export default function Layout() {
   const errMsg = useSelector(selectErrMsg);
@@ -22,6 +24,7 @@ export default function Layout() {
   const dialogOptions = useSelector(selectDialogOptions);
   const isLoading = useSelector(selectIsLoading);
   const successMsg = useSelector(selectSuccessMsg);
+  const isErrorReportVisible = useSelector(selectIsErrorReportVisible);
 
   return (
     <div className="App">
@@ -32,6 +35,11 @@ export default function Layout() {
       {isLoading && (
         <div className="blur maxZIndex">
           <HashLoader color="white" />
+        </div>
+      )}
+      {isErrorReportVisible && (
+        <div className="blur maxZIndex">
+          <CreateErrorReport />
         </div>
       )}
       <Outlet />

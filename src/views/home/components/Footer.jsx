@@ -14,11 +14,9 @@ import {
 
 export default function Footer() {
   const dispatch = useDispatch();
-  const isErrorReportVisible = useSelector(selectIsErrorReportVisible);
 
   return (
     <StyledFooter>
-      {isErrorReportVisible && <ErrorReport />}
       <button
         onClick={() => {
           dispatch(toggleIsErrorReportVisible());

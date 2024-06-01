@@ -1,7 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { selectIsLoading } from "../../global/slices/globalStatesSlice";
+import {
+  selectIsErrorReportVisible,
+  selectIsLoading,
+} from "../../global/slices/globalStatesSlice";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";

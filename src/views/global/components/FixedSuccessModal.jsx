@@ -16,7 +16,7 @@ export default function FixedSuccessModal({ message }) {
       <div className="container success">
         <div>
           <FontAwesomeIcon icon={faCircleCheck} className="icon" />
-          <p>Zmiany zostały zapisane</p>
+          <p>{message}</p>
         </div>
         <StyledButton
           onClick={() => {

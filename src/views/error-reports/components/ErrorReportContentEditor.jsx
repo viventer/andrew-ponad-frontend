@@ -5,7 +5,10 @@ import ErrorReportContentEditorImages from "./ErrorReportContentEditorImages";
 export default function ErrorReportContentEditor() {
   return (
     <StyledErrorReportContentEditor>
-      <ErrorReportContentEditorDescription />
+      <div className="flex">
+        <ErrorReportContentEditorDescription />
+        <p>*</p>
+      </div>
       <ErrorReportContentEditorImages />
     </StyledErrorReportContentEditor>
   );
