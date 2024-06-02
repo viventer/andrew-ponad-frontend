@@ -8,12 +8,13 @@ import { faExchange } from "@fortawesome/free-solid-svg-icons";
 import { setErrMsg } from "../slices/globalStatesSlice";
 import { setThumbnailPreview } from "../../post/slices/postSlice";
 
-import { StyledImageDropzone } from "../../post/styles/ImageDropzone.styled";
+import { StyledImageDropzone } from "../styles/ImageDropzone.styled";
 
 export default function ImageDropzone({
   imagePreview,
   setImagePreview,
   isThumbnail,
+  view,
 }) {
   const dispatch = useDispatch();
 
@@ -56,7 +57,9 @@ export default function ImageDropzone({
     <StyledImageDropzone
       {...getRootProps()}
       $isabsolute={isThumbnail ? 1 : 0}
-      className="imageDropzone responsivePostElement"
+      className={`imageDropzone ${
+        view != "errorReport" && responsivePostElement
+      }`}
     >
       <input {...getInputProps()} />
       <div className="hover-effect">

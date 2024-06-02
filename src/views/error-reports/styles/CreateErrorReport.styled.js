@@ -9,9 +9,10 @@ export const StyledCreateErrorReport = styled.section`
   padding: 1rem;
   background-color: ${({ theme }) => theme.colors.darkGray};
   border: 0.1rem solid ${({ theme }) => theme.colors.navy};
-  width: 50vw;
+  width: 40vw;
+  max-width: 800px;
   max-height: 80vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   & > button {
     position: absolute;

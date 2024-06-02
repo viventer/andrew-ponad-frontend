@@ -11,7 +11,13 @@ import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
 import { useEffect, useState } from "react";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAdd,
+  faPlus,
+  faPlusCircle,
+  faSquarePlus,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function ErrorReportContentEditorImages() {
   const images = useSelector(selectErrorReportImages);
@@ -26,10 +32,15 @@ export default function ErrorReportContentEditorImages() {
         const isThumbnailCorrect = base64Regex.test(image);
 
         return (
-          <div key={index}>
-            <button onClick={() => deleteImage(index)}>
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
+          <div key={index} className="dropzoneWrapper">
+            {!(!isThumbnailCorrect && index == 0) && (
+              <button
+                onClick={() => deleteImage(index)}
+                className="deleteButton"
+              >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            )}
             <img
               src={isThumbnailCorrect ? image : thumbnailPlaceholder}
               alt=""
@@ -40,6 +51,7 @@ export default function ErrorReportContentEditorImages() {
                 dispatch(changeErrorReportImage({ index, newUrl }));
                 console.log("siema");
               }}
+              view="errorReport"
             />
           </div>
         );
@@ -62,10 +74,13 @@ export default function ErrorReportContentEditorImages() {
 
   return (
     <StyledErrorReportContentEditorImages>
-      <h3>Zrzuty ekranu z błędem</h3>
+      <h3>Dodaj zrzuty ekranu z błędem</h3>
       {imageDropzones}
       {images.length < 3 && (
-        <StyledButton onClick={() => addNewImage()}>Dodaj zdjęcie</StyledButton>
+        <StyledButton onClick={() => addNewImage()} className="addButton">
+          <FontAwesomeIcon icon={faPlus} />
+          Dodaj zdjęcie
+        </StyledButton>
       )}
     </StyledErrorReportContentEditorImages>
   );

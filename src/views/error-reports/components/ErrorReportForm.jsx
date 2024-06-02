@@ -16,6 +16,8 @@ import { StyledButton } from "../../global/styles/Button.styled";
 import { useCreateNewErrorReportMutation } from "../slices/errorReportApiSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
 import ErrorReportTitleInput from "./ErrorReportTitleInput";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 export default function ErrorReportForm() {
   const title = useSelector(selectErrorReportTitle);
@@ -63,8 +65,11 @@ export default function ErrorReportForm() {
     <StyledErrorReportForm onSubmit={(e) => e.preventDefault()}>
       <ErrorReportTitleInput />
       <ErrorReportContentEditor />
-      <p>* pole wymagane</p>
+      <p>
+        <span className="sunset">*</span> pole wymagane
+      </p>
       <StyledButton onClick={sendReport} disabled={!isDataProvided}>
+        <FontAwesomeIcon icon={faPaperPlane} />
         Wyślij zgłoszenie
       </StyledButton>
     </StyledErrorReportForm>

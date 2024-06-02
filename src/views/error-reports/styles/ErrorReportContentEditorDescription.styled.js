@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
 export const StyledErrorReportContentEditorDescription = styled.section`
+  margin-bottom: 1rem;
+
   & > h3 {
     margin-bottom: 0.2rem;
   }
