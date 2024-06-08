@@ -48,8 +48,8 @@ export const StyledErrorReportContentEditorImages = styled.section`
 
   & .imageDropzone {
     width: 20vw;
-    height: calc(20vw * 0.5625);
     max-width: 400px;
+    height: calc(20vw * 0.5625);
     max-height: calc(400px * 0.5625);
   }
 
@@ -66,9 +66,47 @@ export const StyledErrorReportContentEditorImages = styled.section`
   }
 
   & .addButton {
-    width: 50%;
     justify-content: center;
     width: 20vw;
+    min-width: 200px;
     max-width: 400px;
+  }
+
+  @media (max-width: 1400px) {
+    & .imageDropzone {
+      width: 35vw;
+      min-width: 300px;
+      height: calc(35vw * 0.5625);
+      min-height: calc(300px * 0.5625);
+    }
+
+    & .dropzoneWrapper {
+      width: 35vw;
+      height: calc(35vw * 0.5625);
+      max-height: calc(400px * 0.5625);
+      min-height: calc(300px * 0.5625);
+      max-width: 400px;
+      min-width: 300px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    & .imageDropzone {
+      width: 90vw;
+      height: calc(90vw * 0.5625);
+      min-width: 0;
+      min-height: 0;
+    }
+
+    & .dropzoneWrapper {
+      width: 90vw;
+      height: calc(90vw * 0.5625);
+      min-width: 0;
+      min-height: 0;
+    }
+
+    & .addButton {
+      width: 90vw;
+    }
   }
 `;

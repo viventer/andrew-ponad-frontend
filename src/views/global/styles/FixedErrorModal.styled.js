@@ -41,12 +41,30 @@ export const StyledFixedErrorModal = styled.section`
   }
 
   @media (orientation: portrait) {
-    bottom: 70vh;
+    bottom: 50vh;
+    left: 2.5vw;
+    right: 2.5vw;
   }
 
   @media (max-width: 750px) {
-    left: 5vw;
-    right: 5vw;
-    width: 90vw;
+    width: 95vw;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0.75rem 4rem 0.75rem 1rem;
+    gap: 1rem;
+
+    & button {
+      width: 3rem;
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    font-size: 1rem;
+
+    & > .icon {
+      display: none;
+    }
   }
 `;

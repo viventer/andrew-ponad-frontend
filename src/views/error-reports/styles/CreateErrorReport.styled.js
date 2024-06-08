@@ -12,6 +12,7 @@ export const StyledCreateErrorReport = styled.section`
   width: 40vw;
   max-width: 800px;
   max-height: 80vh;
+  min-width: 500px;
   overflow-y: auto;
 
   & > button {
@@ -58,5 +59,25 @@ export const StyledCreateErrorReport = styled.section`
 
   & h3 {
     font-size: 1.2rem;
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: calc(100% - 45px);
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 45px;
+    transform: translate(0, 0);
+    border: none;
+  }
+
+  @media (max-width: 340px) {
+    .flex > .icon {
+      display: none;
+    }
   }
 `;
