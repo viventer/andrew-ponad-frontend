@@ -4,12 +4,14 @@ import { StyledAdminPanel } from "../styles/AdminPanel.styled";
 import UsersTab from "./UsersTab";
 import PostsTab from "./PostsTab";
 import useAuth from "../../../hooks/useAuth";
+import ErrorReportsTab from "./ErrorReportsTab";
 
 export default function AdminPanel() {
   const [selectedTab, setSelectedTab] = useState("posts");
 
   const { mainRole } = useAuth();
   const hasUsersTabAccess = mainRole == "Admin";
+  const hasErrorReportsTabAccess = mainRole == "Admin";
 
   return (
     <StyledAdminPanel>
@@ -32,9 +34,24 @@ export default function AdminPanel() {
                 Użytkownicy
               </li>
             )}
+            {hasErrorReportsTabAccess && (
+              <li
+                className={selectedTab == "errorReports" ? "selected" : ""}
+                onClick={() => setSelectedTab("errorReports")}
+                aria-selected={selectedTab == "errorReports" ? true : false}
+              >
+                Zgłoszenia błędów
+              </li>
+            )}
           </ul>
         </nav>
-        {selectedTab == "users" ? <UsersTab /> : <PostsTab />}
+        {selectedTab == "users" ? (
+          <UsersTab />
+        ) : selectedTab == "posts" ? (
+          <PostsTab />
+        ) : (
+          <ErrorReportsTab />
+        )}
       </div>
     </StyledAdminPanel>
   );

@@ -6,6 +6,8 @@ const initialState = {
   postsTabSearchQuery: "",
   roleFilter: "Wybierz rolę",
   usersTabSearchQuery: "",
+  statusFilter: "Wybierz status",
+  errorReportsTabSearchQuery: "",
 };
 
 const adminPanelSlice = createSlice({
@@ -27,6 +29,12 @@ const adminPanelSlice = createSlice({
     setUsersTabSearchQuery: (state, action) => {
       state.usersTabSearchQuery = action.payload;
     },
+    setStatusFilter: (state, action) => {
+      state.statusFilter = action.payload;
+    },
+    setErrorReportsTabSearchQuery: (state, action) => {
+      state.errorReportsTabSearchQuery = action.payload;
+    },
   },
 });
 
@@ -36,6 +44,8 @@ export const {
   setPostsTabSearchQuery,
   setRoleFilter,
   setUsersTabSearchQuery,
+  setStatusFilter,
+  setErrorReportsTabSearchQuery,
 } = adminPanelSlice.actions;
 
 export const selectVisibilityFilter = (state) =>
@@ -46,5 +56,8 @@ export const selectPostsTabSearchQuery = (state) =>
 export const selectRoleFilter = (state) => state.adminPanel.roleFilter;
 export const selectUsersTabSearchQuery = (state) =>
   state.adminPanel.usersTabSearchQuery;
+export const selectStatusFilter = (state) => state.adminPanel.statusFilter;
+export const selectErrorReportsTabSearchQuery = (state) =>
+  state.adminPanel.errorReportsTabSearchQuery;
 
 export default adminPanelSlice.reducer;
