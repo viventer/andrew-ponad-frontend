@@ -1,12 +1,12 @@
 import UsersFilters from "./UsersFilters";
 import UsersList from "./UsersList";
-import { StyledUsersTab } from "../styles/UsersTab.styled";
+import { StyledAdminPanelTab } from "../styles/AdminPanelTab.styled";
 
 export default function UsersTab() {
   return (
-    <StyledUsersTab>
+    <StyledAdminPanelTab>
       <UsersFilters />
       <UsersList />
-    </StyledUsersTab>
+    </StyledAdminPanelTab>
   );
 }

@@ -1,16 +1,16 @@
 import PostsFilters from "./PostsFilters";
 import PostsList from "./PostsList";
 import AddPostButton from "./AddPostButton";
-import { StyledPostsTab } from "../styles/PostsTab.styled";
+import { StyledAdminPanelTab } from "../styles/AdminPanelTab.styled";
 
 export default function PostsTab() {
   return (
-    <StyledPostsTab>
+    <StyledAdminPanelTab>
       <div className="flex">
         <PostsFilters />
         <AddPostButton />
       </div>
       <PostsList />
-    </StyledPostsTab>
+    </StyledAdminPanelTab>
   );
 }

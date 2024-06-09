@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { StyledErrorReportFromList } from "../styles/ErrorReportFromList.styled";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -22,10 +21,10 @@ import {
   faCheckCircle,
   faSave,
   faTrash,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import ErrorReportFromListDetails from "./ErrorReportFromListDetails";
 import StatusSelector from "./StatusSelector";
+import { StyledElementFromList } from "../styles/ElementFromList.styled";
 
 export default function ErrorReportFromList({
   reportData,
@@ -69,9 +68,11 @@ export default function ErrorReportFromList({
       }).unwrap();
     } catch (err) {
       if (!err?.originalStatus && !err?.status) {
-        setErrMsg("Brak odpowiedzi serwera. Sprawdź połączenie sieciowe.");
+        dispatch(
+          setErrMsg("Brak odpowiedzi serwera. Sprawdź połączenie sieciowe.")
+        );
       } else {
-        setErrMsg(err?.data?.message);
+        dispatch(setErrMsg(err?.data?.message));
       }
     }
   };
@@ -129,7 +130,7 @@ export default function ErrorReportFromList({
   };
 
   return (
-    <StyledErrorReportFromList className={`${isDeleted ? "hide" : ""}`}>
+    <StyledElementFromList className={`${isDeleted ? "hide" : ""}`}>
       <div className="shortInfo">
         <div onClick={() => setShowDetails((prev) => !prev)}>
           <FontAwesomeIcon icon={faBug} className="icon" />
@@ -143,12 +144,12 @@ export default function ErrorReportFromList({
             />
             <button onClick={changeStatus}>
               {showSuccessIcon ? (
-                <FontAwesomeIcon icon={faSave} className="saveIcon icon" />
-              ) : (
                 <FontAwesomeIcon
                   icon={faCheckCircle}
                   className="successIcon icon"
                 />
+              ) : (
+                <FontAwesomeIcon icon={faSave} className="saveIcon icon" />
               )}
             </button>
           </div>
@@ -158,6 +159,6 @@ export default function ErrorReportFromList({
         </div>
       </div>
       {showDetails && <ErrorReportFromListDetails reportData={reportData} />}
-    </StyledErrorReportFromList>
+    </StyledElementFromList>
   );
 }

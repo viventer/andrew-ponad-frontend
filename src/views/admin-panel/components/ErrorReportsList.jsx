@@ -7,7 +7,7 @@ import {
 } from "../slices/adminPanelSlice";
 import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
 import { useEffect, useState } from "react";
-import { setIsLoading } from "../../global/slices/globalStatesSlice";
+import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import ErrorReportFromList from "./ErrorReportFromList";
 
 export default function ErrorReportsList() {

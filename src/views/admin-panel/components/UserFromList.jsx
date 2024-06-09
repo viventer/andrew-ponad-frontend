@@ -28,7 +28,7 @@ import {
 
 import RoleSelector from "./RoleSelector";
 import UserFromListInfo from "./UserFromListInfo";
-import { StyledUserFromList } from "../styles/UserFromList.styled";
+import { StyledElementFromList } from "../styles/ElementFromList.styled";
 
 export default function UserFromList({ userInfo, setReloadComponent }) {
   const [showInfo, setShowInfo] = useState(false);
@@ -147,7 +147,7 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
   }, [isUpdateSuccess, isUpdateLoading, isDeleteSuccess, isDeleteLoading]);
 
   return (
-    <StyledUserFromList>
+    <StyledElementFromList>
       <div className="shortInfo">
         <div onClick={() => setShowInfo((prev) => !prev)}>
           <FontAwesomeIcon icon={faUser} className="icon" />
@@ -178,6 +178,6 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
         </div>
       </div>
       {showInfo && <UserFromListInfo userInfo={userInfo} />}
-    </StyledUserFromList>
+    </StyledElementFromList>
   );
 }

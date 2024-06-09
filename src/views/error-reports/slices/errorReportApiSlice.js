@@ -47,7 +47,7 @@ export const errorReportApiSlice = apiSlice.injectEndpoints({
       query: ({ id, newStatus }) => ({
         url: `/errorReports/${id}`,
         method: "PATCH",
-        body: JSON.stringify(newStatus),
+        body: JSON.stringify({ newStatus }),
         headers: {
           "Content-Type": "application/json",
         },

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledUserFromList = styled.li`
+export const StyledElementFromList = styled.li`
   & .shortInfo {
     display: flex;
     align-items: center;
