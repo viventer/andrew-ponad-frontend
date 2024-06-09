@@ -6,7 +6,7 @@ import {
   selectStatusFilter,
 } from "../slices/adminPanelSlice";
 import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setIsLoading } from "../../global/slices/globalStatesSlice";
 import ErrorReportFromList from "./ErrorReportFromList";
 
@@ -34,9 +34,11 @@ export default function ErrorReportsList() {
 
       const isStatusFilterSet =
         statusFilter != "Wybierz status" && statusFilter != "Dowolny";
-      const isStatusFilterMatch = (reportData.status = statusFilter);
+      const isStatusFilterMatch = reportData.status == translatedStatus;
 
-      const isSearchQueryMatch = postTitle.includes(searchQuery.toLowerCase());
+      const isSearchQueryMatch = reportTitle.includes(
+        searchQuery.toLowerCase()
+      );
 
       if (isStatusFilterSet && !isStatusFilterMatch) {
         return false;

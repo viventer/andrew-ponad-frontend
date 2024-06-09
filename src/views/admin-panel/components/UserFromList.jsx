@@ -101,7 +101,7 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
       if (!err?.status && !err?.originalStatus) {
         dispatch(setErrMsg("Brak odpowiedzi serwera"));
       } else {
-        setErrMsg(err?.data?.message);
+        dispatch(setErrMsg(err?.data?.message));
       }
     }
   };
