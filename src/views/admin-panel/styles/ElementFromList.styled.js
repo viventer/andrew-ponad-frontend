@@ -13,6 +13,10 @@ export const StyledElementFromList = styled.li`
     background-color: rgba(255, 255, 255, 0.1);
   }
 
+  & .errorReportShortInfo {
+    width: 75%;
+  }
+
   & .rightSectionWrapper {
     display: flex;
     align-items: center;
@@ -92,6 +96,36 @@ export const StyledElementFromList = styled.li`
     color: ${({ theme }) => theme.colors.red};
   }
 
+  @media (max-width: 1550px) {
+    & .errorReportShortInfo {
+      min-width: 0rem;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    & .errorReportShortInfo {
+      width: 85%;
+    }
+  }
+
+  @media (max-width: 1150px) {
+    & .errorReportShortInfo {
+      width: 95%;
+    }
+  }
+
+  @media (max-width: 850px) {
+    & .errorReportShortInfo {
+      row-gap: 0.5rem;
+      flex-wrap: wrap;
+      padding: 0.5rem 2rem;
+    }
+
+    & .errorReportTitle {
+      min-width: 18.5rem;
+    }
+  }
+
   @media (max-width: 730px) {
     & .shortInfo {
       row-gap: 0.5rem;
@@ -112,6 +146,16 @@ export const StyledElementFromList = styled.li`
     & .shortInfo .rightSectionWrapper {
       justify-content: left;
       gap: 3rem;
+    }
+  }
+
+  @media (max-width: 470px) {
+    & .errorReportTitle > .icon {
+      display: none;
+    }
+
+    & .errorReportShortInfo {
+      padding: 0.5rem 1rem;
     }
   }
 

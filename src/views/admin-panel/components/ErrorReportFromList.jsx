@@ -26,7 +26,6 @@ import {
 import ErrorReportFromListDetails from "./ErrorReportFromListDetails";
 import StatusSelector from "./StatusSelector";
 import { StyledElementFromList } from "../styles/ElementFromList.styled";
-import useShorten from "../../../hooks/useShorten";
 
 export default function ErrorReportFromList({
   reportData,
@@ -137,7 +136,35 @@ export default function ErrorReportFromList({
     }
   };
 
-  const titleMaxLength = 18;
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [titleMaxLength, setTitleMaxLength] = useState(18);
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (windowWidth > 1500) {
+      setTitleMaxLength(40);
+    } else if (windowWidth > 1025) {
+      setTitleMaxLength(30);
+    } else if (windowWidth > 820) {
+      setTitleMaxLength(18);
+    } else if (windowWidth > 625) {
+      setTitleMaxLength(30);
+    } else if (windowWidth > 530) {
+      setTitleMaxLength(24);
+    } else if (windowWidth > 360) {
+      setTitleMaxLength(18);
+    } else {
+      setTitleMaxLength(16);
+    }
+  }, [windowWidth]);
+
   const shortenTitle =
     reportData.title.length > titleMaxLength
       ? reportData.title.slice(0, titleMaxLength) + "..."
@@ -145,8 +172,11 @@ export default function ErrorReportFromList({
 
   return (
     <StyledElementFromList className={`${isDeleted ? "hide" : ""}`}>
-      <div className="shortInfo">
-        <div onClick={() => setShowDetails((prev) => !prev)}>
+      <div className="shortInfo errorReportShortInfo">
+        <div
+          onClick={() => setShowDetails((prev) => !prev)}
+          className="errorReportTitle"
+        >
           <FontAwesomeIcon icon={faBug} className="icon" />
           <p>{shortenTitle}</p>
         </div>

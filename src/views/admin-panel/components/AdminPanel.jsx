@@ -40,7 +40,7 @@ export default function AdminPanel() {
                 onClick={() => setSelectedTab("errorReports")}
                 aria-selected={selectedTab == "errorReports" ? true : false}
               >
-                Zgłoszenia błędów
+                Błędy
               </li>
             )}
           </ul>

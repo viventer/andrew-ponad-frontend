@@ -4,13 +4,14 @@ export const StyledErrorReportFromListDetails = styled.section`
   padding: 1rem;
   background-color: rgba(255, 255, 255, 0.05);
   min-width: 37rem;
-  width: 50%;
+  width: 75%;
 
   & .reportTitle {
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
     padding-bottom: 0.2rem;
     margin-bottom: 1rem;
     font-size: 1.3rem;
+    overflow-x: hidden;
   }
 
   & h3 {
@@ -67,8 +68,13 @@ export const StyledErrorReportFromListDetails = styled.section`
     font-weight: 500;
   }
 
-  @media (max-width: 730px) {
+  @media (max-width: 1150px) {
     width: 95%;
-    min-width: 0rem;
+  }
+
+  @media (max-width: 650px) {
+    & .reportTitle {
+      font-size: 1.1rem;
+    }
   }
 `;

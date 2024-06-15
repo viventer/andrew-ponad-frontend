@@ -16,12 +16,15 @@ export default function ErrorReportFromListDetails({ reportData }) {
 
   const [showScreenshots, setShowScreenshots] = useState(false);
 
+  const hasImages =
+    formattedImages.length > 0 && formattedImages[0] != undefined;
+
   return (
     <StyledErrorReportFromListDetails>
       <h3 className="reportTitle">{reportData.title}</h3>
       <h3>Opis błędu:</h3>
       <article dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></article>
-      {formattedImages && (
+      {hasImages && (
         <button onClick={() => setShowScreenshots((prev) => !prev)}>
           <h3>Dołączone zrzuty ekranu</h3>
           <FontAwesomeIcon
