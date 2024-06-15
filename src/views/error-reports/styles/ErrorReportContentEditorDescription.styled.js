@@ -3,6 +3,14 @@ import styled from "styled-components";
 export const StyledErrorReportContentEditorDescription = styled.section`
   margin-bottom: 1rem;
 
+  .red {
+    color: ${({ theme }) => theme.colors.red};
+  }
+
+  .green {
+    color: ${({ theme }) => theme.colors.green};
+  }
+
   & > h3 {
     margin-bottom: 0.2rem;
   }
@@ -28,6 +36,11 @@ export const StyledErrorReportContentEditorDescription = styled.section`
   .quill ul,
   .quill ol {
     font-size: 1.1rem;
+    font-weight: 300;
+  }
+
+  & strong {
+    font-weight: 500;
   }
 
   .ql-formats * {

@@ -1,10 +1,14 @@
 import ErrorReportContentEditorDescription from "./ErrorReportContentEditorDescription";
 import ErrorReportContentEditorImages from "./ErrorReportContentEditorImages";
 
-export default function ErrorReportContentEditor() {
+export default function ErrorReportContentEditor({
+  isDescriptionLengthCorrect,
+}) {
   return (
     <>
-      <ErrorReportContentEditorDescription />
+      <ErrorReportContentEditorDescription
+        isDescriptionLengthCorrect={isDescriptionLengthCorrect}
+      />
       <ErrorReportContentEditorImages />
     </>
   );

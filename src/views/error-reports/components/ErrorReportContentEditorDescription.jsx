@@ -6,7 +6,9 @@ import {
   setErrorReportDescription,
 } from "../slices/errorReportSlice";
 
-export default function ErrorReportContentEditorDescription() {
+export default function ErrorReportContentEditorDescription({
+  isDescriptionLengthCorrect,
+}) {
   const errorReportDescription = useSelector(selectErrorReportDescription);
 
   const dispatch = useDispatch();
@@ -22,7 +24,11 @@ export default function ErrorReportContentEditorDescription() {
   return (
     <StyledErrorReportContentEditorDescription>
       <h3>
-        Opis błędu <span className="sunset">*</span>
+        Opis błędu
+        <span className={isDescriptionLengthCorrect ? "green" : "red"}>
+          (24 - 1000 znaków)
+        </span>{" "}
+        <span className="sunset">*</span>
       </h3>
       <ReactQuill
         theme="snow"

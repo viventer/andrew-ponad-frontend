@@ -86,6 +86,10 @@ export const GlobalStyles = createGlobalStyle`
     z-index: 99999999;
   }
 
+  .almostMaxZIndex {
+    z-index: 99999998;
+  }
+
   .responsivePostElement {
     width: 90vw;
     height: calc(0.5625 * 90vw);

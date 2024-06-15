@@ -10,6 +10,7 @@ import {
 import {
   setErrMsg,
   setIsErrorReportVisible,
+  setIsLoading,
   setSuccessMsg,
 } from "../../global/slices/globalStatesSlice";
 import { StyledButton } from "../../global/styles/Button.styled";
@@ -18,6 +19,8 @@ import { selectUserId } from "../../auth/slices/authSlice";
 import ErrorReportTitleInput from "./ErrorReportTitleInput";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
+import useGetTextOnlyLength from "../../../hooks/useGetTextOnlyLength";
 
 export default function ErrorReportForm() {
   const title = useSelector(selectErrorReportTitle);
@@ -27,21 +30,18 @@ export default function ErrorReportForm() {
 
   const dispatch = useDispatch();
 
-  const [createNewErrorReport, { isLoading }] =
+  const [createNewErrorReport, { isLoading, isSuccess, isError }] =
     useCreateNewErrorReportMutation();
 
   const sendReport = async () => {
     try {
-      console.log("tak");
+      console.log("próba");
       await createNewErrorReport({
         title,
         description,
         images,
         author: userId,
       }).unwrap();
-      dispatch(setSuccessMsg("Zgłoszenie zostało wysłane."));
-      dispatch(setIsErrorReportVisible(false));
-      dispatch(resetErrorReportState());
     } catch (err) {
       handleCreateReportError(err);
     }
@@ -59,16 +59,41 @@ export default function ErrorReportForm() {
     }
   };
 
-  const isDataProvided = title && description.length >= 24;
+  useEffect(() => {
+    if (isLoading) {
+      console.log("loading");
+      dispatch(setIsLoading(true));
+      return;
+    } else if (isSuccess) {
+      dispatch(setIsLoading(false));
+      dispatch(setSuccessMsg("Zgłoszenie zostało wysłane."));
+      dispatch(resetErrorReportState());
+      dispatch(setIsErrorReportVisible(false));
+    } else if (isError) {
+      dispatch(setIsErrorReportVisible(false));
+    }
+  }, [isLoading]);
+
+  const descriptionTextOnlyLength = useGetTextOnlyLength(description);
+  const isDescriptionLengthCorrect =
+    descriptionTextOnlyLength <= 1000 &&
+    description.length <= 1400 &&
+    (descriptionTextOnlyLength >= 24 || description.length >= 50);
+  const isDataProvided = title && description;
 
   return (
     <StyledErrorReportForm onSubmit={(e) => e.preventDefault()}>
       <ErrorReportTitleInput />
-      <ErrorReportContentEditor />
+      <ErrorReportContentEditor
+        isDescriptionLengthCorrect={isDescriptionLengthCorrect}
+      />
       <p>
         <span className="sunset">*</span> pole wymagane
       </p>
-      <StyledButton onClick={sendReport} disabled={!isDataProvided}>
+      <StyledButton
+        onClick={sendReport}
+        disabled={!(isDataProvided && isDescriptionLengthCorrect)}
+      >
         <FontAwesomeIcon icon={faPaperPlane} />
         Wyślij zgłoszenie
       </StyledButton>

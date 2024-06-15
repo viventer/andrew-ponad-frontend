@@ -6,6 +6,7 @@ import {
   selectDialogAnswer,
   setDialogAction,
   setDialogAnswer,
+  setDialogMsg,
   setDialogOptions,
   setErrMsg,
   setIsLoading,
@@ -25,6 +26,7 @@ import {
 import ErrorReportFromListDetails from "./ErrorReportFromListDetails";
 import StatusSelector from "./StatusSelector";
 import { StyledElementFromList } from "../styles/ElementFromList.styled";
+import useShorten from "../../../hooks/useShorten";
 
 export default function ErrorReportFromList({
   reportData,
@@ -88,8 +90,14 @@ export default function ErrorReportFromList({
   };
 
   useEffect(() => {
-    if (dialogAnswer == "Tak" && dialogAction == `deletePost${postData.id}`) {
+    console.log(dialogAction);
+    if (
+      dialogAnswer == "Tak" &&
+      dialogAction == `deleteErrorReport${reportData.id}`
+    ) {
+      console.log("Wywołane");
       deleteReport();
+      setIsDeleted(true);
     }
     dispatch(setDialogAction(null));
     dispatch(setDialogAnswer(null));
@@ -129,12 +137,18 @@ export default function ErrorReportFromList({
     }
   };
 
+  const titleMaxLength = 18;
+  const shortenTitle =
+    reportData.title.length > titleMaxLength
+      ? reportData.title.slice(0, titleMaxLength) + "..."
+      : reportData.title;
+
   return (
     <StyledElementFromList className={`${isDeleted ? "hide" : ""}`}>
       <div className="shortInfo">
         <div onClick={() => setShowDetails((prev) => !prev)}>
           <FontAwesomeIcon icon={faBug} className="icon" />
-          <p>{reportData.title}</p>
+          <p>{shortenTitle}</p>
         </div>
         <div className="rightSectionWrapper">
           <div>

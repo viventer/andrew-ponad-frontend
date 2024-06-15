@@ -38,7 +38,7 @@ export default function Layout() {
         </div>
       )}
       {isErrorReportVisible && (
-        <div className="blur maxZIndex">
+        <div className="blur almostMaxZIndex">
           <CreateErrorReport />
         </div>
       )}
