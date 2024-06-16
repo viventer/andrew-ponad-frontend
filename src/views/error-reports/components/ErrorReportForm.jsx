@@ -1,6 +1,9 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyledErrorReportForm } from "../styles/ErrorReportForm.styled";
-import ErrorReportContentEditor from "./ErrorReportContentEditor";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+
 import {
   resetErrorReportState,
   selectErrorReportDescription,
@@ -13,14 +16,15 @@ import {
   setIsLoading,
   setSuccessMsg,
 } from "../../global/slices/globalStatesSlice";
-import { StyledButton } from "../../global/styles/Button.styled";
 import { useCreateNewErrorReportMutation } from "../slices/errorReportApiSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
-import ErrorReportTitleInput from "./ErrorReportTitleInput";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
-import { useEffect } from "react";
+
 import useGetTextOnlyLength from "../../../hooks/useGetTextOnlyLength";
+
+import ErrorReportContentEditor from "./ErrorReportContentEditor";
+import ErrorReportTitleInput from "./ErrorReportTitleInput";
+import { StyledErrorReportForm } from "../styles/ErrorReportForm.styled";
+import { StyledButton } from "../../global/styles/Button.styled";
 
 export default function ErrorReportForm() {
   const title = useSelector(selectErrorReportTitle);
@@ -35,7 +39,6 @@ export default function ErrorReportForm() {
 
   const sendReport = async () => {
     try {
-      console.log("próba");
       await createNewErrorReport({
         title,
         description,
@@ -61,7 +64,6 @@ export default function ErrorReportForm() {
 
   useEffect(() => {
     if (isLoading) {
-      console.log("loading");
       dispatch(setIsLoading(true));
       return;
     } else if (isSuccess) {
@@ -70,6 +72,7 @@ export default function ErrorReportForm() {
       dispatch(resetErrorReportState());
       dispatch(setIsErrorReportVisible(false));
     } else if (isError) {
+      dispatch(setIsLoading(false));
       dispatch(setIsErrorReportVisible(false));
     }
   }, [isLoading]);

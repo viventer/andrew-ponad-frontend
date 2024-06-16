@@ -1,13 +1,18 @@
-import DOMPurify from "dompurify";
-import { StyledErrorReportFromListDetails } from "../styles/ErrorReportFromListDetails.styled";
 import { useState } from "react";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+
+import DOMPurify from "dompurify";
+
+import useGetBase64Regex from "../../../hooks/useGetBase64Regex";
+
+import { StyledErrorReportFromListDetails } from "../styles/ErrorReportFromListDetails.styled";
 
 export default function ErrorReportFromListDetails({ reportData }) {
   const sanitizedHTML = DOMPurify.sanitize(reportData.description);
   const creationDate = new Date(reportData.createdAt).toLocaleDateString("PL");
-  const base64Regex = /^data:image\/[^;]+;base64,/;
+  const base64Regex = useGetBase64Regex();
 
   const formattedImages = reportData.images.map((imageUrl, index) => {
     const isImageCorrect = base64Regex.test(imageUrl);

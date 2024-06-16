@@ -1,23 +1,23 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ImageDropzone from "../../global/components/ImageDropzone";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+
+import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
+
 import {
   addErrorReportImage,
   changeErrorReportImage,
   deleteErrorReportImage,
   selectErrorReportImages,
 } from "../slices/errorReportSlice";
+
+import useGetBase64Regex from "../../../hooks/useGetBase64Regex";
+
+import ImageDropzone from "../../global/components/ImageDropzone";
 import { StyledErrorReportContentEditorImages } from "../styles/ErrorReportContentEditorImages.styled";
-import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
-import { useEffect, useState } from "react";
 import { StyledButton } from "../../global/styles/Button.styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faAdd,
-  faPlus,
-  faPlusCircle,
-  faSquarePlus,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
 
 export default function ErrorReportContentEditorImages() {
   const images = useSelector(selectErrorReportImages);
@@ -28,7 +28,7 @@ export default function ErrorReportContentEditorImages() {
   useEffect(() => {
     setImageDropzones(
       images.map((image, index) => {
-        const base64Regex = /^data:image\/[^;]+;base64,/;
+        const base64Regex = useGetBase64Regex();
         const isThumbnailCorrect = base64Regex.test(image);
 
         return (
@@ -41,10 +41,7 @@ export default function ErrorReportContentEditorImages() {
                 <FontAwesomeIcon icon={faTrash} />
               </button>
             )}
-            <img
-              src={isThumbnailCorrect ? image : thumbnailPlaceholder}
-              alt=""
-            />
+            <img src={isThumbnailCorrect ? image : thumbnailPlaceholder} />
             <ImageDropzone
               imagePreview={image}
               setImagePreview={(newUrl) => {
@@ -57,7 +54,6 @@ export default function ErrorReportContentEditorImages() {
         );
       })
     );
-    console.log(images);
   }, [images]);
 
   const addNewImage = () => {

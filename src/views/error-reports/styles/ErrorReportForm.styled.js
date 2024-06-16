@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const StyledErrorReportForm = styled.form`
   & p {
+    margin-bottom: 1rem;
     font-size: 1.1rem;
     font-weight: 500;
-    margin-bottom: 1rem;
   }
 
   & > button {
-    min-width: 200px;
     width: 20vw;
+    min-width: 200px;
     justify-content: center;
   }
 

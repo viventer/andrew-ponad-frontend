@@ -1,10 +1,13 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { StyledCreateErrorReport } from "../styles/CreateErrorReport.styled";
-import ErrorReportForm from "./ErrorReportForm";
-import { faBug, faClose } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
+
+import { faBug, faClose } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { setIsErrorReportVisible } from "../../global/slices/globalStatesSlice";
 import { resetErrorReportState } from "../slices/errorReportSlice";
+
+import { StyledCreateErrorReport } from "../styles/CreateErrorReport.styled";
+import ErrorReportForm from "./ErrorReportForm";
 
 export default function CreateErrorReport() {
   const dispatch = useDispatch();

@@ -1,10 +1,13 @@
-import ReactQuill from "react-quill";
-import { StyledErrorReportContentEditorDescription } from "../styles/ErrorReportContentEditorDescription.styled";
 import { useDispatch, useSelector } from "react-redux";
+
+import ReactQuill from "react-quill";
+
 import {
   selectErrorReportDescription,
   setErrorReportDescription,
 } from "../slices/errorReportSlice";
+
+import { StyledErrorReportContentEditorDescription } from "../styles/ErrorReportContentEditorDescription.styled";
 
 export default function ErrorReportContentEditorDescription({
   isDescriptionLengthCorrect,
@@ -27,7 +30,7 @@ export default function ErrorReportContentEditorDescription({
         Opis błędu
         <span className={isDescriptionLengthCorrect ? "green" : "red"}>
           (24 - 1000 znaków)
-        </span>{" "}
+        </span>
         <span className="sunset">*</span>
       </h3>
       <ReactQuill

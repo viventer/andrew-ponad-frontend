@@ -1,14 +1,17 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
+
 import { useGetErrorReportsQuery } from "../../error-reports/slices/errorReportApiSlice";
-import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 import {
   selectErrorReportsTabSearchQuery,
   selectStatusFilter,
 } from "../slices/adminPanelSlice";
-import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
-import { useEffect, useState } from "react";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+
 import ErrorReportFromList from "./ErrorReportFromList";
+import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 
 export default function ErrorReportsList() {
   const {

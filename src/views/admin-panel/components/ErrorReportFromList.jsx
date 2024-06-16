@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBug,
+  faCheckCircle,
+  faSave,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+
 import {
   selectDialogAction,
   selectDialogAnswer,
@@ -15,14 +23,9 @@ import {
   useChangeErrorReportStatusMutation,
   useDeleteErrorReportMutation,
 } from "../../error-reports/slices/errorReportApiSlice";
+
 import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBug,
-  faCheckCircle,
-  faSave,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+
 import ErrorReportFromListDetails from "./ErrorReportFromListDetails";
 import StatusSelector from "./StatusSelector";
 import { StyledElementFromList } from "../styles/ElementFromList.styled";
@@ -35,7 +38,6 @@ export default function ErrorReportFromList({
   const [showDetails, setShowDetails] = useState(false);
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const dialogAnswer = useSelector(selectDialogAnswer);
@@ -94,7 +96,6 @@ export default function ErrorReportFromList({
       dialogAnswer == "Tak" &&
       dialogAction == `deleteErrorReport${reportData.id}`
     ) {
-      console.log("Wywołane");
       deleteReport();
       setIsDeleted(true);
     }

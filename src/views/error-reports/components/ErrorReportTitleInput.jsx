@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   selectErrorReportTitle,
   setErrorReportTitle,
 } from "../slices/errorReportSlice";
 import { setErrMsg } from "../../global/slices/globalStatesSlice";
+
 import { StyledErrorReportTitleInput } from "../styles/ErrorReportTitleInput.styled";
 
 export default function ErrorReportTitleInput() {

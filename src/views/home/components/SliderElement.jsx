@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import useShorten from "../../../hooks/useShorten";
-
 import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
+
+import useGetBase64Regex from "../../../hooks/useGetBase64Regex";
 
 import PostFromListInfo from "../../global/components/PostFromListInfo";
 import { StyledSliderElement } from "../styles/SliderElement.styled";
@@ -13,7 +12,7 @@ export default function SliderElement({
   index,
   visibleElementsIndexes,
 }) {
-  const base64Regex = /^data:image\/[^;]+;base64,/;
+  const base64Regex = useGetBase64Regex();
   const isThumbnailCorrect = base64Regex.test(postData.thumbnail);
   const thumbnailUrl = isThumbnailCorrect
     ? postData.thumbnail

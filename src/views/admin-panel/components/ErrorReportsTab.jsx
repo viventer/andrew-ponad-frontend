@@ -1,6 +1,6 @@
-import { StyledAdminPanelTab } from "../styles/AdminPanelTab.styled";
 import ErrorReportsFilters from "./ErrorReportsFilters";
 import ErrorReportsList from "./ErrorReportsList";
+import { StyledAdminPanelTab } from "../styles/AdminPanelTab.styled";
 
 export default function ErrorReportsTab() {
   return (

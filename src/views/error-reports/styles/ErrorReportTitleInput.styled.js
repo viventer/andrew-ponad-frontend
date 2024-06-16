@@ -6,16 +6,16 @@ export const StyledErrorReportTitleInput = styled.section`
   margin-bottom: 1rem;
 
   & > label {
-    font-size: 1.2rem;
     margin-bottom: 0.2rem;
+    font-size: 1.2rem;
   }
 
   & > input {
-    background-color: rgba(255, 255, 255, 0);
     border: 0.01rem solid rgba(255, 255, 255, 0.5);
-    color: white;
     padding: 0.3rem 0.6rem;
     font-size: 1.1rem;
+    color: white;
+    background-color: rgba(255, 255, 255, 0);
     transition: all 0.15s ease-in-out;
   }
 

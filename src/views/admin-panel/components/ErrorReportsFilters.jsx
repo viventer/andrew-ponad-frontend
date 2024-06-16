@@ -1,16 +1,20 @@
 import { useDispatch, useSelector } from "react-redux";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
+
+import useGetErrorReportsStatusOptions from "../../../hooks/useGetErrorReportsStatusOptions";
+
 import {
   selectErrorReportsTabSearchQuery,
   selectStatusFilter,
   setErrorReportsTabSearchQuery,
   setStatusFilter,
 } from "../slices/adminPanelSlice";
-import { StyledAdminPanelFilters } from "../styles/AdminPanelFilters.styled";
-import useGetErrorReportsStatusOptions from "../../../hooks/useGetErrorReportsStatusOptions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilter } from "@fortawesome/free-solid-svg-icons";
+
 import FilterSelector from "./FilterSelector";
 import SearchBar from "../../global/components/SearchBar";
+import { StyledAdminPanelFilters } from "../styles/AdminPanelFilters.styled";
 
 export default function ErrorReportsFilters() {
   const selectedStatusFilter = useSelector(selectStatusFilter);

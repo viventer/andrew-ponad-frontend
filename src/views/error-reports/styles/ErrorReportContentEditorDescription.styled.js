@@ -16,8 +16,8 @@ export const StyledErrorReportContentEditorDescription = styled.section`
   }
 
   & .quill {
-    outline: none;
     max-width: 100%;
+    outline: none;
   }
 
   & .ql-toolbar {
