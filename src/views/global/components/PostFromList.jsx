@@ -27,16 +27,16 @@ import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
 
 import useShorten from "../../../hooks/useShorten";
 import useAuth from "../../../hooks/useAuth";
-import useGetBase64Regex from "../../../hooks/useGetBase64Regex";
 
 import { StyledPostFromList } from "../styles/PostFromList.styled";
 import PostFromListInfo from "./PostFromListInfo";
+import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
 
 export default function PostFromList({ postData, setReloadComponent, view }) {
   const [isDeleted, setIsDeleted] = useState(false);
 
-  const base64Regex = useGetBase64Regex();
-  const isThumbnailCorrect = base64Regex.test(postData.thumbnail);
+  const isThumbnailUrlCorrect = useIsThumbnailUrlCorrect();
+  const isThumbnailCorrect = isThumbnailUrlCorrect(postData.thumbnail);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();

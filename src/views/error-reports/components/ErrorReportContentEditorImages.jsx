@@ -13,23 +13,23 @@ import {
   selectErrorReportImages,
 } from "../slices/errorReportSlice";
 
-import useGetBase64Regex from "../../../hooks/useGetBase64Regex";
-
 import ImageDropzone from "../../global/components/ImageDropzone";
 import { StyledErrorReportContentEditorImages } from "../styles/ErrorReportContentEditorImages.styled";
 import { StyledButton } from "../../global/styles/Button.styled";
+import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
 
 export default function ErrorReportContentEditorImages() {
   const images = useSelector(selectErrorReportImages);
 
   const dispatch = useDispatch();
 
+  const isThumbnailUrlCorrect = useIsThumbnailUrlCorrect();
+
   const [imageDropzones, setImageDropzones] = useState([]);
   useEffect(() => {
     setImageDropzones(
       images.map((image, index) => {
-        const base64Regex = useGetBase64Regex();
-        const isThumbnailCorrect = base64Regex.test(image);
+        const isThumbnailCorrect = isThumbnailUrlCorrect(image);
 
         return (
           <div key={index} className="dropzoneWrapper">

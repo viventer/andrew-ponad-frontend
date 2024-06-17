@@ -2,18 +2,17 @@ import { useNavigate } from "react-router-dom";
 
 import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
 
-import useGetBase64Regex from "../../../hooks/useGetBase64Regex";
-
 import PostFromListInfo from "../../global/components/PostFromListInfo";
 import { StyledSliderElement } from "../styles/SliderElement.styled";
+import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
 
 export default function SliderElement({
   postData,
   index,
   visibleElementsIndexes,
 }) {
-  const base64Regex = useGetBase64Regex();
-  const isThumbnailCorrect = base64Regex.test(postData.thumbnail);
+  const isThumbnailUrlCorrect = useIsThumbnailUrlCorrect();
+  const isThumbnailCorrect = isThumbnailUrlCorrect(postData.thumbnail);
   const thumbnailUrl = isThumbnailCorrect
     ? postData.thumbnail
     : thumbnailPlaceholder;

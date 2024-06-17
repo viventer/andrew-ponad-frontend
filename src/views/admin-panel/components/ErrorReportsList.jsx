@@ -81,6 +81,11 @@ export default function ErrorReportsList() {
             />
           );
         })}
+      {filteredReportsData && filteredReportsData.length == 0 && (
+        <p>
+          Nie znaleziono zgłoszeń spełniających podane kryteria wyszukiwania.
+        </p>
+      )}
     </StyledAdminPanelList>
   );
 }

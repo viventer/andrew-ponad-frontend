@@ -80,7 +80,7 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
           );
         })}
       {filteredPostsData && filteredPostsData.length == 0 && (
-        <p>Nie znaleziono postów. Zmień kryteria wyszukiwania.</p>
+        <p>Nie znaleziono postów spełniających podane kryteria wyszukiwania.</p>
       )}
     </StyledPostsSearchResults>
   );

@@ -98,6 +98,12 @@ export default function UsersList() {
             />
           );
         })}
+      {filteredUsersData && filteredUsersData.length == 0 && (
+        <p>
+          Nie znaleziono użytkowników spełniających podane kryteria
+          wyszukiwania.
+        </p>
+      )}
     </StyledAdminPanelList>
   );
 }

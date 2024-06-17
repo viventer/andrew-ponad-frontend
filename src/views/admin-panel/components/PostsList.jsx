@@ -94,6 +94,9 @@ export default function PostsList() {
             />
           );
         })}
+      {filteredPostData && filteredPostData.length == 0 && (
+        <p>Nie znaleziono postów spełniających podane kryteria wyszukiwania.</p>
+      )}
     </StyledAdminPanelList>
   );
 }
