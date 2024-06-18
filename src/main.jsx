@@ -7,9 +7,13 @@ import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store.js";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
+
 import { GlobalStyles } from "./views/global/styles/GlobalStyles.js";
 
 import App from "./App.jsx";
+
+if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 const theme = {
   colors: {
