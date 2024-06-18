@@ -7,7 +7,7 @@ import {
 } from "../views/global/slices/globalStatesSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3500",
+  baseUrl: "https://andrew-ponad-backend.onrender.com",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
