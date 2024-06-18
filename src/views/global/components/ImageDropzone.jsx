@@ -58,7 +58,7 @@ export default function ImageDropzone({
       {...getRootProps()}
       $isabsolute={isThumbnail ? 1 : 0}
       className={`imageDropzone ${
-        view != "errorReport" && responsivePostElement
+        view != "errorReport" && "responsivePostElement"
       }`}
     >
       <input {...getInputProps()} />
