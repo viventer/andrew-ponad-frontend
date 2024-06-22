@@ -5,6 +5,7 @@ import UsersTab from "./UsersTab";
 import PostsTab from "./PostsTab";
 import useAuth from "../../../hooks/useAuth";
 import ErrorReportsTab from "./ErrorReportsTab";
+import CategoriesTab from "./CategoriesTab";
 
 export default function AdminPanel() {
   const [selectedTab, setSelectedTab] = useState("posts");
@@ -12,6 +13,7 @@ export default function AdminPanel() {
   const { mainRole } = useAuth();
   const hasUsersTabAccess = mainRole == "Admin";
   const hasErrorReportsTabAccess = mainRole == "Admin";
+  const hasCategoriesTabAccess = mainRole == "Admin";
 
   return (
     <StyledAdminPanel>
@@ -25,6 +27,15 @@ export default function AdminPanel() {
             >
               Posty
             </li>
+            {hasCategoriesTabAccess && (
+              <li
+                className={selectedTab == "categories" ? "selected" : ""}
+                onClick={() => setSelectedTab("categories")}
+                aria-selected={selectedTab == "categories" ? true : false}
+              >
+                Kategorie
+              </li>
+            )}
             {hasUsersTabAccess && (
               <li
                 className={selectedTab == "users" ? "selected" : ""}
@@ -49,8 +60,10 @@ export default function AdminPanel() {
           <UsersTab />
         ) : selectedTab == "posts" ? (
           <PostsTab />
-        ) : (
+        ) : selectedTab == "errorReports" ? (
           <ErrorReportsTab />
+        ) : (
+          <CategoriesTab />
         )}
       </div>
     </StyledAdminPanel>

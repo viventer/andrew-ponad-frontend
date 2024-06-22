@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledAddPostButton = styled.button`
+export const StyledAddButton = styled.button`
   display: flex;
   align-items: center;
   gap: 0.5rem;

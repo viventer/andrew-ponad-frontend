@@ -8,6 +8,7 @@ const initialState = {
   usersTabSearchQuery: "",
   statusFilter: "Wybierz status",
   errorReportsTabSearchQuery: "",
+  categoriesTabSearchQuery: "",
 };
 
 const adminPanelSlice = createSlice({
@@ -35,6 +36,9 @@ const adminPanelSlice = createSlice({
     setErrorReportsTabSearchQuery: (state, action) => {
       state.errorReportsTabSearchQuery = action.payload;
     },
+    setCategoriesTabSearchQuery: (state, action) => {
+      state.categoriesTabSearchQuery = action.payload;
+    },
   },
 });
 
@@ -46,6 +50,7 @@ export const {
   setUsersTabSearchQuery,
   setStatusFilter,
   setErrorReportsTabSearchQuery,
+  setCategoriesTabSearchQuery,
 } = adminPanelSlice.actions;
 
 export const selectVisibilityFilter = (state) =>
@@ -59,5 +64,7 @@ export const selectUsersTabSearchQuery = (state) =>
 export const selectStatusFilter = (state) => state.adminPanel.statusFilter;
 export const selectErrorReportsTabSearchQuery = (state) =>
   state.adminPanel.errorReportsTabSearchQuery;
+export const selectCategoriesTabSearchQuery = (state) =>
+  state.adminPanel.categoriesTabSearchQuery;
 
 export default adminPanelSlice.reducer;
