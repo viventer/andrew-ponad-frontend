@@ -7,6 +7,7 @@ import {
   setCategoriesTabSearchQuery,
 } from "../slices/adminPanelSlice";
 import AddCategoryButton from "./AddCategoryButton";
+import CategoriesList from "./CategoriesList";
 
 export default function CategoriesTab() {
   const searchQuery = useSelector(selectCategoriesTabSearchQuery);
@@ -25,6 +26,7 @@ export default function CategoriesTab() {
         />
         <AddCategoryButton />
       </div>
+      <CategoriesList />
     </StyledAdminPanelTab>
   );
 }

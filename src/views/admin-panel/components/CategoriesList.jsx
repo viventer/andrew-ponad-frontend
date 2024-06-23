@@ -3,6 +3,8 @@ import { useGetAllCategoriesQuery } from "../../global/slices/categoriesApiSlice
 import { selectCategoriesTabSearchQuery } from "../slices/adminPanelSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import { useEffect, useState } from "react";
+import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
+import CategoryFromList from "./CategoryFromList";
 
 export default function CategoriesList() {
   const {
@@ -16,10 +18,12 @@ export default function CategoriesList() {
   const searchQuery = useSelector(selectCategoriesTabSearchQuery);
 
   let categoriesData;
+  let filteredCategoriesData;
   if (isSuccess) {
     categoriesData = Object.entries(categoriesRawData.entities);
-    filteredCategoriesData = categoriesData.filter((category) => {
-      const categoryData = category[1];
+    console.log(categoriesData);
+    filteredCategoriesData = categoriesData.filter(([id, category]) => {
+      console.log(category);
       const categoryName = category.name.toLowerCase();
 
       const isSearchQueryMatch = categoryName.includes(

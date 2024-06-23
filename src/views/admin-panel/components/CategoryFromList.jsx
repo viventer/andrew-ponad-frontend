@@ -8,8 +8,15 @@ import {
   setDialogAnswer,
   setDialogMsg,
   setDialogOptions,
+  setErrMsg,
+  setIsLoading,
 } from "../../global/slices/globalStatesSlice";
 import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCompass, faTrash } from "@fortawesome/free-solid-svg-icons";
+import CategoryNameInput from "./CategoryNameInput";
+import { StyledElementFromList } from "../styles/ElementFromList.styled";
+import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";
 
 export default function CategoryFromList({ categoryData, setReloadComponent }) {
   const [isDeleted, setIsDeleted] = useState(false);
@@ -44,5 +51,28 @@ export default function CategoryFromList({ categoryData, setReloadComponent }) {
   const [deleteCategoryMutation, { isDeletingLoading }] =
     useDeleteCategoryMutation();
 
-  return <div>CategoryFromList</div>;
+  const deleteCategory = async () => {
+    try {
+      await deleteCategoryMutation(categoryData.id).unwrap();
+      if (isDeletingLoading) {
+        dispatch(setIsLoading(true));
+        return;
+      } else {
+        dispatch(setIsLoading(false));
+        setReloadComponent((prev) => !prev);
+        setIsDeleted(true);
+      }
+    } catch (err) {
+      dispatch(setErrMsg(err?.data?.message || "Błąd usuwania kategorii."));
+      dispatch(setIsLoading(false));
+    }
+  };
+
+  return (
+    <StyledCategoryFromList className={`${isDeleted ? "hide" : ""}`}>
+      <FontAwesomeIcon icon={faCompass} />
+      <CategoryNameInput categoryData={categoryData} />
+      <FontAwesomeIcon icon={faTrash} />
+    </StyledCategoryFromList>
+  );
 }
