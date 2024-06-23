@@ -15,10 +15,13 @@ import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCompass, faTrash } from "@fortawesome/free-solid-svg-icons";
 import CategoryNameInput from "./CategoryNameInput";
-import { StyledElementFromList } from "../styles/ElementFromList.styled";
 import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";
 
-export default function CategoryFromList({ categoryData, setReloadComponent }) {
+export default function CategoryFromList({
+  categoryData,
+  setReloadComponent,
+  toAdd,
+}) {
   const [isDeleted, setIsDeleted] = useState(false);
 
   const navigate = useNavigate();
@@ -71,8 +74,12 @@ export default function CategoryFromList({ categoryData, setReloadComponent }) {
   return (
     <StyledCategoryFromList className={`${isDeleted ? "hide" : ""}`}>
       <FontAwesomeIcon icon={faCompass} />
-      <CategoryNameInput categoryData={categoryData} />
-      <FontAwesomeIcon icon={faTrash} />
+      <CategoryNameInput
+        categoryData={categoryData}
+        setReloadComponent={setReloadComponent}
+        toAdd={toAdd}
+      />
+      {!toAdd && <FontAwesomeIcon icon={faTrash} />}
     </StyledCategoryFromList>
   );
 }
