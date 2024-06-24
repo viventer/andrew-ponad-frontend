@@ -20,7 +20,7 @@ import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";
 export default function CategoryFromList({
   categoryData,
   setReloadComponent,
-  toAdd,
+  toBeAdded,
 }) {
   const [isDeleted, setIsDeleted] = useState(false);
 
@@ -73,13 +73,16 @@ export default function CategoryFromList({
 
   return (
     <StyledCategoryFromList className={`${isDeleted ? "hide" : ""}`}>
-      <FontAwesomeIcon icon={faCompass} />
       <CategoryNameInput
         categoryData={categoryData}
         setReloadComponent={setReloadComponent}
-        toAdd={toAdd}
+        toBeAdded={toBeAdded}
       />
-      {!toAdd && <FontAwesomeIcon icon={faTrash} />}
+      {!toBeAdded && (
+        <button className="deleteButton" onClick={deleteCategory}>
+          <FontAwesomeIcon icon={faTrash} className="icon" />
+        </button>
+      )}
     </StyledCategoryFromList>
   );
 }

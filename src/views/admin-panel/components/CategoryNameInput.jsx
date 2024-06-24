@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StyledCategoryNameInput } from "../styles/CategoryNameInput.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle, faSave } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheckCircle,
+  faCircleExclamation,
+  faPencil,
+  faPlusCircle,
+  faSave,
+} from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import {
@@ -12,14 +18,17 @@ import {
 export default function CategoryNameInput({
   categoryData,
   setReloadComponent,
-  toAdd,
+  toBeAdded,
 }) {
   const [newCategoryName, setNewCategoryName] = useState(
     categoryData?.name || ""
   );
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
+  const [isSaved, setIsSaved] = useState(true);
+  const [isInputFocused, setIsInputFocused] = useState(false);
   const dispatch = useDispatch();
+  const inputRef = useRef(null);
 
   const [
     changeCategoryNameMutation,
@@ -55,6 +64,8 @@ export default function CategoryNameInput({
   const addCategory = async () => {
     try {
       await createNewCategoryMutation(newCategoryName).unwrap();
+      setShowNewCategoryInput(false);
+      setNewCategoryName("");
     } catch (err) {
       handleCreateCategoryError(err);
     }
@@ -92,29 +103,61 @@ export default function CategoryNameInput({
     isCreatingSuccess,
   ]);
 
+  useEffect(() => {
+    if (newCategoryName != categoryData?.name) {
+      setIsSaved(false);
+    }
+  }, [newCategoryName]);
+
+  const isNewNameDifferent = newCategoryName != categoryData?.name;
+  const isDataCorrect =
+    (newCategoryName.length >= 3 && newCategoryName.length && 24) ||
+    !isNewNameDifferent;
+
+  const addInputFocus = () => {
+    inputRef.current.focus();
+  };
+
   return (
-    <StyledCategoryNameInput>
-      {showNewCategoryInput || !toAdd ? (
+    <StyledCategoryNameInput
+      className={
+        !isDataCorrect
+          ? "incorrectData"
+          : isSaved || !isNewNameDifferent
+          ? "saved"
+          : "unSaved"
+      }
+    >
+      {toBeAdded && <FontAwesomeIcon icon={faPlusCircle} className="icon" />}
+      {showNewCategoryInput || !toBeAdded ? (
         <>
           <input
             type="text"
             value={newCategoryName}
             onChange={(e) => setNewCategoryName(e.target.value)}
             placeholder="Nazwa kategorii"
+            ref={inputRef}
+            onFocus={() => setIsInputFocused(true)}
+            onBlur={() => setIsInputFocused(false)}
           />
           <button
             onClick={() => {
-              if (toAdd) addCategory();
-              else changeName();
+              if (toBeAdded) addCategory();
+              else if (isNewNameDifferent) changeName();
+              else addInputFocus();
             }}
+            disabled={(!isDataCorrect || !isNewNameDifferent) && isInputFocused}
+            className={isInputFocused ? "saveButton" : "editButton"}
           >
             {showSuccessIcon ? (
               <FontAwesomeIcon
                 icon={faCheckCircle}
                 className="successIcon icon"
               />
-            ) : (
+            ) : isNewNameDifferent || isInputFocused ? (
               <FontAwesomeIcon icon={faSave} className="saveIcon icon" />
+            ) : (
+              <FontAwesomeIcon icon={faPencil} className="editIcon icon" />
             )}
           </button>
         </>
@@ -122,6 +165,12 @@ export default function CategoryNameInput({
         <button onClick={() => setShowNewCategoryInput(true)}>
           Utwórz nową kategorię
         </button>
+      )}
+      {!isDataCorrect && (
+        <div className="flex">
+          <FontAwesomeIcon icon={faCircleExclamation} />
+          <p>Nazwa może zawierać od 3 do 24 znaków.</p>
+        </div>
       )}
     </StyledCategoryNameInput>
   );

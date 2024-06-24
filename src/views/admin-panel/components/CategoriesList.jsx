@@ -56,7 +56,7 @@ export default function CategoriesList() {
 
   return (
     <StyledAdminPanelList>
-      <CategoryFromList toAdd={true} />
+      <CategoryFromList toBeAdded={true} />
       {filteredCategoriesData &&
         filteredCategoriesData.map(([id, categoryData]) => {
           return (
