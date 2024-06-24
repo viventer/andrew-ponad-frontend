@@ -21,9 +21,7 @@ export default function CategoriesList() {
   let filteredCategoriesData;
   if (isSuccess) {
     categoriesData = Object.entries(categoriesRawData.entities);
-    console.log(categoriesData);
     filteredCategoriesData = categoriesData.filter(([id, category]) => {
-      console.log(category);
       const categoryName = category.name.toLowerCase();
 
       const isSearchQueryMatch = categoryName.includes(

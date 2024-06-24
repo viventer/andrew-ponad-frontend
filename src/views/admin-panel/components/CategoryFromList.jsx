@@ -13,7 +13,11 @@ import {
 } from "../../global/slices/globalStatesSlice";
 import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCompass, faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleExclamation,
+  faCompass,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import CategoryNameInput from "./CategoryNameInput";
 import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";
 
@@ -23,6 +27,8 @@ export default function CategoryFromList({
   toBeAdded,
 }) {
   const [isDeleted, setIsDeleted] = useState(false);
+  const [isSaved, setIsSaved] = useState(true);
+  const [isDataCorrect, setIsDataCorrect] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -72,16 +78,38 @@ export default function CategoryFromList({
   };
 
   return (
-    <StyledCategoryFromList className={`${isDeleted ? "hide" : ""}`}>
-      <CategoryNameInput
-        categoryData={categoryData}
-        setReloadComponent={setReloadComponent}
-        toBeAdded={toBeAdded}
-      />
-      {!toBeAdded && (
-        <button className="deleteButton" onClick={deleteCategory}>
-          <FontAwesomeIcon icon={faTrash} className="icon" />
-        </button>
+    <StyledCategoryFromList
+      className={
+        isDeleted
+          ? "hide"
+          : !isDataCorrect
+          ? "incorrectData"
+          : isSaved
+          ? "saved"
+          : "unSaved"
+      }
+    >
+      <div className="flex">
+        <CategoryNameInput
+          categoryData={categoryData}
+          setReloadComponent={setReloadComponent}
+          toBeAdded={toBeAdded}
+          setIsDataCorrect={setIsDataCorrect}
+          isDataCorrect={isDataCorrect}
+          isSaved={isSaved}
+          setIsSaved={setIsSaved}
+        />
+        {!toBeAdded && (
+          <button className="deleteButton" onClick={deleteCategory}>
+            <FontAwesomeIcon icon={faTrash} className="icon" />
+          </button>
+        )}
+      </div>
+      {!isDataCorrect && !toBeAdded && (
+        <div className="flex formatInfo">
+          <FontAwesomeIcon icon={faCircleExclamation} className="icon" />
+          <p>Nazwa może zawierać od 3 do 24 znaków.</p>
+        </div>
       )}
     </StyledCategoryFromList>
   );

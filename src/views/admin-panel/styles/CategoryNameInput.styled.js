@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 export const StyledCategoryNameInput = styled.section`
   width: 100%;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+  }
+
   & input {
     background-color: rgba(0, 0, 0, 0);
     border: none;
@@ -10,17 +15,8 @@ export const StyledCategoryNameInput = styled.section`
     font-weight: 500;
     min-width: 14rem;
     width: 90%;
-    border-left: 0.5rem solid ${({ theme }) => theme.colors.green};
     padding: 0.25rem 0.5rem;
     transition: all 0.15s ease-in-out;
-  }
-
-  &.incorrectData input {
-    border-left-color: ${({ theme }) => theme.colors.red};
-  }
-
-  &.unSaved input {
-    border-left-color: ${({ theme }) => theme.colors.sunset};
   }
 
   & input:focus {

@@ -5,6 +5,7 @@ import {
   faCheckCircle,
   faCircleExclamation,
   faPencil,
+  faPlus,
   faPlusCircle,
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
@@ -19,13 +20,16 @@ export default function CategoryNameInput({
   categoryData,
   setReloadComponent,
   toBeAdded,
+  isDataCorrect,
+  setIsDataCorrect,
+  isSaved,
+  setIsSaved,
 }) {
   const [newCategoryName, setNewCategoryName] = useState(
     categoryData?.name || ""
   );
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
-  const [isSaved, setIsSaved] = useState(true);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
@@ -103,34 +107,27 @@ export default function CategoryNameInput({
     isCreatingSuccess,
   ]);
 
-  useEffect(() => {
-    if (newCategoryName != categoryData?.name) {
-      setIsSaved(false);
-    }
-  }, [newCategoryName]);
-
   const isNewNameDifferent = newCategoryName != categoryData?.name;
-  const isDataCorrect =
-    (newCategoryName.length >= 3 && newCategoryName.length && 24) ||
-    !isNewNameDifferent;
+  useEffect(() => {
+    if (isNewNameDifferent) {
+      setIsSaved(false);
+    } else {
+      setIsSaved(true);
+    }
+    setIsDataCorrect(
+      (newCategoryName.length >= 3 && newCategoryName.length <= 24) ||
+        !isNewNameDifferent
+    );
+  }, [newCategoryName, isNewNameDifferent]);
 
   const addInputFocus = () => {
     inputRef.current.focus();
   };
 
   return (
-    <StyledCategoryNameInput
-      className={
-        !isDataCorrect
-          ? "incorrectData"
-          : isSaved || !isNewNameDifferent
-          ? "saved"
-          : "unSaved"
-      }
-    >
-      {toBeAdded && <FontAwesomeIcon icon={faPlusCircle} className="icon" />}
+    <StyledCategoryNameInput>
       {showNewCategoryInput || !toBeAdded ? (
-        <>
+        <div>
           <input
             type="text"
             value={newCategoryName}
@@ -139,6 +136,7 @@ export default function CategoryNameInput({
             ref={inputRef}
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
+            maxLength={24}
           />
           <button
             onClick={() => {
@@ -155,22 +153,19 @@ export default function CategoryNameInput({
                 className="successIcon icon"
               />
             ) : isNewNameDifferent || isInputFocused ? (
-              <FontAwesomeIcon icon={faSave} className="saveIcon icon" />
+              <FontAwesomeIcon
+                icon={toBeAdded ? faPlus : faSave}
+                className="saveIcon icon"
+              />
             ) : (
               <FontAwesomeIcon icon={faPencil} className="editIcon icon" />
             )}
           </button>
-        </>
+        </div>
       ) : (
         <button onClick={() => setShowNewCategoryInput(true)}>
           Utwórz nową kategorię
         </button>
-      )}
-      {!isDataCorrect && (
-        <div className="flex">
-          <FontAwesomeIcon icon={faCircleExclamation} />
-          <p>Nazwa może zawierać od 3 do 24 znaków.</p>
-        </div>
       )}
     </StyledCategoryNameInput>
   );
