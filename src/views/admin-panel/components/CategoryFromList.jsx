@@ -28,7 +28,7 @@ export default function CategoryFromList({
 }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isSaved, setIsSaved] = useState(true);
-  const [isDataCorrect, setIsDataCorrect] = useState(true);
+  const [isDataCorrect, setIsDataCorrect] = useState(toBeAdded ? false : true);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState(
     categoryData?.name || ""

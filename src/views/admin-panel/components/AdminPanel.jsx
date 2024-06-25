@@ -6,6 +6,13 @@ import PostsTab from "./PostsTab";
 import useAuth from "../../../hooks/useAuth";
 import ErrorReportsTab from "./ErrorReportsTab";
 import CategoriesTab from "./CategoriesTab";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faBug,
+  faCompass,
+  faFileLines,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function AdminPanel() {
   const [selectedTab, setSelectedTab] = useState("posts");
@@ -25,7 +32,8 @@ export default function AdminPanel() {
               onClick={() => setSelectedTab("posts")}
               aria-selected={selectedTab == "selected" ? true : false}
             >
-              Posty
+              <FontAwesomeIcon icon={faFileLines} className="navIcon" />
+              <p>Posty</p>
             </li>
             {hasCategoriesTabAccess && (
               <li
@@ -33,7 +41,8 @@ export default function AdminPanel() {
                 onClick={() => setSelectedTab("categories")}
                 aria-selected={selectedTab == "categories" ? true : false}
               >
-                Kategorie
+                <FontAwesomeIcon icon={faCompass} className="navIcon" />
+                <p>Kategorie</p>
               </li>
             )}
             {hasUsersTabAccess && (
@@ -42,7 +51,8 @@ export default function AdminPanel() {
                 onClick={() => setSelectedTab("users")}
                 aria-selected={selectedTab == "users" ? true : false}
               >
-                Użytkownicy
+                <FontAwesomeIcon icon={faUser} className="navIcon" />
+                <p>Użytkownicy</p>
               </li>
             )}
             {hasErrorReportsTabAccess && (
@@ -51,7 +61,8 @@ export default function AdminPanel() {
                 onClick={() => setSelectedTab("errorReports")}
                 aria-selected={selectedTab == "errorReports" ? true : false}
               >
-                Błędy
+                <FontAwesomeIcon icon={faBug} className="navIcon" />
+                <p>Błędy</p>
               </li>
             )}
           </ul>

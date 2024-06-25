@@ -22,10 +22,6 @@ export const StyledPostFromList = styled.li`
     width: 100%;
   }
 
-  & .postsSearchResultsImg {
-    /* width: ; */
-  }
-
   & .flex {
     display: flex;
     align-items: center;
@@ -122,7 +118,7 @@ export const StyledPostFromList = styled.li`
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 420px) {
     &:not(.postsSearchResults) .flex > div:first-of-type {
       width: 30vw;
     }
@@ -134,6 +130,21 @@ export const StyledPostFromList = styled.li`
 
     & .flex > div:last-of-type {
       gap: 1.5rem;
+    }
+  }
+
+  @media (max-width: 370px) {
+    &:not(.postsSearchResults) {
+      width: 95%;
+    }
+
+    &:not(.postsSearchResults) .flex > div:last-child {
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: end;
+      padding: 0.25rem 0;
+      row-gap: 0.5rem;
+      column-gap: 1.5rem;
     }
   }
 `;

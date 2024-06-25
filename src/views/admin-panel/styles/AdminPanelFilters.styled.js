@@ -7,6 +7,10 @@ export const StyledAdminPanelFilters = styled.section`
   column-gap: 2rem;
   row-gap: 1rem;
 
+  & > .icon {
+    margin-left: 0.5rem;
+  }
+
   & button.down:first-of-type {
     min-width: 12.5rem;
   }
