@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { StyledCategoryNameInput } from "../styles/CategoryNameInput.styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faAdd,
   faCheckCircle,
   faCircleExclamation,
   faPencil,
@@ -24,13 +25,13 @@ export default function CategoryNameInput({
   setIsDataCorrect,
   isSaved,
   setIsSaved,
+  setIsInputFocused,
+  isInputFocused,
+  newCategoryName,
+  setNewCategoryName,
 }) {
-  const [newCategoryName, setNewCategoryName] = useState(
-    categoryData?.name || ""
-  );
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
-  const [isInputFocused, setIsInputFocused] = useState(false);
   const dispatch = useDispatch();
   const inputRef = useRef(null);
 
@@ -92,11 +93,13 @@ export default function CategoryNameInput({
       dispatch(setIsLoading(true));
     } else if (isChangingSuccess || isCreatingSuccess) {
       dispatch(setIsLoading(false));
-      setShowSuccessIcon(true);
-      setTimeout(() => {
-        setShowSuccessIcon(false);
-        setReloadComponent((prev) => !prev);
-      }, 1500);
+      if (isChangingSuccess) {
+        setShowSuccessIcon(true);
+        setTimeout(() => {
+          setShowSuccessIcon(false);
+          setReloadComponent((prev) => !prev);
+        }, 1500);
+      }
     } else {
       dispatch(setIsLoading(false));
     }
@@ -125,7 +128,7 @@ export default function CategoryNameInput({
   };
 
   return (
-    <StyledCategoryNameInput>
+    <StyledCategoryNameInput onClick={() => setShowNewCategoryInput(true)}>
       {showNewCategoryInput || !toBeAdded ? (
         <div>
           <input
@@ -137,6 +140,12 @@ export default function CategoryNameInput({
             onFocus={() => setIsInputFocused(true)}
             onBlur={() => setIsInputFocused(false)}
             maxLength={24}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && toBeAdded) {
+                addCategory();
+                setIsInputFocused(false);
+              }
+            }}
           />
           <button
             onClick={() => {
@@ -144,8 +153,13 @@ export default function CategoryNameInput({
               else if (isNewNameDifferent) changeName();
               else addInputFocus();
             }}
-            disabled={(!isDataCorrect || !isNewNameDifferent) && isInputFocused}
-            className={isInputFocused ? "saveButton" : "editButton"}
+            disabled={
+              (!isDataCorrect || !isNewNameDifferent) &&
+              (isInputFocused || toBeAdded)
+            }
+            className={
+              isInputFocused || toBeAdded ? "saveButton" : "editButton"
+            }
           >
             {showSuccessIcon ? (
               <FontAwesomeIcon
@@ -163,8 +177,9 @@ export default function CategoryNameInput({
           </button>
         </div>
       ) : (
-        <button onClick={() => setShowNewCategoryInput(true)}>
-          Utwórz nową kategorię
+        <button className="createNewButton">
+          <FontAwesomeIcon icon={faAdd} />
+          <p>Utwórz nową</p>
         </button>
       )}
     </StyledCategoryNameInput>

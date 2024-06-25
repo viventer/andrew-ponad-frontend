@@ -2,10 +2,20 @@ import styled from "styled-components";
 
 export const StyledCategoryFromList = styled.li`
   gap: 0.5rem;
-  width: 40%;
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.1);
   padding-right: 1rem;
   border-left: 0.5rem solid ${({ theme }) => theme.colors.green};
+  transition: all 0.15s ease-in-out;
+
+  &.inputFocused,
+  &.toBeAdded:hover {
+    border-left-width: 1.5rem;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.17);
+  }
 
   & .deleteButton {
     margin-left: 2rem;
@@ -42,11 +52,31 @@ export const StyledCategoryFromList = styled.li`
     color: ${({ theme }) => theme.colors.red};
   }
 
+  &.unSaved {
+    border-left-color: ${({ theme }) => theme.colors.sunset};
+  }
+
   &.incorrectData {
     border-left-color: ${({ theme }) => theme.colors.red};
   }
 
-  &.unSaved {
-    border-left-color: ${({ theme }) => theme.colors.sunset};
+  &.toBeAdded:hover {
+    cursor: pointer;
+  }
+
+  @media (max-width: 400px) {
+    & > .flex {
+      gap: 0;
+      flex-direction: column;
+      align-items: start;
+      position: relative;
+      padding-bottom: 0.25rem;
+    }
+
+    & .deleteButton {
+      position: absolute;
+      bottom: 0.25rem;
+      left: 1rem;
+    }
   }
 `;

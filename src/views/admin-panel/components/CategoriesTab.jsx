@@ -13,7 +13,7 @@ export default function CategoriesTab() {
   const dispatch = useDispatch();
 
   return (
-    <StyledAdminPanelTab>
+    <StyledAdminPanelTab className="categoriesTab">
       <div className="flex">
         <SearchBar
           view="adminPanel"

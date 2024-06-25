@@ -28,7 +28,11 @@ export default function CategoryFromList({
 }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isSaved, setIsSaved] = useState(true);
-  const [isDataCorrect, setIsDataCorrect] = useState(false);
+  const [isDataCorrect, setIsDataCorrect] = useState(true);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+  const [newCategoryName, setNewCategoryName] = useState(
+    categoryData?.name || ""
+  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -38,7 +42,7 @@ export default function CategoryFromList({
 
   const showDialog = () => {
     dispatch(setDialogOptions(["Tak", "Nie"]));
-    dispatch(setDialogAction(`deleteCategory${categoryData.id}`));
+    dispatch(setDialogAction(`deleteCategory${categoryData?.id}`));
     dispatch(
       setDialogMsg(
         "Czy na pewno chcesz usunąć kategorię? Ta operacja jest nieodwracalna."
@@ -49,7 +53,7 @@ export default function CategoryFromList({
   useEffect(() => {
     if (
       dialogAnswer == "Tak" &&
-      dialogAction == `deleteCategory${categoryData.id}`
+      dialogAction == `deleteCategory${categoryData?.id}`
     ) {
       deleteCategory();
     }
@@ -79,7 +83,7 @@ export default function CategoryFromList({
 
   return (
     <StyledCategoryFromList
-      className={
+      className={`${
         isDeleted
           ? "hide"
           : !isDataCorrect
@@ -87,7 +91,9 @@ export default function CategoryFromList({
           : isSaved
           ? "saved"
           : "unSaved"
-      }
+      } ${isInputFocused ? "inputFocused" : ""} ${
+        toBeAdded ? "toBeAdded" : ""
+      }`}
     >
       <div className="flex">
         <CategoryNameInput
@@ -98,14 +104,18 @@ export default function CategoryFromList({
           isDataCorrect={isDataCorrect}
           isSaved={isSaved}
           setIsSaved={setIsSaved}
+          setIsInputFocused={setIsInputFocused}
+          isInputFocused={isInputFocused}
+          newCategoryName={newCategoryName}
+          setNewCategoryName={setNewCategoryName}
         />
         {!toBeAdded && (
-          <button className="deleteButton" onClick={deleteCategory}>
+          <button className="deleteButton" onClick={showDialog}>
             <FontAwesomeIcon icon={faTrash} className="icon" />
           </button>
         )}
       </div>
-      {!isDataCorrect && !toBeAdded && (
+      {!isDataCorrect && (!toBeAdded || newCategoryName) && (
         <div className="flex formatInfo">
           <FontAwesomeIcon icon={faCircleExclamation} className="icon" />
           <p>Nazwa może zawierać od 3 do 24 znaków.</p>

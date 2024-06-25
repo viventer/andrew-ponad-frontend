@@ -13,18 +13,13 @@ export const StyledCategoryNameInput = styled.section`
     color: white;
     font-size: 1rem;
     font-weight: 500;
-    min-width: 14rem;
+    min-width: 14.5rem;
     width: 90%;
     padding: 0.25rem 0.5rem;
-    transition: all 0.15s ease-in-out;
   }
 
   & input:focus {
     outline: none;
-  }
-
-  & input:focus-visible {
-    border-left-width: 1.5rem;
   }
 
   & .saveButton:disabled {
@@ -39,5 +34,29 @@ export const StyledCategoryNameInput = styled.section`
   & .editButton:hover .icon:not(.successIcon) {
     color: ${({ theme }) => theme.colors.sunset};
     cursor: pointer;
+  }
+
+  & .createNewButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+
+  @media (max-width: 400px) {
+    & div {
+      flex-direction: column;
+      align-items: start;
+      gap: 0.5rem;
+    }
+
+    & .saveButton,
+    & .editButton {
+      margin-left: 0.5rem;
+    }
   }
 `;
