@@ -23,11 +23,11 @@ import useUpdatePost from "../../../hooks/useUpdatePost";
 import PostEditForm from "./PostEditForm";
 import {
   resetPostState,
-  selectPostCategory,
+  selectPostCategoryName,
   selectPostTitle,
   selectPostVisibility,
   selectThumbnailFile,
-  setPostCategory,
+  setPostCategoryName,
   setPostTitle,
   setPostVisibility,
   setThumbnailPreview,
@@ -73,7 +73,7 @@ export default function PostCreatePage() {
 
   const thumbnail = useSelector(selectThumbnailFile);
   const title = useSelector(selectPostTitle);
-  const category = useSelector(selectPostCategory);
+  const category = useSelector(selectPostCategoryName);
   const visibility = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
   const translateVisibility = useTranslateVisibility();
@@ -123,7 +123,7 @@ export default function PostCreatePage() {
       const postData = rawPostData.entities[id];
       dispatch(setThumbnailPreview(postData.thumbnail));
       dispatch(setPostTitle(postData.title));
-      dispatch(setPostCategory(postData.category));
+      dispatch(setPostCategoryName(postData.category));
       setPostRows(postData.content);
 
       const translatedVisibility = translateVisibility(

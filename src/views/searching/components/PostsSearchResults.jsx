@@ -32,12 +32,12 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
       }
 
       const postTitle = postData.title.toLowerCase();
-      const postCategory = postData.category;
+      const postCategoryName = postData.category;
 
       const isCategoryFilterSet =
         categoryFilter != "Wybierz kategorię" && categoryFilter != "dowolna";
       const isSearchQueryMatch = postTitle.includes(searchQuery.toLowerCase());
-      const isCategoryFilterMatch = postCategory == categoryFilter;
+      const isCategoryFilterMatch = postCategoryName == categoryFilter;
 
       if (searchQuery && !isSearchQueryMatch) {
         return false;

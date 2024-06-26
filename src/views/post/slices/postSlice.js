@@ -4,7 +4,7 @@ const initialState = {
   thumbnailPreview: null,
   editedPostId: null,
   postTitle: "",
-  postCategory: "Wybierz kategorię",
+  postCategoryName: "Wybierz kategorię",
   postVisibility: "Szkic",
 };
 
@@ -21,8 +21,8 @@ const postSlice = createSlice({
     setPostTitle: (state, action) => {
       state.postTitle = action.payload;
     },
-    setPostCategory: (state, action) => {
-      state.postCategory = action.payload;
+    setPostCategoryName: (state, action) => {
+      state.postCategoryName = action.payload;
     },
     setPostVisibility: (state, action) => {
       state.postVisibility = action.payload;
@@ -36,7 +36,7 @@ const postSlice = createSlice({
 export const {
   setThumbnailPreview,
   setPostTitle,
-  setPostCategory,
+  setPostCategoryName,
   setPostVisibility,
   setEditedPostId,
   resetPostState,
@@ -45,7 +45,7 @@ export const {
 export const selectThumbnailPreview = (state) => state.post.thumbnailPreview;
 export const selectThumbnailFile = (state) => state.post.thumbnailPreview;
 export const selectPostTitle = (state) => state.post.postTitle;
-export const selectPostCategory = (state) => state.post.postCategory;
+export const selectPostCategoryName = (state) => state.post.postCategoryName;
 export const selectPostVisibility = (state) => state.post.postVisibility;
 export const selectEditedPostId = (state) => state.post.editedPostId;
 

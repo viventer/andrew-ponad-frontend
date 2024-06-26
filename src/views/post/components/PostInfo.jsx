@@ -28,7 +28,7 @@ export default function PostInfo({ postData }) {
     <StyledPostInfo>
       <div>
         <h2>{postData.title}</h2>
-        {postData.category != "Wybierz kategorię" && (
+        {postData?.category && (
           <p>
             <FontAwesomeIcon icon={faIcons} className="icon" />
             kategoria: <span>{postData.category}</span>

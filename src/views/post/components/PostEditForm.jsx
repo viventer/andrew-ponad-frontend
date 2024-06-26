@@ -5,7 +5,7 @@ import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 
 import {
   resetPostState,
-  selectPostCategory,
+  selectPostCategoryName,
   selectPostTitle,
   selectPostVisibility,
   selectThumbnailPreview,
@@ -28,7 +28,7 @@ export default function PostEditForm({
 }) {
   const thumbnailPreview = useSelector(selectThumbnailPreview);
   const postTitle = useSelector(selectPostTitle);
-  const postCategory = useSelector(selectPostCategory);
+  const postCategoryName = useSelector(selectPostCategoryName);
   const postVisiblity = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
 
@@ -42,7 +42,7 @@ export default function PostEditForm({
     thumbnail: thumbnailPreview,
     visibility: translatedVisibility,
     content: postRows,
-    category: postCategory,
+    category: postCategoryName,
   };
 
   const isPostContentValid = (postRows) => {

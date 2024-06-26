@@ -7,11 +7,11 @@ import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 
 import {
   resetPostState,
-  selectPostCategory,
+  selectPostCategoryName,
   selectPostTitle,
   selectPostVisibility,
   selectThumbnailFile,
-  setPostCategory,
+  setPostCategoryName,
   setPostTitle,
   setPostVisibility,
   setThumbnailPreview,
@@ -62,7 +62,7 @@ export default function PostEditPage() {
       const postData = rawPostData.entities[id];
       dispatch(setThumbnailPreview(postData.thumbnail));
       dispatch(setPostTitle(postData.title));
-      dispatch(setPostCategory(postData.category));
+      dispatch(setPostCategoryName(postData.category));
       setPostRows(postData.content);
 
       const translatedVisibility = translateVisibility(
@@ -76,7 +76,7 @@ export default function PostEditPage() {
 
   const thumbnail = useSelector(selectThumbnailFile);
   const title = useSelector(selectPostTitle);
-  const category = useSelector(selectPostCategory);
+  const category = useSelector(selectPostCategoryName);
   const visibility = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
   const updatePost = useUpdatePost();

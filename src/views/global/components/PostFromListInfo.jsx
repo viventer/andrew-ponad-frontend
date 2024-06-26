@@ -22,7 +22,7 @@ export default function PostFromListInfo({ postData, view }) {
 
   const content = (
     <>
-      {postData.category != "Wybierz kategorię" && view != "slider" && (
+      {postData?.category && view != "slider" && (
         <p>
           <FontAwesomeIcon icon={faCompass} className="icon" />
           <span>kategoria: </span>
