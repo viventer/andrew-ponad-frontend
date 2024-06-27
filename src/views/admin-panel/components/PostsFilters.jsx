@@ -5,7 +5,11 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 import useGetVisibilityOptions from "../../../hooks/useGetVisibilityOptions";
 
-import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
+import {
+  selectAvailablePostCategories,
+  setErrMsg,
+  setIsLoading,
+} from "../../global/slices/globalStatesSlice";
 import {
   selectCategoryFilter,
   selectPostsTabSearchQuery,
@@ -18,6 +22,8 @@ import {
 import FilterSelector from "./FilterSelector";
 import SearchBar from "../../global/components/SearchBar";
 import { StyledAdminPanelFilters } from "../styles/AdminPanelFilters.styled";
+import useGetAllCategoryNames from "../../../hooks/useGetAllCategoryNames";
+import { useEffect, useState } from "react";
 
 export default function PostsFilters() {
   const selectedVisibilityFilter = useSelector(selectVisibilityFilter);
@@ -27,29 +33,41 @@ export default function PostsFilters() {
   const dispatch = useDispatch();
 
   const visibilityOptions = useGetVisibilityOptions();
-  const availableCategories = useSelector(selectAvailablePostCategories);
-  visibilityOptions.push("Dowolna");
-  const categoryOptions = [...availableCategories, "Dowolna"];
+
+  const { categoryNames, isSuccess, isError, error } = useGetAllCategoryNames();
+  const [categoryOptions, setCategoryOptions] = useState([]);
+
+  useEffect(() => {
+    if (isSuccess && categoryNames) {
+      setCategoryOptions([...categoryNames, "Dowolna"]);
+    } else if (isError) {
+      setErrMsg(error?.message || "Błąd pobierania kategorii.");
+    }
+  }, [isSuccess, categoryNames, isError]);
 
   return (
     <StyledAdminPanelFilters>
       <FontAwesomeIcon icon={faFilter} className="icon postsFiltersIcon" />
-      <FilterSelector
-        selectedFilter={selectedVisibilityFilter}
-        setFilter={(filter) => dispatch(setVisibilityFilter(filter))}
-        options={visibilityOptions}
-      />
-      <FilterSelector
-        selectedFilter={selectedCategoryFilter}
-        setFilter={(filter) => dispatch(setCategoryFilter(filter))}
-        options={categoryOptions}
-      />
-      <SearchBar
-        view="adminPanel"
-        searchQuery={searchQuery}
-        setSearchQuery={(query) => dispatch(setPostsTabSearchQuery(query))}
-        placeholder="Czego szukasz?"
-      />
+      {categoryOptions && (
+        <>
+          <FilterSelector
+            selectedFilter={selectedVisibilityFilter}
+            setFilter={(filter) => dispatch(setVisibilityFilter(filter))}
+            options={visibilityOptions}
+          />
+          <FilterSelector
+            selectedFilter={selectedCategoryFilter}
+            setFilter={(filter) => dispatch(setCategoryFilter(filter))}
+            options={categoryOptions}
+          />
+          <SearchBar
+            view="adminPanel"
+            searchQuery={searchQuery}
+            setSearchQuery={(query) => dispatch(setPostsTabSearchQuery(query))}
+            placeholder="Czego szukasz?"
+          />
+        </>
+      )}
     </StyledAdminPanelFilters>
   );
 }

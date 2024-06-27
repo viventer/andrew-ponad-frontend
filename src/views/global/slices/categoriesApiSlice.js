@@ -30,6 +30,19 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
+    getCategoryById: builder.query({
+      query: (id) => ({
+        url: `/categories/${id}`,
+        validateStatus: (response, result) => {
+          return response.status === 200 && !result.isError;
+        },
+      }),
+      transformResponse: (responseData) => {
+        const category = { ...responseData, id: responseData._id };
+        return categoriesAdapter.setOne(initialState, category);
+      },
+      providesTags: (result, error, id) => [{ type: "Category", id }],
+    }),
     createNewCategory: builder.mutation({
       query: (name) => ({
         url: "/categories",
@@ -69,6 +82,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetAllCategoriesQuery,
+  useGetCategoryByIdQuery,
   useCreateNewCategoryMutation,
   useDeleteCategoryMutation,
   useChangeCategoryNameMutation,
@@ -76,13 +90,25 @@ export const {
 
 export const selectCategoriesResult =
   categoriesApiSlice.endpoints.getAllCategories.select();
+const selectCategoryByIdResult =
+  categoriesApiSlice.endpoints.getCategoryById.select();
 
 const selectCategoriesData = createSelector(
   selectCategoriesResult,
   (categoriesResult) => categoriesResult.data
 );
 
+const selectCategoryByIdData = createSelector(
+  selectCategoryByIdResult,
+  (categoryResult) => categoryResult.data
+);
+
 export const { selectAll: selectAllCategories, selectIds: selectCategoryIds } =
   categoriesAdapter.getSelectors(
     (state) => selectCategoriesData(state) ?? initialState
   );
+
+export const selectCategoryById = (state, categoryId) =>
+  categoriesAdapter
+    .getSelectors()
+    .selectById(selectCategoryByIdData(state), categoryId) ?? initialState;

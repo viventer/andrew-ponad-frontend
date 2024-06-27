@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import {
@@ -13,28 +13,32 @@ import {
   faWindows,
 } from "@fortawesome/free-brands-svg-icons";
 
-import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
+import {
+  selectAvailablePostCategories,
+  setErrMsg,
+} from "../../global/slices/globalStatesSlice";
 
 import SelectorOption from "../../global/components/SelectorOption";
 import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
 import { StyledSelector } from "../../global/styles/Selector.styled";
+import useGetAllCategoryNames from "../../../hooks/useGetAllCategoryNames";
 
 export default function CategorySelector({
   categoryFilter,
   setCategoryFilter,
 }) {
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
-  const availableCategories = useSelector(selectAvailablePostCategories);
-  const categoryOptions = [...availableCategories, "dowolna"];
-  const icons = {
-    "Wybierz kategorię": faCompass,
-    "Windows Server": faWindows,
-    "Urządzenia sieciowe": faEthernet,
-    "Ubuntu Server": faUbuntu,
-    "openSUSE Server": faSuse,
-    inne: faCircleQuestion,
-    dowolna: faGlobe,
-  };
+
+  const { categoryNames, isSuccess, isError, error } = useGetAllCategoryNames();
+  const [categoryOptions, setCategoryOptions] = useState([]);
+
+  useEffect(() => {
+    if (isSuccess && categoryNames) {
+      setCategoryOptions([...categoryNames, "Dowolna"]);
+    } else if (isError) {
+      setErrMsg(error?.message || "Błąd pobierania kategorii.");
+    }
+  }, [isSuccess, categoryNames, isError]);
 
   return (
     <StyledSelector className="selectorUl">
@@ -43,7 +47,6 @@ export default function CategorySelector({
         areOptionsVisible={areOptionsVisible}
         direction="down"
         selectedValue={categoryFilter}
-        icon={icons[categoryFilter]}
       />
       <div className="selectorOptions">
         {categoryOptions.map((category) => {
@@ -55,7 +58,6 @@ export default function CategorySelector({
                 areOptionsVisible={areOptionsVisible}
                 setAreOptionsVisible={setAreOptionsVisible}
                 setValue={setCategoryFilter}
-                icon={icons[category]}
               />
             );
           }

@@ -12,7 +12,16 @@ import SelectorOption from "../../global/components/SelectorOption";
 import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
 
 export default function CategorySelector() {
-  const categoryList = useSelector(selectAvailablePostCategories);
+  const { categoryNames, isSuccess, isError, error } = useGetAllCategoryNames();
+  const [categoryList, setCategoryList] = useState([]);
+
+  useEffect(() => {
+    if (isSuccess && categoryNames) {
+      setCategoryList([...categoryNames, "Dowolna"]);
+    } else if (isError) {
+      setErrMsg(error?.message || "Błąd pobierania kategorii.");
+    }
+  }, [isSuccess, categoryNames, isError]);
 
   const dispatch = useDispatch();
 

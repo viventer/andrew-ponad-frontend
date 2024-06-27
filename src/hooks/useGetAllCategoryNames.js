@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllCategoriesQuery } from "../views/global/slices/categoriesApiSlice";
 
 const useGetAllCategoryNames = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [error, setError] = useState("");
+  const [categoryNames, setCategoryNames] = useState(null);
 
-  const getAllCategoryNames = async () => {
-    const {
-      data: categoriesRawData,
-      isLoading: isQueryLoading,
-      isSuccess: isQuerySuccess,
-      isError: isQueryError,
-      error: queryError,
-    } = useGetAllCategoriesQuery();
-  };
+  const {
+    data: categoriesRawData,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetAllCategoriesQuery();
+
+  useEffect(() => {
+    if (isSuccess) {
+      const categoriesData = Object.entries(categoriesRawData.entities);
+      const categoryNamesList = categoriesData.map(
+        ([id, category]) => category.name
+      );
+      setCategoryNames(categoryNamesList);
+    }
+  }, [isSuccess]);
+
+  return { categoryNames, isLoading, isSuccess, isError, error };
 };
+
+export default useGetAllCategoryNames;
