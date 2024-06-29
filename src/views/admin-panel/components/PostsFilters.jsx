@@ -33,6 +33,7 @@ export default function PostsFilters() {
   const dispatch = useDispatch();
 
   const visibilityOptions = useGetVisibilityOptions();
+  const allVisibilityOptions = [...visibilityOptions, "Dowolna"];
 
   const { categoryNames, isSuccess, isError, error } = useGetAllCategoryNames();
   const [categoryOptions, setCategoryOptions] = useState([]);
@@ -53,7 +54,7 @@ export default function PostsFilters() {
           <FilterSelector
             selectedFilter={selectedVisibilityFilter}
             setFilter={(filter) => dispatch(setVisibilityFilter(filter))}
-            options={visibilityOptions}
+            options={allVisibilityOptions}
           />
           <FilterSelector
             selectedFilter={selectedCategoryFilter}

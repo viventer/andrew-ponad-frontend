@@ -6,7 +6,7 @@ export const StyledThumbnailBar = styled.section`
     height: calc(0.5625 * 90vw);
     max-width: 36rem;
     max-height: 20.25rem;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   & img:first-child,

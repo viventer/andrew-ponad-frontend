@@ -25,6 +25,7 @@ export default function CategoryFromList({
   categoryData,
   setReloadComponent,
   toBeAdded,
+  setReloadAdminPanel,
 }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isSaved, setIsSaved] = useState(true);
@@ -74,6 +75,7 @@ export default function CategoryFromList({
         dispatch(setIsLoading(false));
         setReloadComponent((prev) => !prev);
         setIsDeleted(true);
+        setReloadAdminPanel((prev) => !prev);
       }
     } catch (err) {
       dispatch(setErrMsg(err?.data?.message || "Błąd usuwania kategorii."));

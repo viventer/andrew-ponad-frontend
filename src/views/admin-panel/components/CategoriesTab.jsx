@@ -8,7 +8,7 @@ import {
 } from "../slices/adminPanelSlice";
 import CategoriesList from "./CategoriesList";
 
-export default function CategoriesTab() {
+export default function CategoriesTab({ setReloadAdminPanel }) {
   const searchQuery = useSelector(selectCategoriesTabSearchQuery);
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ export default function CategoriesTab() {
           placeholder="Czego szukasz?"
         />
       </div>
-      <CategoriesList />
+      <CategoriesList setReloadAdminPanel={setReloadAdminPanel} />
     </StyledAdminPanelTab>
   );
 }

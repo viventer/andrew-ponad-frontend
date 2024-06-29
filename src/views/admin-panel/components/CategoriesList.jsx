@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 import CategoryFromList from "./CategoryFromList";
 
-export default function CategoriesList() {
+export default function CategoriesList({ setReloadAdminPanel }) {
   const {
     data: categoriesRawData,
     isLoading,
@@ -57,6 +57,7 @@ export default function CategoriesList() {
       <CategoryFromList
         toBeAdded={true}
         setReloadComponent={setReloadComponent}
+        setReloadAdminPanel={setReloadAdminPanel}
       />
       {filteredCategoriesData &&
         filteredCategoriesData.map(([id, categoryData]) => {

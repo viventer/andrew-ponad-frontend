@@ -45,7 +45,7 @@ export default function PostsList() {
 
       const isCategoryFilterSet =
         categoryFilter != "Kategoria" && categoryFilter != "Dowolna";
-      const isCategoryFilterMatch = postData.category == categoryFilter;
+      const isCategoryFilterMatch = postData.categoryName == categoryFilter;
 
       const isVisibilityFilterSet =
         visibilityFilter != "Widoczność" && visibilityFilter != "Dowolna";

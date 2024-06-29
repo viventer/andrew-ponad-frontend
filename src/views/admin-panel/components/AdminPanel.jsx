@@ -16,6 +16,7 @@ import {
 
 export default function AdminPanel() {
   const [selectedTab, setSelectedTab] = useState("posts");
+  const [reloadAdminPanel, setReloadAdminPanel] = useState(false);
 
   const { mainRole } = useAuth();
   const hasUsersTabAccess = mainRole == "Admin";
@@ -74,7 +75,7 @@ export default function AdminPanel() {
         ) : selectedTab == "errorReports" ? (
           <ErrorReportsTab />
         ) : (
-          <CategoriesTab />
+          <CategoriesTab setReloadAdminPanel={setReloadAdminPanel} />
         )}
       </div>
     </StyledAdminPanel>
