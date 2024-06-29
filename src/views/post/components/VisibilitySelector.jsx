@@ -19,7 +19,6 @@ export default function VisibilitySelector() {
 
   const setSelectorValue = (value) => dispatch(setPostVisibility(value));
   useEffect(() => {
-    console.log(selectedVisibility);
     if (!selectedVisibility) {
       setSelectorValue("Szkic");
     }

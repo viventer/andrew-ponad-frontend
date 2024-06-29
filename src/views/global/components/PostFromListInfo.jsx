@@ -22,11 +22,11 @@ export default function PostFromListInfo({ postData, view }) {
 
   const content = (
     <>
-      {postData?.category && view != "slider" && (
+      {postData?.categoryName && view != "slider" && (
         <p>
           <FontAwesomeIcon icon={faCompass} className="icon" />
           <span>kategoria: </span>
-          {postData.category}
+          {postData.categoryName}
         </p>
       )}
       <p>

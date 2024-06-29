@@ -51,7 +51,20 @@ export default function PostEditPage() {
 
   const translateVisibility = useTranslateVisibility();
 
-  const [postRows, setPostRows] = useState();
+  const [postRows, setPostRows] = useState([
+    [
+      {
+        type: "textEditor",
+        textEditorContent: "",
+        imagePreview: null,
+      },
+      {
+        type: "image",
+        textEditorContent: "",
+        imagePreview: null,
+      },
+    ],
+  ]);
 
   useEffect(() => {
     dispatch(resetPostState());
@@ -62,7 +75,9 @@ export default function PostEditPage() {
       const postData = rawPostData.entities[id];
       dispatch(setThumbnailPreview(postData.thumbnail));
       dispatch(setPostTitle(postData.title));
-      dispatch(setPostCategoryName(postData.category));
+      if (postData.categoryName) {
+        dispatch(setPostCategoryName(postData.categoryName));
+      }
       setPostRows(postData.content);
 
       const translatedVisibility = translateVisibility(
@@ -88,7 +103,7 @@ export default function PostEditPage() {
         const newPostData = {
           thumbnail,
           title,
-          category,
+          categoryName: category,
           author: userId,
           content: postRows,
           visibility: translatedVisibility,
@@ -104,7 +119,6 @@ export default function PostEditPage() {
   const [updatePostMutation, { isLoading }] = useUpdatePostMutation();
   const editPost = async (postData) => {
     try {
-      console.log(postData);
       await updatePostMutation({ postId: id, postData }).unwrap();
       dispatch(setSuccessMsg("Zmiany zostały zapisane"));
       navigate("/adminpanel", { replace: true });

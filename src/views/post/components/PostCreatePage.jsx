@@ -34,6 +34,7 @@ import {
 } from "../slices/postSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
+import useGetCategoryName from "../../../hooks/useGetCategoryName";
 
 export default function PostCreatePage() {
   const [postRows, setPostRows] = useState([
@@ -84,7 +85,7 @@ export default function PostCreatePage() {
         const newPostData = {
           thumbnail,
           title,
-          category,
+          categoryName: category,
           author: userId,
           content: postRows,
           visibility: translatedVisibility,
@@ -92,7 +93,7 @@ export default function PostCreatePage() {
 
         updatePost(newPostData, id);
       })();
-    }, 300000);
+    }, 30000);
 
     return () => clearInterval(intervalId);
   }, [thumbnail, title, category, visibility, postRows]);
@@ -105,7 +106,7 @@ export default function PostCreatePage() {
         {
           thumbnail,
           title,
-          category,
+          categoryName: category,
           author: userId,
           content: postRows,
           visibility: translatedVisibility,
@@ -118,13 +119,16 @@ export default function PostCreatePage() {
     }
   };
 
+  let postData;
   useEffect(() => {
     if (isSuccess && rawPostData.entities[id]) {
-      const postData = rawPostData.entities[id];
+      postData = rawPostData.entities[id];
       dispatch(setThumbnailPreview(postData.thumbnail));
       dispatch(setPostTitle(postData.title));
-      dispatch(setPostCategoryName(postData.category));
       setPostRows(postData.content);
+      if (postData.categoryName) {
+        dispatch(setPostCategoryName(postData.categoryName));
+      }
 
       const translatedVisibility = translateVisibility(
         postData.visibility,

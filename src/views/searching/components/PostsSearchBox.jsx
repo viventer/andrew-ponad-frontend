@@ -10,7 +10,7 @@ import {
 } from "../../global/slices/globalStatesSlice";
 
 import SearchBar from "../../global/components/SearchBar";
-import CategorySelector from "./PostsSearchCategorySelector";
+import PostsSearchCategorySelector from "./PostsSearchCategorySelector";
 import PostsSearchResults from "./PostsSearchResults";
 import { StyledPostsSearchBox } from "../styles/PostsSearchBox.styled";
 import { StyledButton } from "../../global/styles/Button.styled";
@@ -34,7 +34,7 @@ export default function PostsSearchBox({
             placeholder={placeholder}
             view="searchBox"
           />
-          <CategorySelector
+          <PostsSearchCategorySelector
             categoryFilter={categoryFilter}
             setCategoryFilter={setCategoryFilter}
           />

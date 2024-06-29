@@ -46,7 +46,6 @@ export default function ErrorReportContentEditorImages() {
               imagePreview={image}
               setImagePreview={(newUrl) => {
                 dispatch(changeErrorReportImage({ index, newUrl }));
-                console.log("siema");
               }}
               view="errorReport"
             />

@@ -91,7 +91,6 @@ export default function ErrorReportFromList({
   };
 
   useEffect(() => {
-    console.log(dialogAction);
     if (
       dialogAnswer == "Tak" &&
       dialogAction == `deleteErrorReport${reportData.id}`

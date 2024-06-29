@@ -28,10 +28,10 @@ export default function PostInfo({ postData }) {
     <StyledPostInfo>
       <div>
         <h2>{postData.title}</h2>
-        {postData?.category && (
+        {postData?.categoryName && (
           <p>
             <FontAwesomeIcon icon={faIcons} className="icon" />
-            kategoria: <span>{postData.category}</span>
+            kategoria: <span>{postData.categoryName}</span>
           </p>
         )}
         <p>

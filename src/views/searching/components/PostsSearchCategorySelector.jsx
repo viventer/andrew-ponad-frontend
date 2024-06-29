@@ -23,7 +23,7 @@ import SelectedSelectorOption from "../../global/components/SelectedSelectorOpti
 import { StyledSelector } from "../../global/styles/Selector.styled";
 import useGetAllCategoryNames from "../../../hooks/useGetAllCategoryNames";
 
-export default function CategorySelector({
+export default function PostsSearchCategorySelector({
   categoryFilter,
   setCategoryFilter,
 }) {

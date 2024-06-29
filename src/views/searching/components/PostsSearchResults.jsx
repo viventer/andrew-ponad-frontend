@@ -35,7 +35,7 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
       const postCategoryName = postData.category;
 
       const isCategoryFilterSet =
-        categoryFilter != "Wybierz kategorię" && categoryFilter != "dowolna";
+        categoryFilter != "Wybierz kategorię" && categoryFilter != "Dowolna";
       const isSearchQueryMatch = postTitle.includes(searchQuery.toLowerCase());
       const isCategoryFilterMatch = postCategoryName == categoryFilter;
 

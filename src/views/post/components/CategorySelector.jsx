@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -10,6 +10,7 @@ import { StyledSelector } from "../../global/styles/Selector.styled";
 import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
 import SelectorOption from "../../global/components/SelectorOption";
 import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
+import useGetAllCategoryNames from "../../../hooks/useGetAllCategoryNames";
 
 export default function CategorySelector() {
   const { categoryNames, isSuccess, isError, error } = useGetAllCategoryNames();
@@ -17,7 +18,7 @@ export default function CategorySelector() {
 
   useEffect(() => {
     if (isSuccess && categoryNames) {
-      setCategoryList([...categoryNames, "Dowolna"]);
+      setCategoryList([...categoryNames]);
     } else if (isError) {
       setErrMsg(error?.message || "Błąd pobierania kategorii.");
     }
