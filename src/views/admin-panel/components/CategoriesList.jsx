@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { useGetAllCategoriesQuery } from "../../global/slices/categoriesApiSlice";
 import { selectCategoriesTabSearchQuery } from "../slices/adminPanelSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
-import { useEffect, useState } from "react";
+
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 import CategoryFromList from "./CategoryFromList";
 
-export default function CategoriesList({ setReloadAdminPanel }) {
+export default function CategoriesList() {
   const {
     data: categoriesRawData,
     isLoading,
@@ -57,7 +59,6 @@ export default function CategoriesList({ setReloadAdminPanel }) {
       <CategoryFromList
         toBeAdded={true}
         setReloadComponent={setReloadComponent}
-        setReloadAdminPanel={setReloadAdminPanel}
       />
       {filteredCategoriesData &&
         filteredCategoriesData.map(([id, categoryData]) => {

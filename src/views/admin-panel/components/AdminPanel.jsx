@@ -1,22 +1,23 @@
 import { useState } from "react";
 
-import { StyledAdminPanel } from "../styles/AdminPanel.styled";
-import UsersTab from "./UsersTab";
-import PostsTab from "./PostsTab";
-import useAuth from "../../../hooks/useAuth";
-import ErrorReportsTab from "./ErrorReportsTab";
-import CategoriesTab from "./CategoriesTab";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBug,
   faCompass,
   faFileLines,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import useAuth from "../../../hooks/useAuth";
+
+import UsersTab from "./UsersTab";
+import PostsTab from "./PostsTab";
+import ErrorReportsTab from "./ErrorReportsTab";
+import CategoriesTab from "./CategoriesTab";
+import { StyledAdminPanel } from "../styles/AdminPanel.styled";
 
 export default function AdminPanel() {
   const [selectedTab, setSelectedTab] = useState("posts");
-  const [reloadAdminPanel, setReloadAdminPanel] = useState(false);
 
   const { mainRole } = useAuth();
   const hasUsersTabAccess = mainRole == "Admin";
@@ -75,7 +76,7 @@ export default function AdminPanel() {
         ) : selectedTab == "errorReports" ? (
           <ErrorReportsTab />
         ) : (
-          <CategoriesTab setReloadAdminPanel={setReloadAdminPanel} />
+          <CategoriesTab />
         )}
       </div>
     </StyledAdminPanel>

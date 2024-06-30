@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCircleExclamation,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
+
 import {
   selectDialogAction,
   selectDialogAnswer,
@@ -12,12 +18,7 @@ import {
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
 import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlice";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCircleExclamation,
-  faCompass,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
+
 import CategoryNameInput from "./CategoryNameInput";
 import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";
 
@@ -25,7 +26,6 @@ export default function CategoryFromList({
   categoryData,
   setReloadComponent,
   toBeAdded,
-  setReloadAdminPanel,
 }) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isSaved, setIsSaved] = useState(true);
@@ -35,7 +35,6 @@ export default function CategoryFromList({
     categoryData?.name || ""
   );
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const dialogAnswer = useSelector(selectDialogAnswer);
@@ -75,7 +74,6 @@ export default function CategoryFromList({
         dispatch(setIsLoading(false));
         setReloadComponent((prev) => !prev);
         setIsDeleted(true);
-        setReloadAdminPanel((prev) => !prev);
       }
     } catch (err) {
       dispatch(setErrMsg(err?.data?.message || "Błąd usuwania kategorii."));

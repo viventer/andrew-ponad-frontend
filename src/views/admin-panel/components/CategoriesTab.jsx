@@ -1,14 +1,16 @@
 import React from "react";
-import { StyledAdminPanelTab } from "../styles/AdminPanelTab.styled";
-import SearchBar from "../../global/components/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   selectCategoriesTabSearchQuery,
   setCategoriesTabSearchQuery,
 } from "../slices/adminPanelSlice";
-import CategoriesList from "./CategoriesList";
 
-export default function CategoriesTab({ setReloadAdminPanel }) {
+import SearchBar from "../../global/components/SearchBar";
+import CategoriesList from "./CategoriesList";
+import { StyledAdminPanelTab } from "../styles/AdminPanelTab.styled";
+
+export default function CategoriesTab() {
   const searchQuery = useSelector(selectCategoriesTabSearchQuery);
   const dispatch = useDispatch();
 
@@ -24,7 +26,7 @@ export default function CategoriesTab({ setReloadAdminPanel }) {
           placeholder="Czego szukasz?"
         />
       </div>
-      <CategoriesList setReloadAdminPanel={setReloadAdminPanel} />
+      <CategoriesList />
     </StyledAdminPanelTab>
   );
 }

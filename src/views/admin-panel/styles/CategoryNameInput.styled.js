@@ -3,19 +3,27 @@ import styled from "styled-components";
 export const StyledCategoryNameInput = styled.section`
   width: 100%;
   & > div {
-    display: flex;
     justify-content: space-between;
   }
 
+  & > div,
+  & .createNewButton {
+    display: flex;
+  }
+
   & input {
-    background-color: rgba(0, 0, 0, 0);
+    width: 90%;
+    min-width: 14.5rem;
+    padding: 0.25rem 0.5rem;
     border: none;
-    color: white;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  & input,
+  & .createNewButton {
     font-size: 1rem;
     font-weight: 500;
-    min-width: 14.5rem;
-    width: 90%;
-    padding: 0.25rem 0.5rem;
+    color: white;
   }
 
   & input:focus {
@@ -37,12 +45,8 @@ export const StyledCategoryNameInput = styled.section`
   }
 
   & .createNewButton {
-    display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: white;
-    font-weight: 500;
-    font-size: 1rem;
     margin: 0.25rem 0.5rem;
     cursor: pointer;
   }

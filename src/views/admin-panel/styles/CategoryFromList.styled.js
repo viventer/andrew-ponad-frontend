@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const StyledCategoryFromList = styled.li`
   gap: 0.5rem;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
   padding-right: 1rem;
   border-left: 0.5rem solid ${({ theme }) => theme.colors.green};
+  background-color: rgba(255, 255, 255, 0.1);
   transition: all 0.15s ease-in-out;
 
   &.inputFocused,
@@ -22,8 +22,12 @@ export const StyledCategoryFromList = styled.li`
   }
 
   & .deleteButton:hover .icon {
-    color: ${({ theme }) => theme.colors.red};
     cursor: pointer;
+  }
+
+  & .deleteButton:hover .icon,
+  & .formatInfo .icon {
+    color: ${({ theme }) => theme.colors.red};
   }
 
   & button {
@@ -44,12 +48,8 @@ export const StyledCategoryFromList = styled.li`
   }
 
   & .formatInfo {
-    margin: 0.25rem 0.5rem;
     gap: 0.25rem;
-  }
-
-  & .formatInfo .icon {
-    color: ${({ theme }) => theme.colors.red};
+    margin: 0.25rem 0.5rem;
   }
 
   &.unSaved {
