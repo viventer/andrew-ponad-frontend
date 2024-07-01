@@ -30,6 +30,7 @@ export default function Slider() {
     const filteredPostsData = postsData.filter(([id, postData]) =>
       postData.visibility != "draft" ? true : false
     );
+    console.log(filteredPostsData);
     elements = filteredPostsData.map(([id, postData], index) => (
       <SliderElement
         postData={postData}

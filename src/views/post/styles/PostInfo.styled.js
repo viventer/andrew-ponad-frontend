@@ -10,15 +10,15 @@ export const StyledPostInfo = styled.section`
     position: absolute;
     transform: translateY(-100%);
     z-index: 1000;
-    padding: 1rem 2rem;
+    padding: 0.75rem 1.5rem;
     border-left: 0.75rem solid ${({ theme }) => theme.colors.navy};
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(1rem);
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(0.5rem);
   }
 
   & h2 {
-    margin-bottom: 1.25rem;
-    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.3rem;
     font-weight: bold;
   }
 

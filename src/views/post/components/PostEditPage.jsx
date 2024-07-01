@@ -111,7 +111,7 @@ export default function PostEditPage() {
 
         updatePost(newPostData, id);
       })();
-    }, 300000);
+    }, 30000);
 
     return () => clearInterval(intervalId);
   }, [thumbnail, title, category, visibility, postRows]);

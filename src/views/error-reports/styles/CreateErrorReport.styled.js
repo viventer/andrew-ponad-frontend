@@ -11,7 +11,7 @@ export const StyledCreateErrorReport = styled.section`
   max-height: 80vh;
   min-width: 500px;
   overflow-y: auto;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   border: 0.1rem solid ${({ theme }) => theme.colors.navy};
   background-color: ${({ theme }) => theme.colors.darkGray};
 
@@ -45,7 +45,7 @@ export const StyledCreateErrorReport = styled.section`
     font-weight: 500;
   }
 
-  & > .flex > .icon {
+  & > div.flex > .icon {
     padding-right: 0.5rem;
     margin-right: 0.5rem;
     border-right: 0.1rem solid ${({ theme }) => theme.colors.red};
@@ -59,6 +59,17 @@ export const StyledCreateErrorReport = styled.section`
 
   & h3 {
     font-size: 1.2rem;
+  }
+
+  & > section.flex {
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+
+  & > section.flex > .icon {
+    color: ${({ theme }) => theme.colors.red};
   }
 
   @media (max-width: 600px) {

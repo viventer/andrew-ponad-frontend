@@ -92,4 +92,23 @@ export const StyledThumbnailBar = styled.section`
       max-height: 22.5rem;
     }
   }
+
+  @media (max-width: 650px) {
+    margin-bottom: 3rem;
+
+    & img:nth-child(2) {
+      width: calc(100vw - 4rem);
+      height: calc(0.5625 * (100vw - 4rem));
+      max-width: none;
+      max-height: none;
+    }
+  }
+
+  @media (max-width: 500px) {
+    margin-bottom: 0;
+    & img:nth-child(2) {
+      width: calc(100vw - 2rem);
+      height: calc(0.5625 * (100vw - 2rem));
+    }
+  }
 `;
