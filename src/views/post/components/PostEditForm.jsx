@@ -42,7 +42,7 @@ export default function PostEditForm({
     thumbnail: thumbnailPreview,
     visibility: translatedVisibility,
     content: postRows,
-    category: postCategoryName,
+    categoryName: postCategoryName,
   };
 
   const isPostContentValid = (postRows) => {

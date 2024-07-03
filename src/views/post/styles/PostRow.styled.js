@@ -19,13 +19,20 @@ export const StyledPostRow = styled.section`
   }
 
   & article {
-    overflow: auto;
+    overflow-y: auto;
     height: fit-content;
+    white-space: normal;
+    overflow-wrap: break-word;
+    padding-right: 0.75rem;
   }
 
   @media (max-width: 1100px) {
     &:not(.onlyOneElement) {
       flex-direction: column;
     }
+  }
+
+  @media (max-width: 450px) {
+    padding: 2.5rem 0;
   }
 `;

@@ -7,7 +7,7 @@ import {
 } from "../views/global/slices/globalStatesSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3500",
+  baseUrl: "http://192.168.100.112:3500",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;

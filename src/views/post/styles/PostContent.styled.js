@@ -7,7 +7,7 @@ export const StyledPostContent = styled.section`
   border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset};
 
   & > section:nth-child(odd) {
-    background-color: rgba(0, 0, 0, 0.75);
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   & h1 {
@@ -22,7 +22,7 @@ export const StyledPostContent = styled.section`
     font-size: 1.1rem;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 800px) {
     margin-top: 0;
   }
 `;

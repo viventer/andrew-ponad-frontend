@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const StyledSelector = styled.ul`
   position: relative;
-  z-index: 1000;
+  z-index: 99999;
 
   & > .selectorOptions {
     position: absolute;
@@ -48,10 +48,13 @@ export const StyledSelectorOption = styled.li`
     min-width: 12rem;
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     font-weight: 700;
+    z-index: 1;
   }
 
   & > button.selected.down {
     transform: translate(0, calc(-100% - 0.3rem));
+    z-index: -10;
+    position: relative;
   }
 
   & > button.selected.up {

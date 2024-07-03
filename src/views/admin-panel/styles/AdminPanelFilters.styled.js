@@ -38,7 +38,7 @@ export const StyledAdminPanelFilters = styled.section`
     }
 
     & > ul:first-of-type {
-      z-index: 2000;
+      z-index: 999999;
     }
 
     & > ul:first-of-type:has(.hide) {

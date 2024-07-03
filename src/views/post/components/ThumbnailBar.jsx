@@ -26,7 +26,9 @@ export default function ThumbnailBar({ thumbnailFile, view }) {
   }
 
   return (
-    <StyledThumbnailBar className="flex flex-center">
+    <StyledThumbnailBar
+      className={`flex flex-center ${view == "edit" ? "edit" : ""}`}
+    >
       {images}
     </StyledThumbnailBar>
   );

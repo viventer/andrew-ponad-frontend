@@ -41,7 +41,7 @@ export const StyledPostInfo = styled.section`
     color: white;
   }
 
-  @media (max-width: 650px) {
+  @media (max-width: 800px) {
     width: 100vw;
 
     & div {
@@ -69,14 +69,14 @@ export const StyledPostInfo = styled.section`
 
   @media (max-width: 500px) {
     & h2 {
-      margin-bottom: 0.5rem;
+      margin-bottom: 1rem;
       font-size: 1.1rem;
     }
 
     & div {
       transform: translateY(0);
       position: relative;
-      padding: 0.5rem 1rem;
+      padding: 1rem 1rem;
       background-color: rgba(0, 0, 0, 0);
     }
   }

@@ -6,13 +6,16 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import DOMPurify from "dompurify";
 
 import { StyledErrorReportFromListDetails } from "../styles/ErrorReportFromListDetails.styled";
+import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
 
 export default function ErrorReportFromListDetails({ reportData }) {
   const sanitizedHTML = DOMPurify.sanitize(reportData.description);
   const creationDate = new Date(reportData.createdAt).toLocaleDateString("PL");
 
+  const isThumbnailUrlCorrect = useIsThumbnailUrlCorrect();
+
   const formattedImages = reportData.images.map((imageUrl, index) => {
-    const isImageCorrect = base64Regex.test(imageUrl);
+    const isImageCorrect = isThumbnailUrlCorrect(imageUrl);
     if (isImageCorrect) return <img src={imageUrl} key={index} />;
   });
 

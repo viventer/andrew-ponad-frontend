@@ -93,10 +93,12 @@ export const StyledThumbnailBar = styled.section`
     }
   }
 
-  @media (max-width: 650px) {
-    margin-bottom: 3rem;
+  @media (max-width: 800px) {
+    &:not(.edit) {
+      margin-bottom: 3rem;
+    }
 
-    & img:nth-child(2) {
+    &:not(.edit) img:nth-child(2) {
       width: calc(100vw - 4rem);
       height: calc(0.5625 * (100vw - 4rem));
       max-width: none;
@@ -105,8 +107,15 @@ export const StyledThumbnailBar = styled.section`
   }
 
   @media (max-width: 500px) {
-    margin-bottom: 0;
-    & img:nth-child(2) {
+    &:not(.edit) {
+      margin-bottom: 0;
+    }
+
+    &:not(.edit) img {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    &:not(.edit) img:nth-child(2) {
       width: calc(100vw - 2rem);
       height: calc(0.5625 * (100vw - 2rem));
     }

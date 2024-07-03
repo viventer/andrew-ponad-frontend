@@ -36,7 +36,9 @@ export const StyledErrorReportFromListDetails = styled.section`
 
   & img {
     width: 100%;
+    max-width: 100%;
     border: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+    object-fit: contain;
   }
 
   & > button {
@@ -70,6 +72,7 @@ export const StyledErrorReportFromListDetails = styled.section`
 
   @media (max-width: 1150px) {
     width: 95%;
+    min-width: 0;
   }
 
   @media (max-width: 650px) {
