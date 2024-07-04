@@ -4,7 +4,9 @@ export const StyledSliderElement = styled.article`
   position: absolute;
   backdrop-filter: blur(4px);
   background-color: rgba(0, 0, 0, 0.75);
-  transition: left 1s ease-in-out, opacity 1s ease-in-out;
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out,
+    width 1s ease-in-out, height 1s ease-in-out, filter 1s ease-in-out;
+  left: 0;
 
   & img {
     object-fit: contain;
@@ -13,24 +15,23 @@ export const StyledSliderElement = styled.article`
   }
 
   &.sliderElement0 {
-    left: 0;
     z-index: 0;
     filter: blur(2px) brightness(0.6);
   }
 
   &.sliderElement1 {
-    left: 10vw;
+    transform: translateX(10vw);
     z-index: 1;
     filter: blur(1px) brightness(0.8);
   }
 
   &.sliderElement2 {
-    left: 24vw;
+    transform: translateX(24vw);
     z-index: 2;
   }
 
   &.sliderElement3 {
-    left: 48vw;
+    transform: translateX(48vw);
     z-index: 0;
     opacity: 0;
   }
@@ -62,13 +63,13 @@ export const StyledSliderElement = styled.article`
     width: 100%;
     opacity: 0;
     padding: 0.75rem 1.25rem;
-    border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+    /* border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset}; */
+    box-shadow: 0.1rem;
     backdrop-filter: blur(4px);
     font-size: 1.3rem;
     font-weight: 500;
     background-color: rgba(0, 0, 0, 0.5);
-    transition: opacity 1s ease-in-out 0.5s, border-top 1s ease-in-out 0.5s,
-      filter 1s ease-in-out 0s, font-size 1s ease-in-out 0s;
+    transition: opacity 1s ease-in-out 0.5s, border-top 1s ease-in-out 0.5s;
   }
 
   &.sliderElement2 div {
@@ -76,8 +77,8 @@ export const StyledSliderElement = styled.article`
   }
 
   &.sliderElement3 div {
-    filter: opacity(0);
-    font-size: 0;
+    opacity: 0;
+    border-top: none;
   }
 
   &.sliderElement2:hover > article {
@@ -115,26 +116,22 @@ export const StyledSliderElement = styled.article`
   }
 
   @media (max-width: 1300px) {
-    transition: left 1s ease-in-out, transform 1s ease-in-out;
-
     &.sliderElement0 {
-      left: 0;
       display: block;
       filter: blur(1px) brightness(0.8);
+      transform: translateX(0);
     }
 
     &.sliderElement1 {
-      left: 50%;
       z-index: 2;
       filter: blur(0) brightness(1);
-      transform: translateX(-50%);
+      transform: translateX(calc(42.5vw - 50%));
     }
 
     &.sliderElement2 {
-      left: auto;
-      right: 0;
       z-index: 1;
       filter: blur(1px) brightness(0.8);
+      transform: translateX(calc(85vw - 50%));
     }
 
     &.sliderElement3 {
@@ -155,6 +152,7 @@ export const StyledSliderElement = styled.article`
 
     &.sliderElement2 div {
       opacity: 0;
+      border-top: none;
     }
 
     &.sliderElement1 div {
@@ -171,11 +169,6 @@ export const StyledSliderElement = styled.article`
 
     &.sliderElement1:hover img {
       filter: brightness(1.1);
-    }
-
-    &.sliderElement2 div {
-      font-size: 0;
-      filter: opacity(0);
     }
   }
 
@@ -208,22 +201,32 @@ export const StyledSliderElement = styled.article`
     &.sliderElement1 img {
       height: 36vw;
       width: calc(36vw * 1.78);
-      transition: all 0.5s ease-in-out;
+    }
+
+    &.sliderElement0 {
+      display: block;
+      transform: translateX(0);
+    }
+
+    &.sliderElement1 {
+      z-index: 2;
+      transform: translateX(calc(45vw - 50%));
+    }
+
+    &.sliderElement2 {
+      z-index: 1;
+      transform: translateX(calc(90vw - 50%));
     }
   }
 
   @media (max-width: 650px) {
     &.sliderElement2 {
-      left: 75%;
-      right: unset;
-      transform: translateX(-100%);
+      transform: translateX(90vw);
       opacity: 0;
-      transition: opacity 1s ease-in-out, left 1s ease-in-out;
     }
 
     &.sliderElement1 {
-      left: 100%;
-      transform: translateX(-100%);
+      transform: translateX(calc(90vw - 100%));
     }
 
     &.sliderElement1 img {
@@ -252,19 +255,14 @@ export const StyledSliderElement = styled.article`
     &.sliderElement0,
     &.sliderElement2 {
       opacity: 0;
-      transition: transform 1s ease-in-out, opacity 1s ease-in-out;
     }
 
     &.sliderElement0 {
-      left: 0;
-      right: unset;
-      transform: translateX(-35%);
+      transform: translateX(-80vw);
     }
 
     &.sliderElement2 {
-      left: 100%;
-      right: unset;
-      transform: translateX(35%);
+      transform: translateX(80vw);
     }
   }
 `;

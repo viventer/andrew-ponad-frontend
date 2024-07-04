@@ -6,7 +6,7 @@ export const StyledPostsSearchResults = styled.section`
   gap: 1rem;
   max-height: 40vh;
   margin-left: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 1.5rem;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0.5rem 0;
