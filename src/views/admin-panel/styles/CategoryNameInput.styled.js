@@ -38,12 +38,6 @@ export const StyledCategoryNameInput = styled.section`
     color: ${({ theme }) => theme.colors.green};
   }
 
-  & .saveButton:hover .icon:not(.successIcon),
-  & .editButton:hover .icon:not(.successIcon) {
-    color: ${({ theme }) => theme.colors.sunset};
-    cursor: pointer;
-  }
-
   & .createNewButton {
     align-items: center;
     gap: 0.5rem;
@@ -61,6 +55,14 @@ export const StyledCategoryNameInput = styled.section`
     & .saveButton,
     & .editButton {
       margin-left: 0.5rem;
+    }
+  }
+
+  @media (hover: hover) {
+    & .saveButton:hover .icon:not(.successIcon),
+    & .editButton:hover .icon:not(.successIcon) {
+      color: ${({ theme }) => theme.colors.sunset};
+      cursor: pointer;
     }
   }
 `;

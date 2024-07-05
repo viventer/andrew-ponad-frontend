@@ -159,7 +159,7 @@ export default function PostCreatePage() {
   };
 
   const showDialog = () => {
-    dispatch(setDialogOptions(["Dodaj kolejny", "Zakończ dodawanie"]));
+    dispatch(setDialogOptions(["Dodaj kolejny", "Zakończ"]));
     dispatch(setDialogAction("postAdded"));
     dispatch(setDialogMsg("Post został dodany, co chcesz zrobić?"));
   };
@@ -167,7 +167,7 @@ export default function PostCreatePage() {
   const dialogAnswer = useSelector(selectDialogAnswer);
   const dialogAction = useSelector(selectDialogAction);
   useEffect(() => {
-    if (dialogAnswer == "Zakończ dodawanie" && dialogAction == "postAdded") {
+    if (dialogAnswer == "Zakończ" && dialogAction == "postAdded") {
       navigate("/adminpanel", { replace: true });
     } else if (dialogAnswer == "Dodaj kolejny" && dialogAction == "postAdded") {
       navigate("/post/create");

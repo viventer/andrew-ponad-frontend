@@ -19,11 +19,6 @@ export const StyledAddButton = styled.button`
     background-color: ${({ theme }) => theme.colors.navy};
   }
 
-  &:hover {
-    box-shadow: 0.2rem 0.2rem 0 ${({ theme }) => theme.colors.sunset};
-    cursor: pointer;
-  }
-
   &:active {
     transform: translate(0.2rem, 0.2rem);
     box-shadow: none;
@@ -31,5 +26,12 @@ export const StyledAddButton = styled.button`
 
   @media (max-width: 1200px) {
     order: 1;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      box-shadow: 0.2rem 0.2rem 0 ${({ theme }) => theme.colors.sunset};
+      cursor: pointer;
+    }
   }
 `;

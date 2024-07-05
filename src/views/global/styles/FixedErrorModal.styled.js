@@ -31,15 +31,6 @@ export const StyledFixedErrorModal = styled.section`
     color: ${({ theme }) => theme.colors.red};
   }
 
-  & button:hover {
-    cursor: pointer;
-  }
-
-  & > button:hover > .icon {
-    filter: brightness(2);
-    transform: scale(0.75);
-  }
-
   @media (orientation: portrait) {
     bottom: 50vh;
     left: 2.5vw;
@@ -65,6 +56,17 @@ export const StyledFixedErrorModal = styled.section`
 
     & > .icon {
       display: none;
+    }
+  }
+
+  @media (hover: hover) {
+    & button:hover {
+      cursor: pointer;
+    }
+
+    & > button:hover > .icon {
+      filter: brightness(2);
+      transform: scale(0.75);
     }
   }
 `;

@@ -64,10 +64,6 @@ export const StyledElementFromList = styled.li`
     box-shadow: 0.15rem 0.15rem 0 rgba(255, 255, 255, 0.5);
   }
 
-  & > .shortInfo > div:first-of-type:hover {
-    color: ${({ theme }) => theme.colors.sunset};
-  }
-
   & > .shortInfo button:not(.selectorButton) {
     border: none;
     color: white;
@@ -79,21 +75,12 @@ export const StyledElementFromList = styled.li`
     font-size: 1.2rem;
   }
 
-  & > .shortInfo button:not(.selectorButton):hover {
-    color: ${({ theme }) => theme.colors.sunset};
-    cursor: pointer;
-  }
-
   & > .shortInfo button:not(.selectorButton):active {
     transform: scale(0.75);
   }
 
   & .successIcon {
     color: ${({ theme }) => theme.colors.green};
-  }
-
-  & .deleteIcon:hover {
-    color: ${({ theme }) => theme.colors.red};
   }
 
   @media (max-width: 1550px) {
@@ -185,6 +172,21 @@ export const StyledElementFromList = styled.li`
     & .shortInfo {
       row-gap: 0.5rem;
       overflow: hidden;
+    }
+  }
+
+  @media (hover: hover) {
+    & > .shortInfo > div:first-of-type:hover {
+      color: ${({ theme }) => theme.colors.sunset};
+    }
+
+    & > .shortInfo button:not(.selectorButton):hover {
+      color: ${({ theme }) => theme.colors.sunset};
+      cursor: pointer;
+    }
+
+    & .deleteIcon:hover {
+      color: ${({ theme }) => theme.colors.red};
     }
   }
 `;

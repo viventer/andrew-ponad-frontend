@@ -16,6 +16,7 @@ export const StyledSelector = styled.ul`
 
 export const StyledSelectorOption = styled.li`
   list-style: none;
+  white-space: nowrap;
 
   & .flex-center {
     gap: 0.5rem;
@@ -35,17 +36,13 @@ export const StyledSelectorOption = styled.li`
     gap: 0.5rem;
   }
 
-  & > button:hover {
-    background-color: #3a3a3a;
-    cursor: pointer;
-  }
-
   & > button.selected {
+    border-radius: 0.3rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    min-width: 12rem;
+    min-width: 15rem;
     border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     font-weight: 700;
     z-index: 1;
@@ -59,5 +56,12 @@ export const StyledSelectorOption = styled.li`
 
   & > button.selected.up {
     height: 2.5rem;
+  }
+
+  @media (hover: hover) {
+    & > button:hover {
+      background-color: #3a3a3a;
+      cursor: pointer;
+    }
   }
 `;

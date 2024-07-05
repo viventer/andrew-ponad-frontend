@@ -75,15 +75,10 @@ export const StyledPostContentEditor = styled.section`
   & > button {
     justify-content: center;
     width: 100%;
-    margin-bottom: 5rem;
+    margin-bottom: 7rem;
     padding: 2rem;
     font-size: 1.4rem;
     box-shadow: inset 0 0 0rem rgba(21, 49, 92, 0.5);
-  }
-
-  & > button:not([disabled]):hover {
-    box-shadow: inset 10rem 0 0rem rgba(21, 49, 92, 1);
-    outline: none;
   }
 
   @media (max-width: 1100px) {
@@ -98,6 +93,13 @@ export const StyledPostContentEditor = styled.section`
 
     .ql-container {
       height: calc(100% - 65px);
+    }
+  }
+
+  @media (hover: hover) {
+    & > button:not([disabled]):hover {
+      box-shadow: inset 10rem 0 0rem rgba(21, 49, 92, 1);
+      outline: none;
     }
   }
 `;

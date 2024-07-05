@@ -63,7 +63,7 @@ export const StyledSliderElement = styled.article`
     width: 100%;
     opacity: 0;
     padding: 0.75rem 1.25rem;
-    /* border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset}; */
+    border-top: 0.1rem solid ${({ theme }) => theme.colors.sunset};
     box-shadow: 0.1rem;
     backdrop-filter: blur(4px);
     font-size: 1.3rem;
@@ -79,18 +79,6 @@ export const StyledSliderElement = styled.article`
   &.sliderElement3 div {
     opacity: 0;
     border-top: none;
-  }
-
-  &.sliderElement2:hover > article {
-    opacity: 1;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  &:hover img {
-    filter: brightness(1.1);
   }
 
   @media (max-width: 1600px) {
@@ -157,18 +145,6 @@ export const StyledSliderElement = styled.article`
 
     &.sliderElement1 div {
       opacity: 1;
-    }
-
-    &.sliderElement1:hover > article {
-      opacity: 1;
-    }
-
-    &.sliderElement1:hover {
-      cursor: pointer;
-    }
-
-    &.sliderElement1:hover img {
-      filter: brightness(1.1);
     }
   }
 
@@ -263,6 +239,38 @@ export const StyledSliderElement = styled.article`
 
     &.sliderElement2 {
       transform: translateX(80vw);
+    }
+  }
+
+  @media (hover: hover) {
+    &.sliderElement2:hover > article {
+      opacity: 1;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:hover img {
+      filter: brightness(1.1);
+    }
+  }
+
+  @media (max-width: 1300px) and (hover: hover) {
+    &.sliderElement2:hover > article {
+      opacity: 0;
+    }
+
+    &.sliderElement1:hover > article {
+      opacity: 1;
+    }
+
+    &.sliderElement1:hover {
+      cursor: pointer;
+    }
+
+    &.sliderElement1:hover img {
+      filter: brightness(1.1);
     }
   }
 `;

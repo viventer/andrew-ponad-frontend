@@ -42,18 +42,6 @@ export const StyledPostFromList = styled.li`
     box-shadow: 0.15rem 0.15rem 0 rgba(255, 255, 255, 0.5);
   }
 
-  & .flex:hover {
-    cursor: pointer;
-  }
-
-  & .flex:nth-of-type(odd):hover {
-    box-shadow: 0.3rem 0.3rem 0 ${({ theme }) => theme.colors.sunset};
-  }
-
-  & .flex:nth-of-type(even):hover {
-    box-shadow: 0.3rem 0.3rem 0 rgba(255, 255, 255, 0.5);
-  }
-
   & .flex > button:first-of-type {
     color: white;
     background-color: rgba(0, 0, 0, 0.25);
@@ -66,11 +54,6 @@ export const StyledPostFromList = styled.li`
     backdrop-filter: blur(0.1rem);
     text-align: center;
     transition: all 0.2s ease-in-out;
-  }
-
-  & .flex > button:first-of-type:hover {
-    background-color: rgba(0, 0, 0, 0.75);
-    cursor: pointer;
   }
 
   & .flex > img {
@@ -98,15 +81,6 @@ export const StyledPostFromList = styled.li`
     font-size: 1rem;
     color: white;
     transition: all 0.15s ease-in-out;
-  }
-
-  & .flex > div > button:hover {
-    color: ${({ theme }) => theme.colors.sunset};
-    cursor: pointer;
-  }
-
-  & .flex .deleteButton:hover {
-    color: ${({ theme }) => theme.colors.red};
   }
 
   @media (max-width: 650px) {
@@ -145,6 +119,34 @@ export const StyledPostFromList = styled.li`
       padding: 0.25rem 0;
       row-gap: 0.5rem;
       column-gap: 1.5rem;
+    }
+  }
+
+  @media (hover: hover) {
+    & .flex:hover {
+      cursor: pointer;
+    }
+
+    & .flex:nth-of-type(odd):hover {
+      box-shadow: 0.3rem 0.3rem 0 ${({ theme }) => theme.colors.sunset};
+    }
+
+    & .flex:nth-of-type(even):hover {
+      box-shadow: 0.3rem 0.3rem 0 rgba(255, 255, 255, 0.5);
+    }
+
+    & .flex > button:first-of-type:hover {
+      background-color: rgba(0, 0, 0, 0.75);
+      cursor: pointer;
+    }
+
+    & .flex > div > button:hover {
+      color: ${({ theme }) => theme.colors.sunset};
+      cursor: pointer;
+    }
+
+    & .flex .deleteButton:hover {
+      color: ${({ theme }) => theme.colors.red};
     }
   }
 `;

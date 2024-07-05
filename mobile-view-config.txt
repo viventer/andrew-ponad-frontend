@@ -1,4 +1,4 @@
-netsh interface portproxy add v4tov4 listenport=5174 listenaddress=0.0.0.0 connectport=5174 connectaddress=[ip wsl]
+netsh interface portproxy add v4tov4 listenport=5173 listenaddress=0.0.0.0 connectport=5173 connectaddress=[ip wsl]
 netsh interface portproxy add v4tov4 listenport=3500 listenaddress=0.0.0.0 connectport=3500 connectaddress=[ip wsl]
 vite.config.js -> host -> [ip wsl]
 apiSlice -> baseUrl -> [ip windows]:3500

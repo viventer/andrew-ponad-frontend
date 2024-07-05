@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const StyledAdminPanelTab = styled.main`
-  height: 80%;
+  height: 90%;
   margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
 
   &.categoriesTab {
     width: 40%;

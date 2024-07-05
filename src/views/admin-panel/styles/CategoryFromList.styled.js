@@ -8,26 +8,12 @@ export const StyledCategoryFromList = styled.li`
   background-color: rgba(255, 255, 255, 0.1);
   transition: all 0.15s ease-in-out;
 
-  &.inputFocused,
-  &.toBeAdded:hover {
+  &.inputFocused {
     border-left-width: 1.5rem;
-  }
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.17);
   }
 
   & .deleteButton {
     margin-left: 2rem;
-  }
-
-  & .deleteButton:hover .icon {
-    cursor: pointer;
-  }
-
-  & .deleteButton:hover .icon,
-  & .formatInfo .icon {
-    color: ${({ theme }) => theme.colors.red};
   }
 
   & button {
@@ -60,10 +46,6 @@ export const StyledCategoryFromList = styled.li`
     border-left-color: ${({ theme }) => theme.colors.red};
   }
 
-  &.toBeAdded:hover {
-    cursor: pointer;
-  }
-
   @media (max-width: 400px) {
     & > .flex {
       gap: 0;
@@ -77,6 +59,30 @@ export const StyledCategoryFromList = styled.li`
       position: absolute;
       bottom: 0.25rem;
       left: 1rem;
+    }
+  }
+
+  @media (hover: hover) {
+    &.inputFocused,
+    &.toBeAdded:hover {
+      border-left-width: 1.5rem;
+    }
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.17);
+    }
+
+    & .deleteButton:hover .icon {
+      cursor: pointer;
+    }
+
+    & .deleteButton:hover .icon,
+    & .formatInfo .icon {
+      color: ${({ theme }) => theme.colors.red};
+    }
+
+    &.toBeAdded:hover {
+      cursor: pointer;
     }
   }
 `;

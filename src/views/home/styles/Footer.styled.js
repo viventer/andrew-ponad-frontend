@@ -31,11 +31,6 @@ export const StyledFooter = styled.footer`
     transition: border-left 0.2s ease-in-out;
   }
 
-  & > button:hover p {
-    border-left-width: 0.5rem;
-    cursor: pointer;
-  }
-
   & > article {
     display: flex;
     align-items: center;
@@ -53,6 +48,13 @@ export const StyledFooter = styled.footer`
   @media (max-width: 400px) {
     & > article span {
       display: none;
+    }
+  }
+
+  @media (hover: hover) {
+    & > button:hover p {
+      border-left-width: 0.5rem;
+      cursor: pointer;
     }
   }
 `;

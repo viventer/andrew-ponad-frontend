@@ -23,8 +23,10 @@ export const StyledPostEditPage = styled.main`
     right: 0;
     bottom: 0;
     display: flex;
+    flex-wrap: wrap-reverse;
     align-items: end;
-    gap: 2rem;
+    column-gap: 2rem;
+    row-gap: 0.5rem;
     height: 2.5rem;
     z-index: 10000;
     background-color: rgba(0, 0, 0, 0.5);
@@ -39,19 +41,15 @@ export const StyledPostEditPage = styled.main`
     & > .thumbnailBarOverlay {
       width: 80vw;
       max-width: 40rem;
-    }
-  }
-
-  @media (max-width: 750px) {
-    & > .thumbnailBarOverlay {
       display: flex;
+      gap: 2rem;
     }
 
     & > .thumbnailBarOverlay > ul {
       position: absolute;
       right: 0;
       bottom: 1rem;
-      max-width: 12rem;
+      max-width: 15rem;
     }
   }
 
@@ -85,7 +83,7 @@ export const StyledPostTitleInput = styled.input`
     border-color: rgba(241, 196, 123, 1);
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 1100px) {
     transform: translate(0, 0);
     width: 100%;
     padding: 0.3rem 1.5rem;

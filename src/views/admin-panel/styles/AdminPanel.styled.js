@@ -13,8 +13,11 @@ export const StyledAdminPanel = styled.div`
     width: 90%;
     max-width: 1400px;
     margin-top: 5vh;
+    margin-bottom: 5vh;
     border: 0.1rem solid rgba(255, 255, 255, 0.1);
     border-radius: 1rem;
+    height: 82vh;
+    min-height: 500px;
   }
 
   & nav {
@@ -47,11 +50,6 @@ export const StyledAdminPanel = styled.div`
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
   }
 
-  & nav li:not(.selected):hover {
-    border-bottom: 0.1rem solid rgba(255, 255, 255, 0.25);
-    cursor: pointer;
-  }
-
   @media (max-width: 600px) {
     & .navIcon {
       display: none;
@@ -82,9 +80,11 @@ export const StyledAdminPanel = styled.div`
       display: block;
       transition: all 0.15s ease-in-out;
     }
+  }
 
-    & .navIcon:hover {
-      color: ${({ theme }) => theme.colors.sunset};
+  @media (hover: hover) {
+    & nav li:not(.selected):hover {
+      border-bottom: 0.1rem solid rgba(255, 255, 255, 0.25);
       cursor: pointer;
     }
   }

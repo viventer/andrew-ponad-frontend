@@ -144,6 +144,12 @@ export default function CategoryNameInput({
               if (e.key === "Enter" && toBeAdded) {
                 addCategory();
                 setIsInputFocused(false);
+              } else if (newCategoryName.length >= 24) {
+                dispatch(
+                  setErrMsg(
+                    "Nazwa kategorii może zawierać maksymalnie 24 znaki"
+                  )
+                );
               }
             }}
           />

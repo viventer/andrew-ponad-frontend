@@ -52,11 +52,6 @@ export const StyledErrorReportFromListDetails = styled.section`
     transition: all 0.15s ease-in-out;
   }
 
-  & > button:hover {
-    color: ${({ theme }) => theme.colors.sunset};
-    cursor: pointer;
-  }
-
   & > button > h3 {
     margin-bottom: 0;
   }
@@ -78,6 +73,13 @@ export const StyledErrorReportFromListDetails = styled.section`
   @media (max-width: 650px) {
     & .reportTitle {
       font-size: 1.1rem;
+    }
+  }
+
+  @media (hover: hover) {
+    & > button:hover {
+      color: ${({ theme }) => theme.colors.sunset};
+      cursor: pointer;
     }
   }
 `;

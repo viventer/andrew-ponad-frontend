@@ -42,11 +42,6 @@ export const StyledErrorReportContentEditorImages = styled.section`
     position: absolute;
   }
 
-  & .deleteButton:hover {
-    border-color: white;
-    cursor: pointer;
-  }
-
   & .imageDropzone {
     width: 20vw;
     max-width: 400px;
@@ -100,6 +95,13 @@ export const StyledErrorReportContentEditorImages = styled.section`
       min-width: 0;
       height: calc(90vw * 0.5625);
       min-height: 0;
+    }
+  }
+
+  @media (hover: hover) {
+    & .deleteButton:hover {
+      border-color: white;
+      cursor: pointer;
     }
   }
 `;

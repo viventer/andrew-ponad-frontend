@@ -26,11 +26,6 @@ export const StyledCreateErrorReport = styled.section`
     transition: all 0.15s ease-in-out;
   }
 
-  & > button:hover {
-    transform: scale(75%);
-    cursor: pointer;
-  }
-
   & > button:active {
     color: white;
   }
@@ -89,6 +84,13 @@ export const StyledCreateErrorReport = styled.section`
   @media (max-width: 340px) {
     .flex > .icon {
       display: none;
+    }
+  }
+
+  @media (hover: hover) {
+    & > button:hover {
+      transform: scale(75%);
+      cursor: pointer;
     }
   }
 `;
