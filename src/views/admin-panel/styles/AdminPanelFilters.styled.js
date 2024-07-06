@@ -19,6 +19,12 @@ export const StyledAdminPanelFilters = styled.section`
     transform: translate(0, calc(100% + 0.3rem));
   }
 
+  @media (max-width: 1200px) {
+    &.postsTab {
+      order: 2;
+    }
+  }
+
   @media (max-width: 850px) {
     flex-wrap: wrap;
     row-gap: 2rem;

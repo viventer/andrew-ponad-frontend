@@ -19,6 +19,19 @@ import VisibilitySelector from "./VisibilitySelector";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { selectUserId } from "../../auth/slices/authSlice";
 import { StyledPostEditPage } from "../styles/PostEditPage.styled";
+import { useDeletePostMutation } from "../slices/postsApiSlice";
+import {
+  selectDialogAction,
+  selectDialogAnswer,
+  setDialogAction,
+  setDialogAnswer,
+  setDialogMsg,
+  setDialogOptions,
+  setErrMsg,
+  setIsLoading,
+} from "../../global/slices/globalStatesSlice";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function PostEditForm({
   handleClick,
@@ -31,10 +44,50 @@ export default function PostEditForm({
   const postCategoryName = useSelector(selectPostCategoryName);
   const postVisiblity = useSelector(selectPostVisibility);
   const userId = useSelector(selectUserId);
+  const dialogAnswer = useSelector(selectDialogAnswer);
+  const dialogAction = useSelector(selectDialogAction);
 
+  const dispatch = useDispatch();
   const translateVisibility = useTranslateVisibility();
-
   const translatedVisibility = translateVisibility(postVisiblity, "english");
+
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [deletePostMutation, { isDeletingLoading }] = useDeletePostMutation(id);
+
+  const showDialog = () => {
+    dispatch(setDialogOptions(["Tak", "Nie"]));
+    dispatch(setDialogAction(`deletePost${id}`));
+    dispatch(
+      setDialogMsg(
+        "Czy na pewno chcesz odrzucić posta? Ta operacja jest nieodwracalna."
+      )
+    );
+  };
+
+  useEffect(() => {
+    if (dialogAnswer == "Tak" && dialogAction == `deletePost${id}`) {
+      deletePost();
+    }
+    dispatch(setDialogAnswer(null));
+    dispatch(setDialogAction(null));
+  }, [dialogAnswer]);
+
+  const deletePost = async () => {
+    try {
+      await deletePostMutation(id).unwrap();
+      if (isDeletingLoading) {
+        dispatch(setIsLoading(true));
+        return;
+      } else {
+        dispatch(setIsLoading(false));
+        navigate("/adminpanel", { replace: true });
+      }
+    } catch (err) {
+      dispatch(setErrMsg(err?.data?.message || "Błąd odrzucania posta."));
+      dispatch(setIsLoading(false));
+    }
+  };
 
   const postData = {
     author: userId,
@@ -82,6 +135,9 @@ export default function PostEditForm({
         <StyledButton disabled={!canSave} onClick={() => handleClick(postData)}>
           {buttonText}
         </StyledButton>
+        {buttonText == "Dodaj post" && (
+          <StyledButton onClick={showDialog}>Odrzuć post</StyledButton>
+        )}
         <VisibilitySelector />
       </footer>
     </StyledPostEditPage>

@@ -22,7 +22,7 @@ export const StyledElementFromList = styled.li`
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    min-width: 18rem;
+    min-width: 20rem;
   }
 
   & > .shortInfo > div {

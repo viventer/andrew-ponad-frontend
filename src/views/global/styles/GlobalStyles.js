@@ -92,12 +92,11 @@ export const GlobalStyles = createGlobalStyle`
 
   .responsivePostElement {
     width: 90vw;
+    height: calc(0.5625 * 90vw);
+    max-height: calc(0.5625 * 36rem);
     max-width: 36rem;
   }
   
-  .onlyOneElement {
-  }
-
   .onlyOneElement .responsivePostElement {
     max-width: 75rem;
   }

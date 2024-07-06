@@ -33,7 +33,7 @@ export const StyledImageDropzone = styled.div`
 
   & .change-icon {
     filter: opacity(0);
-    font-size: 7rem;
+    font-size: 6rem;
   }
 
   & .change-icon,
@@ -43,7 +43,7 @@ export const StyledImageDropzone = styled.div`
 
   & .change-paragraph {
     filter: opacity(0);
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     font-weight: 500;
   }
 
@@ -56,6 +56,31 @@ export const StyledImageDropzone = styled.div`
     width: 100%;
     height: 100%;
     transition: all 0.15s ease-in-out;
+  }
+
+  @media (max-width: 650px) {
+    & .change-icon {
+      font-size: 4rem;
+    }
+
+    & .change-paragraph {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (max-width: 500px) {
+    & -effect {
+      flex-direction: row;
+      gap: 0.25rem;
+    }
+
+    & .change-icon {
+      font-size: 1.7rem;
+    }
+
+    & .change-paragraph {
+      font-size: 1.3rem;
+    }
   }
 
   @media (hover: hover) {

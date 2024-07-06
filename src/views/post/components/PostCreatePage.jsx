@@ -34,7 +34,6 @@ import {
 } from "../slices/postSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
-import useGetCategoryName from "../../../hooks/useGetCategoryName";
 
 export default function PostCreatePage() {
   const [postRows, setPostRows] = useState([
@@ -205,7 +204,7 @@ export default function PostCreatePage() {
   return (
     <PostEditForm
       handleClick={() => finishCreation()}
-      buttonText="Dodaj posta"
+      buttonText="Dodaj post"
       postRows={postRows}
       setPostRows={setPostRows}
     />

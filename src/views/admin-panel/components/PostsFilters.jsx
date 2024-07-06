@@ -25,7 +25,7 @@ import { StyledAdminPanelFilters } from "../styles/AdminPanelFilters.styled";
 import useGetAllCategoryNames from "../../../hooks/useGetAllCategoryNames";
 import { useEffect, useState } from "react";
 
-export default function PostsFilters() {
+export default function PostsFilters({ view }) {
   const selectedVisibilityFilter = useSelector(selectVisibilityFilter);
   const selectedCategoryFilter = useSelector(selectCategoryFilter);
   const searchQuery = useSelector(selectPostsTabSearchQuery);
@@ -47,7 +47,9 @@ export default function PostsFilters() {
   }, [isSuccess, categoryNames, isError]);
 
   return (
-    <StyledAdminPanelFilters>
+    <StyledAdminPanelFilters
+      className={`${view == "postsTab" ? "postsTab" : ""}`}
+    >
       <FontAwesomeIcon icon={faFilter} className="icon postsFiltersIcon" />
       {categoryOptions && (
         <>

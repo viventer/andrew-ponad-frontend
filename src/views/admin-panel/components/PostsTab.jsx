@@ -7,7 +7,7 @@ export default function PostsTab() {
   return (
     <StyledAdminPanelTab>
       <div className="flex">
-        <PostsFilters />
+        <PostsFilters view="postsTab" />
         <AddPostButton />
       </div>
       <PostsList />

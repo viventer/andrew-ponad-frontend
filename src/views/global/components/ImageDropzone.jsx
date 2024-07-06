@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { useDropzone } from "react-dropzone";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExchange } from "@fortawesome/free-solid-svg-icons";
+import { faCross, faExchange, faX } from "@fortawesome/free-solid-svg-icons";
 
 import { setErrMsg } from "../slices/globalStatesSlice";
 import { setThumbnailPreview } from "../../post/slices/postSlice";
@@ -65,6 +65,7 @@ export default function ImageDropzone({
       <div className="hover-effect">
         <FontAwesomeIcon icon={faExchange} className="change-icon" />
         <p className="change-paragraph">Zmień zdjęcie</p>
+        <FontAwesomeIcon icon={faX} className="discard-icon" />
       </div>
     </StyledImageDropzone>
   );

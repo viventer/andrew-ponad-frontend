@@ -14,7 +14,7 @@ export default function AddPostButton() {
 
   return (
     <StyledAddButton onClick={addPost}>
-      <p>Dodaj posta</p>
+      <p>Dodaj post</p>
       <FontAwesomeIcon icon={faAdd} className="icon" />
     </StyledAddButton>
   );
