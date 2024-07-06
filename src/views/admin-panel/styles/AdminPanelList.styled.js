@@ -8,4 +8,8 @@ export const StyledAdminPanelList = styled.ul`
   margin-bottom: 1rem;
   overflow: auto;
   list-style: none;
+
+  &.errorReportsList {
+    gap: 2rem;
+  }
 `;

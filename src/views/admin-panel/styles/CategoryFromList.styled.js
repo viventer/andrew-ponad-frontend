@@ -47,7 +47,7 @@ export const StyledCategoryFromList = styled.li`
   }
 
   @media (max-width: 400px) {
-    & > .flex {
+    & > .flex:not(.formatInfo) {
       gap: 0;
       flex-direction: column;
       align-items: start;

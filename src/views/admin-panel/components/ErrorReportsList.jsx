@@ -70,7 +70,7 @@ export default function ErrorReportsList() {
   const [reloadComponent, setReloadComponent] = useState(false);
 
   return (
-    <StyledAdminPanelList>
+    <StyledAdminPanelList className="errorReportsList">
       {filteredReportsData &&
         filteredReportsData.map(([id, reportData]) => {
           return (

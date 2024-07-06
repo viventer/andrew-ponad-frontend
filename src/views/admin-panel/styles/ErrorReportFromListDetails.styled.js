@@ -24,7 +24,9 @@ export const StyledErrorReportFromListDetails = styled.section`
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
     background-color: rgba(0, 0, 0, 0.3);
-    width: fit-content;
+    width: 100%;
+    white-space: break-spaces;
+    overflow-x: auto;
   }
 
   & .images {

@@ -41,6 +41,9 @@ export const StyledPostsSearchBox = styled.section`
     transform: none;
     width: 100vw;
     max-width: 100vw;
+
+    border-left: none;
+    border-right: none;
   }
 
   @media (max-width: 650px) {

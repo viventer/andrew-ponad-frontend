@@ -27,7 +27,7 @@ export default function ErrorReportContentEditorDescription({
   return (
     <StyledErrorReportContentEditorDescription>
       <h3>
-        Opis błędu
+        Opis błędu&nbsp;
         <span className={isDescriptionLengthCorrect ? "green" : "red"}>
           (24 - 1000 znaków)
         </span>
