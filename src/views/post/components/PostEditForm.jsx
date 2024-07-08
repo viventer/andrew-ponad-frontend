@@ -9,6 +9,7 @@ import {
   selectPostTitle,
   selectPostVisibility,
   selectThumbnailPreview,
+  setThumbnailPreview,
 } from "../slices/postSlice";
 
 import ThumbnailBar from "./ThumbnailBar";
@@ -32,6 +33,8 @@ import {
 } from "../../global/slices/globalStatesSlice";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function PostEditForm({
   handleClick,
@@ -122,9 +125,18 @@ export default function PostEditForm({
     (isPostContentValid(postRows) && isAllDataExist) ||
     postVisiblity == "Szkic";
 
+  const discardThumbnailImg = () => {
+    dispatch(setThumbnailPreview(""));
+  };
+
   return (
     <StyledPostEditPage>
       <ThumbnailBar view="edit" />
+      <div className="responsivePostElement deleteImgResponsivePostElement">
+        <button className="deleteImgButton" onClick={discardThumbnailImg}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </div>
       <ImageDropzone isThumbnail={true} imagePreview={thumbnailPreview} />
       <div className="thumbnailBarOverlay">
         <PostTitleInput />

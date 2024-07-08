@@ -37,6 +37,17 @@ export const StyledPostEditPage = styled.main`
     height: 2.5rem;
   }
 
+  & .deleteImgButton {
+    right: 2.5%;
+    top: 5%;
+    z-index: 9999999;
+  }
+
+  & .deleteImgResponsivePostElement {
+    position: absolute;
+    top: 0;
+  }
+
   @media (max-width: 1100px) {
     & > .thumbnailBarOverlay {
       width: 80vw;
@@ -59,6 +70,10 @@ export const StyledPostEditPage = styled.main`
     & > .thumbnailBarOverlay {
       width: calc(80vw + 0.3rem);
       margin-top: 0.3rem;
+    }
+
+    & .deleteImgButton {
+      font-size: 1.25rem;
     }
   }
 `;

@@ -37,7 +37,8 @@ export const StyledImageDropzone = styled.div`
   }
 
   & .change-icon,
-  & .change-paragraph {
+  & .change-paragraph,
+  & .discard-icon {
     transition: all 0.15s ease-in-out;
   }
 
@@ -69,7 +70,7 @@ export const StyledImageDropzone = styled.div`
   }
 
   @media (max-width: 500px) {
-    & -effect {
+    & .hover-effect {
       flex-direction: row;
       gap: 0.25rem;
     }

@@ -36,7 +36,7 @@ export default function ErrorReportContentEditorImages() {
             {!(!isThumbnailCorrect && index == 0) && (
               <button
                 onClick={() => deleteImage(index)}
-                className="deleteButton"
+                className="deleteImgButton"
               >
                 <FontAwesomeIcon icon={faTrash} />
               </button>

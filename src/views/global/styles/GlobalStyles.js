@@ -101,6 +101,27 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 75rem;
   }
 
+  .deleteImgButton {
+    position: absolute;
+    right: 0.3rem;
+    top: 0.3rem;
+    z-index: 10;
+    padding: 0.5rem 0.8rem;
+    border: 0.1rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 100%;
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.colors.red};
+    backdrop-filter: blur(2px);
+    background-color: rgba(0, 0, 0, 0.3);
+    transition: all 0.15s ease-in-out;
+  }
+
+  .dropzoneWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
   @media (max-width: 1600px) {
     .responsivePostElement {
       width: 80vw;
@@ -145,6 +166,13 @@ export const GlobalStyles = createGlobalStyle`
       max-height: calc(22.5rem);
     }
 
+  }  
+  
+  @media (hover: hover) {
+    & .deleteImgButton:hover {
+      border-color: white;
+      cursor: pointer;
+    }
   }
 
   .onlyOneElement .quillEditor {

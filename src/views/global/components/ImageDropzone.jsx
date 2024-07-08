@@ -65,7 +65,6 @@ export default function ImageDropzone({
       <div className="hover-effect">
         <FontAwesomeIcon icon={faExchange} className="change-icon" />
         <p className="change-paragraph">Zmień zdjęcie</p>
-        <FontAwesomeIcon icon={faX} className="discard-icon" />
       </div>
     </StyledImageDropzone>
   );

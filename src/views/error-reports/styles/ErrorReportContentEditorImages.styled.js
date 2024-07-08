@@ -23,21 +23,6 @@ export const StyledErrorReportContentEditorImages = styled.section`
     object-fit: contain;
   }
 
-  & .deleteButton {
-    right: 0.3rem;
-    top: 0.3rem;
-    z-index: 10;
-    padding: 0.5rem 0.8rem;
-    border: 0.1rem solid ${({ theme }) => theme.colors.red};
-    border-radius: 3rem;
-    font-size: 1.5rem;
-    color: ${({ theme }) => theme.colors.red};
-    backdrop-filter: blur(2px);
-    background-color: rgba(0, 0, 0, 0.3);
-    transition: all 0.15s ease-in-out;
-  }
-
-  & .deleteButton,
   & > div > img {
     position: absolute;
   }
@@ -95,13 +80,6 @@ export const StyledErrorReportContentEditorImages = styled.section`
       min-width: 0;
       height: calc(90vw * 0.5625);
       min-height: 0;
-    }
-  }
-
-  @media (hover: hover) {
-    & .deleteButton:hover {
-      border-color: white;
-      cursor: pointer;
     }
   }
 `;
