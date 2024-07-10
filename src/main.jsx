@@ -10,6 +10,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 import { GlobalStyles } from "./views/global/styles/GlobalStyles.js";
+import "./views/global/styles/customZoomStyles.css";
 
 import App from "./App.jsx";
 

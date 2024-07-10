@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import useAuth from "../../../hooks/useAuth";
-import Forbidden from "../../global/components/Forbidden";
+import ErrorPage from "../../global/components/ErrorPage";
 
 const RequireAuth = ({ allowedRoles }) => {
   const { roles } = useAuth();
@@ -10,10 +10,13 @@ const RequireAuth = ({ allowedRoles }) => {
 
   if (isAllowed) {
     return <Outlet />;
-  } else if (!isAllowed && Array.isArray(roles)) {
-    return <Forbidden />;
-  } else {
-    return null;
+  } else if (!isAllowed) {
+    return (
+      <ErrorPage
+        headingMessage="Nie masz uprawnień do tej podstrony."
+        subheadingMessage="Odśwież stronę lub zaloguj się ponownie na konto z odpowiednimi uprawnieniami"
+      />
+    );
   }
 };
 export default RequireAuth;

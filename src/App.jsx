@@ -6,7 +6,7 @@ import Home from "./views/home/components/Home";
 import Login from "./views/auth/components/Login";
 import Post from "./views/post/components/Post";
 import PostEditPage from "./views/post/components/PostEditPage";
-import Missing from "./views/global/components/Missing";
+import ErrorPage from "./views/global/components/ErrorPage";
 import Register from "./views/auth/components/Register";
 import PersistLogin from "./views/auth/components/PersistLogin";
 import RequireAuth from "./views/auth/components/RequireAuth";
@@ -31,7 +31,15 @@ function App() {
             <Route path="post/create/:id?" element={<PostCreatePage />} />
           </Route>
         </Route>
-        <Route path="*" element={<Missing />} />
+        <Route
+          path="*"
+          element={
+            <ErrorPage
+              headingMessage="Nie znaleziono strony o podanym adresie."
+              subheadingMessage="Kliknij ikonkę w lewym górnym rogu, aby wrócić na stronę główną."
+            />
+          }
+        />
       </Route>
     </Routes>
   );

@@ -2,6 +2,8 @@ import DOMPurify from "dompurify";
 
 import { StyledPostRow } from "../styles/PostRow.styled";
 
+import Zoom from "react-medium-image-zoom";
+
 export default function PostRow({ rowData }) {
   const firstElementType = rowData[0].type;
   const secondElementType = rowData[1].type;
@@ -21,11 +23,13 @@ export default function PostRow({ rowData }) {
 
       case "image":
         return (
-          <img
-            src={rowData[i].imagePreview}
-            key={i}
-            className="responsivePostElement"
-          />
+          <Zoom>
+            <img
+              src={rowData[i].imagePreview}
+              key={i}
+              className="responsivePostElement"
+            />
+          </Zoom>
         );
 
       default:
