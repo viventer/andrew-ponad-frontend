@@ -11,6 +11,7 @@ import Register from "./views/auth/components/Register";
 import PersistLogin from "./views/auth/components/PersistLogin";
 import RequireAuth from "./views/auth/components/RequireAuth";
 import PostCreatePage from "./views/post/components/PostCreatePage";
+import GradeCalculator from "./views/grade-calculator/components/GradeCalculator";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
+        <Route path="gradecalculator" element={<GradeCalculator />} />
         <Route element={<PersistLogin />}>
           <Route index element={<Home />} />
           <Route path="post/:id" element={<Post />} />

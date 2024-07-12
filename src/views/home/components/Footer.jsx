@@ -1,12 +1,14 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBucket, faBug } from "@fortawesome/free-solid-svg-icons";
+import {
+  faBucket,
+  faBug,
+  faGraduationCap,
+} from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 import { StyledFooter } from "../styles/Footer.styled";
-import ErrorReport from "../../error-reports/components/CreateErrorReport";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-  selectIsErrorReportVisible,
   setIsSearchBoxVisible,
   setIsUserInfoVisible,
   toggleIsErrorReportVisible,
@@ -17,16 +19,24 @@ export default function Footer() {
 
   return (
     <StyledFooter>
-      <button
-        onClick={() => {
-          dispatch(toggleIsErrorReportVisible());
-          dispatch(setIsUserInfoVisible(false));
-          dispatch(setIsSearchBoxVisible(false));
-        }}
-      >
-        <FontAwesomeIcon icon={faBug} />
-        <p>Zgłoś błąd</p>
-      </button>
+      <div className="flex">
+        <button
+          onClick={() => {
+            dispatch(toggleIsErrorReportVisible());
+            dispatch(setIsUserInfoVisible(false));
+            dispatch(setIsSearchBoxVisible(false));
+          }}
+        >
+          <FontAwesomeIcon icon={faBug} />
+          <p>Zgłoś błąd</p>
+        </button>
+        <button className="gradeCalculatorButton">
+          <FontAwesomeIcon icon={faGraduationCap} className="icon" />
+          <Link to="/gradecalculator" className="link">
+            <p>Kalkulator ocen</p>
+          </Link>
+        </button>
+      </div>
       <article>
         <FontAwesomeIcon icon={faBucket} />
         <p>

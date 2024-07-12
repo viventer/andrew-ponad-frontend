@@ -6,32 +6,48 @@ export const StyledFooter = styled.footer`
   right: 0;
   bottom: 0;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1rem;
   padding: 0.5rem 1rem;
   border-top: 0.1rem solid ${({ theme }) => theme.colors.navy};
   background-color: ${({ theme }) => theme.colors.darkGray};
   z-index: 100;
 
-  & > button {
+  & > .flex {
+    justify-content: space-between;
+  }
+
+  & .gradeCalculatorButton > .link {
+    text-decoration: none;
+  }
+
+  & .gradeCalculatorButton > .icon {
+    color: ${({ theme }) => theme.colors.sunset};
+  }
+
+  & button {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     border: none;
-    padding-left: 0.5rem;
     font-size: 1rem;
     font-weight: 500;
     color: ${({ theme }) => theme.colors.red};
     background-color: rgba(0, 0, 0, 0);
   }
 
-  & > button p {
+  & button p {
     border-left: 0.15rem solid ${({ theme }) => theme.colors.red};
     padding-left: 0.5rem;
     color: white;
     transition: border-left 0.2s ease-in-out;
   }
 
-  & > article {
+  & .gradeCalculatorButton p {
+    border-left-color: ${({ theme }) => theme.colors.sunset};
+  }
+
+  & article {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -39,20 +55,20 @@ export const StyledFooter = styled.footer`
     color: ${({ theme }) => theme.colors.sunset};
   }
 
-  & > article p {
+  & article p {
     border-left: 0.15rem solid ${({ theme }) => theme.colors.sunset};
     padding-left: 0.5rem;
     color: white;
   }
 
   @media (max-width: 400px) {
-    & > article span {
+    & article span {
       display: none;
     }
   }
 
   @media (hover: hover) {
-    & > button:hover p {
+    & button:hover p {
       border-left-width: 0.5rem;
       cursor: pointer;
     }
