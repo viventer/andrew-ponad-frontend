@@ -21,7 +21,6 @@ export const GlobalStyles = createGlobalStyle`
     color: white;
     background-color: black;
     background-color: ${({ theme }) => theme.colors.almostBlack};
-    touch-action: none;
   }
 
   main {

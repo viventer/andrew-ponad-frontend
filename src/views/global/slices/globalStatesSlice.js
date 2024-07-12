@@ -22,7 +22,6 @@ const globalStatesSlice = createSlice({
     isUserInfoVisible: false,
     isSearchBoxVisible: false,
     isErrorReportVisible: false,
-    zoomImgSrc: null,
   },
   reducers: {
     setErrMsg: (state, action) => {
@@ -75,9 +74,6 @@ const globalStatesSlice = createSlice({
     toggleIsErrorReportVisible: (state) => {
       state.isErrorReportVisible = !state.isErrorReportVisible;
     },
-    setzoomImgSrc: (state, action) => {
-      state.zoomImgSrc = action.payload;
-    },
   },
 });
 
@@ -97,11 +93,9 @@ export const {
   toggleIsUserInfoVisible,
   setIsErrorReportVisible,
   toggleIsErrorReportVisible,
-  setzoomImgSrc,
 } = globalStatesSlice.actions;
 
 export const selectErrMsg = (state) => state.globalStates.errMsg;
-export const selectZoomImgSrc = (state) => state.globalStates.zoomImgSrc;
 export const selectDialogMsg = (state) => state.globalStates.dialogMsg;
 export const selectSuccessMsg = (state) => state.globalStates.successMsg;
 export const selectDialogAnswer = (state) => state.globalStates.dialogAnswer;

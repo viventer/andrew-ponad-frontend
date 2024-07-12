@@ -13,7 +13,6 @@ import {
   selectIsErrorReportVisible,
   selectIsLoading,
   selectSuccessMsg,
-  selectZoomImgSrc,
 } from "../slices/globalStatesSlice";
 
 import { HashLoader } from "react-spinners";
