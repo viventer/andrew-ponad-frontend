@@ -1,64 +1,106 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StyledGradeCalculator } from "../styles/GradeCalculator.styled";
 import GradeCalculatorInput from "./GradeCalculatorInput";
 import GradingScaleTable from "./GradingScaleTable";
-import { setErrMsg } from "../../global/slices/globalStatesSlice";
-import { useDispatch } from "react-redux";
 
 export default function GradeCalculator() {
   const [scoredPoints, setScoredPoints] = useState(null);
   const [maxPoints, setMaxPoints] = useState(null);
+  const [isScoredPointsValid, setIsScoredPointsValid] = useState(null);
+  const [isMaxPointsValid, setIsMaxPointsValid] = useState(null);
+  const [scoredPointsErrMsg, setScoredPointsErrMsg] = useState("");
+  const [maxPointsErrMsg, setMaxPointsErrMsg] = useState("");
 
-  const dispatch = useDispatch();
+  const scoredPointsInputRef = useRef();
+  const maxPointsInputRef = useRef();
 
-  const handleSetScoredPoints = (points) => {
-    const validationResult = validateScoredPoints(points);
-    if (validationResult.isValid) {
-      setScoredPoints(points);
+  useEffect(() => {
+    scoredPointsInputRef.current.focus();
+  });
+
+  const validatePoints = () => {
+    if (!scoredPoints || !maxPoints) {
+      setIsScoredPointsValid(false);
+      setIsMaxPointsValid(false);
+      setScoredPointsErrMsg("");
+      setMaxPointsErrMsg("");
+    } else if (scoredPoints < 0) {
+      setIsScoredPointsValid(false);
+      setScoredPointsErrMsg(
+        "Liczba zdobytych punktów nie może być mniejsza od 0."
+      );
+    } else if (maxPoints <= 0) {
+      setIsMaxPointsValid(false);
+      setMaxPointsErrMsg("Maksymalna liczba punktów musi być większa od 0.");
+    } else if (scoredPoints > 9999) {
+      setIsScoredPointsValid(false);
+      setScoredPointsErrMsg(
+        "Liczba zdobytych punktów nie może być większa od 9999."
+      );
+    } else if (maxPoints > 9999) {
+      setIsMaxPointsValid(false);
+      setMaxPointsErrMsg(
+        "Maksumalna liczba punktów nie może być większa od 9999."
+      );
+    } else if (maxPoints < scoredPoints && maxPoints && scoredPoints) {
+      setIsMaxPointsValid(false);
+      setIsScoredPointsValid(false);
+      setMaxPointsErrMsg(
+        "Maksymalna liczba punktów nie może być mniejsza od liczby zdobytych."
+      );
     } else {
-      dispatch(setErrMsg(validationResult.errorMessage));
-    }
-  };
-  const validateScoredPoints = (points) => {
-    const validationResult = { isValid: true, errorMesage: "" };
-
-    if (points > maxPoints && maxPoints) {
-      validationResult.isValid = false;
-      validationResult.errorMesage =
-        "Liczba uzyskanych punktów nie może być większa od maksymalnej.";
-    } else if (points < 0) {
-      validationResult.isValid = false;
-      validationResult.errorMesage =
-        "Liczba uzyskanych punktów nie może być mniejsza od 0.";
-    } else if (points > 9999) {
-      validationResult.isValid = false;
-      validationResult.errorMesage =
-        "Liczba uzyskanych punktów nie może być większa niż 9999.";
+      setIsMaxPointsValid(true);
+      setIsScoredPointsValid(true);
+      setMaxPointsErrMsg("");
+      setScoredPointsErrMsg("");
     }
   };
 
-  const handleSetMaxPoints = (points) => {};
-  const validateMaxPoints = (points) => {};
+  useEffect(() => {
+    validatePoints();
+  }, [scoredPoints, maxPoints]);
+
+  const showTables = isMaxPointsValid && isScoredPointsValid;
 
   return (
     <StyledGradeCalculator>
       <div className="inputsWrapper">
         <GradeCalculatorInput
           text="Liczba zdobytych punktów"
-          setter={handleSetScoredPoints}
+          setter={setScoredPoints}
           value={scoredPoints}
+          inputRef={scoredPointsInputRef}
+          isValid={isScoredPointsValid}
+          errMsg={scoredPointsErrMsg}
         />
         <GradeCalculatorInput
           text="Maksymalna liczba punktów"
-          setter={handleSetMaxPoints}
+          setter={setMaxPoints}
           value={maxPoints}
+          inputRef={maxPointsInputRef}
+          isValid={isMaxPointsValid}
+          errMsg={maxPointsErrMsg}
         />
       </div>
-      <div className="tablesWrapper">
-        <GradingScaleTable type="writtenTest" />
-        <GradingScaleTable type="choiceTest" />
-        <GradingScaleTable type="pracitceTest" />
-      </div>
+      {showTables && (
+        <div className="tablesWrapper">
+          <GradingScaleTable
+            type="written"
+            maxPoints={maxPoints}
+            scoredPoints={scoredPoints}
+          />
+          <GradingScaleTable
+            type="choice"
+            maxPoints={maxPoints}
+            scoredPoints={scoredPoints}
+          />
+          <GradingScaleTable
+            type="practice"
+            maxPoints={maxPoints}
+            scoredPoints={scoredPoints}
+          />
+        </div>
+      )}
     </StyledGradeCalculator>
   );
 }
