@@ -20,9 +20,9 @@ export default function GradingScaleTable({ type, maxPoints, scoredPoints }) {
       <h2>{headingText}</h2>
       <ul>
         {Object.keys(gradingScales[type]).map((key) => {
-          const start = gradingScales[type][key][0] * maxPoints;
+          const start = gradingScales[type][key][0] * parseFloat(maxPoints);
           const startFormattedNum = parseFloat(start.toFixed(2));
-          const end = gradingScales[type][key][1] * maxPoints;
+          const end = gradingScales[type][key][1] * parseFloat(maxPoints);
           const endFormattedNum = parseFloat(end.toFixed(2));
           const isScoredInRange =
             scoredPoints >= startFormattedNum &&

@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { StyledGradeCalculator } from "../styles/GradeCalculator.styled";
 import GradeCalculatorInput from "./GradeCalculatorInput";
 import GradingScaleTable from "./GradingScaleTable";
+import FixedErrorModal from "../../global/components/FixedErrorModal";
+import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 
 export default function GradeCalculator() {
   const [scoredPoints, setScoredPoints] = useState(null);
   const [maxPoints, setMaxPoints] = useState(null);
   const [isScoredPointsValid, setIsScoredPointsValid] = useState(null);
   const [isMaxPointsValid, setIsMaxPointsValid] = useState(null);
-  const [scoredPointsErrMsg, setScoredPointsErrMsg] = useState("");
-  const [maxPointsErrMsg, setMaxPointsErrMsg] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   const scoredPointsInputRef = useRef();
   const maxPointsInputRef = useRef();
@@ -18,56 +19,69 @@ export default function GradeCalculator() {
     scoredPointsInputRef.current.focus();
   }, []);
 
-  const validatePoints = () => {
+  const validateScoredPoints = () => {
+    const scoredPointsTrimmed = scoredPoints.trim();
+    if (!/^\d*\.?\d*$/.test(scoredPointsTrimmed)) {
+      setIsScoredPointsValid(false);
+      setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
+      return;
+    }
+
     const scoredPointsNum = parseFloat(scoredPoints);
     const maxPointsNum = parseFloat(maxPoints);
 
-    setIsScoredPointsValid(true);
-    setIsMaxPointsValid(true);
-
-    if (
-      (!scoredPointsNum && scoredPointsNum !== 0) ||
-      (!maxPointsNum && maxPointsNum !== 0)
-    ) {
+    if (!scoredPointsNum && scoredPointsNum != 0) {
       setIsScoredPointsValid(false);
-      setIsMaxPointsValid(false);
-      setScoredPointsErrMsg("");
-      setMaxPointsErrMsg("");
+      setErrMsg("");
+    } else if (scoredPointsNum > maxPointsNum) {
+      setIsScoredPointsValid(false);
+      setErrMsg(
+        "Liczba zdobytych punktów nie może być większa od maksymalnej."
+      );
     } else if (scoredPointsNum < 0) {
       setIsScoredPointsValid(false);
-      setScoredPointsErrMsg(
-        "Liczba zdobytych punktów nie może być mniejsza od 0."
-      );
-    } else if (maxPointsNum <= 0) {
-      console.log("tak");
-      setIsMaxPointsValid(false);
-      setMaxPointsErrMsg("Maksymalna liczba punktów musi być większa od 0.");
+      setErrMsg("Liczba zdobytych punktów nie może być mniejsza niż 0.");
     } else if (scoredPointsNum > 9999) {
       setIsScoredPointsValid(false);
-      setScoredPointsErrMsg(
-        "Liczba zdobytych punktów nie może być większa od 9999."
-      );
-    } else if (maxPointsNum > 9999) {
+      setErrMsg("Liczba zdobytych punktów nie może być większa niż 9999.");
+    }
+  };
+
+  const validateMaxPoints = () => {
+    const maxPointsTrimmed = maxPoints.trim();
+    if (!/^\d*\.?\d*$/.test(maxPointsTrimmed)) {
       setIsMaxPointsValid(false);
-      setMaxPointsErrMsg(
-        "Maksumalna liczba punktów nie może być większa od 9999."
-      );
+      setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
+      return;
+    }
+
+    const scoredPointsNum = parseFloat(scoredPoints);
+    const maxPointsNum = parseFloat(maxPoints);
+    console.log(maxPointsNum);
+
+    if (!maxPointsNum && maxPointsNum != 0) {
+      setIsMaxPointsValid(false);
+      setErrMsg("");
     } else if (maxPointsNum < scoredPointsNum) {
       setIsMaxPointsValid(false);
-      setIsScoredPointsValid(false);
-      setMaxPointsErrMsg(
+      setErrMsg(
         "Maksymalna liczba punktów nie może być mniejsza od liczby zdobytych."
       );
-    } else {
-      setIsMaxPointsValid(true);
-      setIsScoredPointsValid(true);
-      setMaxPointsErrMsg("");
-      setScoredPointsErrMsg("");
+    } else if (maxPointsNum <= 0) {
+      setIsMaxPointsValid(false);
+      setErrMsg("Maksymalna liczba punktów musi być większa od 0.");
+    } else if (maxPointsNum > 9999) {
+      setIsMaxPointsValid(false);
+      setErrMsg("Maksymalna liczba punktów nie może być większa niż 9999.");
     }
   };
 
   useEffect(() => {
-    validatePoints();
+    setErrMsg("");
+    setIsMaxPointsValid(true);
+    setIsScoredPointsValid(true);
+    validateScoredPoints();
+    validateMaxPoints();
   }, [scoredPoints, maxPoints]);
 
   const showTables = isMaxPointsValid && isScoredPointsValid;
@@ -81,7 +95,6 @@ export default function GradeCalculator() {
           value={scoredPoints}
           inputRef={scoredPointsInputRef}
           isValid={isScoredPointsValid}
-          errMsg={scoredPointsErrMsg}
           type="scoredPointsInput"
         />
         <GradeCalculatorInput
@@ -90,11 +103,10 @@ export default function GradeCalculator() {
           value={maxPoints}
           inputRef={maxPointsInputRef}
           isValid={isMaxPointsValid}
-          errMsg={maxPointsErrMsg}
           type="maxPointsInput"
         />
       </div>
-      {showTables && (
+      {showTables ? (
         <div className="tablesWrapper">
           <GradingScaleTable
             type="written"
@@ -112,6 +124,8 @@ export default function GradeCalculator() {
             scoredPoints={scoredPoints}
           />
         </div>
+      ) : (
+        <DynamicErrorNotification message={errMsg} view="gradeCalc" />
       )}
     </StyledGradeCalculator>
   );

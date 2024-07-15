@@ -14,4 +14,9 @@ export const StyledDynamicErrorNotification = styled.section`
   & > p {
     color: white;
   }
+
+  &.gradeCalc {
+    max-width: 60rem;
+    width: fit-content;
+  }
 `;

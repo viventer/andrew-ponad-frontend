@@ -17,7 +17,11 @@ export const StyledGradeCalculatorInput = styled.div`
   }
 
   & .wrapper:focus-within {
-    box-shadow: 0.2rem 0.2rem ${({ theme }) => theme.colors.sunset};
+    box-shadow: 0.3rem 0.3rem ${({ theme }) => theme.colors.red};
+  }
+
+  & .wrapper.valid:focus-within {
+    box-shadow: 0.3rem 0.3rem ${({ theme }) => theme.colors.green};
   }
 
   & input {

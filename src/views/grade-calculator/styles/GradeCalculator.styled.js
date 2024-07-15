@@ -15,8 +15,6 @@ export const StyledGradeCalculator = styled.main`
 
   & .tablesWrapper {
     display: flex;
-    gap: 3rem;
-    justify-content: space-between;
-    max-width: 1200px;
+    gap: 5rem;
   }
 `;

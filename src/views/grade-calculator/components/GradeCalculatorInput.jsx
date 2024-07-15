@@ -21,7 +21,6 @@ export default function GradeCalculatorInput({
           onChange={(e) => setter(e.target.value)}
         />
       </div>
-      {!isValid && <p>{errMsg}</p>}
     </StyledGradeCalculatorInput>
   );
 }
