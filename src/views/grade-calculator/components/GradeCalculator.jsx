@@ -16,33 +16,43 @@ export default function GradeCalculator() {
 
   useEffect(() => {
     scoredPointsInputRef.current.focus();
-  });
+  }, []);
 
   const validatePoints = () => {
-    if (!scoredPoints || !maxPoints) {
+    const scoredPointsNum = parseFloat(scoredPoints);
+    const maxPointsNum = parseFloat(maxPoints);
+
+    setIsScoredPointsValid(true);
+    setIsMaxPointsValid(true);
+
+    if (
+      (!scoredPointsNum && scoredPointsNum !== 0) ||
+      (!maxPointsNum && maxPointsNum !== 0)
+    ) {
       setIsScoredPointsValid(false);
       setIsMaxPointsValid(false);
       setScoredPointsErrMsg("");
       setMaxPointsErrMsg("");
-    } else if (scoredPoints < 0) {
+    } else if (scoredPointsNum < 0) {
       setIsScoredPointsValid(false);
       setScoredPointsErrMsg(
         "Liczba zdobytych punktów nie może być mniejsza od 0."
       );
-    } else if (maxPoints <= 0) {
+    } else if (maxPointsNum <= 0) {
+      console.log("tak");
       setIsMaxPointsValid(false);
       setMaxPointsErrMsg("Maksymalna liczba punktów musi być większa od 0.");
-    } else if (scoredPoints > 9999) {
+    } else if (scoredPointsNum > 9999) {
       setIsScoredPointsValid(false);
       setScoredPointsErrMsg(
         "Liczba zdobytych punktów nie może być większa od 9999."
       );
-    } else if (maxPoints > 9999) {
+    } else if (maxPointsNum > 9999) {
       setIsMaxPointsValid(false);
       setMaxPointsErrMsg(
         "Maksumalna liczba punktów nie może być większa od 9999."
       );
-    } else if (maxPoints < scoredPoints && maxPoints && scoredPoints) {
+    } else if (maxPointsNum < scoredPointsNum) {
       setIsMaxPointsValid(false);
       setIsScoredPointsValid(false);
       setMaxPointsErrMsg(
@@ -72,6 +82,7 @@ export default function GradeCalculator() {
           inputRef={scoredPointsInputRef}
           isValid={isScoredPointsValid}
           errMsg={scoredPointsErrMsg}
+          type="scoredPointsInput"
         />
         <GradeCalculatorInput
           text="Maksymalna liczba punktów"
@@ -80,6 +91,7 @@ export default function GradeCalculator() {
           inputRef={maxPointsInputRef}
           isValid={isMaxPointsValid}
           errMsg={maxPointsErrMsg}
+          type="maxPointsInput"
         />
       </div>
       {showTables && (

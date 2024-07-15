@@ -7,20 +7,21 @@ export default function GradeCalculatorInput({
   inputRef,
   isValid,
   errMsg,
+  type,
 }) {
   return (
     <StyledGradeCalculatorInput>
       <div className={`wrapper ${isValid ? "valid" : ""}`}>
-        <label htmlFor="numInput">{text}</label>
+        <label htmlFor={type}>{text}</label>
         <input
-          type="number"
+          type="text"
           value={value}
-          id="numInput"
+          id={type}
           ref={inputRef}
           onChange={(e) => setter(e.target.value)}
         />
-        {!isValid && <p>{errMsg}</p>}
       </div>
+      {!isValid && <p>{errMsg}</p>}
     </StyledGradeCalculatorInput>
   );
 }

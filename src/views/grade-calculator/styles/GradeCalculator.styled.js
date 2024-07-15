@@ -1,3 +1,22 @@
 import styled from "styled-components";
 
-export const StyledGradeCalculator = styled.main``;
+export const StyledGradeCalculator = styled.main`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+
+  & .inputsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: fit-content;
+  }
+
+  & .tablesWrapper {
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    max-width: 1200px;
+  }
+`;
