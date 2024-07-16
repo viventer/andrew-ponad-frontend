@@ -20,7 +20,7 @@ export default function GradeCalculator() {
   }, []);
 
   const validateScoredPoints = () => {
-    const scoredPointsTrimmed = scoredPoints.trim();
+    const scoredPointsTrimmed = scoredPoints?.trim();
     if (!/^\d*\.?\d*$/.test(scoredPointsTrimmed)) {
       setIsScoredPointsValid(false);
       setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
@@ -48,7 +48,7 @@ export default function GradeCalculator() {
   };
 
   const validateMaxPoints = () => {
-    const maxPointsTrimmed = maxPoints.trim();
+    const maxPointsTrimmed = maxPoints?.trim();
     if (!/^\d*\.?\d*$/.test(maxPointsTrimmed)) {
       setIsMaxPointsValid(false);
       setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
@@ -84,49 +84,51 @@ export default function GradeCalculator() {
     validateMaxPoints();
   }, [scoredPoints, maxPoints]);
 
-  const showTables = isMaxPointsValid && isScoredPointsValid;
+  const isErr = !isMaxPointsValid || !isScoredPointsValid;
 
   return (
     <StyledGradeCalculator>
-      <div className="inputsWrapper">
-        <GradeCalculatorInput
-          text="Liczba zdobytych punktów"
-          setter={setScoredPoints}
-          value={scoredPoints}
-          inputRef={scoredPointsInputRef}
-          isValid={isScoredPointsValid}
-          type="scoredPointsInput"
-        />
-        <GradeCalculatorInput
-          text="Maksymalna liczba punktów"
-          setter={setMaxPoints}
-          value={maxPoints}
-          inputRef={maxPointsInputRef}
-          isValid={isMaxPointsValid}
-          type="maxPointsInput"
-        />
-      </div>
-      {showTables ? (
-        <div className="tablesWrapper">
-          <GradingScaleTable
-            type="written"
-            maxPoints={maxPoints}
-            scoredPoints={scoredPoints}
+      <div className="upperWrapper">
+        <div className="inputsWrapper">
+          <GradeCalculatorInput
+            text="Liczba zdobytych punktów"
+            setter={setScoredPoints}
+            value={scoredPoints}
+            inputRef={scoredPointsInputRef}
+            isValid={isScoredPointsValid}
+            type="scoredPointsInput"
           />
-          <GradingScaleTable
-            type="choice"
-            maxPoints={maxPoints}
-            scoredPoints={scoredPoints}
-          />
-          <GradingScaleTable
-            type="practice"
-            maxPoints={maxPoints}
-            scoredPoints={scoredPoints}
+          <GradeCalculatorInput
+            text="Maksymalna liczba punktów"
+            setter={setMaxPoints}
+            value={maxPoints}
+            inputRef={maxPointsInputRef}
+            isValid={isMaxPointsValid}
+            type="maxPointsInput"
           />
         </div>
-      ) : (
         <DynamicErrorNotification message={errMsg} view="gradeCalc" />
-      )}
+      </div>
+      <div className="tablesWrapper">
+        <GradingScaleTable
+          type="written"
+          maxPoints={maxPoints}
+          scoredPoints={scoredPoints}
+          isErr={isErr}
+        />
+        <GradingScaleTable
+          type="choice"
+          maxPoints={maxPoints}
+          scoredPoints={scoredPoints}
+          isErr={isErr}
+        />
+        <GradingScaleTable
+          type="practice"
+          maxPoints={maxPoints}
+          scoredPoints={scoredPoints}
+          isErr={isErr}
+        />
+      </div>
     </StyledGradeCalculator>
   );
 }

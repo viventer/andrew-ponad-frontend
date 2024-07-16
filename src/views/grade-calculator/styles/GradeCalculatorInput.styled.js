@@ -9,19 +9,15 @@ export const StyledGradeCalculatorInput = styled.div`
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 0.5rem;
     transition: box-shadow 0.15s ease-in-out;
-    box-shadow: 0.15rem 0.15rem ${({ theme }) => theme.colors.red};
+    border-left: 0.75rem solid ${({ theme }) => theme.colors.red};
   }
 
   & .wrapper.valid {
-    box-shadow: 0.15rem 0.15rem ${({ theme }) => theme.colors.green};
+    border-left-color: ${({ theme }) => theme.colors.green};
   }
 
   & .wrapper:focus-within {
-    box-shadow: 0.3rem 0.3rem ${({ theme }) => theme.colors.red};
-  }
-
-  & .wrapper.valid:focus-within {
-    box-shadow: 0.3rem 0.3rem ${({ theme }) => theme.colors.green};
+    border-left-width: 1.5rem;
   }
 
   & input {
@@ -42,5 +38,10 @@ export const StyledGradeCalculatorInput = styled.div`
 
   & label {
     padding: 0.5rem 1rem;
+    width: 16rem;
+  }
+
+  & .wrapper:focus-within label {
+    width: 15.25rem;
   }
 `;

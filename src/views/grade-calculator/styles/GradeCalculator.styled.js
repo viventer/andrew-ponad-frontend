@@ -6,6 +6,12 @@ export const StyledGradeCalculator = styled.main`
   gap: 2rem;
   margin-top: 2rem;
 
+  & .upperWrapper {
+    display: flex;
+    gap: 2rem;
+    align-items: end;
+  }
+
   & .inputsWrapper {
     display: flex;
     flex-direction: column;
