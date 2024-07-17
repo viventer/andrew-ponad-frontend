@@ -45,7 +45,7 @@ export const StyledGradingScaleTable = styled.article`
   }
 
   & li > p {
-    width: 8rem;
+    width: 10rem;
     text-align: end;
     padding-right: 1rem;
   }

@@ -3,13 +3,13 @@ import styled from "styled-components";
 export const StyledGradeCalculatorInput = styled.div`
   & .wrapper {
     display: flex;
-    width: 100%;
     justify-content: space-between;
     align-items: center;
     background-color: rgba(255, 255, 255, 0.15);
     border-radius: 0.5rem;
-    transition: box-shadow 0.15s ease-in-out;
+    transition: border-left 0.15s ease-in-out;
     border-left: 0.75rem solid ${({ theme }) => theme.colors.red};
+    width: 22rem;
   }
 
   & .wrapper.valid {
@@ -38,10 +38,27 @@ export const StyledGradeCalculatorInput = styled.div`
 
   & label {
     padding: 0.5rem 1rem;
-    width: 16rem;
+    width: 17rem;
   }
 
-  & .wrapper:focus-within label {
-    width: 15.25rem;
+  @media (max-width: 400px) {
+    & .wrapper {
+      border-left-width: 0;
+      width: 18rem;
+    }
+
+    & .wrapper:focus-within {
+      border-left-width: 0.5rem;
+    }
+
+    & input {
+      padding: 0.5rem 0.5rem;
+      width: 3.5rem;
+    }
+
+    & label {
+      padding: 0.5rem 0.5rem;
+      width: 14.5rem;
+    }
   }
 `;

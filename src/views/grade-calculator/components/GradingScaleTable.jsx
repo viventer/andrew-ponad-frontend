@@ -39,20 +39,20 @@ export default function GradingScaleTable({
           const start = gradingScales[type][key][0] * parseFloat(maxPoints);
           const end = gradingScales[type][key][1] * parseFloat(maxPoints);
 
-          let startFormattedNum = parseFloat(start.toFixed(1));
-          let endFormattedNum = parseFloat(end.toFixed(1));
+          let startFormattedNum = parseFloat(start.toFixed(2));
+          let endFormattedNum = parseFloat(end.toFixed(2));
 
           if (index > 0) {
             const prevEnd =
               gradingScales[type][array[index - 1]][1] * parseFloat(maxPoints);
-            const prevEndFormattedNum = parseFloat(prevEnd.toFixed(1));
+            const prevEndFormattedNum = parseFloat(prevEnd.toFixed(2));
             startFormattedNum = parseFloat(
-              (prevEndFormattedNum + 0.1).toFixed(1)
+              (prevEndFormattedNum + 0.01).toFixed(2)
             );
           }
 
-          const startFormattedStr = startFormattedNum.toFixed(1);
-          const endFormattedStr = endFormattedNum.toFixed(1);
+          const startFormattedStr = startFormattedNum.toFixed(2);
+          const endFormattedStr = endFormattedNum.toFixed(2);
 
           const isScoredInRange =
             scoredPoints >= startFormattedNum &&
