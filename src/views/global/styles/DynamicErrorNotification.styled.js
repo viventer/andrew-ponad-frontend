@@ -16,7 +16,23 @@ export const StyledDynamicErrorNotification = styled.section`
   }
 
   &.gradeCalc {
-    max-width: 60rem;
+    max-width: 30rem;
     width: fit-content;
+    position: absolute;
+    right: 0;
+    top: -1rem;
+  }
+
+  @media (max-width: 1200px) {
+    &.gradeCalc {
+      max-width: 25rem;
+    }
+  }
+
+  @media (max-width: 950px) {
+    &.gradeCalc {
+      position: static;
+      max-width: 100%;
+    }
   }
 `;

@@ -6,7 +6,6 @@ export default function GradeCalculatorInput({
   value,
   inputRef,
   isValid,
-  errMsg,
   type,
 }) {
   return (

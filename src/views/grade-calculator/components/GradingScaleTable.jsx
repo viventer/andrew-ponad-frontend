@@ -1,5 +1,6 @@
-import { StyledGradingScaleTable } from "../styles/GradingScaleTable.styled";
 import gradingScales from "../data/gradingScales.json";
+
+import { StyledGradingScaleTable } from "../styles/GradingScaleTable.styled";
 
 export default function GradingScaleTable({
   type,

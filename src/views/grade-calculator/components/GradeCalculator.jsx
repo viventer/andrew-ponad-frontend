@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+
 import { StyledGradeCalculator } from "../styles/GradeCalculator.styled";
 import GradeCalculatorInput from "./GradeCalculatorInput";
 import GradingScaleTable from "./GradingScaleTable";
-import FixedErrorModal from "../../global/components/FixedErrorModal";
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 
 export default function GradeCalculator() {
@@ -21,8 +21,8 @@ export default function GradeCalculator() {
   }, []);
 
   const validateScoredPoints = () => {
-    const scoredPointsTrimmed = scoredPoints?.trim();
-    if (!/^\d*\.?\d*$/.test(scoredPointsTrimmed) && scoredPointsTrimmed) {
+    if (!isFormatCorrect(scoredPoints) && scoredPoints) {
+      console.log("siema");
       setIsScoredPointsValid(false);
       setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
       return;
@@ -33,7 +33,6 @@ export default function GradeCalculator() {
 
     if (!scoredPointsNum && scoredPointsNum != 0) {
       setIsScoredPointsValid(false);
-      setErrMsg("");
     } else if (scoredPointsNum > maxPointsNum) {
       setIsScoredPointsValid(false);
       setErrMsg(
@@ -49,8 +48,7 @@ export default function GradeCalculator() {
   };
 
   const validateMaxPoints = () => {
-    const maxPointsTrimmed = maxPoints?.trim();
-    if (!/^\d*\.?\d*$/.test(maxPointsTrimmed) && maxPointsTrimmed) {
+    if (!isFormatCorrect(maxPoints) && maxPoints) {
       setIsMaxPointsValid(false);
       setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
       return;
@@ -58,11 +56,9 @@ export default function GradeCalculator() {
 
     const scoredPointsNum = parseFloat(scoredPoints);
     const maxPointsNum = parseFloat(maxPoints);
-    console.log(maxPointsNum);
 
     if (!maxPointsNum && maxPointsNum != 0) {
       setIsMaxPointsValid(false);
-      setErrMsg("");
     } else if (maxPointsNum < scoredPointsNum) {
       setIsMaxPointsValid(false);
       setErrMsg(
@@ -75,6 +71,14 @@ export default function GradeCalculator() {
       setIsMaxPointsValid(false);
       setErrMsg("Maksymalna liczba punktów nie może być większa niż 9999.");
     }
+  };
+
+  const isFormatCorrect = (points) => {
+    const pointsTrimmed = points?.trim();
+    if (!/^\d*\.?\d*$/.test(pointsTrimmed)) {
+      return false;
+    }
+    return true;
   };
 
   useEffect(() => {

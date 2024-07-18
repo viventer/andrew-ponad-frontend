@@ -2,21 +2,21 @@ import styled from "styled-components";
 
 export const StyledGradingScaleTable = styled.article`
   h2 {
+    padding: 0.5rem 2rem;
+    border-radius: 0.5rem;
     margin-bottom: 1rem;
     font-size: 1.2rem;
     font-weight: 700;
     text-align: center;
     background-color: ${({ theme }) => theme.colors.navy};
-    padding: 0.5rem 2rem;
-    border-radius: 0.5rem;
   }
 
   & ul {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    list-style: none;
     width: 100%;
+    list-style: none;
   }
 
   & li {
@@ -25,19 +25,19 @@ export const StyledGradingScaleTable = styled.article`
     justify-content: space-between;
     width: 100%;
     gap: 1rem;
-    background-color: rgba(255, 255, 255, 0.05);
     border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
     box-shadow: 0.2rem 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
   }
 
   & li > div {
-    border-left: 0.75rem solid rgba(0, 0, 0, 0);
-    font-weight: 500;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
     width: 5rem;
-    text-align: left;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    border-left: 0.75rem solid rgba(0, 0, 0, 0);
     border-radius: 0.5rem 0 0 0.5rem;
+    font-weight: 500;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.1);
   }
 
   & li.gradeObtained > div {
@@ -46,7 +46,7 @@ export const StyledGradingScaleTable = styled.article`
 
   & li > p {
     width: 10rem;
-    text-align: end;
     padding-right: 1rem;
+    text-align: end;
   }
 `;

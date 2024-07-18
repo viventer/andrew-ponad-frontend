@@ -1,46 +1,50 @@
 import styled from "styled-components";
 
 export const StyledGradeCalculator = styled.main`
-  width: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+
+  &,
+  & .gradeCalculatorWrapper,
+  & .upperWrapper,
+  & .inputsWrapper,
+  & .tablesWrapper {
+    display: flex;
+  }
 
   & .gradeCalculatorWrapper {
-    display: flex;
     flex-direction: column;
     gap: 2rem;
     width: fit-content;
     height: fit-content;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin: 2rem 0;
     box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.25);
     background-color: rgba(255, 255, 255, 0.02);
-    padding: 2rem;
-    margin: 2rem 0;
-    border-radius: 0.5rem;
   }
 
   & .upperWrapper {
-    display: flex;
-    gap: 2rem;
+    position: relative;
     align-items: end;
+    gap: 2rem;
   }
 
   & .inputsWrapper {
-    display: flex;
     flex-direction: column;
     gap: 1rem;
   }
 
   & .tablesWrapper {
-    display: flex;
     gap: 4rem;
   }
 
   @media (max-height: 850px) {
     & .gradeCalculatorWrapper {
-      background-color: rgba(0, 0, 0, 0);
-      box-shadow: none;
       margin: 1rem 0;
+      box-shadow: none;
+      background-color: rgba(0, 0, 0, 0);
     }
   }
 
@@ -53,9 +57,9 @@ export const StyledGradeCalculator = styled.main`
     }
 
     & .gradeCalculatorWrapper {
-      background-color: rgba(0, 0, 0, 0);
-      box-shadow: none;
       margin: 1rem 0;
+      box-shadow: none;
+      background-color: rgba(0, 0, 0, 0);
     }
   }
 
@@ -66,22 +70,22 @@ export const StyledGradeCalculator = styled.main`
   @media (max-width: 950px) {
     & .tablesWrapper {
       justify-content: left;
-      gap: 4rem;
       flex-wrap: wrap;
+      gap: 4rem;
     }
 
     & .upperWrapper {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
       align-items: start;
+      gap: 1rem;
     }
   }
 
   @media (max-width: 750px) {
     & .tablesWrapper {
-      gap: 2rem;
       justify-content: space-between;
+      gap: 2rem;
     }
   }
 

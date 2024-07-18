@@ -5,11 +5,11 @@ export const StyledGradeCalculatorInput = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(255, 255, 255, 0.15);
-    border-radius: 0.5rem;
-    transition: border-left 0.15s ease-in-out;
-    border-left: 0.75rem solid ${({ theme }) => theme.colors.red};
     width: 22rem;
+    border-left: 0.75rem solid ${({ theme }) => theme.colors.red};
+    border-radius: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: border-left 0.15s ease-in-out;
   }
 
   & .wrapper.valid {
@@ -22,14 +22,14 @@ export const StyledGradeCalculatorInput = styled.div`
 
   & input {
     width: 5rem;
-    font-size: 1rem;
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
-    border: none;
     height: 100%;
     padding: 0.5rem 1rem;
+    border: none;
     border-radius: 0 0.5rem 0.5rem 0;
+    font-size: 1rem;
     font-weight: 500;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.15);
   }
 
   & input:focus {
@@ -37,14 +37,14 @@ export const StyledGradeCalculatorInput = styled.div`
   }
 
   & label {
-    padding: 0.5rem 1rem;
     width: 17rem;
+    padding: 0.5rem 1rem;
   }
 
   @media (max-width: 400px) {
     & .wrapper {
-      border-left-width: 0;
       width: 18rem;
+      border-left-width: 0;
     }
 
     & .wrapper:focus-within {
@@ -52,13 +52,13 @@ export const StyledGradeCalculatorInput = styled.div`
     }
 
     & input {
-      padding: 0.5rem 0.5rem;
       width: 3.5rem;
+      padding: 0.5rem 0.5rem;
     }
 
     & label {
-      padding: 0.5rem 0.5rem;
       width: 14.5rem;
+      padding: 0.5rem 0.5rem;
     }
   }
 `;
