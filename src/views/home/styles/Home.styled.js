@@ -6,7 +6,7 @@ export const StyledHome = styled.main`
   justify-content: center;
   align-items: left;
   flex-direction: column;
-  height: 80vh;
+  height: 60vh;
   width: 70vw;
   margin: 0 auto 0 auto;
 

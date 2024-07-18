@@ -12,6 +12,7 @@ import { faAnglesRight } from "@fortawesome/free-solid-svg-icons";
 import { StyledHome } from "../styles/Home.styled";
 import Slider from "./Slider";
 import Footer from "./Footer";
+import RecommendedPosts from "./RecommendedPosts";
 
 export default function Home() {
   const isLoading = useSelector(selectIsLoading);
@@ -31,6 +32,7 @@ export default function Home() {
             </div>
           </section>
         )}
+        <RecommendedPosts />
       </StyledHome>
       <Footer />
     </>
