@@ -10,6 +10,8 @@ export const StyledHome = styled.main`
   width: 70vw;
   margin: 0 auto 0 auto;
 
+  border: 0.1rem solid green;
+
   & .headingSection {
     position: absolute;
     right: 0;
