@@ -31,9 +31,41 @@ export const StyledMostPopularPosts = styled.section`
     border: 0.1rem solid pink;
   }
 
+  & > button {
+    width: 100%;
+    justify-content: center;
+    display: none;
+  }
+
   @media (max-width: 1500px) {
     & > section {
       gap: 1rem;
+    }
+  }
+
+  @media (max-width: 1300px) {
+    bottom: -10rem;
+  }
+
+  @media (max-width: 1100px) {
+    & > section {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    & > button {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 800px) {
+    & > section {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 500px) {
+    & > section {
+      grid-template-columns: 1fr;
     }
   }
 `;

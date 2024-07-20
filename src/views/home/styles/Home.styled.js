@@ -8,7 +8,7 @@ export const StyledHome = styled.main`
   flex-direction: column;
   height: 60vh;
   width: 70vw;
-  margin: 0 auto 0 auto;
+  margin: 0 auto 22rem auto;
 
   border: 0.1rem solid green;
 
@@ -82,11 +82,20 @@ export const StyledHome = styled.main`
     height: 28vw;
     /* overflow-x: visible; */
     margin-top: 3rem;
+    margin-bottom: 34rem;
 
     & .headingSection {
       right: auto;
       bottom: -1.5rem;
       transform: translateY(100%);
+    }
+  }
+
+  @media (max-width: 1100px) {
+    margin-bottom: 38rem;
+
+    &:has(.isExpanded) {
+      margin-bottom: 50rem;
     }
   }
 
@@ -97,6 +106,10 @@ export const StyledHome = styled.main`
   @media (max-width: 800px) {
     height: 36vw;
     width: 90vw;
+
+    &:has(.isExpanded) {
+      margin-bottom: 70rem;
+    }
   }
 
   @media (max-width: 650px) {
@@ -104,6 +117,10 @@ export const StyledHome = styled.main`
 
     & .headingSection {
       border-left-width: 0.1rem;
+    }
+
+    &:has(.isExpanded) {
+      margin-bottom: 64rem;
     }
   }
 
@@ -122,11 +139,26 @@ export const StyledHome = styled.main`
     & .headingSection div {
       font-size: 1rem;
     }
+
+    &:has(.isExpanded) {
+      margin-bottom: 60rem;
+    }
   }
 
   @media (max-width: 500px) {
     justify-content: center;
     height: calc(90vw / 1.78);
+    margin-bottom: 40rem;
+
+    &:has(.isExpanded) {
+      margin-bottom: 135rem;
+    }
+  }
+
+  @media (max-width: 450px) {
+    &:has(.isExpanded) {
+      margin-bottom: 126rem;
+    }
   }
 
   @media (max-width: 400px) {
@@ -136,6 +168,10 @@ export const StyledHome = styled.main`
 
     & .headingSection div {
       font-size: 0.95rem;
+    }
+
+    &:has(.isExpanded) {
+      margin-bottom: 116rem;
     }
   }
 
@@ -147,9 +183,13 @@ export const StyledHome = styled.main`
     & .headingSection span {
       margin: 0;
     }
+
+    &:has(.isExpanded) {
+      margin-bottom: 108rem;
+    }
   }
 
   @media (orientation: portrait) {
-    margin-top: 15vh;
+    /* margin-top: 15vh; */
   }
 `;

@@ -45,4 +45,36 @@ export const StyledPostFromSection = styled.article`
       display: none;
     }
   }
+
+  @media (max-width: 1100px) {
+    &.post3 {
+      display: none;
+    }
+
+    &.isExpanded.post3,
+    &.isExpanded.post4,
+    &.isExpanded.post5 {
+      display: block;
+    }
+  }
+
+  @media (max-width: 800px) {
+    &.post2 {
+      display: none;
+    }
+
+    &.isExpanded.post2 {
+      display: block;
+    }
+  }
+
+  @media (max-width: 500px) {
+    &.post1 {
+      display: none;
+    }
+
+    &.isExpanded.post1 {
+      display: block;
+    }
+  }
 `;

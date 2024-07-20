@@ -1,11 +1,16 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from "../../../hooks/useAuth";
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
+import { StyledButton } from "../../global/styles/Button.styled";
 import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
 import { StyledMostPopularPosts } from "../styles/MostPopularPosts.styled";
 import PostFromSection from "./PostFromSection";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function MostPopularPosts() {
   const { isLogged } = useAuth();
+  const [areExpanded, setAreExpanded] = useState(false);
 
   const {
     data: postsRawData,
@@ -34,10 +39,18 @@ export default function MostPopularPosts() {
         {sortedPostsData &&
           sortedPostsData.map(([id, postData], index) => {
             return (
-              <PostFromSection postData={postData} key={id} index={index} />
+              <PostFromSection
+                postData={postData}
+                key={id}
+                index={index}
+                areExpanded={areExpanded}
+              />
             );
           })}
       </section>
+      <StyledButton onClick={() => setAreExpanded((prev) => !prev)}>
+        <FontAwesomeIcon icon={areExpanded ? faChevronUp : faChevronDown} />
+      </StyledButton>
     </StyledMostPopularPosts>
   );
 }

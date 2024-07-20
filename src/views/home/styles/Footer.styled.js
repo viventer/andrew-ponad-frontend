@@ -11,7 +11,7 @@ export const StyledFooter = styled.footer`
   padding: 0.5rem 1rem;
   border-top: 0.1rem solid ${({ theme }) => theme.colors.navy};
   background-color: ${({ theme }) => theme.colors.darkGray};
-  z-index: 100;
+  z-index: 9999999;
 
   & > .flex {
     justify-content: space-between;
