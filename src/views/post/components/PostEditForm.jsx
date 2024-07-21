@@ -132,11 +132,13 @@ export default function PostEditForm({
   return (
     <StyledPostEditPage>
       <ThumbnailBar view="edit" />
-      <div className="responsivePostElement deleteImgResponsivePostElement">
-        <button className="deleteImgButton" onClick={discardThumbnailImg}>
-          <FontAwesomeIcon icon={faTrash} />
-        </button>
-      </div>
+      {thumbnailPreview && (
+        <div className="responsivePostElement deleteImgResponsivePostElement">
+          <button className="deleteImgButton" onClick={discardThumbnailImg}>
+            <FontAwesomeIcon icon={faTrash} />
+          </button>
+        </div>
+      )}
       <ImageDropzone isThumbnail={true} imagePreview={thumbnailPreview} />
       <div className="thumbnailBarOverlay">
         <PostTitleInput />

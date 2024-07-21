@@ -5,6 +5,7 @@ import {
   faAlignLeft,
   faClose,
   faImage,
+  faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { StyledRowTypeSelection } from "../styles/RowTypeSelection.styled";
@@ -52,6 +53,13 @@ export default function RowTypeSelection({ index, changeRowType, deleteRow }) {
         >
           <FontAwesomeIcon icon={faImage} />
           <FontAwesomeIcon icon={faImage} />
+        </div>
+        <div
+          onClick={() => {
+            changeRowType(index, "video", "none");
+          }}
+        >
+          <FontAwesomeIcon icon={faVideo} />
         </div>
       </div>
       {index != 0 && (

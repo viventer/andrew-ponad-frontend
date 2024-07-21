@@ -1,5 +1,6 @@
 import ReactQuill from "react-quill";
 import ImageDropzone from "../../global/components/ImageDropzone";
+import ReactPlayer from "react-player";
 
 import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
 
@@ -70,6 +71,14 @@ export default function PostContentEditorRow({
                 }}
                 modules={quillModules}
                 className="quillEditor responsivePostElement"
+              />
+            );
+          } else if (elementData.type === "video") {
+            return (
+              <ReactPlayer
+                url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
+                controls={true}
+                light={true}
               />
             );
           }

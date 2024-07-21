@@ -1,5 +1,4 @@
 import { useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 import "react-quill/dist/quill.snow.css";
 
