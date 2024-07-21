@@ -4,7 +4,15 @@ export const StyledPostFromSection = styled.article`
   &:not(.post0, .post1, .post2, .post3, .post4) {
     display: none;
   }
+  border-radius: 0.5rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
   background-color: rgba(0, 0, 0, 0.5);
+  transition: all 0.15s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    transform: translate(0, -1rem);
+  }
 
   & .thumbnailWrapper {
     position: relative;
@@ -14,20 +22,20 @@ export const StyledPostFromSection = styled.article`
     width: 100%;
     height: auto;
     aspect-ratio: 16 / 9;
-    object-fit: contain;
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.sunset};
+    object-fit: contain;
   }
 
   & .postViews {
     position: absolute;
     left: 0.5rem;
     top: 0.5rem;
-    padding: 0.25rem 0.75rem;
-    border-radius: 0.3rem;
-    border: 0.1rem solid ${({ theme }) => theme.colors.navy};
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border: 0.1rem solid ${({ theme }) => theme.colors.navy};
+    border-radius: 0.3rem;
     backdrop-filter: blur(2px);
     background-color: rgba(0, 0, 0, 0.5);
   }

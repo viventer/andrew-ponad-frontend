@@ -1,12 +1,21 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import useAuth from "../../../hooks/useAuth";
-import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
-import { StyledButton } from "../../global/styles/Button.styled";
+
 import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
+import {
+  selectIsLoading,
+  setErrMsg,
+  setIsLoading,
+} from "../../global/slices/globalStatesSlice";
+
+import { StyledButton } from "../../global/styles/Button.styled";
 import { StyledMostPopularPosts } from "../styles/MostPopularPosts.styled";
 import PostFromSection from "./PostFromSection";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
 
 export default function MostPopularPosts() {
   const { isLogged } = useAuth();
@@ -14,7 +23,7 @@ export default function MostPopularPosts() {
 
   const {
     data: postsRawData,
-    isLoading,
+    isLoading: isDataLoading,
     isSuccess,
     isError,
     error,
@@ -32,25 +41,43 @@ export default function MostPopularPosts() {
     console.log(sortedPostsData);
   }
 
+  const isLoading = useSelector(selectIsLoading);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isDataLoading) {
+      dispatch(setIsLoading(true));
+    } else if (isError) {
+      dispatch(setIsLoading(false));
+      dispatch(
+        setErrMsg(
+          error?.message || "Błąd pobierania najpopularniejszych postów."
+        )
+      );
+    } else if (isSuccess) {
+      dispatch(setIsLoading(false));
+    }
+  }, [isDataLoading, isError, isSuccess]);
+
   return (
-    <StyledMostPopularPosts>
-      <h3>Najpopularniejsze posty</h3>
-      <section>
-        {sortedPostsData &&
-          sortedPostsData.map(([id, postData], index) => {
-            return (
+    !isLoading && (
+      <StyledMostPopularPosts>
+        <h3>Najpopularniejsze posty</h3>
+        <section>
+          {sortedPostsData &&
+            sortedPostsData.map(([id, postData], index) => (
               <PostFromSection
                 postData={postData}
                 key={id}
                 index={index}
                 areExpanded={areExpanded}
               />
-            );
-          })}
-      </section>
-      <StyledButton onClick={() => setAreExpanded((prev) => !prev)}>
-        <FontAwesomeIcon icon={areExpanded ? faChevronUp : faChevronDown} />
-      </StyledButton>
-    </StyledMostPopularPosts>
+            ))}
+        </section>
+        <StyledButton onClick={() => setAreExpanded((prev) => !prev)}>
+          <FontAwesomeIcon icon={areExpanded ? faChevronUp : faChevronDown} />
+        </StyledButton>
+      </StyledMostPopularPosts>
+    )
   );
 }

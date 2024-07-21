@@ -10,8 +10,6 @@ export const StyledHome = styled.main`
   width: 70vw;
   margin: 0 auto 22rem auto;
 
-  border: 0.1rem solid green;
-
   & .headingSection {
     position: absolute;
     right: 0;
@@ -95,7 +93,7 @@ export const StyledHome = styled.main`
     margin-bottom: 38rem;
 
     &:has(.isExpanded) {
-      margin-bottom: 50rem;
+      margin-bottom: 55rem;
     }
   }
 
@@ -108,7 +106,7 @@ export const StyledHome = styled.main`
     width: 90vw;
 
     &:has(.isExpanded) {
-      margin-bottom: 70rem;
+      margin-bottom: 75rem;
     }
   }
 
@@ -120,7 +118,7 @@ export const StyledHome = styled.main`
     }
 
     &:has(.isExpanded) {
-      margin-bottom: 64rem;
+      margin-bottom: 66rem;
     }
   }
 
@@ -141,7 +139,7 @@ export const StyledHome = styled.main`
     }
 
     &:has(.isExpanded) {
-      margin-bottom: 60rem;
+      margin-bottom: 62rem;
     }
   }
 
@@ -151,13 +149,13 @@ export const StyledHome = styled.main`
     margin-bottom: 40rem;
 
     &:has(.isExpanded) {
-      margin-bottom: 135rem;
+      margin-bottom: 144rem;
     }
   }
 
   @media (max-width: 450px) {
     &:has(.isExpanded) {
-      margin-bottom: 126rem;
+      margin-bottom: 134rem;
     }
   }
 
@@ -171,7 +169,7 @@ export const StyledHome = styled.main`
     }
 
     &:has(.isExpanded) {
-      margin-bottom: 116rem;
+      margin-bottom: 125rem;
     }
   }
 
@@ -185,7 +183,7 @@ export const StyledHome = styled.main`
     }
 
     &:has(.isExpanded) {
-      margin-bottom: 108rem;
+      margin-bottom: 118rem;
     }
   }
 
