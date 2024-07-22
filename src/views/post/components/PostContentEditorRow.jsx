@@ -6,6 +6,7 @@ import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
 
 import RowTypeSelection from "./RowTypeSelection";
 import { StyledPostContentEditorRow } from "../styles/PostContentEditorRow.styled";
+import VideoUploader from "./VideoUploader";
 
 export default function PostContentEditorRow({
   activeRowNumber,
@@ -45,8 +46,12 @@ export default function PostContentEditorRow({
       >
         {rowData.map((elementData, i) => {
           const imagePreview = rowData[i].imagePreview;
+          const videoUrl = rowData[i].videoUrl;
           const setImagePreview = (url) => {
             updateElement(index, i, { imagePreview: url });
+          };
+          const setVideoUrl = (url) => {
+            updateElement(index, i, { videoUrl: url });
           };
 
           if (elementData.type === "image") {
@@ -75,10 +80,10 @@ export default function PostContentEditorRow({
             );
           } else if (elementData.type === "video") {
             return (
-              <ReactPlayer
-                url="https://www.youtube.com/watch?v=LXb3EKWsInQ"
-                controls={true}
-                light={true}
+              <VideoUploader
+                setVideoUrl={setVideoUrl}
+                key={i - 11}
+                videoUrl={videoUrl}
               />
             );
           }

@@ -96,9 +96,14 @@ export const GlobalStyles = createGlobalStyle`
     max-height: calc(0.5625 * 36rem);
     max-width: 36rem;
   }
+
+  .onlyOneElement {
+    height: calc(0.5625 * 75rem);
+  }
   
   .onlyOneElement .responsivePostElement {
     max-width: 75rem;
+    max-height: calc(0.5625 * 75rem);
   }
 
   .deleteImgButton {
@@ -130,6 +135,10 @@ export const GlobalStyles = createGlobalStyle`
       max-height: calc(18rem);
     }
 
+    .onlyOneElement {
+      height: calc(0.5625 * 67rem);
+    }
+
 
     .onlyOneElement .responsivePostElement {
       max-width: 67rem;
@@ -143,6 +152,10 @@ export const GlobalStyles = createGlobalStyle`
       height: calc(0.5625 * 70vw);
       max-width: 28rem;
       max-height: calc(15.75rem);
+    }
+
+    .onlyOneElement {
+      height: calc(0.5625 * 59rem);
     }
 
     .onlyOneElement .responsivePostElement {
@@ -166,6 +179,9 @@ export const GlobalStyles = createGlobalStyle`
       max-height: calc(22.5rem);
     }
 
+    .onlyOneElement {
+      height: 22.5rem;
+    }
   }  
   
   @media (hover: hover) {
