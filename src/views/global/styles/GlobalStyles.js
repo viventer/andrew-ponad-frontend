@@ -9,6 +9,16 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
     font-family: 'Ubuntu', sans-serif;
   }
+
+  ::selection {
+    background: #ffb7b7; 
+    color: #fff; 
+  }
+
+  ::-moz-selection {
+    background: ${({ theme }) => theme.colors.sunset};
+    color: #000; 
+  }
   
   p, h1, h2, h3, h4, h5, h6 {
     font-size: inherit;

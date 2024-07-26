@@ -15,13 +15,13 @@ export default function PostContentEditor({ postRows, setPostRows }) {
         type: "textEditor",
         textEditorContent: "",
         imagePreview: null,
-        videoUrl: null,
+        videoUrl: "",
       },
       {
         type: "image",
         textEditorContent: "",
         imagePreview: null,
-        videoUrl: null,
+        videoUrl: "",
       },
     ];
     setPostRows((prevPostRows) => [...prevPostRows, newRow]);

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
+import thumbnailPlaceholder from "../../post/images/thumbnailPlaceholder.jpg";
 
 import {
   addErrorReportImage,

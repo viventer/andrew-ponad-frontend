@@ -2,7 +2,7 @@ import ReactQuill from "react-quill";
 import ImageDropzone from "../../global/components/ImageDropzone";
 import ReactPlayer from "react-player";
 
-import thumbnailPlaceholder from "../image/thumbnailPlaceholder.jpg";
+import thumbnailPlaceholder from "../images/thumbnailPlaceholder.jpg";
 
 import RowTypeSelection from "./RowTypeSelection";
 import { StyledPostContentEditorRow } from "../styles/PostContentEditorRow.styled";

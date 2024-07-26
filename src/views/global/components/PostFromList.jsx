@@ -10,7 +10,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
-import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
+import thumbnailPlaceholder from "../../post/images/thumbnailPlaceholder.jpg";
 
 import {
   selectDialogAction,

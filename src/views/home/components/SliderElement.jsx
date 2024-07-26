@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-import thumbnailPlaceholder from "../../post/image/thumbnailPlaceholder.jpg";
+import thumbnailPlaceholder from "../../post/images/thumbnailPlaceholder.jpg";
 
 import PostFromListInfo from "../../global/components/PostFromListInfo";
 import { StyledSliderElement } from "../styles/SliderElement.styled";

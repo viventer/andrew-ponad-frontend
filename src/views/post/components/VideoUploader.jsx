@@ -1,15 +1,29 @@
 import ReactPlayer from "react-player";
 import { StyledVideoUploader } from "../styles/VideoUploader.styled";
-import { useDispatch } from "react-redux";
-import { setErrMsg } from "../../global/slices/globalStatesSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { selectErrMsg, setErrMsg } from "../../global/slices/globalStatesSlice";
+import videoPlaceholder from "../images/videoPlaceholder.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
 
 export default function VideoUploader({ setVideoUrl, videoUrl }) {
   const dispatch = useDispatch();
+  const errMsg = useSelector(selectErrMsg);
+  const [isInputShown, setIsInputShown] = useState(false);
+
+  const isValidUrl = (url) => {
+    const regex = /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/;
+    return regex.test(url);
+  };
 
   return (
     <StyledVideoUploader className="responsivePostElement">
       <div className="urlInputWrapper">
-        <label htmlFor="urlInput">Link do filmu</label>
+        <button onClick={() => setIsInputShown((prev) => !prev)}>
+          <FontAwesomeIcon icon={faLink} />
+          <label htmlFor="urlInput">Link do filmu</label>
+        </button>
         <input
           type="text"
           id="urlInput"
@@ -23,15 +37,27 @@ export default function VideoUploader({ setVideoUrl, videoUrl }) {
             }
           }}
           maxLength={100}
+          className={isInputShown ? "shown" : ""}
         />
       </div>
       <div className="reactPlayerWrapper">
-        <ReactPlayer
-          url={videoUrl}
-          controls={true}
-          light={true}
-          className="reactPlayer"
-        />
+        {isValidUrl(videoUrl) && !errMsg ? (
+          <ReactPlayer
+            url={videoUrl}
+            controls={true}
+            light={true}
+            className="reactPlayer"
+            onError={() =>
+              dispatch(setErrMsg("Podany adres URL jest nieprawidłowy."))
+            }
+          />
+        ) : (
+          <img
+            src={videoPlaceholder}
+            className="reactPlayer videoPlaceholder"
+            alt="Video placeholder"
+          />
+        )}
       </div>
     </StyledVideoUploader>
   );
