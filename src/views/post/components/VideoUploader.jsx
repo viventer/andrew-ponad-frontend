@@ -1,11 +1,15 @@
-import ReactPlayer from "react-player";
-import { StyledVideoUploader } from "../styles/VideoUploader.styled";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectErrMsg, setErrMsg } from "../../global/slices/globalStatesSlice";
-import videoPlaceholder from "../images/videoPlaceholder.jpg";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+
+import { selectErrMsg, setErrMsg } from "../../global/slices/globalStatesSlice";
+
+import videoPlaceholder from "../images/videoPlaceholder.jpg";
+
+import ReactPlayer from "react-player";
+import { StyledVideoUploader } from "../styles/VideoUploader.styled";
 
 export default function VideoUploader({ setVideoUrl, videoUrl }) {
   const dispatch = useDispatch();

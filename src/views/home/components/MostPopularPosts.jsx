@@ -47,7 +47,7 @@ export default function MostPopularPosts() {
   useEffect(() => {
     if (isDataLoading) {
       dispatch(setIsLoading(true));
-    } else if (isError) {
+    } else if (isError && !sortedPostsData) {
       dispatch(setIsLoading(false));
       dispatch(
         setErrMsg(
@@ -56,8 +56,9 @@ export default function MostPopularPosts() {
       );
     } else if (isSuccess) {
       dispatch(setIsLoading(false));
+      dispatch(setErrMsg(""));
     }
-  }, [isDataLoading, isError, isSuccess]);
+  }, [isDataLoading, isError, isSuccess, sortedPostsData]);
 
   return (
     !isLoading && (

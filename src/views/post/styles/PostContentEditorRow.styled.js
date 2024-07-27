@@ -13,6 +13,10 @@ export const StyledPostContentEditorRow = styled.section`
     cursor: pointer;
   }
 
+  .videoElementWrapper {
+    height: fit-content;
+  }
+
   @media (hover: hover) {
     & .flex:not(.active):hover {
       outline: 0.1rem solid #777;

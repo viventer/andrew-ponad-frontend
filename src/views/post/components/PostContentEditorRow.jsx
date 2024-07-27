@@ -1,12 +1,11 @@
 import ReactQuill from "react-quill";
 import ImageDropzone from "../../global/components/ImageDropzone";
-import ReactPlayer from "react-player";
 
 import thumbnailPlaceholder from "../images/thumbnailPlaceholder.jpg";
 
 import RowTypeSelection from "./RowTypeSelection";
-import { StyledPostContentEditorRow } from "../styles/PostContentEditorRow.styled";
 import VideoUploader from "./VideoUploader";
+import { StyledPostContentEditorRow } from "../styles/PostContentEditorRow.styled";
 
 export default function PostContentEditorRow({
   activeRowNumber,
@@ -39,7 +38,9 @@ export default function PostContentEditorRow({
       <div
         className={`flex flex-center ${
           rowData[1].type == "none" ? "onlyOneElement" : ""
-        } ${activeRowNumber == index ? "active" : ""}`}
+        } ${activeRowNumber == index ? "active" : ""} ${
+          rowData[0].type == "video" ? "videoElementWrapper" : ""
+        }`}
         onClick={() => {
           setActiveRowNumber(index);
         }}

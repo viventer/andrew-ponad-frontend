@@ -114,6 +114,7 @@ export const GlobalStyles = createGlobalStyle`
   .onlyOneElement .responsivePostElement {
     max-width: 75rem;
     max-height: calc(0.5625 * 75rem);
+    height: 100%;
   }
 
   .deleteImgButton {
@@ -153,6 +154,7 @@ export const GlobalStyles = createGlobalStyle`
     .onlyOneElement .responsivePostElement {
       max-width: 67rem;
       max-height: calc(0.5625 * 67rem);
+
     }
   }
 
