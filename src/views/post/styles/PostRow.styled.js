@@ -26,6 +26,10 @@ export const StyledPostRow = styled.section`
     padding-right: 0.75rem;
   }
 
+  & .reactPlayerWrapper {
+    box-shadow: 0.5rem 0.5rem 2rem rgba(0, 0, 0, 0.75);
+  }
+
   @media (max-width: 1100px) {
     &:not(.onlyOneElement) {
       flex-direction: column;

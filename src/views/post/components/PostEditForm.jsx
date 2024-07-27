@@ -105,7 +105,11 @@ export default function PostEditForm({
     for (const row of postRows) {
       for (const item of row) {
         if (item.type == "none") continue;
-        if (item.textEditorContent == "" && !item.imagePreview) {
+        if (
+          item.textEditorContent == "" &&
+          !item.imagePreview &&
+          !item.videoUrl
+        ) {
           return false;
         }
       }

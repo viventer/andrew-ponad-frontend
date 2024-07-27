@@ -138,6 +138,12 @@ export const GlobalStyles = createGlobalStyle`
     right: 0;
   }
 
+  .reactPlayer {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16/9;
+  }
+
   @media (max-width: 1600px) {
     .responsivePostElement {
       width: 80vw;

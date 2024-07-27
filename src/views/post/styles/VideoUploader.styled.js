@@ -85,12 +85,6 @@ export const StyledVideoUploader = styled.article`
     width: 100%;
   }
 
-  & .reactPlayer {
-    width: 100% !important;
-    height: auto !important;
-    aspect-ratio: 16/9;
-  }
-
   @media (max-width: 500px) {
     #urlInput {
       font-size: 0.9rem;
