@@ -11,7 +11,12 @@ import videoPlaceholder from "../images/videoPlaceholder.jpg";
 import ReactPlayer from "react-player";
 import { StyledVideoUploader } from "../styles/VideoUploader.styled";
 
-export default function VideoUploader({ setVideoUrl, videoUrl }) {
+export default function VideoUploader({
+  setVideoUrl,
+  videoUrl,
+  setActiveRowNumber,
+  index,
+}) {
   const dispatch = useDispatch();
   const errMsg = useSelector(selectErrMsg);
   const [isInputShown, setIsInputShown] = useState(false);
@@ -54,6 +59,8 @@ export default function VideoUploader({ setVideoUrl, videoUrl }) {
             onError={() =>
               dispatch(setErrMsg("Podany adres URL jest nieprawidłowy."))
             }
+            onPlay={() => setActiveRowNumber(index)}
+            onPause={() => setActiveRowNumber(index)}
           />
         ) : (
           <img

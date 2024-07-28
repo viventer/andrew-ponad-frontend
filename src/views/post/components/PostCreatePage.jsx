@@ -42,11 +42,13 @@ export default function PostCreatePage() {
         type: "textEditor",
         textEditorContent: "",
         imagePreview: null,
+        videoUrl: "",
       },
       {
         type: "image",
         textEditorContent: "",
         imagePreview: null,
+        videoUrl: "",
       },
     ],
   ]);

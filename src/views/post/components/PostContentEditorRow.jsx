@@ -3,7 +3,7 @@ import ImageDropzone from "../../global/components/ImageDropzone";
 
 import thumbnailPlaceholder from "../images/thumbnailPlaceholder.jpg";
 
-import RowTypeSelection from "./RowTypeSelection";
+import RowTopBar from "./RowTopBar";
 import VideoUploader from "./VideoUploader";
 import { StyledPostContentEditorRow } from "../styles/PostContentEditorRow.styled";
 
@@ -15,6 +15,8 @@ export default function PostContentEditorRow({
   updateElement,
   changeRowType,
   deleteRow,
+  changeRowIndex,
+  isLast,
 }) {
   const toolbarOptions = [
     ["bold", "italic", "underline", "strike", "code-block"],
@@ -28,11 +30,13 @@ export default function PostContentEditorRow({
   return (
     <StyledPostContentEditorRow>
       {activeRowNumber == index && (
-        <RowTypeSelection
+        <RowTopBar
           index={index}
           updateElement={updateElement}
           changeRowType={changeRowType}
+          changeRowIndex={changeRowIndex}
           deleteRow={deleteRow}
+          isLast={isLast}
         />
       )}
       <div
@@ -82,6 +86,8 @@ export default function PostContentEditorRow({
           } else if (elementData.type === "video") {
             return (
               <VideoUploader
+                setActiveRowNumber={setActiveRowNumber}
+                index={index}
                 setVideoUrl={setVideoUrl}
                 key={i - 11}
                 videoUrl={videoUrl}

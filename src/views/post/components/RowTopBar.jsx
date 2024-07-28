@@ -3,18 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAlignLeft,
+  faArrowDown,
+  faArrowUp,
   faClose,
   faImage,
   faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { StyledRowTypeSelection } from "../styles/RowTypeSelection.styled";
+import { StyledRowTopBar } from "../styles/RowTopBar.styled";
 
-export default function RowTypeSelection({ index, changeRowType, deleteRow }) {
-  const dispatch = useDispatch();
-
+export default function RowTopBar({
+  index,
+  changeRowType,
+  deleteRow,
+  changeRowIndex,
+  isLast,
+}) {
   return (
-    <StyledRowTypeSelection>
+    <StyledRowTopBar>
       <div>
         <div
           onClick={() => {
@@ -62,15 +68,29 @@ export default function RowTypeSelection({ index, changeRowType, deleteRow }) {
           <FontAwesomeIcon icon={faVideo} />
         </div>
       </div>
-      {index != 0 && (
-        <div
-          onClick={() => {
-            deleteRow(index);
-          }}
-        >
-          <FontAwesomeIcon icon={faClose} />
+      <div className="barRightSide">
+        <div>
+          {index != 0 && (
+            <div onClick={() => changeRowIndex(index, index - 1)}>
+              <FontAwesomeIcon icon={faArrowUp} />
+            </div>
+          )}
+          {!isLast && (
+            <div onClick={() => changeRowIndex(index, index + 1)}>
+              <FontAwesomeIcon icon={faArrowDown} />
+            </div>
+          )}
         </div>
-      )}
-    </StyledRowTypeSelection>
+        {index != 0 && (
+          <div
+            onClick={() => {
+              deleteRow(index);
+            }}
+          >
+            <FontAwesomeIcon icon={faClose} className="deleteIcon" />
+          </div>
+        )}
+      </div>
+    </StyledRowTopBar>
   );
 }

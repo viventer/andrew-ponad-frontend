@@ -1,9 +1,11 @@
 import styled from "styled-components";
 
-export const StyledRowTypeSelection = styled.div`
+export const StyledRowTopBar = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  flex-wrap: wrap;
+  column-gap: 2rem;
+  row-gap: 1rem;
   width: 100%;
   margin-bottom: 0.5rem;
   padding: 0.5rem 1rem;
@@ -26,18 +28,30 @@ export const StyledRowTypeSelection = styled.div`
     cursor: pointer;
   }
 
+  & .barRightSide {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+  }
+
   @media (hover: hover) {
     & div:hover {
       color: white;
     }
 
-    & > div:nth-child(2):hover {
-      color: rgb(255, 100, 100);
+    & .deleteIcon:hover {
+      color: ${({ theme }) => theme.colors.red};
     }
   }
 
   @media (max-width: 1100px) {
     width: 80vw;
     max-width: 40rem;
+  }
+
+  @media (max-width: 800px) {
+    & .barRightSide {
+      gap: 2rem;
+    }
   }
 `;

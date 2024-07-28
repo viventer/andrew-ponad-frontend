@@ -67,6 +67,14 @@ export default function PostContentEditor({ postRows, setPostRows }) {
     setPostRows([...newRows]);
   };
 
+  const changeRowIndex = (oldRowIndex, newRowIndex) => {
+    const rowData = [...postRows[oldRowIndex]];
+    const newRows = postRows.filter((row, index) => index !== oldRowIndex);
+    newRows.splice(newRowIndex, 0, rowData);
+    setPostRows([...newRows]);
+    setActiveRowNumber(newRowIndex);
+  };
+
   return (
     <StyledPostContentEditor>
       {postRows.map((postRow, i) => (
@@ -79,6 +87,8 @@ export default function PostContentEditor({ postRows, setPostRows }) {
           updateElement={updateElement}
           changeRowType={changeRowType}
           deleteRow={deleteRow}
+          changeRowIndex={changeRowIndex}
+          isLast={i == postRows.length - 1}
         />
       ))}
       <StyledButton onClick={addRow}>Dodaj nowy wiersz</StyledButton>
