@@ -49,11 +49,6 @@ export default function MostPopularPosts() {
       dispatch(setIsLoading(true));
     } else if (isError && !sortedPostsData) {
       dispatch(setIsLoading(false));
-      dispatch(
-        setErrMsg(
-          error?.message || "Błąd pobierania najpopularniejszych postów."
-        )
-      );
     } else if (isSuccess) {
       dispatch(setIsLoading(false));
       dispatch(setErrMsg(""));
