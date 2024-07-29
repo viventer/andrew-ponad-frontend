@@ -14,6 +14,7 @@ import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
 import PostFromList from "../../global/components/PostFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 import useAuth from "../../../hooks/useAuth";
+import useGetFilteredData from "../../../hooks/useGetFilteredData";
 
 export default function PostsList() {
   const { isLogged } = useAuth();
@@ -29,6 +30,8 @@ export default function PostsList() {
   const categoryFilter = useSelector(selectCategoryFilter);
   const visibilityFilter = useSelector(selectVisibilityFilter);
   const searchQuery = useSelector(selectPostsTabSearchQuery);
+
+  const getFilteredData = useGetFilteredData();
 
   let postsData;
   let filteredPostData;

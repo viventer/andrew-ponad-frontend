@@ -8,6 +8,7 @@ import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import { StyledSlider } from "../styles/Slider.styled";
 import SliderElement from "./SliderElement";
+import useGetFilteredData from "../../../hooks/useGetFilteredData";
 
 export default function Slider() {
   const { isLogged } = useAuth();
