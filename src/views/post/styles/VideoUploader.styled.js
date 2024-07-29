@@ -44,10 +44,6 @@ export const StyledVideoUploader = styled.article`
     transition: color 0.15s ease-in-out;
   }
 
-  & .urlInputWrapper button:hover {
-    color: rgba(255, 255, 255, 0.75);
-  }
-
   & label {
     width: fit-content;
     font-weight: 700;
@@ -110,6 +106,12 @@ export const StyledVideoUploader = styled.article`
   @media (max-width: 400px) {
     & .urlInputWrapper {
       right: 0.5rem;
+    }
+  }
+
+  @media (hover: hover) {
+    & .urlInputWrapper button:hover {
+      color: rgba(255, 255, 255, 0.75);
     }
   }
 `;

@@ -9,11 +9,6 @@ export const StyledPostFromSection = styled.article`
   background-color: rgba(0, 0, 0, 0.5);
   transition: all 0.15s ease-in-out;
 
-  &:hover {
-    cursor: pointer;
-    transform: translate(0, -1rem);
-  }
-
   & .thumbnailWrapper {
     position: relative;
   }
@@ -83,6 +78,13 @@ export const StyledPostFromSection = styled.article`
 
     &.isExpanded.post1 {
       display: block;
+    }
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      transform: translate(0, -1rem);
     }
   }
 `;

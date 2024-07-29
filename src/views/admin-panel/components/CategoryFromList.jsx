@@ -102,7 +102,6 @@ export default function CategoryFromList({
           toBeAdded={toBeAdded}
           setIsDataCorrect={setIsDataCorrect}
           isDataCorrect={isDataCorrect}
-          isSaved={isSaved}
           setIsSaved={setIsSaved}
           setIsInputFocused={setIsInputFocused}
           isInputFocused={isInputFocused}

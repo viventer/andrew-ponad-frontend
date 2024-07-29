@@ -23,7 +23,6 @@ export default function CategoryNameInput({
   toBeAdded,
   isDataCorrect,
   setIsDataCorrect,
-  isSaved,
   setIsSaved,
   setIsInputFocused,
   isInputFocused,
