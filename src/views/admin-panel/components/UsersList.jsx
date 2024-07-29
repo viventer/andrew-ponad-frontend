@@ -10,6 +10,8 @@ import {
 
 import UserFromList from "./UserFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
+import useGetMainRole from "../../../hooks/useGetMainRole";
+import useGetFilteredData from "../../../hooks/useGetFilteredData";
 
 export default function UsersList() {
   const {
@@ -23,40 +25,16 @@ export default function UsersList() {
   const roleFilter = useSelector(selectRoleFilter);
   const searchQuery = useSelector(selectUsersTabSearchQuery);
 
-  const getMainRole = (userData) => {
-    if (userData.roles.includes("Admin")) {
-      return "Admin";
-    } else if (userData.roles.includes("Editor")) {
-      return "Edytor";
-    } else if (userData.roles.includes("Creator")) {
-      return "Twórca";
-    } else if (userData.roles.includes("Verified")) {
-      return "Zweryfikowany";
-    } else {
-      return "Niezweryfikowany";
-    }
-  };
+  const getMainRole = useGetMainRole();
+  const getFilteredData = useGetFilteredData();
 
   let usersData;
   let filteredUsersData;
   if (isSuccess) {
     usersData = Object.entries(usersRawData.entities);
-    filteredUsersData = usersData.filter((user) => {
-      const userData = user[1];
-      const mainRole = getMainRole(userData);
-      const username = userData.username.toLowerCase();
-
-      if (
-        roleFilter != "Dowolna" &&
-        roleFilter != "Wybierz rolę" &&
-        mainRole != roleFilter
-      ) {
-        return false;
-      } else if (searchQuery && !username.includes(searchQuery.toLowerCase())) {
-        return false;
-      } else {
-        return true;
-      }
+    filteredUsersData = getFilteredData(usersData, {
+      searchQuery,
+      mainRole: roleFilter,
     });
   }
 

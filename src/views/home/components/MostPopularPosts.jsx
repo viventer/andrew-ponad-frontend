@@ -38,7 +38,6 @@ export default function MostPopularPosts() {
       const post2Views = post2[1].views;
       return post2Views - post1Views;
     });
-    console.log(sortedPostsData);
   }
 
   const isLoading = useSelector(selectIsLoading);

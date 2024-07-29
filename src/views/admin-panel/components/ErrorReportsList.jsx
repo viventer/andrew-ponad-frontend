@@ -12,6 +12,7 @@ import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import ErrorReportFromList from "./ErrorReportFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
+import useGetFilteredData from "../../../hooks/useGetFilteredData";
 
 export default function ErrorReportsList() {
   const {
@@ -24,32 +25,16 @@ export default function ErrorReportsList() {
 
   const statusFilter = useSelector(selectStatusFilter);
   const searchQuery = useSelector(selectErrorReportsTabSearchQuery);
+  const getFilteredData = useGetFilteredData();
 
   let reportsData;
   let filteredReportsData;
   const translateStatus = useTranslateErrorReportsStatus();
   if (isSuccess) {
     reportsData = Object.entries(errorReportsRawData.entities);
-    filteredReportsData = reportsData.filter((report) => {
-      const reportData = report[1];
-      const translatedStatus = translateStatus(statusFilter, "english");
-      const reportTitle = reportData.title.toLowerCase();
-
-      const isStatusFilterSet =
-        statusFilter != "Wybierz status" && statusFilter != "Dowolny";
-      const isStatusFilterMatch = reportData.status == translatedStatus;
-
-      const isSearchQueryMatch = reportTitle.includes(
-        searchQuery.toLowerCase()
-      );
-
-      if (isStatusFilterSet && !isStatusFilterMatch) {
-        return false;
-      } else if (searchQuery && !isSearchQueryMatch) {
-        return false;
-      } else {
-        return true;
-      }
+    filteredReportsData = getFilteredData(reportsData, {
+      status: statusFilter,
+      searchQuery,
     });
   }
 

@@ -8,6 +8,7 @@ import useAuth from "../../../hooks/useAuth";
 
 import PostFromList from "../../global/components/PostFromList";
 import { StyledPostsSearchResults } from "../styles/PostsSearchResults.styled";
+import useGetFilteredData from "../../../hooks/useGetFilteredData";
 
 export default function PostsSearchResults({ searchQuery, categoryFilter }) {
   const { isLogged } = useAuth();
@@ -21,32 +22,25 @@ export default function PostsSearchResults({ searchQuery, categoryFilter }) {
   } = useGetPostsQuery({ isLogged });
   const dispatch = useDispatch();
 
+  const getFilteredData = useGetFilteredData();
+
   let postsData;
   let filteredPostsData;
   if (isSuccess) {
     postsData = Object.entries(postsRawData.entities);
-    filteredPostsData = postsData.filter((post) => {
+    const postsDataWithoutDrafts = postsData.filter((post) => {
       const postData = post[1];
       if (postData.visibility == "draft") {
         return false;
       }
-
-      const postTitle = postData.title.toLowerCase();
-      const postCategoryName = postData.categoryName;
-
-      const isCategoryFilterSet =
-        categoryFilter != "Wybierz kategorię" && categoryFilter != "Dowolna";
-      const isSearchQueryMatch = postTitle.includes(searchQuery.toLowerCase());
-      const isCategoryFilterMatch = postCategoryName == categoryFilter;
-
-      if (searchQuery && !isSearchQueryMatch) {
-        return false;
-      } else if (isCategoryFilterSet && !isCategoryFilterMatch) {
-        return false;
-      }
       return true;
     });
+    filteredPostsData = getFilteredData(postsDataWithoutDrafts, {
+      searchQuery,
+      categoryName: categoryFilter,
+    });
   }
+
   if (isError) {
     if (![401, 403].includes(error.status)) {
       dispatch(

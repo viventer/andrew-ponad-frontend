@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
-
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import {
   selectCategoryFilter,
@@ -35,38 +33,15 @@ export default function PostsList() {
 
   let postsData;
   let filteredPostData;
-  const translateVisibility = useTranslateVisibility();
   if (isSuccess) {
     postsData = Object.entries(postsRawData.entities);
-    filteredPostData = postsData.filter((post) => {
-      const postData = post[1];
-      const translatedVisibility = translateVisibility(
-        visibilityFilter,
-        "english"
-      );
-      const postTitle = postData.title.toLowerCase();
-
-      const isCategoryFilterSet =
-        categoryFilter != "Kategoria" && categoryFilter != "Dowolna";
-      const isCategoryFilterMatch = postData.categoryName == categoryFilter;
-
-      const isVisibilityFilterSet =
-        visibilityFilter != "Widoczność" && visibilityFilter != "Dowolna";
-      const isVisibilityFilterMatch =
-        postData.visibility == translatedVisibility;
-
-      const isSearchQueryMatch = postTitle.includes(searchQuery.toLowerCase());
-
-      if (isCategoryFilterSet && !isCategoryFilterMatch) {
-        return false;
-      } else if (isVisibilityFilterSet && !isVisibilityFilterMatch) {
-        return false;
-      } else if (searchQuery && !isSearchQueryMatch) {
-        return false;
-      } else {
-        return true;
-      }
+    filteredPostData = getFilteredData(postsData, {
+      visibility: visibilityFilter,
+      categoryName: categoryFilter,
+      searchQuery: searchQuery,
     });
+
+    console.log("tak");
   }
 
   const dispatch = useDispatch();

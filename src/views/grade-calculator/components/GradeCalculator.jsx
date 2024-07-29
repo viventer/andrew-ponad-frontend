@@ -22,7 +22,6 @@ export default function GradeCalculator() {
 
   const validateScoredPoints = () => {
     if (!isFormatCorrect(scoredPoints) && scoredPoints) {
-      console.log("siema");
       setIsScoredPointsValid(false);
       setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
       return;

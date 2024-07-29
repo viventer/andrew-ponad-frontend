@@ -7,6 +7,7 @@ import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
 import CategoryFromList from "./CategoryFromList";
+import useGetFilteredData from "../../../hooks/useGetFilteredData";
 
 export default function CategoriesList() {
   const {
@@ -18,23 +19,14 @@ export default function CategoriesList() {
   } = useGetAllCategoriesQuery();
 
   const searchQuery = useSelector(selectCategoriesTabSearchQuery);
+  const getFilteredData = useGetFilteredData();
 
   let categoriesData;
   let filteredCategoriesData;
   if (isSuccess) {
     categoriesData = Object.entries(categoriesRawData.entities);
-    filteredCategoriesData = categoriesData.filter(([id, category]) => {
-      const categoryName = category.name.toLowerCase();
-
-      const isSearchQueryMatch = categoryName.includes(
-        searchQuery.toLowerCase()
-      );
-
-      if (searchQuery && !isSearchQueryMatch) {
-        return false;
-      } else {
-        return true;
-      }
+    filteredCategoriesData = getFilteredData(categoriesData, {
+      searchQuery,
     });
   }
 

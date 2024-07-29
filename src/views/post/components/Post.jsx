@@ -42,8 +42,6 @@ export default function Post() {
   if (isSuccess && rawPostData.entities[id]) {
     postData = rawPostData.entities[id];
 
-    console.log(postData);
-
     switch (postData.visibility) {
       case "public":
         translatedVisibility = "Publiczny";
