@@ -1,5 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAlignLeft,

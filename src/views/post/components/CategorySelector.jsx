@@ -9,7 +9,6 @@ import {
 import { StyledSelector } from "../../global/styles/Selector.styled";
 import SelectedSelectorOption from "../../global/components/SelectedSelectorOption";
 import SelectorOption from "../../global/components/SelectorOption";
-import { selectAvailablePostCategories } from "../../global/slices/globalStatesSlice";
 import useGetAllCategoryNames from "../../../hooks/useGetAllCategoryNames";
 
 export default function CategorySelector() {

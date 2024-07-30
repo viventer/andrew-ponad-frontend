@@ -1,13 +1,14 @@
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBucket,
   faBug,
   faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 
 import { StyledFooter } from "../styles/Footer.styled";
-import { useDispatch } from "react-redux";
 import {
   setIsSearchBoxVisible,
   setIsUserInfoVisible,

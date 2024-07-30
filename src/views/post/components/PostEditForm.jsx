@@ -1,25 +1,19 @@
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ImageDropzone from "../../global/components/ImageDropzone";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 import useTranslateVisibility from "../../../hooks/useTranslateVisibility";
 
 import {
-  resetPostState,
   selectPostCategoryName,
   selectPostTitle,
   selectPostVisibility,
   selectThumbnailPreview,
   setThumbnailPreview,
 } from "../slices/postSlice";
-
-import ThumbnailBar from "./ThumbnailBar";
-import PostTitleInput from "./PostTitleInput";
-import CategorySelector from "./CategorySelector";
-import PostContentEditor from "./PostContentEditor";
-import VisibilitySelector from "./VisibilitySelector";
-import { StyledButton } from "../../global/styles/Button.styled";
-import { selectUserId } from "../../auth/slices/authSlice";
-import { StyledPostEditPage } from "../styles/PostEditPage.styled";
 import { useDeletePostMutation } from "../slices/postsApiSlice";
 import {
   selectDialogAction,
@@ -31,10 +25,16 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
-import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+
+import ImageDropzone from "../../global/components/ImageDropzone";
+import ThumbnailBar from "./ThumbnailBar";
+import PostTitleInput from "./PostTitleInput";
+import CategorySelector from "./CategorySelector";
+import PostContentEditor from "./PostContentEditor";
+import VisibilitySelector from "./VisibilitySelector";
+import { StyledButton } from "../../global/styles/Button.styled";
+import { selectUserId } from "../../auth/slices/authSlice";
+import { StyledPostEditPage } from "../styles/PostEditPage.styled";
 
 export default function PostEditForm({
   handleClick,

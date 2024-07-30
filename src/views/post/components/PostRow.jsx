@@ -1,11 +1,12 @@
+import { useDispatch } from "react-redux";
+
 import DOMPurify from "dompurify";
+import ReactPlayer from "react-player";
+import Zoom from "react-medium-image-zoom";
+
+import { setErrMsg } from "../../global/slices/globalStatesSlice";
 
 import { StyledPostRow } from "../styles/PostRow.styled";
-
-import Zoom from "react-medium-image-zoom";
-import ReactPlayer from "react-player";
-import { setErrMsg } from "../../global/slices/globalStatesSlice";
-import { useDispatch } from "react-redux";
 
 export default function PostRow({ rowData }) {
   const firstElementType = rowData[0].type;
