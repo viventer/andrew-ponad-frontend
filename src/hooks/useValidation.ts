@@ -1,9 +1,12 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useTheme } from "styled-components";
 
 import validator from "validator";
 
-export default function useValidation(references, inputs) {
+export default function useValidation(
+  references: { [key: string]: React.RefObject<HTMLElement> },
+  inputs: { [key: string]: string }
+) {
   const theme = useTheme();
 
   const [validations, setValidations] = useState({
@@ -15,7 +18,15 @@ export default function useValidation(references, inputs) {
     lastName: "",
   });
 
-  const validateField = (fieldName, value) => {
+  type FieldName =
+    | "password"
+    | "username"
+    | "firstName"
+    | "lastName"
+    | "email"
+    | "confirmPassword";
+
+  const validateField = (fieldName: FieldName, value: string): boolean => {
     switch (fieldName) {
       case "password":
         return validatePassword(value);
@@ -32,14 +43,16 @@ export default function useValidation(references, inputs) {
     }
   };
 
-  const validateConfirmPassword = (confirmPassword) => {
+  type ValidationFunction = (input: string) => boolean;
+
+  const validateConfirmPassword: ValidationFunction = (confirmPassword) => {
     const isValid = inputs.password === confirmPassword;
     setValidationStyle(isValid, references.confirmPasswordRef);
 
     return isValid;
   };
 
-  const validateUsername = (username) => {
+  const validateUsername: ValidationFunction = (username) => {
     const regex =
       /^(?!.*_{3,})(?=.{3,20}$)[a-zA-Z0-9]+(_[a-zA-Z0-9]*)*[a-zA-Z0-9]+$/;
     const twoLettersRegex = /.*[a-zA-Z].*[a-zA-Z].*/;
@@ -50,10 +63,20 @@ export default function useValidation(references, inputs) {
     return isValid;
   };
 
-  const validatePassword = (password) => {
-    const checkRequirement = (requirement, paragraphIndex) => {
+  const validateEmail: ValidationFunction = (email) => {
+    const isValid = validator.isEmail(email);
+    setValidationStyle(isValid, references.emailRef);
+
+    return isValid;
+  };
+
+  const validatePassword: ValidationFunction = (password): boolean => {
+    const checkRequirement = (
+      requirementMet: boolean,
+      paragraphIndex: number
+    ) => {
       const requirementParagraph = getRequirementParagraph(paragraphIndex);
-      if (requirement) {
+      if (requirementMet) {
         requirementParagraph.style.color = theme.colors.green;
         setTimeout(() => {
           requirementParagraph.style.display = "none";
@@ -68,17 +91,20 @@ export default function useValidation(references, inputs) {
       }
     };
 
-    const getRequirementParagraph = (index) => {
-      return references.passwordRequirementsRef.current.querySelector(
-        `p:nth-of-type(${index})`
-      );
+    const getRequirementParagraph = (index: number): HTMLElement => {
+      const container = references.passwordRequirementsRef.current!;
+      return container.querySelector(`p:nth-of-type(${index})`) as HTMLElement;
     };
 
-    const requirements = {
+    type Requirements = {
+      [key: string]: boolean;
+    };
+
+    const requirements: Requirements = {
       correctLength: password.length >= 8 && password.length <= 32,
       containsUpperCase: /[A-Z]/.test(password),
       containsLowerCase: /[a-z]/.test(password),
-      containsDigit: /[1-9]/.test(password),
+      containsDigit: /[0-9]/.test(password),
       containsSpecialChar: /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password),
       notContainSpace: /^[^\s]*$/.test(password),
     };
@@ -95,14 +121,7 @@ export default function useValidation(references, inputs) {
     return isValid;
   };
 
-  const validateEmail = (email) => {
-    const isValid = validator.isEmail(email);
-    setValidationStyle(isValid, references.emailRef);
-
-    return isValid;
-  };
-
-  const validateFirstName = (firstName) => {
+  const validateFirstName: ValidationFunction = (firstName) => {
     const regex =
       /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{3,50}(?:[-\s'][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/;
 
@@ -112,7 +131,7 @@ export default function useValidation(references, inputs) {
     return isValid;
   };
 
-  const validateLastName = (lastName) => {
+  const validateLastName: ValidationFunction = (lastName) => {
     const regex =
       /^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{3,50}(?:[-\s'][a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/;
 
@@ -122,13 +141,18 @@ export default function useValidation(references, inputs) {
     return isValid;
   };
 
-  const setValidationStyle = (isValid, fieldRef) => {
+  const setValidationStyle = (
+    isValid: boolean,
+    fieldRef: React.RefObject<HTMLElement>
+  ) => {
+    const element = fieldRef.current as HTMLElement;
+
     if (isValid) {
-      fieldRef.current.classList.add("correct");
-      fieldRef.current.classList.remove("incorrect");
+      element.classList.add("correct");
+      element.classList.remove("incorrect");
     } else {
-      fieldRef.current.classList.add("incorrect");
-      fieldRef.current.classList.remove("correct");
+      element.classList.add("incorrect");
+      element.classList.remove("correct");
     }
   };
 

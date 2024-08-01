@@ -1,5 +1,6 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice";
+import { RootState } from "../../../redux/store";
 
 export interface Post {
   __v: number;
@@ -58,7 +59,8 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         return postsAdapter.setAll(initialState, loadedPosts);
       },
     }),
-    getPostById: builder.query<PostsResult, void>({
+    // prettier-ignore
+    getPostById: builder.query<PostsResult, { isLogged?: boolean; postId?: string }>({
       query: ({ postId, isLogged }) => ({
         url: `/posts/${postId}`,
         headers: {
@@ -72,7 +74,7 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         const post = { ...responseData, id: responseData._id };
         return postsAdapter.setOne(initialState, post);
       },
-      providesTags: (result, error, postId) => [{ type: "Post", id: postId }],
+
     }),
     updatePost: builder.mutation({
       query: ({ postId, postData }) => ({
@@ -120,7 +122,7 @@ export const {
 } = postsApiSlice;
 
 export const selectPostsResult = postsApiSlice.endpoints.getPosts.select();
-const selectPostByIdResult = postsApiSlice.endpoints.getPostById.select();
+const selectPostByIdResult = postsApiSlice.endpoints.getPostById.select({});
 
 const selectPostsData = createSelector(
   selectPostsResult,
@@ -133,8 +135,9 @@ const selectPostByIdData = createSelector(
 );
 
 export const { selectAll: selectAllPosts, selectIds: selectPostIds } =
-  postsAdapter.getSelectors((state) => selectPostsData(state) ?? initialState);
+  postsAdapter.getSelectors(
+    (state: RootState) => selectPostsData(state) ?? initialState
+  );
 
-export const selectPostById = (state, postId) =>
-  postsAdapter.getSelectors().selectById(selectPostByIdData(state), postId) ??
-  initialState;
+export const selectPostById = (state: RootState, postId: string) =>
+  selectPostByIdData(state)?.entities?.[postId] ?? null;

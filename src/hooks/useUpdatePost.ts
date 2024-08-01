@@ -1,9 +1,12 @@
-import { useUpdatePostMutation } from "../views/post/slices/postsApiSlice";
+import {
+  Post,
+  useUpdatePostMutation,
+} from "../views/post/slices/postsApiSlice";
 
 const useUpdatePost = () => {
   const [updatePostMutation] = useUpdatePostMutation();
 
-  const updatePost = async (newPostData, id) => {
+  const updatePost = async (newPostData: Post, id: string) => {
     await updatePostMutation({ postId: id, postData: newPostData }).unwrap();
   };
 
