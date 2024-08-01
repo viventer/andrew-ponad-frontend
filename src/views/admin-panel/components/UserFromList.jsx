@@ -9,7 +9,7 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-import useTranslateRole from "../../../hooks/useTranslateRole";
+import useTranslateRole from "../../../hooks/useTranslateRole.ts";
 
 import {
   useDeleteUserMutation,

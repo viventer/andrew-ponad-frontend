@@ -1,4 +1,4 @@
-const useGetVisibilityOptions = () => {
+const useGetVisibilityOptions = (): string[] => {
   return [
     "Publiczny",
     "Niepubliczny",

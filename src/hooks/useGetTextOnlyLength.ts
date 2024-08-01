@@ -1,4 +1,4 @@
-const useGetTextOnlyLength = (string) => {
+const useGetTextOnlyLength = (string: string): number => {
   const decodedString = string
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")

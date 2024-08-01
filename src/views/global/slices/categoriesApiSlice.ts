@@ -1,50 +1,59 @@
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice";
+import { RootState } from "../../../redux/store";
 
-const categoriesAdapter = createEntityAdapter({});
+interface Category {
+  _id: string;
+  name: string;
+  __v: number;
+  connectedPosts: string[];
+  id: string;
+  postTitles: string[];
+}
+
+interface CategoriesResult {
+  ids: string[];
+  entities: { [id: string]: Category };
+}
+
+type Tag = { type: string; id: string };
+
+const categoriesAdapter = createEntityAdapter<Category>({});
 
 const initialState = categoriesAdapter.getInitialState();
 
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getAllCategories: builder.query({
+    getAllCategories: builder.query<CategoriesResult, void>({
       query: () => ({
         url: "/categories",
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
+        validateStatus: (response: Response, result: Category[]) => {
+          return response.status === 200;
         },
       }),
-      transformResponse: (responseData) => {
+      transformResponse: (responseData: Category[]) => {
         const loadedCategories = responseData.map((category) => {
           category.id = category._id;
           return category;
         });
         return categoriesAdapter.setAll(initialState, loadedCategories);
       },
-      providesTags: (result, error, arg) => {
-        if (result?.ids) {
-          return [
-            { type: "Category", id: "LIST" },
-            ...result.ids.map((id) => ({ type: "Category", id })),
-          ];
-        }
-      },
     }),
     getCategoryById: builder.query({
       query: (id) => ({
         url: `/categories/${id}`,
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
+        validateStatus: (response: Response, result: Category) => {
+          return response.status === 200;
         },
       }),
-      transformResponse: (responseData) => {
+      transformResponse: (responseData: Category) => {
         const category = { ...responseData, id: responseData._id };
         return categoriesAdapter.setOne(initialState, category);
       },
       providesTags: (result, error, id) => [{ type: "Category", id }],
     }),
     createNewCategory: builder.mutation({
-      query: (name) => ({
+      query: (name: string) => ({
         url: "/categories",
         method: "POST",
         body: {
@@ -54,7 +63,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: [{ type: "Category", id: "LIST" }],
     }),
     changeCategoryName: builder.mutation({
-      query: ({ id, newName }) => ({
+      query: ({ id, newName }: { id: string; newName: string }) => ({
         url: `/categories/${id}`,
         method: "PATCH",
         body: {
@@ -90,8 +99,9 @@ export const {
 
 export const selectCategoriesResult =
   categoriesApiSlice.endpoints.getAllCategories.select();
-const selectCategoryByIdResult =
-  categoriesApiSlice.endpoints.getCategoryById.select();
+
+const selectCategoryByIdResult = (state: RootState, categoryId: string) =>
+  categoriesApiSlice.endpoints.getCategoryById.select(categoryId)(state);
 
 const selectCategoriesData = createSelector(
   selectCategoriesResult,
@@ -105,10 +115,9 @@ const selectCategoryByIdData = createSelector(
 
 export const { selectAll: selectAllCategories, selectIds: selectCategoryIds } =
   categoriesAdapter.getSelectors(
-    (state) => selectCategoriesData(state) ?? initialState
+    (state: RootState) => selectCategoriesData(state) ?? initialState
   );
 
-export const selectCategoryById = (state, categoryId) =>
-  categoriesAdapter
-    .getSelectors()
-    .selectById(selectCategoryByIdData(state), categoryId) ?? initialState;
+export const selectCategoryById = (state: RootState, categoryId: string) =>
+  selectCategoryByIdData(state, categoryId)?.entities[categoryId] ??
+  initialState;

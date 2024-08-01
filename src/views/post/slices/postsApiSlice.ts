@@ -1,49 +1,74 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice";
 
-const postsAdapter = createEntityAdapter({});
+export interface Post {
+  __v: number;
+  _id: string;
+  postNumber: number;
+  author: string;
+  category: string;
+  categoryName: string;
+  content: PostRow[];
+  createdAt: string;
+  id: string;
+  thumbnail: string;
+  title: string;
+  updatedAt?: string;
+  views: number;
+  visibility: string;
+}
+
+export interface PostRowElement {
+  type: "textEditor" | "image" | "video";
+  textEditorContent?: string;
+  imagePreview?: null | string;
+  videoUrl?: string;
+}
+
+export type PostRow = PostRowElement[];
+
+interface PostsResult {
+  ids: string[];
+  entities: { [id: string]: Post };
+}
+
+const postsAdapter = createEntityAdapter<Post>({});
 
 const initialState = postsAdapter.getInitialState();
 
 export const postsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getPosts: builder.query({
-      query: ({ isLogged }) => ({
-        url: "/posts",
-        headers: {
-          isLogged: isLogged,
-        },
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
-        },
-      }),
-      transformResponse: (responseData) => {
+    getPosts: builder.query<PostsResult, { isLogged: boolean } | void>({
+      query: (args) => {
+        const isLogged = args?.isLogged;
+        return {
+          url: "/posts",
+          headers: {
+            ...(isLogged !== undefined ? { isLogged: String(isLogged) } : {}),
+          },
+          validateStatus: (response: Response, result: Post[]) =>
+            response.status === 200,
+        };
+      },
+      transformResponse: (responseData: Post[]) => {
         const loadedPosts = responseData.map((post) => {
           post.id = post._id;
           return post;
         });
         return postsAdapter.setAll(initialState, loadedPosts);
       },
-      providesTags: (result, error, arg) => {
-        if (result?.ids) {
-          return [
-            { type: "Post", id: "LIST" },
-            ...result.ids.map((id) => ({ type: "Post", id })),
-          ];
-        } else return [{ type: "Post", id: "LIST" }];
-      },
     }),
-    getPostById: builder.query({
+    getPostById: builder.query<PostsResult, void>({
       query: ({ postId, isLogged }) => ({
         url: `/posts/${postId}`,
         headers: {
           isLogged: isLogged,
         },
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
+        validateStatus: (response: Response, result: Post) => {
+          return response.status === 200;
         },
       }),
-      transformResponse: (responseData) => {
+      transformResponse: (responseData: Post) => {
         const post = { ...responseData, id: responseData._id };
         return postsAdapter.setOne(initialState, post);
       },

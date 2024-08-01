@@ -1,7 +1,10 @@
 const useTranslateErrorReportsStatus = () => {
-  const translateStatus = (reportStatus, targetLanguage) => {
+  const translateStatus = (
+    reportStatus: string,
+    targetLanguage: string
+  ): string => {
     if (!reportStatus || !targetLanguage) {
-      return null;
+      return "";
     }
 
     if (targetLanguage === "english") {
@@ -12,8 +15,6 @@ const useTranslateErrorReportsStatus = () => {
           return "inProgress";
         case "Naprawione":
           return "fixed";
-        default:
-          return null;
       }
     } else if (targetLanguage === "polish") {
       switch (reportStatus) {
@@ -23,10 +24,10 @@ const useTranslateErrorReportsStatus = () => {
           return "W trakcie";
         case "fixed":
           return "Naprawione";
-        default:
-          return null;
       }
     }
+
+    return "";
   };
 
   return translateStatus;

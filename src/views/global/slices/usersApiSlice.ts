@@ -1,50 +1,64 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice";
+import { RootState } from "../../../redux/store";
 
-const usersAdapter = createEntityAdapter({});
+export interface User {
+  __v: number;
+  _id: string;
+  email: string;
+  firstName: string;
+  id: string;
+  lastName: string;
+  roles: string[];
+  username: string;
+}
+
+interface UsersResult {
+  ids: string[];
+  entities: { [id: string]: User };
+}
+
+const usersAdapter = createEntityAdapter<User>({});
 
 const initialState = usersAdapter.getInitialState();
 
 export const usersApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getUsers: builder.query({
+    getUsers: builder.query<UsersResult, void>({
       query: () => ({
         url: "/users",
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
+        validateStatus: (response: Response, result: User[]) => {
+          return response.status === 200;
         },
       }),
-      transformResponse: (responseData) => {
+      transformResponse: (responseData: User[]) => {
         const loadedUsers = responseData.map((user) => {
           user.id = user._id;
           return user;
         });
         return usersAdapter.setAll(initialState, loadedUsers);
       },
-      providesTags: (result, error, arg) => {
-        if (result?.ids) {
-          return [
-            { type: "User", id: "LIST" },
-            ...result.ids.map((id) => ({ type: "User", id })),
-          ];
-        } else return [{ type: "User", id: "LIST" }];
-      },
     }),
-    getUserById: builder.query({
+    getUserById: builder.query<UsersResult, void>({
       query: (userId) => ({
         url: `/users/${userId}`,
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
+        validateStatus: (response: Response, result: User) => {
+          return response.status === 200;
         },
       }),
-      transformResponse: (responseData) => {
+      transformResponse: (responseData: User) => {
         const user = { ...responseData, id: responseData._id };
         return usersAdapter.setOne(initialState, user);
       },
-      providesTags: (result, error, userId) => [{ type: "User", id: userId }],
     }),
     updateUser: builder.mutation({
-      query: ({ userId, initialUserData }) => ({
+      query: ({
+        userId,
+        initialUserData,
+      }: {
+        userId: string;
+        initialUserData: User;
+      }) => ({
         url: `/users/${userId}`,
         method: "PATCH",
         body: JSON.stringify(initialUserData),
@@ -52,7 +66,9 @@ export const usersApiSlice = apiSlice.injectEndpoints({
           "Content-Type": "application/json",
         },
       }),
-      invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
+      invalidatesTags: (result, error, arg) => [
+        { type: "User", id: arg.userId },
+      ],
     }),
     deleteUser: builder.mutation({
       query: (id) => ({
@@ -63,7 +79,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
     }),
     addNewUser: builder.mutation({
-      query: (initialUserData) => ({
+      query: (initialUserData: User) => ({
         url: "/users",
         method: "POST",
         body: {
@@ -97,8 +113,9 @@ const selectUserByIdData = createSelector(
 );
 
 export const { selectAll: selectAllUsers, selectIds: selectUserIds } =
-  usersAdapter.getSelectors((state) => selectUsersData(state) ?? initialState);
+  usersAdapter.getSelectors(
+    (state: RootState) => selectUsersData(state) ?? initialState
+  );
 
-export const selectUserById = (state, userId) =>
-  usersAdapter.getSelectors().selectById(selectUserByIdData(state), userId) ??
-  initialState;
+export const selectUserById = (state: RootState, userId: string) =>
+  selectUserByIdData(state)?.entities?.[userId] ?? null;

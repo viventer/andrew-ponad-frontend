@@ -14,8 +14,8 @@ const useAuth = () => {
   let isVerified = false;
   let mainRole = "User";
 
-  const token = useSelector(selectCurrentToken);
-  const isLogged = useSelector(selectIsLogged);
+  const token = useSelector(selectCurrentToken) as string;
+  const isLogged = useSelector(selectIsLogged) as boolean;
 
   const dispatch = useDispatch();
 
@@ -24,7 +24,16 @@ const useAuth = () => {
       dispatch(setIsLogged(true));
     }
 
-    const decoded = jwtDecode(token);
+    type jwtDecodeType = {
+      UserInfo: {
+        username: string;
+        roles: string[];
+      };
+      exp: number;
+      iat: number;
+    };
+
+    const decoded = jwtDecode<jwtDecodeType>(token);
     const { username, roles } = decoded.UserInfo;
 
     if (roles.includes("Admin")) isAdmin = true;

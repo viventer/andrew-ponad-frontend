@@ -1,7 +1,10 @@
 const useTranslateVisibility = () => {
-  const translateVisibility = (postVisibility, targetLanguage) => {
+  const translateVisibility = (
+    postVisibility: string,
+    targetLanguage: string
+  ): string => {
     if (!postVisibility || !targetLanguage) {
-      return null;
+      return "";
     }
 
     if (targetLanguage === "english") {
@@ -17,7 +20,7 @@ const useTranslateVisibility = () => {
         case "Dla zweryfikowanych":
           return "verifiedOnly";
         default:
-          return null;
+          return "";
       }
     } else if (targetLanguage === "polish") {
       switch (postVisibility) {
@@ -32,9 +35,11 @@ const useTranslateVisibility = () => {
         case "verifiedOnly":
           return "Dla zweryfikowanych";
         default:
-          return null;
+          return "";
       }
     }
+
+    return "";
   };
 
   return translateVisibility;

@@ -1,4 +1,4 @@
-const useGetErrorReportsStatusOptions = () => {
+const useGetErrorReportsStatusOptions = (): string[] => {
   return ["Nowe", "W trakcie", "Naprawione"];
 };
 

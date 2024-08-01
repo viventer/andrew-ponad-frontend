@@ -1,5 +1,10 @@
 const useShorten = () => {
-  const shorten = (string, maxCharNumber, maxWidth, currentWidth) => {
+  const shorten = (
+    string: string,
+    maxCharNumber: number,
+    maxWidth: number,
+    currentWidth: number
+  ): string => {
     if (
       string.length <= maxCharNumber ||
       (maxWidth && currentWidth > maxWidth)

@@ -1,17 +1,29 @@
 import useGetMainRole from "./useGetMainRole";
 import useTranslateErrorReportsStatus from "./useTranslateErrorReportsStatus";
 import useTranslateVisibility from "./useTranslateVisibility";
+import { User } from "../views/global/slices/usersApiSlice";
 
 const useGetFilteredData = () => {
   const translateVisibility = useTranslateVisibility();
   const translateStatus = useTranslateErrorReportsStatus();
   const getMainRole = useGetMainRole();
 
-  const getFilteredData = (elements, filters) => {
+  type Element = [
+    string,
+    {
+      [index: string]: string | number;
+    }
+  ];
+
+  type Filters = {
+    [index: string]: string;
+  };
+
+  const getFilteredData = (elements: Element[], filters: Filters) => {
     const filteredData = elements.filter(([id, element]) => {
       return Object.keys(filters).every((key) => {
-        let elementValue;
-        let filterValue;
+        let elementValue = "";
+        let filterValue = "";
         if (key == "visibility") {
           filterValue = translateVisibility(filters[key], "english");
         } else if (key == "status") {
@@ -21,8 +33,8 @@ const useGetFilteredData = () => {
         }
 
         if (key == "mainRole") {
-          elementValue = getMainRole(element).toLowerCase();
-        } else if (element[key]) {
+          elementValue = getMainRole(element as unknown as User).toLowerCase();
+        } else if (element[key] && typeof element[key] == "string") {
           elementValue = element[key].toLowerCase();
         }
 
@@ -36,11 +48,14 @@ const useGetFilteredData = () => {
           return true;
         }
 
-        if (key == "searchQuery" && element.title) {
+        if (key == "searchQuery" && typeof element.title == "string") {
           return element.title.toLowerCase().includes(filterValue);
-        } else if (key == "searchQuery" && element.name) {
+        } else if (key == "searchQuery" && typeof element.name == "string") {
           return element.name.toLowerCase().includes(filterValue);
-        } else if (key == "searchQuery" && element.username) {
+        } else if (
+          key == "searchQuery" &&
+          typeof element.username == "string"
+        ) {
           return element.username.toLowerCase().includes(filterValue);
         }
 

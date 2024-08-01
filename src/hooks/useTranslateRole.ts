@@ -1,7 +1,7 @@
 const useTranslateRole = () => {
-  const translateRole = (role, targetLanguage) => {
+  const translateRole = (role: string, targetLanguage: string): string => {
     if (!role || !targetLanguage) {
-      return null;
+      return "";
     }
 
     if (targetLanguage === "english") {
@@ -16,8 +16,6 @@ const useTranslateRole = () => {
           return "Verified";
         case "Niezweryfikowany":
           return "User";
-        default:
-          return null;
       }
     } else if (targetLanguage === "polish") {
       switch (role) {
@@ -31,10 +29,10 @@ const useTranslateRole = () => {
           return "Zweryfikowany";
         case "User":
           return "Niezweryfikowany";
-        default:
-          return null;
       }
     }
+
+    return "";
   };
 
   return translateRole;

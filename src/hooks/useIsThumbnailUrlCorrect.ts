@@ -1,5 +1,5 @@
 const useIsThumbnailUrlCorrect = () => {
-  const isThumbnailUrlCorrect = (url) => {
+  const isThumbnailUrlCorrect = (url: string): boolean => {
     const base64Regex = /^data:image\/[^;]+;base64,/;
     const isCorrect = base64Regex.test(url);
 

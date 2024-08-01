@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetAllCategoriesQuery } from "../views/global/slices/categoriesApiSlice";
 
 const useGetAllCategoryNames = () => {
-  const [categoryNames, setCategoryNames] = useState(null);
+  const [categoryNames, setCategoryNames] = useState<null | string[]>(null);
 
   const {
     data: categoriesRawData,
