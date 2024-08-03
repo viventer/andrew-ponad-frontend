@@ -13,7 +13,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import { apiSlice } from "./apiSlice";
+import { apiSlice } from "./apiSlice.ts";
 import authReducer from "../views/auth/slices/authSlice";
 import globalStatesReducer from "../views/global/slices/globalStatesSlice";
 import postReducer from "../views/post/slices/postSlice";

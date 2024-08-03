@@ -29,7 +29,6 @@ export default function ErrorReportsList() {
 
   let reportsData;
   let filteredReportsData;
-  const translateStatus = useTranslateErrorReportsStatus();
   if (isSuccess) {
     reportsData = Object.entries(errorReportsRawData.entities);
     filteredReportsData = getFilteredData(reportsData, {

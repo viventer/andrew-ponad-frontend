@@ -1,16 +1,25 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  BaseQueryFn,
+  createApi,
+  FetchArgs,
+  fetchBaseQuery,
+  FetchBaseQueryError,
+} from "@reduxjs/toolkit/query/react";
 
 import { setCredentials } from "../views/auth/slices/authSlice";
 import {
   setErrMsg,
   setIsLogged,
 } from "../views/global/slices/globalStatesSlice";
+import { RootState } from "./store";
+import { RefreshResponse } from "../views/auth/slices/authApiSlice";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://192.168.100.112:3500",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
-    const token = getState().auth.token;
+    const state = getState() as RootState;
+    const token = state.auth.token;
     if (token) {
       headers.set("authorization", `Bearer ${token}`);
     }
@@ -18,28 +27,32 @@ const baseQuery = fetchBaseQuery({
   },
 });
 
-const baseQueryWithReauth = async (args, api, extraOptions) => {
+type ExtraOptions = Record<string, any>;
+const baseQueryWithReauth: any = async (
+  args: FetchArgs,
+  api: any,
+  extraOptions: ExtraOptions
+) => {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result?.error?.status === 403 || result?.error?.originalStatus === 403) {
+  if (result?.error?.status === 403) {
     console.log("sending refresh token");
     const refreshResult = await baseQuery("/refresh", api, extraOptions);
     if (refreshResult?.data) {
-      const user = api.getState().auth.user;
-      api.dispatch(setCredentials({ ...refreshResult.data, user }));
+      const username = api.getState().auth.user;
+      const refreshResultData: RefreshResponse =
+        refreshResult.data as RefreshResponse;
+      api.dispatch(setCredentials({ ...refreshResultData, username }));
       result = await baseQuery(args, api, extraOptions);
     } else if (
-      refreshResult?.error?.originalStatus === 401 &&
-      JSON.parse(localStorage.getItem("persist"))
+      refreshResult?.error?.status === 401 &&
+      JSON.parse(localStorage.getItem("persist")!)
     ) {
       api.dispatch(setErrMsg("Sesja wygasła. Zaloguj się ponownie."));
     } else {
       api.dispatch(setIsLogged(false));
     }
-  } else if (
-    result?.error?.status === 429 ||
-    result?.error?.originalStatus === 429
-  ) {
+  } else if (result?.error?.status === 429) {
     api.dispatch(
       setErrMsg(
         "Wysyłasz za dużo zapytań do serwera! Spróbuj ponownie za minutę."

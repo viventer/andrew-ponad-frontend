@@ -1,19 +1,33 @@
-import { useDispatch } from "react-redux";
-import { apiSlice } from "../../../redux/apiSlice";
+import { apiSlice } from "../../../redux/apiSlice.ts";
 
-import { logOut, setCredentials } from "./authSlice";
-import { setErrMsg } from "../../global/slices/globalStatesSlice";
+import { logOut, setCredentials } from "./authSlice.js";
+import { setErrMsg } from "../../global/slices/globalStatesSlice.js";
+
+type RegistrationCredentials = {
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+};
+
+type LoginCredentials = Pick<RegistrationCredentials, "username" | "password">;
+
+export type RefreshResponse = {
+  accessToken: string;
+  userId: string;
+};
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation({
+    login: builder.mutation<void, LoginCredentials>({
       query: (credentials) => ({
         url: "/login",
         method: "POST",
         body: { ...credentials },
       }),
     }),
-    logout: builder.mutation({
+    logout: builder.mutation<void, void>({
       query: () => ({
         url: "/logout",
         method: "POST",
@@ -31,7 +45,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
-    refresh: builder.mutation({
+    refresh: builder.mutation<RefreshResponse, void>({
       query: () => ({
         url: "/refresh",
         method: "GET",
@@ -41,7 +55,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
           const { data } = await queryFulfilled;
           const { accessToken, userId } = data;
           dispatch(setCredentials({ accessToken, userId }));
-        } catch (err) {
+        } catch (err: any) {
           if (err?.error?.status == "FETCH_ERROR") {
             dispatch(setErrMsg("Błąd serwera, sprawdź połączenie sieciowe"));
           }
@@ -49,7 +63,7 @@ export const authApiSlice = apiSlice.injectEndpoints({
         }
       },
     }),
-    register: builder.mutation({
+    register: builder.mutation<void, RegistrationCredentials>({
       query: (credentials) => ({
         url: "/register",
         method: "POST",

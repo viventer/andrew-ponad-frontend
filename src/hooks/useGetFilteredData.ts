@@ -25,9 +25,12 @@ const useGetFilteredData = () => {
         let elementValue = "";
         let filterValue = "";
         if (key == "visibility") {
-          filterValue = translateVisibility(filters[key], "english");
+          filterValue = translateVisibility(
+            filters[key],
+            "english"
+          ).toLowerCase();
         } else if (key == "status") {
-          filterValue = translateStatus(filters[key], "english");
+          filterValue = translateStatus(filters[key], "english").toLowerCase();
         } else {
           filterValue = filters[key].toLowerCase();
         }

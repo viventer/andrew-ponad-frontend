@@ -1,47 +1,58 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
-import { apiSlice } from "../../../redux/apiSlice";
+import { apiSlice } from "../../../redux/apiSlice.ts";
+import { RootState } from "../../../redux/store.ts";
 
-const errorReportAdapter = createEntityAdapter({});
+export interface ErrorReport {
+  __v: number;
+  _id: string;
+  author: string | null;
+  createdAt: string;
+  description: string;
+  id: string;
+  images: string[];
+  status: "new" | "fixed" | "inProgress";
+  title: string;
+  updatedAt: string;
+  username: string;
+}
+
+interface ReportsResult {
+  ids: string[];
+  entities: { [id: string]: ErrorReport };
+}
+
+const errorReportAdapter = createEntityAdapter<ErrorReport>({});
 
 const initialState = errorReportAdapter.getInitialState();
 
 export const errorReportApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getErrorReports: builder.query({
+    getErrorReports: builder.query<ReportsResult, void>({
       query: () => ({
         url: "/errorReports",
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
+        validateStatus: (response: Response, result: ErrorReport) => {
+          return response.status === 200;
         },
       }),
-      transformResponse: (responseData) => {
+      transformResponse: (responseData: ErrorReport[]) => {
         const loadedReports = responseData.map((report) => {
           report.id = report._id;
           return report;
         });
         return errorReportAdapter.setAll(initialState, loadedReports);
       },
-      providesTags: (result, error, arg) => {
-        if (result?.ids) {
-          return [
-            { type: "ErrorReport", id: "LIST" },
-            ...result.ids.map((id) => ({ type: "ErrorReport", id })),
-          ];
-        } else return [{ type: "ErrorReport", id: "LIST" }];
-      },
     }),
-    getErrorReportById: builder.query({
+    getErrorReportById: builder.query<ReportsResult, { id: string }>({
       query: ({ id }) => ({
         url: `/errorReports/${id}`,
-        validateStatus: (response, result) => {
-          return response.status === 200 && !result.isError;
+        validateStatus: (response: Response, result: ErrorReport) => {
+          return response.status === 200;
         },
       }),
-      transformResponse: (responseData) => {
+      transformResponse: (responseData: ErrorReport) => {
         const report = { ...responseData, id: responseData._id };
         return errorReportAdapter.setOne(initialState, report);
       },
-      providesTags: (result, error, id) => [{ type: "ErrorReport", id }],
     }),
     changeErrorReportStatus: builder.mutation({
       query: ({ id, newStatus }) => ({
@@ -84,14 +95,14 @@ export const {
 export const selectErrorReportsResult =
   errorReportApiSlice.endpoints.getErrorReports.select();
 const selectErrorReportByIdResult =
-  errorReportApiSlice.endpoints.getErrorReportById.select();
+  errorReportApiSlice.endpoints.getErrorReportById.select({ id: "" });
 
 const selectErrorReportsData = createSelector(
   selectErrorReportsResult,
   (errorReportsResult) => errorReportsResult.data
 );
 
-const selectPostByIdData = createSelector(
+const selectErrorReportByIdData = createSelector(
   selectErrorReportByIdResult,
   (errorReportResult) => errorReportResult.data
 );
@@ -100,10 +111,8 @@ export const {
   selectAll: selectAllErrorReports,
   selectIds: selectErrorReportIds,
 } = errorReportAdapter.getSelectors(
-  (state) => selectErrorReportsData(state) ?? initialState
+  (state: RootState) => selectErrorReportsData(state) ?? initialState
 );
 
-export const selectErrorReportById = (state, id) =>
-  errorReportAdapter
-    .getSelectors()
-    .selectById(selectErrorReportByIdData(state), id) ?? initialState;
+export const selectErrorReportById = (state: RootState, id: string) =>
+  selectErrorReportByIdData(state)?.entities?.[id] ?? null;

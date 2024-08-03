@@ -40,8 +40,6 @@ export default function PostsList() {
       categoryName: categoryFilter,
       searchQuery: searchQuery,
     });
-
-    console.log("tak");
   }
 
   const dispatch = useDispatch();

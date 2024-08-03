@@ -1,5 +1,5 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
-import { apiSlice } from "../../../redux/apiSlice";
+import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store";
 
 export interface Post {
