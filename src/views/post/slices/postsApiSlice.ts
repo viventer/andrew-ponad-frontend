@@ -17,7 +17,10 @@ export interface Post {
   updatedAt?: string;
   views: number;
   visibility: string;
+  [key: string]: any;
 }
+
+export type PostEntity = [string, Post];
 
 export interface PostRowElement {
   type: "textEditor" | "image" | "video";

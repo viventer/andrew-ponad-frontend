@@ -2,24 +2,25 @@ import useGetMainRole from "./useGetMainRole";
 import useTranslateErrorReportsStatus from "./useTranslateErrorReportsStatus";
 import useTranslateVisibility from "./useTranslateVisibility";
 import { User } from "../views/global/slices/usersApiSlice";
+import { PostEntity } from "../views/post/slices/postsApiSlice";
+import { ErrorReportEntity } from "../views/error-reports/slices/errorReportApiSlice";
+import { CategoryEntity } from "../views/global/slices/categoriesApiSlice";
 
 const useGetFilteredData = () => {
   const translateVisibility = useTranslateVisibility();
   const translateStatus = useTranslateErrorReportsStatus();
   const getMainRole = useGetMainRole();
 
-  type Element = [
-    string,
-    {
-      [index: string]: string | number;
-    }
-  ];
-
   type Filters = {
     [index: string]: string;
   };
 
-  const getFilteredData = (elements: Element[], filters: Filters) => {
+  type DataEntity = PostEntity | ErrorReportEntity | CategoryEntity;
+
+  const getFilteredData = (
+    elements: DataEntity[],
+    filters: Filters
+  ): DataEntity[] => {
     const filteredData = elements.filter(([id, element]) => {
       return Object.keys(filters).every((key) => {
         let elementValue = "";

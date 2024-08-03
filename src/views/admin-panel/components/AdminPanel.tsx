@@ -17,12 +17,14 @@ import CategoriesTab from "./CategoriesTab";
 import { StyledAdminPanel } from "../styles/AdminPanel.styled";
 
 export default function AdminPanel() {
-  const [selectedTab, setSelectedTab] = useState("posts");
+  type Tab = "posts" | "categories" | "users" | "errorReports";
+
+  const [selectedTab, setSelectedTab] = useState<Tab>("posts");
 
   const { mainRole } = useAuth();
-  const hasUsersTabAccess = mainRole == "Admin";
-  const hasErrorReportsTabAccess = mainRole == "Admin";
-  const hasCategoriesTabAccess = mainRole == "Admin";
+  const hasUsersTabAccess = mainRole === "Admin";
+  const hasErrorReportsTabAccess = mainRole === "Admin";
+  const hasCategoriesTabAccess = mainRole === "Admin";
 
   return (
     <StyledAdminPanel>
@@ -30,18 +32,18 @@ export default function AdminPanel() {
         <nav>
           <ul>
             <li
-              className={selectedTab == "posts" ? "selected" : ""}
+              className={selectedTab === "posts" ? "selected" : ""}
               onClick={() => setSelectedTab("posts")}
-              aria-selected={selectedTab == "selected" ? true : false}
+              aria-selected={selectedTab === "posts" ? true : false}
             >
               <FontAwesomeIcon icon={faFileLines} className="navIcon" />
               <p>Posty</p>
             </li>
             {hasCategoriesTabAccess && (
               <li
-                className={selectedTab == "categories" ? "selected" : ""}
+                className={selectedTab === "categories" ? "selected" : ""}
                 onClick={() => setSelectedTab("categories")}
-                aria-selected={selectedTab == "categories" ? true : false}
+                aria-selected={selectedTab === "categories" ? true : false}
               >
                 <FontAwesomeIcon icon={faCompass} className="navIcon" />
                 <p>Kategorie</p>
@@ -49,9 +51,9 @@ export default function AdminPanel() {
             )}
             {hasUsersTabAccess && (
               <li
-                className={selectedTab == "users" ? "selected" : ""}
+                className={selectedTab === "users" ? "selected" : ""}
                 onClick={() => setSelectedTab("users")}
-                aria-selected={selectedTab == "users" ? true : false}
+                aria-selected={selectedTab === "users" ? true : false}
               >
                 <FontAwesomeIcon icon={faUser} className="navIcon" />
                 <p>Użytkownicy</p>
@@ -59,9 +61,9 @@ export default function AdminPanel() {
             )}
             {hasErrorReportsTabAccess && (
               <li
-                className={selectedTab == "errorReports" ? "selected" : ""}
+                className={selectedTab === "errorReports" ? "selected" : ""}
                 onClick={() => setSelectedTab("errorReports")}
-                aria-selected={selectedTab == "errorReports" ? true : false}
+                aria-selected={selectedTab === "errorReports" ? true : false}
               >
                 <FontAwesomeIcon icon={faBug} className="navIcon" />
                 <p>Błędy</p>
@@ -69,11 +71,11 @@ export default function AdminPanel() {
             )}
           </ul>
         </nav>
-        {selectedTab == "users" ? (
+        {selectedTab === "users" ? (
           <UsersTab />
-        ) : selectedTab == "posts" ? (
+        ) : selectedTab === "posts" ? (
           <PostsTab />
-        ) : selectedTab == "errorReports" ? (
+        ) : selectedTab === "errorReports" ? (
           <ErrorReportsTab />
         ) : (
           <CategoriesTab />

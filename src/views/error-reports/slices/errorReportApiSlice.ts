@@ -14,7 +14,10 @@ export interface ErrorReport {
   title: string;
   updatedAt: string;
   username: string;
+  [key: string]: any;
 }
+
+export type ErrorReportEntity = [string, ErrorReport];
 
 interface ReportsResult {
   ids: string[];

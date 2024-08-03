@@ -1,9 +1,7 @@
 import {
-  BaseQueryFn,
   createApi,
   FetchArgs,
   fetchBaseQuery,
-  FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
 
 import { setCredentials } from "../views/auth/slices/authSlice";

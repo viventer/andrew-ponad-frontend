@@ -9,12 +9,17 @@ interface Category {
   connectedPosts: string[];
   id: string;
   postTitles: string[];
+  [key: string]: any;
 }
+
+export type CategoryEntity = [string, Category];
 
 interface CategoriesResult {
   ids: string[];
   entities: { [id: string]: Category };
 }
+
+export type CategoryResult = [string, Category];
 
 type Tag = { type: string; id: string };
 

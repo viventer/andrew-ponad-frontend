@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useGetAllCategoriesQuery } from "../../global/slices/categoriesApiSlice";
+import {
+  CategoryEntity,
+  CategoryResult,
+  useGetAllCategoriesQuery,
+} from "../../global/slices/categoriesApiSlice";
 import { selectCategoriesTabSearchQuery } from "../slices/adminPanelSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
@@ -21,7 +25,7 @@ export default function CategoriesList() {
   const searchQuery = useSelector(selectCategoriesTabSearchQuery);
   const getFilteredData = useGetFilteredData();
 
-  let categoriesData;
+  let categoriesData: CategoryEntity[];
   let filteredCategoriesData;
   if (isSuccess) {
     categoriesData = Object.entries(categoriesRawData.entities);
