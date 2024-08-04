@@ -1,13 +1,18 @@
 import { StyledDynamicErrorNotification } from "../styles/DynamicErrorNotification.styled";
 
-export default function DynamicErrorNotification({ message, view }) {
+type Props = {
+  message: string;
+  view?: string;
+};
+
+export default function DynamicErrorNotification({ message, view }: Props) {
   return (
     <StyledDynamicErrorNotification
       className={`${!message ? "hide" : ""} ${
         view == "gradeCalc" ? "gradeCalc" : ""
       }`}
     >
-      <p>{message?.error || message?.message || message}</p>
+      <p>{message}</p>
     </StyledDynamicErrorNotification>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  Category,
   CategoryEntity,
   CategoryResult,
   useGetAllCategoriesQuery,
@@ -60,7 +61,7 @@ export default function CategoriesList() {
         filteredCategoriesData.map(([id, categoryData]) => {
           return (
             <CategoryFromList
-              categoryData={categoryData}
+              categoryData={categoryData as Category}
               key={id}
               setReloadComponent={setReloadComponent}
             />

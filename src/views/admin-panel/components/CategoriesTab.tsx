@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -20,7 +19,7 @@ export default function CategoriesTab() {
         <SearchBar
           view="adminPanel"
           searchQuery={searchQuery}
-          setSearchQuery={(query) =>
+          setSearchQuery={(query: string) =>
             dispatch(setCategoriesTabSearchQuery(query))
           }
           placeholder="Czego szukasz?"

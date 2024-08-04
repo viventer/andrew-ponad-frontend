@@ -11,13 +11,16 @@ import { setErrMsg } from "../slices/globalStatesSlice";
 import { StyledFixedErrorModal } from "../styles/FixedErrorModal.styled";
 import { useEffect, useRef } from "react";
 
-export default function FixedErrorModal({ message }) {
+export default function FixedErrorModal({ message }: { message: string }) {
   const dispatch = useDispatch();
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        modalRef.current &&
+        !modalRef.current.contains(event.target as Node)
+      ) {
         hideModal();
       }
     };
@@ -38,12 +41,7 @@ export default function FixedErrorModal({ message }) {
       ref={modalRef}
     >
       <FontAwesomeIcon icon={faTriangleExclamation} className="icon" />
-      <p>
-        {message?.error ||
-          message?.message ||
-          (typeof message == "string" && message) ||
-          JSON.stringify(message)}
-      </p>
+      <p>{message}</p>
       <button onClick={() => hideModal()}>
         <FontAwesomeIcon icon={faClose} className="icon transition" />
       </button>

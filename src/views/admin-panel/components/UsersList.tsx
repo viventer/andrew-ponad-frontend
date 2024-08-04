@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useGetUsersQuery } from "../../global/slices/usersApiSlice";
+import {
+  useGetUsersQuery,
+  User,
+  UserEntity,
+} from "../../global/slices/usersApiSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import {
   selectRoleFilter,
@@ -28,7 +32,7 @@ export default function UsersList() {
   const getMainRole = useGetMainRole();
   const getFilteredData = useGetFilteredData();
 
-  let usersData;
+  let usersData: UserEntity[];
   let filteredUsersData;
   if (isSuccess) {
     usersData = Object.entries(usersRawData.entities);
@@ -59,7 +63,7 @@ export default function UsersList() {
     <StyledAdminPanelList>
       {filteredUsersData &&
         filteredUsersData.map(([id, userData]) => {
-          const mainRole = getMainRole(userData);
+          const mainRole = getMainRole(userData as User);
           return (
             <UserFromList
               setReloadComponent={setReloadComponent}

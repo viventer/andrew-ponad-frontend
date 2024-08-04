@@ -7,7 +7,11 @@ import {
   selectPostsTabSearchQuery,
   selectVisibilityFilter,
 } from "../slices/adminPanelSlice";
-import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
+import {
+  Post,
+  PostEntity,
+  useGetPostsQuery,
+} from "../../post/slices/postsApiSlice";
 
 import PostFromList from "../../global/components/PostFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
@@ -31,7 +35,7 @@ export default function PostsList() {
 
   const getFilteredData = useGetFilteredData();
 
-  let postsData;
+  let postsData: PostEntity[];
   let filteredPostData;
   if (isSuccess) {
     postsData = Object.entries(postsRawData.entities);
@@ -64,7 +68,7 @@ export default function PostsList() {
         filteredPostData.map(([id, postData]) => {
           return (
             <PostFromList
-              postData={postData}
+              postData={postData as Post}
               key={id}
               setReloadComponent={setReloadComponent}
             />

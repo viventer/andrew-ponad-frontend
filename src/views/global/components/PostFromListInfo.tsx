@@ -10,8 +10,11 @@ import {
   faEye,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Post } from "../../post/slices/postsApiSlice";
 
-export default function PostFromListInfo({ postData, view }) {
+type Props = { postData: Post; view?: string };
+
+export default function PostFromListInfo({ postData, view }: Props) {
   const translateVisibility = useTranslateVisibility();
   const translatedVisibility = translateVisibility(
     postData.visibility,

@@ -40,7 +40,9 @@ export default function UsersFilters() {
       <SearchBar
         view="adminPanel"
         searchQuery={searchQuery}
-        setSearchQuery={(query) => dispatch(setUsersTabSearchQuery(query))}
+        setSearchQuery={(query: string) =>
+          dispatch(setUsersTabSearchQuery(query))
+        }
         placeholder="Kogo szukasz?"
       />
     </StyledAdminPanelFilters>

@@ -31,7 +31,6 @@ export default function Header() {
         </h1>
         <PostsSearch />
       </div>
-      {/* <Navigation /> can be done after the app is released*/}
       <button
         onClick={() => {
           dispatch(toggleIsUserInfoVisible());

@@ -1,7 +1,7 @@
 import useGetMainRole from "./useGetMainRole";
 import useTranslateErrorReportsStatus from "./useTranslateErrorReportsStatus";
 import useTranslateVisibility from "./useTranslateVisibility";
-import { User } from "../views/global/slices/usersApiSlice";
+import { User, UserEntity } from "../views/global/slices/usersApiSlice";
 import { PostEntity } from "../views/post/slices/postsApiSlice";
 import { ErrorReportEntity } from "../views/error-reports/slices/errorReportApiSlice";
 import { CategoryEntity } from "../views/global/slices/categoriesApiSlice";
@@ -15,7 +15,11 @@ const useGetFilteredData = () => {
     [index: string]: string;
   };
 
-  type DataEntity = PostEntity | ErrorReportEntity | CategoryEntity;
+  type DataEntity =
+    | PostEntity
+    | ErrorReportEntity
+    | CategoryEntity
+    | UserEntity;
 
   const getFilteredData = (
     elements: DataEntity[],

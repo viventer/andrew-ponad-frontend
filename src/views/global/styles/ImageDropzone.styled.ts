@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledImageDropzone = styled.div`
+export const StyledImageDropzone = styled.div<{ $isabsolute: number }>`
   ${({ $isabsolute }) =>
     $isabsolute &&
     `

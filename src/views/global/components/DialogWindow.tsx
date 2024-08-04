@@ -13,13 +13,18 @@ import {
 import { StyledFixedModal } from "../styles/FixedModal.styled";
 import { StyledButton } from "../styles/Button.styled";
 
-export default function DialogWindow({ message, options }) {
+type Props = {
+  message: string;
+  options: string[];
+};
+
+export default function DialogWindow({ message, options }: Props) {
   const dispatch = useDispatch();
   const action = useSelector(selectDialogAction);
 
-  const closeDialog = (answer) => {
+  const closeDialog = (answer: string) => {
     dispatch(setDialogAnswer(answer));
-    dispatch(setDialogMsg(null));
+    dispatch(setDialogMsg(""));
     dispatch(setDialogOptions([]));
   };
 

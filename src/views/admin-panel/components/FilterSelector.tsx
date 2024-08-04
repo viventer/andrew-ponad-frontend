@@ -4,7 +4,17 @@ import SelectedSelectorOption from "../../global/components/SelectedSelectorOpti
 import SelectorOption from "../../global/components/SelectorOption";
 import { StyledSelector } from "../../global/styles/Selector.styled";
 
-export default function FilterSelector({ setFilter, selectedFilter, options }) {
+type Props = {
+  setFilter: (filter: string) => void;
+  selectedFilter: string;
+  options: string[];
+};
+
+export default function FilterSelector({
+  setFilter,
+  selectedFilter,
+  options,
+}: Props) {
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
 
   return (

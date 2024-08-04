@@ -33,13 +33,13 @@ export default function ErrorReportsFilters() {
       />
       <FilterSelector
         selectedFilter={selectedStatusFilter}
-        setFilter={(filter) => dispatch(setStatusFilter(filter))}
+        setFilter={(filter: string) => dispatch(setStatusFilter(filter))}
         options={statusOptions}
       />
       <SearchBar
         view="adminPanel"
         searchQuery={searchQuery}
-        setSearchQuery={(query) =>
+        setSearchQuery={(query: string) =>
           dispatch(setErrorReportsTabSearchQuery(query))
         }
         placeholder="Czego szukasz?"

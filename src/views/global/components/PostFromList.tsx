@@ -23,7 +23,7 @@ import {
   setIsLoading,
   setIsSearchBoxVisible,
 } from "../slices/globalStatesSlice";
-import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
+import { Post, useDeletePostMutation } from "../../post/slices/postsApiSlice";
 
 import useShorten from "../../../hooks/useShorten";
 import useAuth from "../../../hooks/useAuth";
@@ -32,7 +32,17 @@ import { StyledPostFromList } from "../styles/PostFromList.styled";
 import PostFromListInfo from "./PostFromListInfo";
 import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
 
-export default function PostFromList({ postData, setReloadComponent, view }) {
+type Props = {
+  postData: Post;
+  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
+  view?: string;
+};
+
+export default function PostFromList({
+  postData,
+  setReloadComponent,
+  view,
+}: Props) {
   const [isDeleted, setIsDeleted] = useState(false);
 
   const isThumbnailUrlCorrect = useIsThumbnailUrlCorrect();
@@ -53,9 +63,8 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
   const dialogAnswer = useSelector(selectDialogAnswer);
   const dialogAction = useSelector(selectDialogAction);
 
-  const [deletePostMutation, { isDeletingLoading }] = useDeletePostMutation(
-    postData.id
-  );
+  const [deletePostMutation, { isLoading: isDeletingLoading }] =
+    useDeletePostMutation();
 
   const showDialog = () => {
     dispatch(setDialogOptions(["Tak", "Nie"]));
@@ -71,8 +80,8 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
     if (dialogAnswer == "Tak" && dialogAction == `deletePost${postData.id}`) {
       deletePost();
     }
-    dispatch(setDialogAnswer(null));
-    dispatch(setDialogAction(null));
+    dispatch(setDialogAnswer(""));
+    dispatch(setDialogAction(""));
   }, [dialogAnswer]);
 
   const deletePost = async () => {
@@ -86,7 +95,7 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
         setReloadComponent((prev) => !prev);
         setIsDeleted(true);
       }
-    } catch (err) {
+    } catch (err: any) {
       dispatch(setErrMsg(err?.data?.message || "Błąd usuwania posta."));
       dispatch(setIsLoading(false));
     }
@@ -127,7 +136,9 @@ export default function PostFromList({ postData, setReloadComponent, view }) {
         <img
           src={isThumbnailCorrect ? postData.thumbnail : thumbnailPlaceholder}
           onClick={viewPost}
-          className={view == "postsSearchResults" && "postsSearchResultsImg"}
+          className={
+            view == "postsSearchResults" ? "postsSearchResultsImg" : ""
+          }
         />
         <div onClick={viewPost}>
           <h2>

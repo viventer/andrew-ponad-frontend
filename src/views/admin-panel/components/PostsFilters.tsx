@@ -25,7 +25,7 @@ import { StyledAdminPanelFilters } from "../styles/AdminPanelFilters.styled";
 import useGetAllCategoryNames from "../../../hooks/useGetAllCategoryNames";
 import { useEffect, useState } from "react";
 
-export default function PostsFilters({ view }) {
+export default function PostsFilters({ view }: { view?: string }) {
   const selectedVisibilityFilter = useSelector(selectVisibilityFilter);
   const selectedCategoryFilter = useSelector(selectCategoryFilter);
   const searchQuery = useSelector(selectPostsTabSearchQuery);
@@ -36,7 +36,7 @@ export default function PostsFilters({ view }) {
   const allVisibilityOptions = [...visibilityOptions, "Dowolna"];
 
   const { categoryNames, isSuccess, isError, error } = useGetAllCategoryNames();
-  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [categoryOptions, setCategoryOptions] = useState<string[]>();
 
   useEffect(() => {
     if (isSuccess && categoryNames) {
@@ -66,7 +66,9 @@ export default function PostsFilters({ view }) {
           <SearchBar
             view="adminPanel"
             searchQuery={searchQuery}
-            setSearchQuery={(query) => dispatch(setPostsTabSearchQuery(query))}
+            setSearchQuery={(query: string) =>
+              dispatch(setPostsTabSearchQuery(query))
+            }
             placeholder="Czego szukasz?"
           />
         </>

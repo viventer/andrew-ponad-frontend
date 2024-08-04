@@ -5,7 +5,7 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { setSuccessMsg } from "../slices/globalStatesSlice";
 
-export default function FixedSuccessModal({ message }) {
+export default function FixedSuccessModal({ message }: { message: string }) {
   const dispatch = useDispatch();
 
   return (

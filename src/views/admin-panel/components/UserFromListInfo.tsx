@@ -1,6 +1,7 @@
 import { StyledElementFromListInfo } from "../../global/styles/ElementFromListInfo.styled";
+import { UserInfo } from "./UserFromList";
 
-export default function UserFromListInfo({ userInfo }) {
+export default function UserFromListInfo({ userInfo }: { userInfo: UserInfo }) {
   return (
     <StyledElementFromListInfo>
       <p>

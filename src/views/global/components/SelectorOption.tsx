@@ -1,6 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { StyledSelectorOption } from "../styles/Selector.styled";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+type Props = {
+  value: string;
+  areOptionsVisible: boolean;
+  setAreOptionsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setValue: (value: string) => void;
+  icon?: IconProp;
+};
 
 export default function SelectorOption({
   value,
@@ -8,9 +17,8 @@ export default function SelectorOption({
   setAreOptionsVisible,
   setValue,
   icon,
-}) {
-  const selectOption = (e) => {
-    e.preventDefault();
+}: Props) {
+  const selectOption = () => {
     setValue(value);
     setAreOptionsVisible(false);
   };
@@ -18,8 +26,8 @@ export default function SelectorOption({
   return (
     <StyledSelectorOption className={areOptionsVisible ? "" : "hide"}>
       <button
-        onClick={(e) => {
-          selectOption(e);
+        onClick={() => {
+          selectOption();
         }}
         className="selectorButton"
       >

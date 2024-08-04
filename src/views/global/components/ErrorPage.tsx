@@ -2,7 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { StyledErrorPage } from "../styles/ErrorPage.styled";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
-export default function ErrorPage({ headingMessage, subheadingMessage }) {
+type Props = {
+  headingMessage: string;
+  subheadingMessage: string;
+};
+
+export default function ErrorPage({
+  headingMessage,
+  subheadingMessage,
+}: Props) {
   return (
     <StyledErrorPage>
       <div className="messageWrapper">

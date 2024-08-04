@@ -4,18 +4,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAdd,
   faCheckCircle,
-  faCircleExclamation,
   faPencil,
   faPlus,
-  faPlusCircle,
   faSave,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import {
+  Category,
   useChangeCategoryNameMutation,
   useCreateNewCategoryMutation,
 } from "../../global/slices/categoriesApiSlice";
+
+type Props = {
+  categoryData?: Category;
+  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
+  toBeAdded?: boolean;
+  isDataCorrect: boolean;
+  setIsDataCorrect: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsSaved: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsInputFocused: React.Dispatch<React.SetStateAction<boolean>>;
+  isInputFocused: boolean;
+  newCategoryName: string;
+  setNewCategoryName: React.Dispatch<React.SetStateAction<string>>;
+};
 
 export default function CategoryNameInput({
   categoryData,
@@ -28,11 +40,11 @@ export default function CategoryNameInput({
   isInputFocused,
   newCategoryName,
   setNewCategoryName,
-}) {
+}: Props) {
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [
     changeCategoryNameMutation,
@@ -44,24 +56,18 @@ export default function CategoryNameInput({
   ] = useCreateNewCategoryMutation();
 
   const changeName = async () => {
-    if (categoryData.name == newCategoryName) {
+    if (categoryData!.name == newCategoryName) {
       dispatch(setErrMsg("Nazwa kategorii nie uległa zmianie."));
       return;
     }
 
     try {
       await changeCategoryNameMutation({
-        id: categoryData.id,
+        id: categoryData!.id,
         newName: newCategoryName,
       }).unwrap();
     } catch (err) {
-      if (!err?.originalStatus && !err?.status) {
-        dispatch(
-          setErrMsg("Brak odpowiedzi serwera. Sprawdź połączenie sieciowe.")
-        );
-      } else {
-        dispatch(setErrMsg(err?.data?.message));
-      }
+      dispatch(setErrMsg("Błąd zmiany nazwy kategorii."));
     }
   };
 
@@ -75,7 +81,7 @@ export default function CategoryNameInput({
     }
   };
 
-  const handleCreateCategoryError = (err) => {
+  const handleCreateCategoryError = (err: any) => {
     if (
       (!err?.originalStatus && !err?.status) ||
       err?.status === "FETCH_ERROR"
@@ -123,7 +129,9 @@ export default function CategoryNameInput({
   }, [newCategoryName, isNewNameDifferent]);
 
   const addInputFocus = () => {
-    inputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   return (

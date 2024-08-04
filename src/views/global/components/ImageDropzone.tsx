@@ -10,12 +10,19 @@ import { setThumbnailPreview } from "../../post/slices/postSlice";
 
 import { StyledImageDropzone } from "../styles/ImageDropzone.styled";
 
+type Props = {
+  imagePreview: string;
+  setImagePreview: React.Dispatch<React.SetStateAction<string>>;
+  isThumbnail: boolean;
+  view?: string;
+};
+
 export default function ImageDropzone({
   imagePreview,
   setImagePreview,
   isThumbnail,
   view,
-}) {
+}: Props) {
   const dispatch = useDispatch();
 
   let url;
@@ -32,9 +39,9 @@ export default function ImageDropzone({
       const file = new FileReader();
       file.onload = () => {
         if (isThumbnail) {
-          dispatch(setThumbnailPreview(file.result));
+          dispatch(setThumbnailPreview(file.result as string));
         } else {
-          setImagePreview(file.result);
+          setImagePreview(file.result as string);
         }
       };
 

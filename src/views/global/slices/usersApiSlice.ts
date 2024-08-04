@@ -13,6 +13,8 @@ export interface User {
   username: string;
 }
 
+export type UserEntity = [string, User];
+
 interface UsersResult {
   ids: string[];
   entities: { [id: string]: User };
@@ -52,16 +54,10 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       },
     }),
     updateUser: builder.mutation({
-      query: ({
-        userId,
-        initialUserData,
-      }: {
-        userId: string;
-        initialUserData: User;
-      }) => ({
+      query: ({ userId, userData }: { userId: string; userData: any }) => ({
         url: `/users/${userId}`,
         method: "PATCH",
-        body: JSON.stringify(initialUserData),
+        body: JSON.stringify(userData),
         headers: {
           "Content-Type": "application/json",
         },

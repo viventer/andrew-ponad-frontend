@@ -9,12 +9,15 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 
-import useTranslateRole from "../../../hooks/useTranslateRole.ts";
+import useTranslateRole, {
+  RoleInEnglish,
+} from "../../../hooks/useTranslateRole.ts";
 
 import {
   useDeleteUserMutation,
+  User,
   useUpdateUserMutation,
-} from "../../global/slices/usersApiSlice";
+} from "../../global/slices/usersApiSlice.ts";
 import {
   selectDialogAction,
   selectDialogAnswer,
@@ -24,13 +27,28 @@ import {
   setDialogOptions,
   setErrMsg,
   setIsLoading,
-} from "../../global/slices/globalStatesSlice";
+} from "../../global/slices/globalStatesSlice.ts";
 
-import RoleSelector from "./RoleSelector";
-import UserFromListInfo from "./UserFromListInfo";
-import { StyledElementFromList } from "../styles/ElementFromList.styled";
+import RoleSelector from "./RoleSelector.tsx";
+import UserFromListInfo from "./UserFromListInfo.jsx";
+import { StyledElementFromList } from "../styles/ElementFromList.styled.ts";
 
-export default function UserFromList({ userInfo, setReloadComponent }) {
+type Props = {
+  userInfo: UserInfo;
+  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type UserInfo = {
+  username: string;
+  id: string;
+  mainRole: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  roles: string[];
+};
+
+export default function UserFromList({ userInfo, setReloadComponent }: Props) {
   const [showInfo, setShowInfo] = useState(false);
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
 
@@ -59,9 +77,12 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
     const translatedSelectedMainRole = translateRole(
       selectedMainRole,
       "english"
-    );
+    ) as RoleInEnglish;
 
-    const translatedMainRole = translateRole(userInfo.mainRole, "english");
+    const translatedMainRole = translateRole(
+      userInfo.mainRole,
+      "english"
+    ) as RoleInEnglish;
 
     if (userInfo.mainRole == selectedMainRole) {
       dispatch(setErrMsg("Użytkownik posiada już wybraną rolę"));
@@ -83,9 +104,12 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
     try {
       await updateUser({
         userId: userInfo.id,
-        initialUserData: { username: userInfo.username, roles: updatedRoles },
+        userData: {
+          username: userInfo.username,
+          roles: updatedRoles as string[],
+        },
       }).unwrap();
-    } catch (err) {
+    } catch (err: any) {
       if (!err?.originalStatus && !err?.status) {
         setErrMsg("Brak odpowiedzi serwera");
       } else {
@@ -97,7 +121,7 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
   const deleteUser = async () => {
     try {
       await deleteUserMutation(userInfo.id).unwrap();
-    } catch (err) {
+    } catch (err: any) {
       if (!err?.status && !err?.originalStatus) {
         dispatch(setErrMsg("Brak odpowiedzi serwera"));
       } else {
@@ -122,8 +146,8 @@ export default function UserFromList({ userInfo, setReloadComponent }) {
     if (dialogAnswer == "Tak" && dialogAction == `deleteUser${userInfo.id}`) {
       deleteUser();
     }
-    dispatch(setDialogAction(null));
-    dispatch(setDialogAnswer(null));
+    dispatch(setDialogAction(""));
+    dispatch(setDialogAnswer(""));
   }, [dialogAnswer]);
 
   useEffect(() => {

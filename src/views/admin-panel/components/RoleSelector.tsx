@@ -4,10 +4,15 @@ import SelectedSelectorOption from "../../global/components/SelectedSelectorOpti
 import SelectorOption from "../../global/components/SelectorOption";
 import { StyledSelector } from "../../global/styles/Selector.styled";
 
+type Props = {
+  selectedMainRole: string;
+  setSelectedMainRole: React.Dispatch<React.SetStateAction<string>>;
+};
+
 export default function RoleSelector({
   selectedMainRole,
   setSelectedMainRole,
-}) {
+}: Props) {
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
 
   const availableRoles = [

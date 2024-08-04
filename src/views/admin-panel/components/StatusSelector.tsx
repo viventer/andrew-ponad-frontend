@@ -3,7 +3,15 @@ import SelectedSelectorOption from "../../global/components/SelectedSelectorOpti
 import SelectorOption from "../../global/components/SelectorOption";
 import { StyledSelector } from "../../global/styles/Selector.styled";
 
-export default function StatusSelector({ selectedStatus, setSelectedStatus }) {
+type Props = {
+  selectedStatus: string;
+  setSelectedStatus: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function StatusSelector({
+  selectedStatus,
+  setSelectedStatus,
+}: Props) {
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
 
   const availableStatuses = ["Nowe", "W trakcie", "Naprawione"];

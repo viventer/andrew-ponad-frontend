@@ -2,6 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 import { StyledSelectorOption } from "../styles/Selector.styled";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+type Props = {
+  setAreOptionsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  areOptionsVisible: boolean;
+  direction: "down" | "up";
+  selectedValue: string;
+  icon?: IconProp;
+};
 
 export default function SelectedSelectorOption({
   setAreOptionsVisible,
@@ -9,17 +18,16 @@ export default function SelectedSelectorOption({
   direction,
   selectedValue,
   icon,
-}) {
-  const toggleOptionsVisibility = (e) => {
-    e.preventDefault();
+}: Props) {
+  const toggleOptionsVisibility = () => {
     setAreOptionsVisible((prev) => !prev);
   };
 
   return (
     <StyledSelectorOption>
       <button
-        onClick={(e) => {
-          toggleOptionsVisibility(e);
+        onClick={() => {
+          toggleOptionsVisibility();
         }}
         className={`selected ${direction} selectorButton`}
       >

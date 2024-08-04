@@ -1,7 +1,23 @@
+export type RoleInEnglish =
+  | "Admin"
+  | "Editor"
+  | "Creator"
+  | "Verified"
+  | "User";
+
+export type RoleInPolish =
+  | "Admin"
+  | "Edytor"
+  | "Twórca"
+  | "Zweryfikowany"
+  | "Niezweryfikowany";
+
 const useTranslateRole = () => {
-  const translateRole = (role: string, targetLanguage: string): string => {
+  type ReturnType = RoleInPolish | RoleInEnglish | null;
+
+  const translateRole = (role: string, targetLanguage: string): ReturnType => {
     if (!role || !targetLanguage) {
-      return "";
+      return null;
     }
 
     if (targetLanguage === "english") {
@@ -32,7 +48,7 @@ const useTranslateRole = () => {
       }
     }
 
-    return "";
+    return null;
   };
 
   return translateRole;

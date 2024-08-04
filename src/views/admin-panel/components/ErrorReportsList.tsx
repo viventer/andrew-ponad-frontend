@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 
 import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
 
-import { useGetErrorReportsQuery } from "../../error-reports/slices/errorReportApiSlice";
+import {
+  ErrorReportEntity,
+  useGetErrorReportsQuery,
+} from "../../error-reports/slices/errorReportApiSlice";
 import {
   selectErrorReportsTabSearchQuery,
   selectStatusFilter,
@@ -27,7 +30,7 @@ export default function ErrorReportsList() {
   const searchQuery = useSelector(selectErrorReportsTabSearchQuery);
   const getFilteredData = useGetFilteredData();
 
-  let reportsData;
+  let reportsData: ErrorReportEntity[];
   let filteredReportsData;
   if (isSuccess) {
     reportsData = Object.entries(errorReportsRawData.entities);

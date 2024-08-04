@@ -17,16 +17,25 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
-import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlice";
+import {
+  Category,
+  useDeleteCategoryMutation,
+} from "../../global/slices/categoriesApiSlice";
 
 import CategoryNameInput from "./CategoryNameInput";
 import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";
+
+type Props = {
+  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
+  categoryData?: Category;
+  toBeAdded?: boolean;
+};
 
 export default function CategoryFromList({
   categoryData,
   setReloadComponent,
   toBeAdded,
-}) {
+}: Props) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isSaved, setIsSaved] = useState(true);
   const [isDataCorrect, setIsDataCorrect] = useState(toBeAdded ? false : true);
@@ -57,16 +66,16 @@ export default function CategoryFromList({
     ) {
       deleteCategory();
     }
-    dispatch(setDialogAnswer(null));
-    dispatch(setDialogAction(null));
+    dispatch(setDialogAnswer(""));
+    dispatch(setDialogAction(""));
   }, [dialogAnswer]);
 
-  const [deleteCategoryMutation, { isDeletingLoading }] =
+  const [deleteCategoryMutation, { isLoading: isDeletingLoading }] =
     useDeleteCategoryMutation();
 
   const deleteCategory = async () => {
     try {
-      await deleteCategoryMutation(categoryData.id).unwrap();
+      await deleteCategoryMutation(categoryData!.id).unwrap();
       if (isDeletingLoading) {
         dispatch(setIsLoading(true));
         return;
@@ -76,7 +85,7 @@ export default function CategoryFromList({
         setIsDeleted(true);
       }
     } catch (err) {
-      dispatch(setErrMsg(err?.data?.message || "Błąd usuwania kategorii."));
+      dispatch(setErrMsg("Błąd usuwania kategorii."));
       dispatch(setIsLoading(false));
     }
   };

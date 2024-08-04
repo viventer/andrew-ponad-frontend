@@ -7,8 +7,13 @@ import DOMPurify from "dompurify";
 
 import { StyledErrorReportFromListDetails } from "../styles/ErrorReportFromListDetails.styled";
 import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
+import { ErrorReport } from "../../error-reports/slices/errorReportApiSlice";
 
-export default function ErrorReportFromListDetails({ reportData }) {
+export default function ErrorReportFromListDetails({
+  reportData,
+}: {
+  reportData: ErrorReport;
+}) {
   const sanitizedHTML = DOMPurify.sanitize(reportData.description);
   const creationDate = new Date(reportData.createdAt).toLocaleDateString("PL");
 
