@@ -30,7 +30,7 @@ import {
 } from "../../global/slices/globalStatesSlice.ts";
 
 import RoleSelector from "./RoleSelector.tsx";
-import UserFromListInfo from "./UserFromListInfo.jsx";
+import UserFromListInfo from "./UserFromListInfo.tsx";
 import { StyledElementFromList } from "../styles/ElementFromList.styled.ts";
 
 type Props = {

@@ -1,5 +1,32 @@
+import React from "react";
+import { FieldName } from "../../../hooks/useValidation";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { StyledAuthForm } from "../styles/AuthForm.styled";
+import { RegistrationInputs } from "./Register";
+
+type Props = {
+  canSave: boolean;
+  persist: boolean;
+  handlers: Handlers;
+  inputs: RegistrationInputs;
+  references: References;
+};
+
+type Handlers = {
+  handleInputChange: (fieldName: FieldName, value: string) => void;
+  onRegisterClicked: (e: React.FormEvent<HTMLFormElement>) => void;
+  onPersistToggle: () => void;
+};
+
+type References = {
+  usernameRef: React.MutableRefObject<HTMLElement>;
+  emailRef: React.MutableRefObject<HTMLElement>;
+  firstNameRef: React.MutableRefObject<HTMLElement>;
+  lastNameRef: React.MutableRefObject<HTMLElement>;
+  passwordRef: React.MutableRefObject<HTMLElement>;
+  confirmPasswordRef: React.MutableRefObject<HTMLElement>;
+  passwordRequirementsRef: React.MutableRefObject<HTMLElement>;
+};
 
 export function RegisterForm({
   canSave,
@@ -7,7 +34,7 @@ export function RegisterForm({
   handlers,
   inputs,
   references,
-}) {
+}: Props) {
   return (
     <StyledAuthForm onSubmit={handlers.onRegisterClicked}>
       <label htmlFor="username">Nazwa użytkownika:</label>

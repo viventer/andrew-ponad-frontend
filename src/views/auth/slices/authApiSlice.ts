@@ -20,7 +20,10 @@ export type RefreshResponse = {
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation<void, LoginCredentials>({
+    login: builder.mutation<
+      { accessToken: string; userId: string },
+      LoginCredentials
+    >({
       query: (credentials) => ({
         url: "/login",
         method: "POST",

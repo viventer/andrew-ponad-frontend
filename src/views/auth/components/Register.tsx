@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,11 +11,20 @@ import {
 } from "../../global/slices/globalStatesSlice";
 
 import usePersist from "../../../hooks/usePersist";
-import useValidation from "../../../hooks/useValidation";
+import useValidation, { FieldName } from "../../../hooks/useValidation";
 
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import { RegisterForm } from "./RegisterForm";
 import { StyledAuth } from "../styles/Auth.styled";
+
+export type RegistrationInputs = {
+  username: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+};
 
 export default function Register() {
   const isLogged = useSelector(selectIsLogged);
@@ -29,16 +38,18 @@ export default function Register() {
     }
   }, []);
 
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const confirmPasswordRef = useRef();
-  const passwordRequirementsRef = useRef();
-  const firstNameRef = useRef();
-  const lastNameRef = useRef();
-  const usernameRef = useRef();
+  const emailRef = useRef<HTMLElement>();
+  const passwordRef = useRef<HTMLElement>();
+  const confirmPasswordRef = useRef<HTMLElement>();
+  const passwordRequirementsRef = useRef<HTMLElement>();
+  const firstNameRef = useRef<HTMLElement>();
+  const lastNameRef = useRef<HTMLElement>();
+  const usernameRef = useRef<HTMLElement>();
 
   useEffect(() => {
-    usernameRef.current.focus();
+    if (usernameRef.current) {
+      usernameRef.current.focus();
+    }
   }, []);
 
   const dispatch = useDispatch();
@@ -46,33 +57,36 @@ export default function Register() {
   const onPersistToggle = () => setPersist((prev) => !prev);
 
   const [register, { isLoading }] = useRegisterMutation();
-  const [login, { isLoginLoading }] = useLoginMutation();
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
 
   const [errMsg, setErrMsg] = useState("");
 
-  const [inputs, setInputs] = useState({
+  const initialInputsState = {
     username: "",
     password: "",
     confirmPassword: "",
     email: "",
     firstName: "",
     lastName: "",
-  });
+  };
+
+  const [inputs, setInputs] = useState<RegistrationInputs>(initialInputsState);
 
   const { validations, setValidations, validateField } = useValidation(
     {
-      usernameRef,
-      emailRef,
-      firstNameRef,
-      lastNameRef,
-      passwordRef,
-      confirmPasswordRef,
-      passwordRequirementsRef,
+      usernameRef: usernameRef as React.MutableRefObject<HTMLElement>,
+      emailRef: usernameRef as React.MutableRefObject<HTMLElement>,
+      firstNameRef: usernameRef as React.MutableRefObject<HTMLElement>,
+      lastNameRef: usernameRef as React.MutableRefObject<HTMLElement>,
+      passwordRef: usernameRef as React.MutableRefObject<HTMLElement>,
+      confirmPasswordRef: usernameRef as React.MutableRefObject<HTMLElement>,
+      passwordRequirementsRef:
+        usernameRef as React.MutableRefObject<HTMLElement>,
     },
     inputs
   );
 
-  const handleInputChange = (fieldName, value) => {
+  const handleInputChange = (fieldName: FieldName, value: string) => {
     setInputs((prevInputs) => ({ ...prevInputs, [fieldName]: value }));
     setValidations((prevValidations) => ({
       ...prevValidations,
@@ -80,7 +94,7 @@ export default function Register() {
     }));
   };
 
-  const onRegisterClicked = async (e) => {
+  const onRegisterClicked = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isAllDataExist) {
       setErrMsg("Uzupełnij wszystkie pola");
@@ -98,7 +112,7 @@ export default function Register() {
       dispatch(
         setCredentials({ username: inputs.username, accessToken, userId })
       );
-      setInputs({});
+      setInputs(initialInputsState);
       if (!isLogged) {
         dispatch(setIsLogged(true));
       }
@@ -108,7 +122,7 @@ export default function Register() {
     }
   };
 
-  const handleRegistrationError = (err) => {
+  const handleRegistrationError = (err: any) => {
     if (!err.originalStatus && !err.status) {
       setErrMsg("Brak odpowiedzi serwera");
     } else if (err.originalStatus === 400) {

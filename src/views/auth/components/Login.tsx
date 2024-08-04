@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, MutableRefObject } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -38,9 +38,11 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const usernameRef = useRef();
+  const usernameRef = useRef<HTMLInputElement>();
   useEffect(() => {
-    usernameRef.current.focus();
+    if (usernameRef.current) {
+      usernameRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
@@ -56,7 +58,7 @@ export default function Login() {
     }
   }, [isLoading]);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { accessToken, userId } = await login({
@@ -75,7 +77,7 @@ export default function Login() {
     }
   };
 
-  const handleLoginError = (err) => {
+  const handleLoginError = (err: any) => {
     if (!err?.originalStatus && !err?.status) {
       console.log(err);
       setErrMsg("Brak odpowiedzi serwera");
@@ -90,11 +92,21 @@ export default function Login() {
     }
   };
 
-  const handleUserInput = (e) => setUsername(e.target.value);
-  const handlePwdInput = (e) => setPassword(e.target.value);
+  const handleUserInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    if (target) {
+      setUsername(target.value);
+    }
+  };
+  const handlePwdInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    if (target) {
+      setPassword(target.value);
+    }
+  };
   const handlePersistToggle = () => setPersist((prev) => !prev);
 
-  const canSubmit = username && password;
+  const canSubmit = username && password ? true : false;
 
   const content = (
     <StyledAuth>
@@ -107,7 +119,7 @@ export default function Login() {
           handlePersistToggle,
         }}
         loginData={{ username, password, persist }}
-        usernameRef={usernameRef}
+        usernameRef={usernameRef as MutableRefObject<HTMLInputElement>}
         canSubmit={canSubmit}
       />
       <div className="flex">

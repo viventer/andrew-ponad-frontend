@@ -1,12 +1,33 @@
+import React, { MutableRefObject } from "react";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { StyledAuthForm } from "../styles/AuthForm.styled";
+
+type Props = {
+  handlers: Handlers;
+  loginData: LoginData;
+  usernameRef: MutableRefObject<HTMLInputElement>;
+  canSubmit: boolean;
+};
+
+type Handlers = {
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  handleUserInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePwdInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handlePersistToggle: () => void;
+};
+
+type LoginData = {
+  username: string;
+  password: string;
+  persist: boolean;
+};
 
 export default function LoginForm({
   handlers,
   loginData,
   usernameRef,
   canSubmit,
-}) {
+}: Props) {
   return (
     <StyledAuthForm onSubmit={handlers.handleSubmit}>
       <label htmlFor="username">Login</label>

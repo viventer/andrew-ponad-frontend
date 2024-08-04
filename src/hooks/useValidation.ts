@@ -3,8 +3,16 @@ import { useTheme } from "styled-components";
 
 import validator from "validator";
 
+export type FieldName =
+  | "password"
+  | "username"
+  | "firstName"
+  | "lastName"
+  | "email"
+  | "confirmPassword";
+
 export default function useValidation(
-  references: { [key: string]: React.RefObject<HTMLElement> },
+  references: { [key: string]: React.MutableRefObject<HTMLElement> },
   inputs: { [key: string]: string }
 ) {
   const theme = useTheme();
@@ -17,14 +25,6 @@ export default function useValidation(
     firstName: "",
     lastName: "",
   });
-
-  type FieldName =
-    | "password"
-    | "username"
-    | "firstName"
-    | "lastName"
-    | "email"
-    | "confirmPassword";
 
   const validateField = (fieldName: FieldName, value: string): boolean => {
     switch (fieldName) {
