@@ -34,7 +34,7 @@ import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
 
 type Props = {
   postData: Post;
-  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
+  setReloadComponent?: React.Dispatch<React.SetStateAction<boolean>>;
   view?: string;
 };
 
@@ -92,7 +92,9 @@ export default function PostFromList({
         return;
       } else {
         dispatch(setIsLoading(false));
-        setReloadComponent((prev) => !prev);
+        if (setReloadComponent) {
+          setReloadComponent((prev) => !prev);
+        }
         setIsDeleted(true);
       }
     } catch (err: any) {

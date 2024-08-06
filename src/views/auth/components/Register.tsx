@@ -38,13 +38,13 @@ export default function Register() {
     }
   }, []);
 
-  const emailRef = useRef<HTMLElement>();
-  const passwordRef = useRef<HTMLElement>();
-  const confirmPasswordRef = useRef<HTMLElement>();
+  const emailRef = useRef<HTMLInputElement>();
+  const passwordRef = useRef<HTMLInputElement>();
+  const confirmPasswordRef = useRef<HTMLInputElement>();
   const passwordRequirementsRef = useRef<HTMLElement>();
-  const firstNameRef = useRef<HTMLElement>();
-  const lastNameRef = useRef<HTMLElement>();
-  const usernameRef = useRef<HTMLElement>();
+  const firstNameRef = useRef<HTMLInputElement>();
+  const lastNameRef = useRef<HTMLInputElement>();
+  const usernameRef = useRef<HTMLInputElement>();
 
   useEffect(() => {
     if (usernameRef.current) {
@@ -162,13 +162,16 @@ export default function Register() {
         canSave={isAllDataExist && isAllDataValid}
         inputs={inputs}
         references={{
-          usernameRef,
-          emailRef,
-          passwordRef,
-          confirmPasswordRef,
-          passwordRequirementsRef,
-          firstNameRef,
-          lastNameRef,
+          usernameRef: usernameRef as React.MutableRefObject<HTMLInputElement>,
+          emailRef: emailRef as React.MutableRefObject<HTMLInputElement>,
+          passwordRef: passwordRef as React.MutableRefObject<HTMLInputElement>,
+          confirmPasswordRef:
+            confirmPasswordRef as React.MutableRefObject<HTMLInputElement>,
+          passwordRequirementsRef:
+            passwordRequirementsRef as React.MutableRefObject<HTMLElement>,
+          firstNameRef:
+            firstNameRef as React.MutableRefObject<HTMLInputElement>,
+          lastNameRef: lastNameRef as React.MutableRefObject<HTMLInputElement>,
         }}
       />
 

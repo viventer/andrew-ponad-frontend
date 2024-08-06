@@ -19,12 +19,12 @@ type Handlers = {
 };
 
 type References = {
-  usernameRef: React.MutableRefObject<HTMLElement>;
-  emailRef: React.MutableRefObject<HTMLElement>;
-  firstNameRef: React.MutableRefObject<HTMLElement>;
-  lastNameRef: React.MutableRefObject<HTMLElement>;
-  passwordRef: React.MutableRefObject<HTMLElement>;
-  confirmPasswordRef: React.MutableRefObject<HTMLElement>;
+  usernameRef: React.MutableRefObject<HTMLInputElement>;
+  emailRef: React.MutableRefObject<HTMLInputElement>;
+  firstNameRef: React.MutableRefObject<HTMLInputElement>;
+  lastNameRef: React.MutableRefObject<HTMLInputElement>;
+  passwordRef: React.MutableRefObject<HTMLInputElement>;
+  confirmPasswordRef: React.MutableRefObject<HTMLInputElement>;
   passwordRequirementsRef: React.MutableRefObject<HTMLElement>;
 };
 

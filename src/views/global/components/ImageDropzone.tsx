@@ -12,8 +12,8 @@ import { StyledImageDropzone } from "../styles/ImageDropzone.styled";
 
 type Props = {
   imagePreview: string;
-  setImagePreview: React.Dispatch<React.SetStateAction<string>>;
-  isThumbnail: boolean;
+  setImagePreview?: (url: string) => void;
+  isThumbnail?: boolean;
   view?: string;
 };
 
@@ -40,7 +40,7 @@ export default function ImageDropzone({
       file.onload = () => {
         if (isThumbnail) {
           dispatch(setThumbnailPreview(file.result as string));
-        } else {
+        } else if (setImagePreview) {
           setImagePreview(file.result as string);
         }
       };

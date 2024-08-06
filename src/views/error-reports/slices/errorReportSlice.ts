@@ -33,7 +33,10 @@ const errorReportSlice = createSlice({
     },
     changeImage: (
       state,
-      action: PayloadAction<{ index: number; newUrl: string }>
+      action: PayloadAction<{
+        index: number;
+        newUrl: string;
+      }>
     ) => {
       state.images[action.payload.index] = action.payload.newUrl;
     },

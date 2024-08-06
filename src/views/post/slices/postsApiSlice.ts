@@ -9,7 +9,7 @@ export interface Post {
   author: string;
   category: string;
   categoryName: string;
-  content: PostRow[];
+  content: PostRowType[];
   createdAt: string;
   id: string;
   thumbnail: string;
@@ -22,14 +22,16 @@ export interface Post {
 
 export type PostEntity = [string, Post];
 
+export type PostRowElementType = "textEditor" | "image" | "video" | "none";
+
 export interface PostRowElement {
-  type: "textEditor" | "image" | "video";
+  type: PostRowElementType;
   textEditorContent?: string;
   imagePreview?: null | string;
   videoUrl?: string;
 }
 
-export type PostRow = PostRowElement[];
+export type PostRowType = PostRowElement[];
 
 interface PostsResult {
   ids: string[];

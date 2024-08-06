@@ -70,7 +70,7 @@ const globalStatesSlice = createSlice({
     setDialogAction: (state, action: PayloadAction<string>) => {
       state.dialogAction = action.payload;
     },
-    setUserData: (state, action: PayloadAction<User>) => {
+    setUserData: (state, action: PayloadAction<User | null>) => {
       state.userData = action.payload;
     },
     setIsLogged: (state, action: PayloadAction<boolean>) => {

@@ -41,7 +41,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         return usersAdapter.setAll(initialState, loadedUsers);
       },
     }),
-    getUserById: builder.query<UsersResult, void>({
+    getUserById: builder.query({
       query: (userId) => ({
         url: `/users/${userId}`,
         validateStatus: (response: Response, result: User) => {
@@ -96,7 +96,7 @@ export const {
 } = usersApiSlice;
 
 export const selectUsersResult = usersApiSlice.endpoints.getUsers.select();
-const selectUserByIdResult = usersApiSlice.endpoints.getUserById.select();
+const selectUserByIdResult = usersApiSlice.endpoints.getUserById.select("");
 
 const selectUsersData = createSelector(
   selectUsersResult,
