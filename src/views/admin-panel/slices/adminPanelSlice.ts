@@ -1,15 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type AdminPanelState = {
-  visibilityFilter: string;
-  categoryFilter: string;
-  postsTabSearchQuery: string;
-  roleFilter: string;
-  usersTabSearchQuery: string;
-  statusFilter: string;
-  errorReportsTabSearchQuery: string;
-  categoriesTabSearchQuery: string;
-};
+import { AdminPanelState } from "../types/adminPanel.types";
 
 const initialState: AdminPanelState = {
   visibilityFilter: "Widoczność",

@@ -12,7 +12,6 @@ import {
 } from "../slices/globalStatesSlice";
 
 import PostsSearch from "../../searching/components/PostsSearch";
-import Navigation from "./Navigation";
 import UserInfo from "../../user-info/components/UserInfo";
 import { StyledHeader } from "../styles/Header.styled";
 

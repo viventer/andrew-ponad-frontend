@@ -16,15 +16,7 @@ import useValidation, { FieldName } from "../../../hooks/useValidation";
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 import { RegisterForm } from "./RegisterForm";
 import { StyledAuth } from "../styles/Auth.styled";
-
-export type RegistrationInputs = {
-  username: string;
-  password: string;
-  confirmPassword: string;
-  email: string;
-  firstName: string;
-  lastName: string;
-};
+import { RegistrationInputs } from "../types/auth.types";
 
 export default function Register() {
   const isLogged = useSelector(selectIsLogged);

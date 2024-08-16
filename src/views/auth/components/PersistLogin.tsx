@@ -19,8 +19,6 @@ const PersistLogin = () => {
   const token = useSelector(selectCurrentToken);
   const isLogged = useSelector(selectIsLogged);
 
-  const effectRan = useRef(false);
-
   const [trueSuccess, setTrueSuccess] = useState(false);
 
   const [refresh, { isUninitialized, isLoading, isSuccess, isError }] =

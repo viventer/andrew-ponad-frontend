@@ -10,7 +10,7 @@ import {
   setIsLogged,
 } from "../views/global/slices/globalStatesSlice";
 import { RootState } from "./store";
-import { RefreshResponse } from "../views/auth/slices/authApiSlice";
+import { RefreshResponse } from "../views/auth/types/auth.types";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: "http://192.168.100.112:3500",

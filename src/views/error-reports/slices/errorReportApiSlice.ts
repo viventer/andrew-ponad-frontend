@@ -1,30 +1,14 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store.ts";
-
-export interface ErrorReport {
-  __v: number;
-  _id: string;
-  author: string | null;
-  createdAt: string;
-  description: string;
-  id: string;
-  images: string[];
-  status: "new" | "fixed" | "inProgress";
-  title: string;
-  updatedAt: string;
-  username: string;
-  [key: string]: any;
-}
-
-export type ErrorReportEntity = [string, ErrorReport];
+import { ErrorReportType } from "../types/errorReports.types.ts";
 
 interface ReportsResult {
   ids: string[];
-  entities: { [id: string]: ErrorReport };
+  entities: { [id: string]: ErrorReportType };
 }
 
-const errorReportAdapter = createEntityAdapter<ErrorReport>({});
+const errorReportAdapter = createEntityAdapter<ErrorReportType>({});
 
 const initialState = errorReportAdapter.getInitialState();
 
@@ -33,11 +17,11 @@ export const errorReportApiSlice = apiSlice.injectEndpoints({
     getErrorReports: builder.query<ReportsResult, void>({
       query: () => ({
         url: "/errorReports",
-        validateStatus: (response: Response, result: ErrorReport) => {
+        validateStatus: (response: Response, result: ErrorReportType) => {
           return response.status === 200;
         },
       }),
-      transformResponse: (responseData: ErrorReport[]) => {
+      transformResponse: (responseData: ErrorReportType[]) => {
         const loadedReports = responseData.map((report) => {
           report.id = report._id;
           return report;
@@ -48,11 +32,11 @@ export const errorReportApiSlice = apiSlice.injectEndpoints({
     getErrorReportById: builder.query<ReportsResult, { id: string }>({
       query: ({ id }) => ({
         url: `/errorReports/${id}`,
-        validateStatus: (response: Response, result: ErrorReport) => {
+        validateStatus: (response: Response, result: ErrorReportType) => {
           return response.status === 200;
         },
       }),
-      transformResponse: (responseData: ErrorReport) => {
+      transformResponse: (responseData: ErrorReportType) => {
         const report = { ...responseData, id: responseData._id };
         return errorReportAdapter.setOne(initialState, report);
       },

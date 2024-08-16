@@ -4,9 +4,9 @@ import useTranslateVisibility from "./useTranslateVisibility";
 import { User, UserEntity } from "../views/global/slices/usersApiSlice";
 import { Post, PostEntity } from "../views/post/slices/postsApiSlice";
 import {
-  ErrorReport,
+  ErrorReportType,
   ErrorReportEntity,
-} from "../views/error-reports/slices/errorReportApiSlice";
+} from "../views/error-reports/types/errorReports.types";
 import {
   Category,
   CategoryEntity,
@@ -67,9 +67,10 @@ const useGetFilteredData = () => {
 
         if (
           key == "searchQuery" &&
-          typeof (element as Post | Category | ErrorReport).title == "string"
+          typeof (element as Post | Category | ErrorReportType).title ==
+            "string"
         ) {
-          return (element as Post | Category | ErrorReport).title
+          return (element as Post | Category | ErrorReportType).title
             .toLowerCase()
             .includes(filterValue);
         } else if (

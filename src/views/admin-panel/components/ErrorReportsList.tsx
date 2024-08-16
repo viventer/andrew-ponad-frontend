@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
-
-import {
-  ErrorReportEntity,
-  useGetErrorReportsQuery,
-} from "../../error-reports/slices/errorReportApiSlice";
+import { useGetErrorReportsQuery } from "../../error-reports/slices/errorReportApiSlice";
 import {
   selectErrorReportsTabSearchQuery,
   selectStatusFilter,
 } from "../slices/adminPanelSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+
+import { ErrorReportType } from "../../error-reports/types/errorReports.types";
+import { ErrorReportEntity } from "../../error-reports/types/errorReports.types";
 
 import ErrorReportFromList from "./ErrorReportFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
@@ -62,7 +60,7 @@ export default function ErrorReportsList() {
         filteredReportsData.map(([id, reportData]) => {
           return (
             <ErrorReportFromList
-              reportData={reportData}
+              reportData={reportData as ErrorReportType}
               key={id}
               setReloadComponent={setReloadComponent}
             />

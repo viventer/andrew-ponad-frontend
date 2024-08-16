@@ -2,7 +2,7 @@ import React from "react";
 import { FieldName } from "../../../hooks/useValidation";
 import { StyledButton } from "../../global/styles/Button.styled";
 import { StyledAuthForm } from "../styles/AuthForm.styled";
-import { RegistrationInputs } from "./Register";
+import { RegistrationInputs } from "../types/auth.types";
 
 type Props = {
   canSave: boolean;

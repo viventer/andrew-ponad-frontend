@@ -23,6 +23,7 @@ import {
   useChangeErrorReportStatusMutation,
   useDeleteErrorReportMutation,
 } from "../../error-reports/slices/errorReportApiSlice";
+import { ErrorReportType } from "../../error-reports/types/errorReports.types";
 
 import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
 
@@ -30,10 +31,15 @@ import ErrorReportFromListDetails from "./ErrorReportFromListDetails";
 import StatusSelector from "./StatusSelector";
 import { StyledElementFromList } from "../styles/ElementFromList.styled";
 
+type Props = {
+  reportData: ErrorReportType;
+  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 export default function ErrorReportFromList({
   reportData,
   setReloadComponent,
-}) {
+}: Props) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
@@ -50,7 +56,7 @@ export default function ErrorReportFromList({
   const [
     deleteErrorReportMutation,
     { isLoading: isDeleteLoading, isSuccess: isDeleteSuccess },
-  ] = useDeleteErrorReportMutation(reportData.id);
+  ] = useDeleteErrorReportMutation();
 
   const translateStatus = useTranslateErrorReportsStatus();
   const statusInPolish = translateStatus(reportData.status, "polish");
@@ -69,7 +75,7 @@ export default function ErrorReportFromList({
         id: reportData.id,
         newStatus: translatedSelectedStatus,
       }).unwrap();
-    } catch (err) {
+    } catch (err: any) {
       if (!err?.originalStatus && !err?.status) {
         dispatch(
           setErrMsg("Brak odpowiedzi serwera. Sprawdź połączenie sieciowe.")
@@ -98,8 +104,8 @@ export default function ErrorReportFromList({
       deleteReport();
       setIsDeleted(true);
     }
-    dispatch(setDialogAction(null));
-    dispatch(setDialogAnswer(null));
+    dispatch(setDialogAction(""));
+    dispatch(setDialogAnswer(""));
   }, [dialogAnswer]);
 
   useEffect(() => {
@@ -125,7 +131,7 @@ export default function ErrorReportFromList({
   const deleteReport = async () => {
     try {
       await deleteErrorReportMutation(reportData.id).unwrap();
-    } catch (err) {
+    } catch (err: any) {
       if (!err?.status && !err?.originalStatus) {
         dispatch(
           setErrMsg("Brak odpowiedzi serwera. Sprawdź połączenie sieciowe.")

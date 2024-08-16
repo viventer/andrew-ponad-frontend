@@ -2,6 +2,7 @@ import { apiSlice } from "../../../redux/apiSlice.ts";
 
 import { logOut, setCredentials } from "./authSlice.js";
 import { setErrMsg } from "../../global/slices/globalStatesSlice.js";
+import { RefreshResponse } from "../types/auth.types.ts";
 
 type RegistrationCredentials = {
   username: string;
@@ -12,11 +13,6 @@ type RegistrationCredentials = {
 };
 
 type LoginCredentials = Pick<RegistrationCredentials, "username" | "password">;
-
-export type RefreshResponse = {
-  accessToken: string;
-  userId: string;
-};
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
