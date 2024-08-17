@@ -17,17 +17,15 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
-import {
-  Category,
-  useDeleteCategoryMutation,
-} from "../../global/slices/categoriesApiSlice";
+import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlice";
+import { CategoryType } from "../../global/types/categories.types";
 
 import CategoryNameInput from "./CategoryNameInput";
 import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";
 
 type Props = {
   setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
-  categoryData?: Category;
+  categoryData?: CategoryType;
   toBeAdded?: boolean;
 };
 

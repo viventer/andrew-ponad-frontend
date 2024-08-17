@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import { StyledGradeCalculator } from "../styles/GradeCalculator.styled";
 import GradeCalculatorInput from "./GradeCalculatorInput";
@@ -6,29 +6,31 @@ import GradingScaleTable from "./GradingScaleTable";
 import DynamicErrorNotification from "../../global/components/DynamicErrorNotification";
 
 export default function GradeCalculator() {
-  const [scoredPoints, setScoredPoints] = useState(null);
-  const [maxPoints, setMaxPoints] = useState(null);
-  const [isScoredPointsValid, setIsScoredPointsValid] = useState(null);
-  const [isMaxPointsValid, setIsMaxPointsValid] = useState(null);
+  const [scoredPoints, setScoredPoints] = useState<string>("");
+  const [maxPoints, setMaxPoints] = useState<string>("");
+  const [isScoredPointsValid, setIsScoredPointsValid] = useState(false);
+  const [isMaxPointsValid, setIsMaxPointsValid] = useState(false);
   const [errMsg, setErrMsg] = useState("");
 
-  const scoredPointsInputRef = useRef();
-  const maxPointsInputRef = useRef();
+  const scoredPointsInputRef = useRef<HTMLInputElement>();
+  const maxPointsInputRef = useRef<HTMLInputElement>();
 
   useEffect(() => {
-    scoredPointsInputRef.current.focus();
+    if (scoredPointsInputRef.current) {
+      scoredPointsInputRef.current.focus();
+    }
     setErrMsg("");
   }, []);
 
   const validateScoredPoints = () => {
-    if (!isFormatCorrect(scoredPoints) && scoredPoints) {
+    if (scoredPoints && !isFormatCorrect(scoredPoints)) {
       setIsScoredPointsValid(false);
       setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
       return;
     }
 
-    const scoredPointsNum = parseFloat(scoredPoints);
-    const maxPointsNum = parseFloat(maxPoints);
+    const scoredPointsNum = parseFloat(scoredPoints!);
+    const maxPointsNum = parseFloat(maxPoints!);
 
     if (!scoredPointsNum && scoredPointsNum != 0) {
       setIsScoredPointsValid(false);
@@ -47,14 +49,14 @@ export default function GradeCalculator() {
   };
 
   const validateMaxPoints = () => {
-    if (!isFormatCorrect(maxPoints) && maxPoints) {
+    if (maxPoints && !isFormatCorrect(maxPoints)) {
       setIsMaxPointsValid(false);
       setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
       return;
     }
 
-    const scoredPointsNum = parseFloat(scoredPoints);
-    const maxPointsNum = parseFloat(maxPoints);
+    const scoredPointsNum = parseFloat(scoredPoints!);
+    const maxPointsNum = parseFloat(maxPoints!);
 
     if (!maxPointsNum && maxPointsNum != 0) {
       setIsMaxPointsValid(false);
@@ -72,7 +74,7 @@ export default function GradeCalculator() {
     }
   };
 
-  const isFormatCorrect = (points) => {
+  const isFormatCorrect = (points: string) => {
     const pointsTrimmed = points?.trim();
     if (!/^\d*\.?\d*$/.test(pointsTrimmed)) {
       return false;
@@ -99,7 +101,9 @@ export default function GradeCalculator() {
               text="Liczba zdobytych punktów"
               setter={setScoredPoints}
               value={scoredPoints}
-              inputRef={scoredPointsInputRef}
+              inputRef={
+                scoredPointsInputRef as React.MutableRefObject<HTMLInputElement>
+              }
               isValid={isScoredPointsValid}
               type="scoredPointsInput"
             />
@@ -107,7 +111,9 @@ export default function GradeCalculator() {
               text="Maksymalna liczba punktów"
               setter={setMaxPoints}
               value={maxPoints}
-              inputRef={maxPointsInputRef}
+              inputRef={
+                scoredPointsInputRef as React.MutableRefObject<HTMLInputElement>
+              }
               isValid={isMaxPointsValid}
               type="maxPointsInput"
             />

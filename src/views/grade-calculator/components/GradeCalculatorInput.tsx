@@ -1,5 +1,14 @@
 import { StyledGradeCalculatorInput } from "../styles/GradeCalculatorInput.styled";
 
+type Props = {
+  text: string;
+  setter: React.Dispatch<React.SetStateAction<string>>;
+  value: string;
+  inputRef: React.MutableRefObject<HTMLInputElement>;
+  isValid: boolean;
+  type: "scoredPointsInput" | "maxPointsInput";
+};
+
 export default function GradeCalculatorInput({
   text,
   setter,
@@ -7,7 +16,7 @@ export default function GradeCalculatorInput({
   inputRef,
   isValid,
   type,
-}) {
+}: Props) {
   return (
     <StyledGradeCalculatorInput>
       <div className={`wrapper ${isValid ? "valid" : ""}`}>

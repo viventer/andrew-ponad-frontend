@@ -1,26 +1,14 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store";
-
-export interface User {
-  __v: number;
-  _id: string;
-  email: string;
-  firstName: string;
-  id: string;
-  lastName: string;
-  roles: string[];
-  username: string;
-}
-
-export type UserEntity = [string, User];
+import { UserType } from "../types/users.types.ts";
 
 interface UsersResult {
   ids: string[];
-  entities: { [id: string]: User };
+  entities: { [id: string]: UserType };
 }
 
-const usersAdapter = createEntityAdapter<User>({});
+const usersAdapter = createEntityAdapter<UserType>({});
 
 const initialState = usersAdapter.getInitialState();
 
@@ -29,11 +17,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     getUsers: builder.query<UsersResult, void>({
       query: () => ({
         url: "/users",
-        validateStatus: (response: Response, result: User[]) => {
+        validateStatus: (response: Response, result: UserType[]) => {
           return response.status === 200;
         },
       }),
-      transformResponse: (responseData: User[]) => {
+      transformResponse: (responseData: UserType[]) => {
         const loadedUsers = responseData.map((user) => {
           user.id = user._id;
           return user;
@@ -44,11 +32,11 @@ export const usersApiSlice = apiSlice.injectEndpoints({
     getUserById: builder.query({
       query: (userId) => ({
         url: `/users/${userId}`,
-        validateStatus: (response: Response, result: User) => {
+        validateStatus: (response: Response, result: UserType) => {
           return response.status === 200;
         },
       }),
-      transformResponse: (responseData: User) => {
+      transformResponse: (responseData: UserType) => {
         const user = { ...responseData, id: responseData._id };
         return usersAdapter.setOne(initialState, user);
       },
@@ -75,7 +63,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: (result, error, arg) => [{ type: "User", id: arg.id }],
     }),
     addNewUser: builder.mutation({
-      query: (initialUserData: User) => ({
+      query: (initialUserData: UserType) => ({
         url: "/users",
         method: "POST",
         body: {

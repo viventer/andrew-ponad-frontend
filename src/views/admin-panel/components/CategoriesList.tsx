@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { useGetAllCategoriesQuery } from "../../global/slices/categoriesApiSlice";
 import {
-  Category,
+  CategoryType,
   CategoryEntity,
-  CategoryResult,
-  useGetAllCategoriesQuery,
-} from "../../global/slices/categoriesApiSlice";
+} from "../../global/types/categories.types";
 import { selectCategoriesTabSearchQuery } from "../slices/adminPanelSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
@@ -61,7 +60,7 @@ export default function CategoriesList() {
         filteredCategoriesData.map(([id, categoryData]) => {
           return (
             <CategoryFromList
-              categoryData={categoryData as Category}
+              categoryData={categoryData as CategoryType}
               key={id}
               setReloadComponent={setReloadComponent}
             />

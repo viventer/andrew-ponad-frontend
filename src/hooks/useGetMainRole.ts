@@ -1,7 +1,7 @@
-import { User } from "../views/global/slices/usersApiSlice";
+import { UserType } from "../views/global/types/users.types";
 
 const useGetMainRole = () => {
-  const getMainRole = (userData: User): string => {
+  const getMainRole = (userData: UserType): string => {
     if (userData.roles.includes("Admin")) {
       return "Admin";
     } else if (userData.roles.includes("Editor")) {

@@ -2,12 +2,29 @@ import gradingScales from "../data/gradingScales.json";
 
 import { StyledGradingScaleTable } from "../styles/GradingScaleTable.styled";
 
+type Props = {
+  type: "written" | "choice" | "practice";
+  maxPoints: string;
+  scoredPoints: string;
+  isErr: boolean;
+};
+
+type GradingScales = {
+  written: GradingScaleType;
+  choice: GradingScaleType;
+  practice: GradingScaleType;
+};
+
+type GradingScaleType = {
+  [key: string]: [number, number];
+};
+
 export default function GradingScaleTable({
   type,
   maxPoints,
   scoredPoints,
   isErr,
-}) {
+}: Props) {
   let headingText;
   switch (type) {
     case "written":
@@ -23,11 +40,13 @@ export default function GradingScaleTable({
       headingText = "";
   }
 
+  const scale = (gradingScales as any)[type];
+
   return (
     <StyledGradingScaleTable>
       <h2>{headingText}</h2>
       <ul>
-        {Object.keys(gradingScales[type]).map((key, index, array) => {
+        {Object.keys(scale).map((key, index, array) => {
           if (isErr) {
             return (
               <li key={key}>
@@ -37,15 +56,15 @@ export default function GradingScaleTable({
             );
           }
 
-          const start = gradingScales[type][key][0] * parseFloat(maxPoints);
-          const end = gradingScales[type][key][1] * parseFloat(maxPoints);
+          const start = scale[key][0] * parseFloat(maxPoints);
+          const end = scale[key][1] * parseFloat(maxPoints);
 
           let startFormattedNum = parseFloat(start.toFixed(2));
           let endFormattedNum = parseFloat(end.toFixed(2));
+          const scoredNum = parseFloat(scoredPoints);
 
           if (index > 0) {
-            const prevEnd =
-              gradingScales[type][array[index - 1]][1] * parseFloat(maxPoints);
+            const prevEnd = scale[array[index - 1]][1] * parseFloat(maxPoints);
             const prevEndFormattedNum = parseFloat(prevEnd.toFixed(2));
             startFormattedNum = parseFloat(
               (prevEndFormattedNum + 0.01).toFixed(2)
@@ -56,8 +75,7 @@ export default function GradingScaleTable({
           const endFormattedStr = endFormattedNum.toFixed(2);
 
           const isScoredInRange =
-            scoredPoints >= startFormattedNum &&
-            scoredPoints <= endFormattedNum;
+            scoredNum >= startFormattedNum && scoredNum <= endFormattedNum;
 
           return (
             <li key={key} className={isScoredInRange ? "gradeObtained" : ""}>

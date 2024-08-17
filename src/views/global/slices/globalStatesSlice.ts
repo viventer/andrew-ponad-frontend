@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { User } from "./usersApiSlice";
 import { RootState } from "../../../redux/store";
+import { UserType } from "../types/users.types";
 
 type GlobalStates = {
   errMsg: string;
@@ -10,7 +10,7 @@ type GlobalStates = {
   dialogOptions: string[];
   dialogAction: string;
   isLoading: boolean;
-  userData: null | User;
+  userData: null | UserType;
   isLogged: boolean;
   availablePostCategories: string[];
   isUserInfoVisible: boolean;
@@ -70,7 +70,7 @@ const globalStatesSlice = createSlice({
     setDialogAction: (state, action: PayloadAction<string>) => {
       state.dialogAction = action.payload;
     },
-    setUserData: (state, action: PayloadAction<User | null>) => {
+    setUserData: (state, action: PayloadAction<UserType | null>) => {
       state.userData = action.payload;
     },
     setIsLogged: (state, action: PayloadAction<boolean>) => {

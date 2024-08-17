@@ -15,7 +15,6 @@ import useTranslateRole, {
 
 import {
   useDeleteUserMutation,
-  User,
   useUpdateUserMutation,
 } from "../../global/slices/usersApiSlice.ts";
 import {

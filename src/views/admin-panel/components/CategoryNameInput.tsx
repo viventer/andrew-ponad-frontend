@@ -11,13 +11,13 @@ import {
 import { useDispatch } from "react-redux";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import {
-  Category,
   useChangeCategoryNameMutation,
   useCreateNewCategoryMutation,
 } from "../../global/slices/categoriesApiSlice";
+import { CategoryType } from "../../global/types/categories.types";
 
 type Props = {
-  categoryData?: Category;
+  categoryData?: CategoryType;
   setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
   toBeAdded?: boolean;
   isDataCorrect: boolean;

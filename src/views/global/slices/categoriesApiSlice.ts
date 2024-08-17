@@ -1,29 +1,16 @@
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store";
-
-export interface Category {
-  _id: string;
-  name: string;
-  __v: number;
-  connectedPosts: string[];
-  id: string;
-  postTitles: string[];
-  [key: string]: any;
-}
-
-export type CategoryEntity = [string, Category];
+import { CategoryType } from "../types/categories.types.ts";
 
 interface CategoriesResult {
   ids: string[];
-  entities: { [id: string]: Category };
+  entities: { [id: string]: CategoryType };
 }
-
-export type CategoryResult = [string, Category];
 
 type Tag = { type: string; id: string };
 
-const categoriesAdapter = createEntityAdapter<Category>({});
+const categoriesAdapter = createEntityAdapter<CategoryType>({});
 
 const initialState = categoriesAdapter.getInitialState();
 
@@ -32,11 +19,11 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
     getAllCategories: builder.query<CategoriesResult, void>({
       query: () => ({
         url: "/categories",
-        validateStatus: (response: Response, result: Category[]) => {
+        validateStatus: (response: Response, result: CategoryType[]) => {
           return response.status === 200;
         },
       }),
-      transformResponse: (responseData: Category[]) => {
+      transformResponse: (responseData: CategoryType[]) => {
         const loadedCategories = responseData.map((category) => {
           category.id = category._id;
           return category;
@@ -47,11 +34,11 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
     getCategoryById: builder.query({
       query: (id) => ({
         url: `/categories/${id}`,
-        validateStatus: (response: Response, result: Category) => {
+        validateStatus: (response: Response, result: CategoryType) => {
           return response.status === 200;
         },
       }),
-      transformResponse: (responseData: Category) => {
+      transformResponse: (responseData: CategoryType) => {
         const category = { ...responseData, id: responseData._id };
         return categoriesAdapter.setOne(initialState, category);
       },

@@ -1,16 +1,16 @@
 import useGetMainRole from "./useGetMainRole";
 import useTranslateErrorReportsStatus from "./useTranslateErrorReportsStatus";
 import useTranslateVisibility from "./useTranslateVisibility";
-import { User, UserEntity } from "../views/global/slices/usersApiSlice";
+import { UserType, UserEntity } from "../views/global/types/users.types";
 import { Post, PostEntity } from "../views/post/slices/postsApiSlice";
 import {
   ErrorReportType,
   ErrorReportEntity,
 } from "../views/error-reports/types/errorReports.types";
 import {
-  Category,
+  CategoryType,
   CategoryEntity,
-} from "../views/global/slices/categoriesApiSlice";
+} from "../views/global/types/categories.types";
 
 const useGetFilteredData = () => {
   const translateVisibility = useTranslateVisibility();
@@ -47,7 +47,9 @@ const useGetFilteredData = () => {
         }
 
         if (key == "mainRole") {
-          elementValue = getMainRole(element as unknown as User).toLowerCase();
+          elementValue = getMainRole(
+            element as unknown as UserType
+          ).toLowerCase();
         } else if (
           element[key as keyof typeof element] &&
           typeof element[key as keyof typeof element] == "string"
@@ -67,15 +69,15 @@ const useGetFilteredData = () => {
 
         if (
           key == "searchQuery" &&
-          typeof (element as Post | Category | ErrorReportType).title ==
+          typeof (element as Post | CategoryType | ErrorReportType).title ==
             "string"
         ) {
-          return (element as Post | Category | ErrorReportType).title
+          return (element as Post | CategoryType | ErrorReportType).title
             .toLowerCase()
             .includes(filterValue);
         } else if (
           key == "searchQuery" &&
-          typeof (element as User).username == "string"
+          typeof (element as UserType).username == "string"
         ) {
           return element.username.toLowerCase().includes(filterValue);
         } else if (

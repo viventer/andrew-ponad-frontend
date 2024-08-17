@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  useGetUsersQuery,
-  User,
-  UserEntity,
-} from "../../global/slices/usersApiSlice";
+import { useGetUsersQuery } from "../../global/slices/usersApiSlice";
+import { UserType, UserEntity } from "../../global/types/users.types";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import {
   selectRoleFilter,
@@ -63,7 +60,7 @@ export default function UsersList() {
     <StyledAdminPanelList>
       {filteredUsersData &&
         filteredUsersData.map(([id, userData]) => {
-          const mainRole = getMainRole(userData as User);
+          const mainRole = getMainRole(userData as UserType);
           return (
             <UserFromList
               setReloadComponent={setReloadComponent}
