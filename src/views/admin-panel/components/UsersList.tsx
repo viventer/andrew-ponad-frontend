@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useGetUsersQuery } from "../../global/slices/usersApiSlice";
-import { UserType, UserEntity } from "../../global/types/users.types";
+import { UserType, UserEntity } from "../../global/types/user.types";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 import {
   selectRoleFilter,

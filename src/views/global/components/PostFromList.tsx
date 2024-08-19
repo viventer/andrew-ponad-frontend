@@ -23,7 +23,8 @@ import {
   setIsLoading,
   setIsSearchBoxVisible,
 } from "../slices/globalStatesSlice";
-import { Post, useDeletePostMutation } from "../../post/slices/postsApiSlice";
+import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
+import { PostType } from "../../post/types/post.types";
 
 import useShorten from "../../../hooks/useShorten";
 import useAuth from "../../../hooks/useAuth";
@@ -33,7 +34,7 @@ import PostFromListInfo from "./PostFromListInfo";
 import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
 
 type Props = {
-  postData: Post;
+  postData: PostType;
   setReloadComponent?: React.Dispatch<React.SetStateAction<boolean>>;
   view?: string;
 };

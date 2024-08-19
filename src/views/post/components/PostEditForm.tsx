@@ -14,11 +14,8 @@ import {
   selectThumbnailPreview,
   setThumbnailPreview,
 } from "../slices/postSlice";
-import {
-  Post,
-  PostRowType,
-  useDeletePostMutation,
-} from "../slices/postsApiSlice";
+import { useDeletePostMutation } from "../slices/postsApiSlice";
+import { PostType, PostRowType } from "../types/post.types";
 import {
   selectDialogAction,
   selectDialogAnswer,
@@ -41,7 +38,7 @@ import { selectUserId } from "../../auth/slices/authSlice";
 import { StyledPostEditPage } from "../styles/PostEditPage.styled";
 
 type Props = {
-  handleClick: (postData: Partial<Post>) => any;
+  handleClick: (postData: Partial<PostType>) => any;
   buttonText: string;
   postRows: PostRowType[];
   setPostRows: React.Dispatch<React.SetStateAction<PostRowType[]>>;

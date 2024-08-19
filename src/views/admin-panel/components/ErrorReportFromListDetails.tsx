@@ -7,7 +7,7 @@ import DOMPurify from "dompurify";
 
 import { StyledErrorReportFromListDetails } from "../styles/ErrorReportFromListDetails.styled";
 import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
-import { ErrorReportType } from "../../error-reports/types/errorReports.types";
+import { ErrorReportType } from "../../error-reports/types/errorReport.types";
 
 export default function ErrorReportFromListDetails({
   reportData,

@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 
 import { StyledPostFromSection } from "../styles/PostFromSection.styled";
-import { Post } from "../../post/slices/postsApiSlice";
+import { PostType } from "../../post/types/post.types";
 
 type Props = {
-  postData: Post;
+  postData: PostType;
   index: number;
   areExpanded: boolean;
 };

@@ -10,7 +10,7 @@ import {
   PostRowElement,
   PostRowElementType,
   PostRowType,
-} from "../slices/postsApiSlice";
+} from "../types/post.types";
 
 type Props = {
   activeRowNumber: number;

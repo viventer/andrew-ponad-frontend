@@ -7,7 +7,7 @@ import Zoom from "react-medium-image-zoom";
 import { setErrMsg } from "../../global/slices/globalStatesSlice";
 
 import { StyledPostRow } from "../styles/PostRow.styled";
-import { PostRowType } from "../slices/postsApiSlice";
+import { PostRowType } from "../types/post.types";
 
 export default function PostRow({ rowData }: { rowData: PostRowType }) {
   const firstElementType = rowData[0].type;

@@ -1,7 +1,7 @@
 import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store";
-import { CategoryType } from "../types/categories.types.ts";
+import { CategoryType } from "../types/category.types.ts";
 
 interface CategoriesResult {
   ids: string[];

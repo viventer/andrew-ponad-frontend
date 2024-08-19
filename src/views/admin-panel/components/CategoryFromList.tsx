@@ -18,7 +18,7 @@ import {
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
 import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlice";
-import { CategoryType } from "../../global/types/categories.types";
+import { CategoryType } from "../../global/types/category.types";
 
 import CategoryNameInput from "./CategoryNameInput";
 import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";

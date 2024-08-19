@@ -1,7 +1,7 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store.ts";
-import { ErrorReportType } from "../types/errorReports.types.ts";
+import { ErrorReportType } from "../types/errorReport.types.ts";
 
 interface ReportsResult {
   ids: string[];

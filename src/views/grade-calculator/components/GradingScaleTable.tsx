@@ -9,12 +9,6 @@ type Props = {
   isErr: boolean;
 };
 
-type GradingScales = {
-  written: GradingScaleType;
-  choice: GradingScaleType;
-  practice: GradingScaleType;
-};
-
 type GradingScaleType = {
   [key: string]: [number, number];
 };

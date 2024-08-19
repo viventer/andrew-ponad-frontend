@@ -7,11 +7,8 @@ import {
   selectPostsTabSearchQuery,
   selectVisibilityFilter,
 } from "../slices/adminPanelSlice";
-import {
-  Post,
-  PostEntity,
-  useGetPostsQuery,
-} from "../../post/slices/postsApiSlice";
+import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
+import { PostType, PostEntity } from "../../post/types/post.types";
 
 import PostFromList from "../../global/components/PostFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";
@@ -68,7 +65,7 @@ export default function PostsList() {
         filteredPostData.map(([id, postData]) => {
           return (
             <PostFromList
-              postData={postData as Post}
+              postData={postData as PostType}
               key={id}
               setReloadComponent={setReloadComponent}
             />

@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import useAuth from "../../../hooks/useAuth";
 
-import { PostEntity, useGetPostsQuery } from "../../post/slices/postsApiSlice";
+import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
+import { PostEntity } from "../../post/types/post.types";
 import {
   selectIsLoading,
   setErrMsg,

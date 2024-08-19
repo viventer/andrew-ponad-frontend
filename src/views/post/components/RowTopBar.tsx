@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import { StyledRowTopBar } from "../styles/RowTopBar.styled";
-import { PostRowElementType } from "../slices/postsApiSlice";
+import { PostRowElementType } from "../types/post.types";
 
 type Props = {
   index: number;

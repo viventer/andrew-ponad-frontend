@@ -23,7 +23,7 @@ import {
   useChangeErrorReportStatusMutation,
   useDeleteErrorReportMutation,
 } from "../../error-reports/slices/errorReportApiSlice";
-import { ErrorReportType } from "../../error-reports/types/errorReports.types";
+import { ErrorReportType } from "../../error-reports/types/errorReport.types";
 
 import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorReportsStatus";
 

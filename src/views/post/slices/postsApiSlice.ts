@@ -1,44 +1,14 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store";
-
-export interface Post {
-  __v: number;
-  _id: string;
-  postNumber: number;
-  author: string;
-  category: string;
-  categoryName: string;
-  content: PostRowType[];
-  createdAt: string;
-  id: string;
-  thumbnail: string;
-  title: string;
-  updatedAt?: string;
-  views: number;
-  visibility: string;
-  [key: string]: any;
-}
-
-export type PostEntity = [string, Post];
-
-export type PostRowElementType = "textEditor" | "image" | "video" | "none";
-
-export interface PostRowElement {
-  type: PostRowElementType;
-  textEditorContent?: string;
-  imagePreview?: null | string;
-  videoUrl?: string;
-}
-
-export type PostRowType = PostRowElement[];
+import { PostType } from "../types/post.types.ts";
 
 interface PostsResult {
   ids: string[];
-  entities: { [id: string]: Post };
+  entities: { [id: string]: PostType };
 }
 
-const postsAdapter = createEntityAdapter<Post>({});
+const postsAdapter = createEntityAdapter<PostType>({});
 
 const initialState = postsAdapter.getInitialState();
 
@@ -52,11 +22,11 @@ export const postsApiSlice = apiSlice.injectEndpoints({
           headers: {
             ...(isLogged !== undefined ? { isLogged: String(isLogged) } : {}),
           },
-          validateStatus: (response: Response, result: Post[]) =>
+          validateStatus: (response: Response, result: PostType[]) =>
             response.status === 200,
         };
       },
-      transformResponse: (responseData: Post[]) => {
+      transformResponse: (responseData: PostType[]) => {
         const loadedPosts = responseData.map((post) => {
           post.id = post._id;
           return post;
@@ -71,11 +41,11 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         headers: {
           isLogged: isLogged,
         },
-        validateStatus: (response: Response, result: Post) => {
+        validateStatus: (response: Response, result: PostType) => {
           return response.status === 200;
         },
       }),
-      transformResponse: (responseData: Post) => {
+      transformResponse: (responseData: PostType) => {
         const post = { ...responseData, id: responseData._id };
         return postsAdapter.setOne(initialState, post);
       },

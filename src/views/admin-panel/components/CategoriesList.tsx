@@ -5,7 +5,7 @@ import { useGetAllCategoriesQuery } from "../../global/slices/categoriesApiSlice
 import {
   CategoryType,
   CategoryEntity,
-} from "../../global/types/categories.types";
+} from "../../global/types/category.types";
 import { selectCategoriesTabSearchQuery } from "../slices/adminPanelSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 

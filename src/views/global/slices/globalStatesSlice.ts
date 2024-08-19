@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../../redux/store";
-import { UserType } from "../types/users.types";
+import { UserType } from "../types/user.types";
 
 type GlobalStates = {
   errMsg: string;

@@ -10,9 +10,9 @@ import {
   faEye,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { Post } from "../../post/slices/postsApiSlice";
+import { PostType } from "../../post/types/post.types";
 
-type Props = { postData: Post; view?: string };
+type Props = { postData: PostType; view?: string };
 
 export default function PostFromListInfo({ postData, view }: Props) {
   const translateVisibility = useTranslateVisibility();

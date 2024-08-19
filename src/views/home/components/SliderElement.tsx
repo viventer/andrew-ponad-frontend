@@ -5,10 +5,10 @@ import thumbnailPlaceholder from "../../post/images/thumbnailPlaceholder.jpg";
 import PostFromListInfo from "../../global/components/PostFromListInfo";
 import { StyledSliderElement } from "../styles/SliderElement.styled";
 import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
-import { Post } from "../../post/slices/postsApiSlice";
+import { PostType } from "../../post/types/post.types";
 
 type Props = {
-  postData: Post;
+  postData: PostType;
   index: number;
   visibleElementsIndexes: number[];
 };

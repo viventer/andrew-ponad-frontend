@@ -1,16 +1,16 @@
 import useGetMainRole from "./useGetMainRole";
 import useTranslateErrorReportsStatus from "./useTranslateErrorReportsStatus";
 import useTranslateVisibility from "./useTranslateVisibility";
-import { UserType, UserEntity } from "../views/global/types/users.types";
-import { Post, PostEntity } from "../views/post/slices/postsApiSlice";
+import { UserType, UserEntity } from "../views/global/types/user.types";
+import { PostType, PostEntity } from "../views/post/types/post.types";
 import {
   ErrorReportType,
   ErrorReportEntity,
-} from "../views/error-reports/types/errorReports.types";
+} from "../views/error-reports/types/errorReport.types";
 import {
   CategoryType,
   CategoryEntity,
-} from "../views/global/types/categories.types";
+} from "../views/global/types/category.types";
 
 const useGetFilteredData = () => {
   const translateVisibility = useTranslateVisibility();
@@ -69,10 +69,10 @@ const useGetFilteredData = () => {
 
         if (
           key == "searchQuery" &&
-          typeof (element as Post | CategoryType | ErrorReportType).title ==
+          typeof (element as PostType | CategoryType | ErrorReportType).title ==
             "string"
         ) {
-          return (element as Post | CategoryType | ErrorReportType).title
+          return (element as PostType | CategoryType | ErrorReportType).title
             .toLowerCase()
             .includes(filterValue);
         } else if (

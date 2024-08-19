@@ -1,4 +1,4 @@
-import { UserType } from "../views/global/types/users.types";
+import { UserType } from "../views/global/types/user.types";
 
 const useGetMainRole = () => {
   const getMainRole = (userData: UserType): string => {

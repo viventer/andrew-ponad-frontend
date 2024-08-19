@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import {
-  Post,
-  PostEntity,
-  useGetPostsQuery,
-} from "../../post/slices/postsApiSlice";
+import { useGetPostsQuery } from "../../post/slices/postsApiSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
+import { PostType, PostEntity } from "../../post/types/post.types";
 
 import useAuth from "../../../hooks/useAuth";
 
@@ -79,7 +76,7 @@ export default function PostsSearchResults({
         filteredPostsData.map(([id, postData]) => {
           return (
             <PostFromList
-              postData={postData as Post}
+              postData={postData as PostType}
               key={id}
               view="postsSearchResults"
             />

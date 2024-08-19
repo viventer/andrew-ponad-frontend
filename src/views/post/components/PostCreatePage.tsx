@@ -3,11 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import {
-  Post,
-  PostRowType,
   useAddNewPostMutation,
   useGetPostByIdQuery,
 } from "../slices/postsApiSlice";
+import { PostType, PostRowType } from "../types/post.types";
 import {
   selectDialogAction,
   selectDialogAnswer,
@@ -152,7 +151,7 @@ export default function PostCreatePage() {
     }
   }, [isSuccess, isError]);
 
-  const addPost = async (postData: Partial<Post>) => {
+  const addPost = async (postData: Partial<PostType>) => {
     try {
       const response = await addNewPost(postData).unwrap();
       return response.id;

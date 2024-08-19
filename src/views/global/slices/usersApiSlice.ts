@@ -1,7 +1,7 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store";
-import { UserType } from "../types/users.types.ts";
+import { UserType } from "../types/user.types.ts";
 
 interface UsersResult {
   ids: string[];

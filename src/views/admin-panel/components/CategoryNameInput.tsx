@@ -14,7 +14,7 @@ import {
   useChangeCategoryNameMutation,
   useCreateNewCategoryMutation,
 } from "../../global/slices/categoriesApiSlice";
-import { CategoryType } from "../../global/types/categories.types";
+import { CategoryType } from "../../global/types/category.types";
 
 type Props = {
   categoryData?: CategoryType;

@@ -8,8 +8,8 @@ import {
 } from "../slices/adminPanelSlice";
 import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
-import { ErrorReportType } from "../../error-reports/types/errorReports.types";
-import { ErrorReportEntity } from "../../error-reports/types/errorReports.types";
+import { ErrorReportType } from "../../error-reports/types/errorReport.types";
+import { ErrorReportEntity } from "../../error-reports/types/errorReport.types";
 
 import ErrorReportFromList from "./ErrorReportFromList";
 import { StyledAdminPanelList } from "../styles/AdminPanelList.styled";

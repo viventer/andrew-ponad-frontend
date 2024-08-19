@@ -18,10 +18,10 @@ import {
   setThumbnailPreview,
 } from "../slices/postSlice";
 import {
-  Post,
   useGetPostByIdQuery,
   useUpdatePostMutation,
 } from "../slices/postsApiSlice";
+import { PostType, PostRowType } from "../types/post.types";
 import {
   selectSuccessMsg,
   setErrMsg,
@@ -29,7 +29,6 @@ import {
   setSuccessMsg,
 } from "../../global/slices/globalStatesSlice";
 import { selectUserId } from "../../auth/slices/authSlice";
-import { PostRowType } from "../slices/postsApiSlice";
 
 import PostEditForm from "./PostEditForm";
 
@@ -121,7 +120,7 @@ export default function PostEditPage() {
   }, [thumbnail, title, category, visibility, postRows]);
 
   const [updatePostMutation, { isLoading }] = useUpdatePostMutation();
-  const editPost = async (postData: Partial<Post>) => {
+  const editPost = async (postData: Partial<PostType>) => {
     try {
       await updatePostMutation({ postId: id, postData }).unwrap();
       dispatch(setSuccessMsg("Zmiany zostały zapisane"));
@@ -162,7 +161,7 @@ export default function PostEditPage() {
     <>
       {postRows ? (
         <PostEditForm
-          handleClick={(postData: Partial<Post>) => editPost(postData)}
+          handleClick={(postData: Partial<PostType>) => editPost(postData)}
           buttonText="Zapisz zmiany"
           postRows={postRows}
           setPostRows={setPostRows}

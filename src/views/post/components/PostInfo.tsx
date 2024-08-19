@@ -8,9 +8,13 @@ import { useGetUserByIdQuery } from "../../global/slices/usersApiSlice";
 import { setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import { StyledPostInfo } from "../styles/PostInfo.styled";
-import { Post } from "../slices/postsApiSlice";
+import { PostType } from "../types/post.types";
 
-export default function PostInfo({ postData }: { postData: Partial<Post> }) {
+export default function PostInfo({
+  postData,
+}: {
+  postData: Partial<PostType>;
+}) {
   const userId = postData.author as string;
   const { data: authorData, isLoading } = useGetUserByIdQuery(userId);
   const authorUsername = authorData?.entities[userId]?.username;

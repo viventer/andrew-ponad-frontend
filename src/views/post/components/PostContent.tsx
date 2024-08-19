@@ -1,4 +1,4 @@
-import { PostRowType } from "../slices/postsApiSlice";
+import { PostRowType } from "../types/post.types";
 import { StyledPostContent } from "../styles/PostContent.styled";
 import PostRow from "./PostRow";
 
