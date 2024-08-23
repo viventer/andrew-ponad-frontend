@@ -1,0 +1,29 @@
+homePage.cy.ts:
+1. navigation
+- open post from slider 
+- return to home page by clicking h1
+- open post from most popular
+- return to home page by clicking back arrow
+- open error report window 
+- close error report window by clicking X
+- open grade calculator
+- return to home page by clicking h1
+- open search box 
+- close search box by clicking up arrow
+- open userInfo
+- open login page 
+- return to home 
+- open registration page 
+- open login page
+- return to home
+
+2. slider
+- check message on the right side 
+- check main post title 
+- wait until main post is changed 
+- check main post title (should be different)
+- open main post 
+- title should be eq to clicked
+- return to home 
+- check info on hover 
+- 

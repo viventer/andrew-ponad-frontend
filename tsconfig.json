@@ -15,7 +15,12 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "types": ["cypress", "node"]
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "cypress/**/*.ts",
+    "src/views/global/styles/SearchBar.styled.ts"
+  ]
 }

@@ -76,13 +76,13 @@ export default function useValidation(
       paragraphIndex: number
     ) => {
       const requirementParagraph = getRequirementParagraph(paragraphIndex);
-      if (requirementMet) {
+      if (requirementMet && requirementParagraph) {
         requirementParagraph.style.color = theme.colors.green;
         setTimeout(() => {
           requirementParagraph.style.display = "none";
         }, 500);
         requirementParagraph.style.opacity = "0";
-      } else {
+      } else if (requirementParagraph) {
         requirementParagraph.style.color = theme.colors.red;
         setTimeout(() => {
           requirementParagraph.style.display = "block";
