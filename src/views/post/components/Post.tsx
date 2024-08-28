@@ -13,6 +13,7 @@ import PostContent from "./PostContent";
 import PostInfo from "./PostInfo";
 import { StyledPost } from "../styles/Post.styled";
 import useAuth from "../../../hooks/useAuth";
+import ErrorPage from "../../global/components/ErrorPage";
 
 export default function Post() {
   const { isLogged } = useAuth();
@@ -31,11 +32,6 @@ export default function Post() {
   ] = useAddPostViewMutation();
 
   const dispatch = useDispatch();
-
-  if (isGetDataError || isAddPostViewError) {
-    const error = getDataError || addPostViewError;
-    dispatch(setErrMsg(error?.data?.message || "Błąd otwierania posta."));
-  }
 
   let postData;
   let translatedVisibility;
@@ -75,12 +71,17 @@ export default function Post() {
 
   return (
     <StyledPost>
-      {postData && (
+      {postData ? (
         <>
           <ThumbnailBar thumbnailFile={postData?.thumbnail} />
           <PostInfo postData={postData} />
           <PostContent postContentData={postData?.content} />
         </>
+      ) : (
+        <ErrorPage
+          headingMessage="Nie masz uprawnień do tego posta."
+          subheadingMessage="Zaloguj się na konto o odpowiednich uprawnieniach."
+        />
       )}
     </StyledPost>
   );

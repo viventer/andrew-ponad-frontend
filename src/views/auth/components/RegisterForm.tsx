@@ -49,6 +49,7 @@ export function RegisterForm({
           }
           required
           ref={references.usernameRef}
+          maxLength={20}
         />
         <section>
           <p>&bull; od 3 do 20 znaków</p>
@@ -67,6 +68,7 @@ export function RegisterForm({
         onChange={(e) => handlers.handleInputChange("email", e.target.value)}
         required
         ref={references.emailRef}
+        maxLength={192}
       />
 
       <label htmlFor="firstName">Imię:</label>
@@ -80,6 +82,7 @@ export function RegisterForm({
         }
         required
         ref={references.firstNameRef}
+        maxLength={48}
       />
 
       <label htmlFor="lastName">Nazwisko:</label>
@@ -91,6 +94,7 @@ export function RegisterForm({
         onChange={(e) => handlers.handleInputChange("lastName", e.target.value)}
         required
         ref={references.lastNameRef}
+        maxLength={64}
       />
 
       <label htmlFor="password">Hasło:</label>
@@ -104,6 +108,7 @@ export function RegisterForm({
           }
           required
           ref={references.passwordRef}
+          maxLength={32}
         />
         <section ref={references.passwordRequirementsRef}>
           <p>&bull; od 8 do 32 znaków</p>
@@ -125,6 +130,7 @@ export function RegisterForm({
         }
         required
         ref={references.confirmPasswordRef}
+        maxLength={32}
       />
       <StyledButton disabled={!canSave}>Zarejestruj się</StyledButton>
       <div className="flex">

@@ -46,6 +46,7 @@ export default function ChangePasswordForm({
           handlers.handleInputChange("oldPassword", e.target.value)
         }
         autoComplete="off"
+        maxLength={32}
       />
       <label htmlFor="newPassword">Nowe hasło</label>
       <div>
@@ -59,6 +60,7 @@ export default function ChangePasswordForm({
           onChange={(e) =>
             handlers.handleInputChange("newPassword", e.target.value)
           }
+          maxLength={32}
         />
         <section ref={references.passwordRequirementsRef}>
           <p>&bull; od 8 do 32 znaków</p>
@@ -80,6 +82,7 @@ export default function ChangePasswordForm({
         onChange={(e) =>
           handlers.handleInputChange("confirmNewPassword", e.target.value)
         }
+        maxLength={32}
       />
       <StyledButton disabled={!canSubmit} onClick={handlers.handleSubmit}>
         Zmień hasło

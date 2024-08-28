@@ -1,8 +1,7 @@
 homePage.cy.ts:
 1. navigation
-- open post from slider 
-- return to home page by clicking h1
 - open post from most popular
+- check if title is same as clicked on home page
 - return to home page by clicking back arrow
 - open error report window 
 - close error report window by clicking X
@@ -16,14 +15,336 @@ homePage.cy.ts:
 - open registration page 
 - open login page
 - return to home
-
-2. slider
-- check message on the right side 
-- check main post title 
-- wait until main post is changed 
+- check slider heading and subheading
+- check main post title in the slider 
+- wait until main post is changed
 - check main post title (should be different)
 - open main post 
 - title should be eq to clicked
 - return to home 
-- check info on hover 
-- 
+- check info on slider hover 
+
+errorReport.cy.ts 
+1. CRD operations
+- open error report window 
+- first path - happy:
+  - type some title
+  - type some description 
+  - add three screenshots 
+  - send the report
+- second path - happy without screenshots:
+  - type some title
+  - type some description 
+  - send the report
+- third path - extreme case:
+  - try to type too long title 
+  - error message should be visible 
+  - close message and check 
+  - type too long description 
+  - check error message 
+  - close and check 
+  - add too big screenshot 
+  - check error
+  - close and check 
+  - add correct screenshot
+  - send report 
+- fourth path - html in title and description:
+  - type some html code in title 
+  - type some html code in description 
+  - send report 
+- go to errorReports in admin panel 
+- check all reports added in the test
+- change status of the first to in progress 
+- change status of the second to repaired 
+- filter reports by status - new 
+- check if there are third and fourth report, and aren't one and two 
+- delete fourth post 
+- change filter to in progress
+- check first post existance 
+- change filter to repaired 
+- check second post existance 
+- change to any 
+- search for first post name 
+- delete first post 
+- check if there is no post with this name 
+- clear search input 
+- delete second and third post 
+- return to home
+
+
+gradeCalculator.cy.ts
+- go to grade calc 
+- first path: happy:
+  - type 20 earned points
+  - type 40 max 
+  - check if results are ok 
+- delete 0 in max 
+- check error message 
+- check results 
+- change earned to 3 
+- check results
+- change earned to 0 
+- check results 
+- change earned to -1
+- check error and results 
+- change earned to 5 
+- change max to 0
+- check error mesage 
+- change earned to 0 
+- check error message 
+- type some text in max 
+- check error 
+- change min to 0.6
+- change max to 1
+- check results
+- return to home
+
+
+searchBox.cy.ts
+- open search box 
+- type Server 
+- check if all post names includes "Server"
+- set category "Windows Server" 
+- check post categories
+- close search box by clicking up arrow 
+- open search box 
+- type 2012 instead of server 
+- check first result data 
+- open first result 
+- check if data in post are the same 
+- open search box 
+- change query to "qwertyuiop"
+- check communicate 
+- close search box by opening error report window 
+- close error report window 
+
+
+auth.cy.ts 
+1. Login.
+- go to login page by clicking "Zaloguj się"
+- type login: "admin" and password: "ZAQ!2wsx"
+- check "Zapamiętaj to urządzenie"
+- click "Zaloguj się"
+- show userInfo 
+- check userInfo data 
+- go to adminPanel
+- check if there is no error 
+- show userInfo
+- click log out button 
+- go to login page 
+- login as "User", password: "ZAQ!2wsx"
+- uncheck "Zapamiętaj to urządzenie"
+- check userInfo data 
+- navigate to /adminpanel 
+- check error message 
+- show userInfo 
+- click log out button 
+- go to login page 
+- login: tak 
+- hasło: nie 
+- check error message after clicking button 
+- login: admin 
+- click button 
+- check err msg 
+- clear login input 
+- try to click button 
+- type "tak" in login 
+- clear password 
+- try to click button 
+- return to home page 
+
+2. Register. 
+- go to register page by clicking "Zarejestruj się"
+- type login: user_test, email: siema@gmail.com, first name: Jan, last name: Kowalski, password: ZAQ!2wsx, confirm password. 
+- check if inputs correctly change their colors after typing data 
+- check if it is possible to click "Zarejestruj się"
+- check "Zapamiętaj to urządzenie"
+- click "Zarejestruj się"
+- check userInfo data 
+- try to go to /register 
+- check if url has changed
+- try to open post 
+- try to enter /adminpanel
+- log out 
+- go to /register page 
+- second path:  
+  - login: ęćąż
+  - email: tak1@gmail.com  
+  - imię: Jan
+  - nazwisko: Kowalski
+  - hasło: ŻĄŚŹĘ!@#$%^&*()-+[];'":
+  - zapamiętaj unchecked 
+  - check if can click 
+  - change username to ecaz123
+  - click
+  - check userInfo data 
+  - log out 
+  - try to log in 
+  - check userInfo data 
+  - log out 
+- third path:
+  - admin 
+  - tak1@gmail.com
+  - Jan 
+  - Kowalski 
+  - ZAQ!2wsx
+  - zapamiętaj unchecked 
+  - click 
+  - check err msg 
+  - change username to user1234
+  - check err msg 
+  - change email to tak2@gmail.com
+  - click 
+  - check userInfo 
+  - log out 
+- fourth path:
+  - qwertyiuopasdfghjkla
+  -takieuhruhieriuherguhieriuheruhiergiuheiuhruhieriuherjghkjfkjfgk@gmailhgbrhehgherguheriugherguiherguiherguiheruighergiuherigheiu.comeiujghjueruigheuhrghehrugheruigherhgiuehrguehrgiuehrgiuherga
+  - imię: yuehgrgiuherguiheguriheuihrguerhgueihrguierhgiuh
+  - nazwisko: yuehgrgiuherguiheguriheuihrguerhgueihrguierhgiuhet
+  - check password requirements, by fulfilling one requirement at a time
+  - hasło: iuehrgheriuhgiuhergiuhherhiu12A!
+  - check userInfo data 
+  - log out 
+  - log in 
+  - log out
+
+3. Permissions
+- admin:
+  - log in (admin ZAQ!2wsx)
+  - go to admin panel 
+  - check tabs access 
+  - go to posts 
+  - change visibility to private 
+  - search for DNS 
+  - edit post and save changes 
+  - delete post
+  - add post with title: DNS na Windows Server 2012 
+  - go to categories tab 
+  - create new: todelete
+  - search for new category 
+  - change its name to: todelete123
+  - delete it 
+  - go to users tab 
+  - change user7 role to Verified and save 
+  - change user7 role to Unverfiied and save 
+  - change role filter to unverified
+  - delete last user 
+  - go to error reports tab 
+  - search for "rtgtrth"
+  - change its status to Nowe 
+  - change to W trakcie 
+  - change status filter to "Nowe"
+  - delete last report 
+  - search for that 
+  - check information 
+  - return to home
+  - log out 
+- editor 
+  - log in (Editor ZAQ!2wsx)
+  - go to admin panel 
+  - check tabs access 
+  - create new post with name: nowyEdytor123 and visibility private 
+  - change visibility filter to private 
+  - search for new post 
+  - edit new post to title: nowyEdytor1234
+  - search for it
+  - delete it 
+  - edit post with title "tak" to name "tak123"
+  - return to "tak" name 
+  - change visibility filter to public 
+  - delete last post
+  - return to home
+  - log out 
+- creator 
+  - log in (Creator ZAQ!2wsx)
+  - go to admin panel 
+  - check tabs access
+  - create new post with name: nowyCreator123 and visibility private 
+  - change visibility filter to private 
+  - search for new post 
+  - edit new post to title: nowyCreator1234
+  - search for it 
+  - delete it 
+  - try to delete and edit different post 
+  - return to home 
+  - log out 
+- verified 
+  - log in (Verified ZAQ!2wsx)
+  - search for post with title: "Strona WWW na OpenSuse Server"
+  - open it
+  - check title 
+  - try to go to adminpanel through the userInfo box
+  - go to /adminpanel
+  - check err msg 
+  - try to open post with this id: 667faa1cb6a79023bfd03f5e
+  - check err msg 
+  - return to home
+  - log out 
+- unverified 
+  - log in (User ZAQ!2wsx)
+  - check userInfo 
+  - search for post with title: "Strona WWW na OpenSuse Server"
+  - search for post with title: "Podstawowa konfiguracja Windows Serverrr"
+  - open and check title 
+  - try to open this post: 667faa1cb6a79023bfd03f5e 
+  - go to /adminpanel 
+  - return to home 
+  - try to send err msg with random data 
+  - log out 
+- not logged in 
+  - search for post with title: "Strona WWW na OpenSuse Server"
+  - search for post with title: "Podstawowa konfiguracja Windows Serverrr"
+  - open and check title 
+  - try to open this post: 667faa1cb6a79023bfd03f5e 
+  - go to /adminpanel 
+  - return to home 
+  - try to send err msg with random data 
+
+
+posts.cy.ts 
+1. CRUD operations.  
+- log in as admin 
+- go to admin panel through the userInfo 
+- click "Dodaj post" 
+- set thumbnail to too large file 
+- check err msg
+- set thumbnail to correct file 
+- change post title to "test123"
+- change visibility to public 
+- try to click "Dodaj post"
+- change visibility to draft
+- click "Dodaj post"
+- click "Zakończ"
+- search for post with title "test123"
+- open and check title 
+- return back 
+- edit post with title "test123"
+- change category to "Windows Server"
+- change category to "Linux Server"
+- change category to "Programowanie"
+- change category to "Router"
+- try to type too long title
+- check err msg 
+- change post title to "test1234"
+- write "something" in text input 
+- upload some image 
+- add new row 
+- set row type to text only 
+- type "ęćąż" in text input 
+- change row type to one img 
+- change row type to text and img 
+- check if text is present in the input
+- upload img 
+- add new row 
+- set type to two images 
+- upload to images
+- add new row 
+- change its type to video 
+- set link to: https://youtu.be/145Qd0aVTEk?si=uQgfIzw-PlJWz1vp
+- change visibility to public
+- click "Zapisz zmiany"
+- check msg
+- click ok 
+- search for post1234 
+- check all data 

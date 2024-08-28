@@ -102,8 +102,8 @@ export default function useValidation(
 
     const requirements: Requirements = {
       correctLength: password.length >= 8 && password.length <= 32,
-      containsUpperCase: /[A-Z]/.test(password),
-      containsLowerCase: /[a-z]/.test(password),
+      containsUpperCase: /[A-ZĄĆĘŁŃÓŚŹŻ]/.test(password),
+      containsLowerCase: /[a-ząćęłńóśźż]/.test(password),
       containsDigit: /[0-9]/.test(password),
       containsSpecialChar: /[!@#$%^&*()_+{}\[\]:;<>,.?~\\/-]/.test(password),
       notContainSpace: /^[^\s]*$/.test(password),

@@ -25,7 +25,9 @@ export default function GradeCalculator() {
   const validateScoredPoints = () => {
     if (scoredPoints && !isFormatCorrect(scoredPoints)) {
       setIsScoredPointsValid(false);
-      setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
+      setErrMsg(
+        "Pola mogą zawierać tylko dodatnie liczby, do separacji używaj kropek."
+      );
       return;
     }
 
@@ -51,7 +53,9 @@ export default function GradeCalculator() {
   const validateMaxPoints = () => {
     if (maxPoints && !isFormatCorrect(maxPoints)) {
       setIsMaxPointsValid(false);
-      setErrMsg("Pola mogą zawierać tylko liczby, do separacji używaj kropek.");
+      setErrMsg(
+        "Pola mogą zawierać tylko dodatnie liczby, do separacji używaj kropek."
+      );
       return;
     }
 

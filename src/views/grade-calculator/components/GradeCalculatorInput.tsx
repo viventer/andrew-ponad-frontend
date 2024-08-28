@@ -27,6 +27,7 @@ export default function GradeCalculatorInput({
           id={type}
           ref={inputRef}
           onChange={(e) => setter(e.target.value)}
+          maxLength={7}
         />
       </div>
     </StyledGradeCalculatorInput>

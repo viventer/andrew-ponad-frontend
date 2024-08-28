@@ -67,13 +67,14 @@ export default function Register() {
   const { validations, setValidations, validateField } = useValidation(
     {
       usernameRef: usernameRef as React.MutableRefObject<HTMLElement>,
-      emailRef: usernameRef as React.MutableRefObject<HTMLElement>,
-      firstNameRef: usernameRef as React.MutableRefObject<HTMLElement>,
-      lastNameRef: usernameRef as React.MutableRefObject<HTMLElement>,
-      passwordRef: usernameRef as React.MutableRefObject<HTMLElement>,
-      confirmPasswordRef: usernameRef as React.MutableRefObject<HTMLElement>,
+      emailRef: emailRef as React.MutableRefObject<HTMLElement>,
+      firstNameRef: firstNameRef as React.MutableRefObject<HTMLElement>,
+      lastNameRef: lastNameRef as React.MutableRefObject<HTMLElement>,
+      passwordRef: passwordRef as React.MutableRefObject<HTMLElement>,
+      confirmPasswordRef:
+        confirmPasswordRef as React.MutableRefObject<HTMLElement>,
       passwordRequirementsRef:
-        usernameRef as React.MutableRefObject<HTMLElement>,
+        passwordRequirementsRef as React.MutableRefObject<HTMLElement>,
     },
     inputs
   );

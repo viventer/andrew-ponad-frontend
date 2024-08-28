@@ -42,7 +42,7 @@ export default function UsersList() {
   const dispatch = useDispatch();
 
   if (isError) {
-    dispatch(setErrMsg(error?.data?.errorMessage + ". Odśwież stronę."));
+    dispatch(setErrMsg("Wystąpił błąd. Odśwież stronę."));
   }
 
   useEffect(() => {

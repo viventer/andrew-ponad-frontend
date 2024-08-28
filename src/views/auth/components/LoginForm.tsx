@@ -30,7 +30,7 @@ export default function LoginForm({
 }: Props) {
   return (
     <StyledAuthForm onSubmit={handlers.handleSubmit}>
-      <label htmlFor="username">Login</label>
+      <label htmlFor="username">Nazwa użytkownika:</label>
       <input
         type="text"
         id="username"
@@ -39,14 +39,16 @@ export default function LoginForm({
         onChange={handlers.handleUserInput}
         autoComplete="off"
         required
+        maxLength={24}
       />
-      <label htmlFor="password">Hasło</label>
+      <label htmlFor="password">Hasło:</label>
       <input
         type="password"
         id="password"
         onChange={handlers.handlePwdInput}
         value={loginData.password}
         required
+        maxLength={32}
       />
       <StyledButton
         className={canSubmit ? "activeButton" : "disabledButton"}

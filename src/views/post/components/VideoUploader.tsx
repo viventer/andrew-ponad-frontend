@@ -52,7 +52,7 @@ export default function VideoUploader({
               );
             }
           }}
-          maxLength={100}
+          maxLength={128}
           className={isInputShown ? "shown" : ""}
         />
       </div>

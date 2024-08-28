@@ -33,7 +33,13 @@ export default function MostPopularPosts() {
   let sortedPostsData: PostEntity[] | null = null;
   if (isSuccess) {
     postsData = Object.entries(postsRawData.entities);
-    sortedPostsData = postsData.sort((post1, post2) => {
+    const filteredPostsData = postsData.filter(([id, postData]) => {
+      if (postData.visibility == "unlisted" || postData.visibility == "draft") {
+        return false;
+      }
+      return true;
+    });
+    sortedPostsData = filteredPostsData.sort((post1, post2) => {
       const post1Views = post1[1].views;
       const post2Views = post2[1].views;
       return post2Views - post1Views;

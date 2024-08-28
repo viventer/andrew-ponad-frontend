@@ -32,6 +32,7 @@ export default function SearchBar({
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
+          maxLength={64}
         />
         <button className="icon">
           <FontAwesomeIcon icon={faSearch} />

@@ -8,6 +8,7 @@ import { setErrMsg, setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import { StyledSlider } from "../styles/Slider.styled";
 import SliderElement from "./SliderElement";
+import { PostEntity } from "../../post/types/post.types";
 
 export default function Slider() {
   const { isLogged } = useAuth();
@@ -26,9 +27,11 @@ export default function Slider() {
 
   let elements;
   if (isSuccess) {
-    const postsData = Object.entries(postsRawData.entities);
+    const postsData: PostEntity[] = Object.entries(postsRawData.entities);
     const filteredPostsData = postsData.filter(([id, postData]) =>
-      postData.visibility != "draft" ? true : false
+      postData.visibility != "draft" && postData.visibility != "unlisted"
+        ? true
+        : false
     );
     elements = filteredPostsData.map(([id, postData], index) => (
       <SliderElement

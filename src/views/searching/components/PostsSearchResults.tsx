@@ -39,7 +39,7 @@ export default function PostsSearchResults({
     postsData = Object.entries(postsRawData.entities);
     const postsDataWithoutDrafts = postsData.filter((post) => {
       const postData = post[1];
-      if (postData.visibility == "draft") {
+      if (postData.visibility == "draft" || postData.visibility == "unlisted") {
         return false;
       }
       return true;

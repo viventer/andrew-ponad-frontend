@@ -4,7 +4,10 @@ import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faIcons, faUser } from "@fortawesome/free-solid-svg-icons";
 
-import { useGetUserByIdQuery } from "../../global/slices/usersApiSlice";
+import {
+  useGetUserByIdQuery,
+  useGetUsernameQuery,
+} from "../../global/slices/usersApiSlice";
 import { setIsLoading } from "../../global/slices/globalStatesSlice";
 
 import { StyledPostInfo } from "../styles/PostInfo.styled";
@@ -16,8 +19,9 @@ export default function PostInfo({
   postData: Partial<PostType>;
 }) {
   const userId = postData.author as string;
-  const { data: authorData, isLoading } = useGetUserByIdQuery(userId);
-  const authorUsername = authorData?.entities[userId]?.username;
+  const { data: authorData, isLoading } = useGetUsernameQuery(userId);
+
+  const authorUsername = authorData?.username;
   const dispatch = useDispatch();
 
   useEffect(() => {

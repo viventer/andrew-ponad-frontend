@@ -39,6 +39,8 @@ export default function UserInfo() {
     skip: userData?.id == userId || !isLogged,
   });
 
+  console.log(userRawData);
+
   const [isChangePwdWindowVisible, setIsChangePwdWindowVisible] =
     useState(false);
   const [finishedPwdChange, setFinishedPwdChange] = useState(false);

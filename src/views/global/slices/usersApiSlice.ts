@@ -22,6 +22,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         },
       }),
       transformResponse: (responseData: UserType[]) => {
+        console.log(responseData);
         const loadedUsers = responseData.map((user) => {
           user.id = user._id;
           return user;
@@ -40,6 +41,17 @@ export const usersApiSlice = apiSlice.injectEndpoints({
         const user = { ...responseData, id: responseData._id };
         return usersAdapter.setOne(initialState, user);
       },
+    }),
+    getUsername: builder.query<{ username: string; id: string }, string>({
+      query: (userId) => ({
+        url: `/users/${userId}/username`,
+        validateStatus: (
+          response: Response,
+          result: { username: string; id: string }
+        ) => {
+          return response.status === 200;
+        },
+      }),
     }),
     updateUser: builder.mutation({
       query: ({ userId, userData }: { userId: string; userData: any }) => ({
@@ -78,6 +90,7 @@ export const usersApiSlice = apiSlice.injectEndpoints({
 export const {
   useGetUsersQuery,
   useGetUserByIdQuery,
+  useGetUsernameQuery,
   useAddNewUserMutation,
   useUpdateUserMutation,
   useDeleteUserMutation,
