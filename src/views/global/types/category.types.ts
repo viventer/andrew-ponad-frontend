@@ -9,3 +9,8 @@ export interface CategoryType {
 }
 
 export type CategoryEntity = [string, CategoryType];
+
+export interface CategoriesResult {
+  ids: string[];
+  entities: { [id: string]: CategoryType };
+}

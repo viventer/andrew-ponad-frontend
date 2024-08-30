@@ -171,10 +171,13 @@ export default function PostCreatePage() {
   useEffect(() => {
     if (dialogAnswer == "Zakończ" && dialogAction == "postAdded") {
       navigate("/adminpanel", { replace: true });
+      window.location.reload();
     } else if (dialogAnswer == "Dodaj kolejny" && dialogAction == "postAdded") {
       navigate("/post/create");
       window.location.reload();
     }
+    dispatch(setDialogMsg(""));
+    console.log("wywołało się");
     dispatch(setDialogAnswer(""));
     dispatch(setDialogAction(""));
   }, [dialogAnswer]);

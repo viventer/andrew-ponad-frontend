@@ -2,11 +2,7 @@ import { createEntityAdapter, createSelector } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store";
 import { CategoryType } from "../types/category.types.ts";
-
-interface CategoriesResult {
-  ids: string[];
-  entities: { [id: string]: CategoryType };
-}
+import { CategoriesResult } from "../types/category.types.ts";
 
 type Tag = { type: string; id: string };
 

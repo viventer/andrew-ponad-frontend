@@ -14,7 +14,14 @@ import {
   useChangeCategoryNameMutation,
   useCreateNewCategoryMutation,
 } from "../../global/slices/categoriesApiSlice";
-import { CategoryType } from "../../global/types/category.types";
+import {
+  CategoriesResult,
+  CategoryType,
+} from "../../global/types/category.types";
+import {
+  QueryActionCreatorResult,
+  QueryDefinition,
+} from "@reduxjs/toolkit/query";
 
 type Props = {
   categoryData?: CategoryType;
@@ -27,6 +34,15 @@ type Props = {
   isInputFocused: boolean;
   newCategoryName: string;
   setNewCategoryName: React.Dispatch<React.SetStateAction<string>>;
+  refetch?: () => QueryActionCreatorResult<
+    QueryDefinition<
+      void,
+      any,
+      "Post" | "User" | "ErrorReport" | "Category",
+      CategoriesResult,
+      "api"
+    >
+  >;
 };
 
 export default function CategoryNameInput({
@@ -40,6 +56,7 @@ export default function CategoryNameInput({
   isInputFocused,
   newCategoryName,
   setNewCategoryName,
+  refetch,
 }: Props) {
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
   const [showNewCategoryInput, setShowNewCategoryInput] = useState(false);
@@ -104,6 +121,8 @@ export default function CategoryNameInput({
           setShowSuccessIcon(false);
           setReloadComponent((prev) => !prev);
         }, 1500);
+      } else {
+        refetch!();
       }
     } else {
       dispatch(setIsLoading(false));

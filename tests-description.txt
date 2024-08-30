@@ -346,5 +346,102 @@ posts.cy.ts
 - click "Zapisz zmiany"
 - check msg
 - click ok 
-- search for post1234 
-- check all data 
+- search for test1234 
+- check all data in admin panel 
+- add new post 
+- change title to "test1234"
+- click "Dodaj post"
+- check err msg 
+- change title to "test987"
+- click "Dodaj post"
+- click "Dodaj kolejny"
+- change title to "test987"
+- click "Dodaj post" 
+- check err msg 
+- click "Odrzuć post"
+- click Nie
+- click "Odrzuć post"
+- click Tak 
+- search for "test987" 
+- click delete icon 
+- click Nie 
+- click one more time 
+- click Tak 
+- check if post still exist 
+- delete "test1234"
+- refresh page 
+- search for it 
+- check msg 
+- click add post 
+- change title to "discarded"
+- click "Odrzuć post" 
+- click Nie 
+- click one more time and Tak 
+- search for "discarded"
+- check msg 
+- add post with title "public", visibility "publiczny", category "Windows Server", random text in a single text input and some thumbnail 
+- add private post with category "Linux Server"
+- add szkic with title "draft" and category "Programowanie"
+- add unlisted post with category Router 
+- add post verifiedOnly with category Windows Server 
+- change visibility filter to "Szkic"
+- category filter: "Linux Server" 
+- search for draft 
+- category filter: "Programowanie" 
+- search for draft 
+- category filter: "Router"
+- visibility: "Dowolna"
+- search for unlisted 
+- category filter: "Linux Server" 
+- search for private 
+- return to home page 
+- log out 
+- log in as Editor 
+- go to adminpanel 
+- search for private
+- edit title of private to private1 
+- search for private1 
+- delete it 
+- add new post with title "publicEditor" 
+- return to home and log out 
+- log in as creator 
+- search for private 
+- check msg 
+- search for publicEditor 
+- try to edit it 
+- go to edit it through typing /edit in url 
+- check err msg 
+- return to /adminpanel 
+- add new post with title "verifiedCreator"
+- search for it 
+- edit it to title: "verifiedOnlyCreator"
+- home, log out 
+- log in as Verified 
+- search for verifiedOnlyCreator post 
+- open it 
+- check title 
+- home, log out 
+- log in as user 
+- search for verifiedOnlyCreator post 
+- check msg 
+- home, log out 
+- log in as admin 
+- delete all posts created in this test 
+
+
+categories.cy.ts 
+- add new category with name: Nowa 
+- add new post with visibility "Szkic" and the new category 
+- search for it 
+- check category name in its data 
+- search for "Nowa"
+- edit its name to "Nowa2"
+- go to posts tab 
+- change category filter to Nowa2 
+- check if there is the new post 
+- go to categories tab 
+- search for Nowa2
+- try to delete it 
+- check communicate
+- delete post with 
+

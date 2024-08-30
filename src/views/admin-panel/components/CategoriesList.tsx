@@ -20,6 +20,7 @@ export default function CategoriesList() {
     isSuccess,
     isError,
     error,
+    refetch,
   } = useGetAllCategoriesQuery();
 
   const searchQuery = useSelector(selectCategoriesTabSearchQuery);
@@ -55,6 +56,7 @@ export default function CategoriesList() {
       <CategoryFromList
         toBeAdded={true}
         setReloadComponent={setReloadComponent}
+        refetch={refetch}
       />
       {filteredCategoriesData &&
         filteredCategoriesData.map(([id, categoryData]) => {

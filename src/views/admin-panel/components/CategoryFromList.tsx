@@ -18,21 +18,38 @@ import {
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
 import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlice";
-import { CategoryType } from "../../global/types/category.types";
+import {
+  CategoriesResult,
+  CategoryType,
+} from "../../global/types/category.types";
 
 import CategoryNameInput from "./CategoryNameInput";
 import { StyledCategoryFromList } from "../styles/CategoryFromList.styled";
+import {
+  QueryActionCreatorResult,
+  QueryDefinition,
+} from "@reduxjs/toolkit/query";
 
 type Props = {
   setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
   categoryData?: CategoryType;
   toBeAdded?: boolean;
+  refetch?: () => QueryActionCreatorResult<
+    QueryDefinition<
+      void,
+      any,
+      "Post" | "User" | "ErrorReport" | "Category",
+      CategoriesResult,
+      "api"
+    >
+  >;
 };
 
 export default function CategoryFromList({
   categoryData,
   setReloadComponent,
   toBeAdded,
+  refetch,
 }: Props) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isSaved, setIsSaved] = useState(true);
@@ -114,6 +131,7 @@ export default function CategoryFromList({
           isInputFocused={isInputFocused}
           newCategoryName={newCategoryName}
           setNewCategoryName={setNewCategoryName}
+          refetch={refetch}
         />
         {!toBeAdded && (
           <button className="deleteButton" onClick={showDialog}>

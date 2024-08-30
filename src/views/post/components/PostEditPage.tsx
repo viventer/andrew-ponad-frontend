@@ -125,6 +125,7 @@ export default function PostEditPage() {
       await updatePostMutation({ postId: id, postData }).unwrap();
       dispatch(setSuccessMsg("Zmiany zostały zapisane"));
       navigate("/adminpanel", { replace: true });
+      window.location.reload();
     } catch (err) {
       handleEditPostError(err);
     }
