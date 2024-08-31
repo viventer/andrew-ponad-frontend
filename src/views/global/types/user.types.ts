@@ -10,3 +10,8 @@ export interface UserType {
 }
 
 export type UserEntity = [string, UserType];
+
+export interface UsersResult {
+  ids: string[];
+  entities: { [id: string]: UserType };
+}

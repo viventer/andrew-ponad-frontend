@@ -28,3 +28,8 @@ export interface PostRowElement {
 }
 
 export type PostRowType = PostRowElement[];
+
+export interface PostsResult {
+  ids: string[];
+  entities: { [id: string]: PostType };
+}

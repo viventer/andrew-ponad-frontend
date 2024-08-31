@@ -24,6 +24,7 @@ export default function PostsList() {
     isSuccess,
     isError,
     error,
+    refetch,
   } = useGetPostsQuery({ isLogged });
 
   const categoryFilter = useSelector(selectCategoryFilter);
@@ -57,17 +58,15 @@ export default function PostsList() {
     }
   }, [isLoading]);
 
-  const [reloadComponent, setReloadComponent] = useState(false);
-
   return (
     <StyledAdminPanelList>
       {filteredPostData &&
         filteredPostData.map(([id, postData]) => {
           return (
             <PostFromList
+              refetch={refetch}
               postData={postData as PostType}
               key={id}
-              setReloadComponent={setReloadComponent}
             />
           );
         })}

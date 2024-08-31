@@ -31,7 +31,6 @@ import {
 } from "@reduxjs/toolkit/query";
 
 type Props = {
-  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
   categoryData?: CategoryType;
   toBeAdded?: boolean;
   refetch?: () => QueryActionCreatorResult<
@@ -47,7 +46,6 @@ type Props = {
 
 export default function CategoryFromList({
   categoryData,
-  setReloadComponent,
   toBeAdded,
   refetch,
 }: Props) {
@@ -96,7 +94,7 @@ export default function CategoryFromList({
         return;
       } else {
         dispatch(setIsLoading(false));
-        setReloadComponent((prev) => !prev);
+        refetch!();
         setIsDeleted(true);
       }
     } catch (err) {
@@ -122,7 +120,6 @@ export default function CategoryFromList({
       <div className="flex">
         <CategoryNameInput
           categoryData={categoryData}
-          setReloadComponent={setReloadComponent}
           toBeAdded={toBeAdded}
           setIsDataCorrect={setIsDataCorrect}
           isDataCorrect={isDataCorrect}

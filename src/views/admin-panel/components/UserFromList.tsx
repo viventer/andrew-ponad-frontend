@@ -31,10 +31,21 @@ import {
 import RoleSelector from "./RoleSelector.tsx";
 import UserFromListInfo from "./UserFromListInfo.tsx";
 import { StyledElementFromList } from "../styles/ElementFromList.styled.ts";
+import { QueryActionCreatorResult } from "@reduxjs/toolkit/query";
+import { QueryDefinition } from "@reduxjs/toolkit/query";
+import { UsersResult } from "../../global/types/user.types.ts";
 
 type Props = {
   userInfo: UserInfo;
-  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
+  refetch: () => QueryActionCreatorResult<
+    QueryDefinition<
+      void,
+      any,
+      "Post" | "User" | "ErrorReport" | "Category",
+      UsersResult,
+      "api"
+    >
+  >;
 };
 
 export type UserInfo = {
@@ -47,7 +58,7 @@ export type UserInfo = {
   roles: string[];
 };
 
-export default function UserFromList({ userInfo, setReloadComponent }: Props) {
+export default function UserFromList({ userInfo, refetch }: Props) {
   const [showInfo, setShowInfo] = useState(false);
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
 
@@ -155,15 +166,13 @@ export default function UserFromList({ userInfo, setReloadComponent }: Props) {
     } else if (isUpdateSuccess) {
       dispatch(setIsLoading(false));
       setShowSuccessIcon(true);
+      refetch();
       setTimeout(() => {
         setShowSuccessIcon(false);
-        setReloadComponent((prev) => !prev);
       }, 1500);
     } else if (isDeleteSuccess) {
       dispatch(setIsLoading(false));
-      setTimeout(() => {
-        setReloadComponent((prev) => !prev);
-      }, 1000);
+      refetch();
     } else {
       dispatch(setIsLoading(false));
     }

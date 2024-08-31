@@ -23,27 +23,36 @@ import {
   setIsLoading,
   setIsSearchBoxVisible,
 } from "../slices/globalStatesSlice";
-import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
-import { PostType } from "../../post/types/post.types";
-
-import useShorten from "../../../hooks/useShorten";
-import useAuth from "../../../hooks/useAuth";
+import { PostsResult, PostType } from "../../post/types/post.types";
 
 import { StyledPostFromList } from "../styles/PostFromList.styled";
 import PostFromListInfo from "./PostFromListInfo";
 import useIsThumbnailUrlCorrect from "../../../hooks/useIsThumbnailUrlCorrect";
+import {
+  QueryActionCreatorResult,
+  QueryDefinition,
+} from "@reduxjs/toolkit/query";
+import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
+import useShorten from "../../../hooks/useShorten";
+import useAuth from "../../../hooks/useAuth";
 
 type Props = {
   postData: PostType;
-  setReloadComponent?: React.Dispatch<React.SetStateAction<boolean>>;
   view?: string;
+  refetch: () => QueryActionCreatorResult<
+    QueryDefinition<
+      void | {
+        isLogged: boolean;
+      },
+      any,
+      "Post" | "User" | "ErrorReport" | "Category",
+      PostsResult,
+      "api"
+    >
+  >;
 };
 
-export default function PostFromList({
-  postData,
-  setReloadComponent,
-  view,
-}: Props) {
+export default function PostFromList({ postData, view, refetch }: Props) {
   const [isDeleted, setIsDeleted] = useState(false);
 
   const isThumbnailUrlCorrect = useIsThumbnailUrlCorrect();
@@ -93,9 +102,7 @@ export default function PostFromList({
         return;
       } else {
         dispatch(setIsLoading(false));
-        if (setReloadComponent) {
-          setReloadComponent((prev) => !prev);
-        }
+        refetch();
         setIsDeleted(true);
       }
     } catch (err: any) {

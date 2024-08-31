@@ -2,11 +2,7 @@ import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store";
 import { PostType } from "../types/post.types.ts";
-
-interface PostsResult {
-  ids: string[];
-  entities: { [id: string]: PostType };
-}
+import { PostsResult } from "../types/post.types.ts";
 
 const postsAdapter = createEntityAdapter<PostType>({});
 

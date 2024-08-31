@@ -3,7 +3,7 @@ import { apiSlice } from "../../../redux/apiSlice.ts";
 import { RootState } from "../../../redux/store.ts";
 import { ErrorReportType } from "../types/errorReport.types.ts";
 
-interface ReportsResult {
+export interface ReportsResult {
   ids: string[];
   entities: { [id: string]: ErrorReportType };
 }

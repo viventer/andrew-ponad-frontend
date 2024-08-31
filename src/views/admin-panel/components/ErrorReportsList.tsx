@@ -22,6 +22,7 @@ export default function ErrorReportsList() {
     isSuccess,
     isError,
     error,
+    refetch,
   } = useGetErrorReportsQuery();
 
   const statusFilter = useSelector(selectStatusFilter);
@@ -52,8 +53,6 @@ export default function ErrorReportsList() {
     }
   }, [isLoading]);
 
-  const [reloadComponent, setReloadComponent] = useState(false);
-
   return (
     <StyledAdminPanelList className="errorReportsList">
       {filteredReportsData &&
@@ -62,7 +61,7 @@ export default function ErrorReportsList() {
             <ErrorReportFromList
               reportData={reportData as ErrorReportType}
               key={id}
-              setReloadComponent={setReloadComponent}
+              refetch={refetch}
             />
           );
         })}

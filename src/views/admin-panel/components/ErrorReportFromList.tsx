@@ -20,6 +20,7 @@ import {
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
 import {
+  ReportsResult,
   useChangeErrorReportStatusMutation,
   useDeleteErrorReportMutation,
 } from "../../error-reports/slices/errorReportApiSlice";
@@ -30,16 +31,25 @@ import useTranslateErrorReportsStatus from "../../../hooks/useTranslateErrorRepo
 import ErrorReportFromListDetails from "./ErrorReportFromListDetails";
 import StatusSelector from "./StatusSelector";
 import { StyledElementFromList } from "../styles/ElementFromList.styled";
+import {
+  QueryActionCreatorResult,
+  QueryDefinition,
+} from "@reduxjs/toolkit/query";
 
 type Props = {
   reportData: ErrorReportType;
-  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
+  refetch: () => QueryActionCreatorResult<
+    QueryDefinition<
+      void,
+      any,
+      "Post" | "User" | "ErrorReport" | "Category",
+      ReportsResult,
+      "api"
+    >
+  >;
 };
 
-export default function ErrorReportFromList({
-  reportData,
-  setReloadComponent,
-}: Props) {
+export default function ErrorReportFromList({ reportData, refetch }: Props) {
   const [isDeleted, setIsDeleted] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
   const [showSuccessIcon, setShowSuccessIcon] = useState(false);
@@ -114,15 +124,13 @@ export default function ErrorReportFromList({
     } else if (isChangeSuccess) {
       dispatch(setIsLoading(false));
       setShowSuccessIcon(true);
+      refetch();
       setTimeout(() => {
         setShowSuccessIcon(false);
-        setReloadComponent((prev) => !prev);
       }, 1500);
     } else if (isDeleteSuccess) {
       dispatch(setIsLoading(false));
-      setTimeout(() => {
-        setReloadComponent((prev) => !prev);
-      }, 1000);
+      refetch();
     } else {
       dispatch(setIsLoading(false));
     }

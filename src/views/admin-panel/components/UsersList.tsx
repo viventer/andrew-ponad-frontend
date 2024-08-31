@@ -21,6 +21,7 @@ export default function UsersList() {
     isSuccess,
     isError,
     error,
+    refetch,
   } = useGetUsersQuery();
 
   const roleFilter = useSelector(selectRoleFilter);
@@ -54,8 +55,6 @@ export default function UsersList() {
     }
   }, [isLoading]);
 
-  const [reloadComponent, setReloadComponent] = useState(false);
-
   return (
     <StyledAdminPanelList>
       {filteredUsersData &&
@@ -63,7 +62,6 @@ export default function UsersList() {
           const mainRole = getMainRole(userData as UserType);
           return (
             <UserFromList
-              setReloadComponent={setReloadComponent}
               key={id}
               userInfo={{
                 username: userData.username,
@@ -74,6 +72,7 @@ export default function UsersList() {
                 lastName: userData.lastName,
                 roles: userData.roles,
               }}
+              refetch={refetch}
             />
           );
         })}

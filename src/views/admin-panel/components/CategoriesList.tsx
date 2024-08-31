@@ -49,22 +49,16 @@ export default function CategoriesList() {
     }
   }, [isLoading]);
 
-  const [reloadComponent, setReloadComponent] = useState(false);
-
   return (
     <StyledAdminPanelList>
-      <CategoryFromList
-        toBeAdded={true}
-        setReloadComponent={setReloadComponent}
-        refetch={refetch}
-      />
+      <CategoryFromList toBeAdded={true} refetch={refetch} />
       {filteredCategoriesData &&
         filteredCategoriesData.map(([id, categoryData]) => {
           return (
             <CategoryFromList
               categoryData={categoryData as CategoryType}
               key={id}
-              setReloadComponent={setReloadComponent}
+              refetch={refetch}
             />
           );
         })}

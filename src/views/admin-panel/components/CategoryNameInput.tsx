@@ -25,7 +25,6 @@ import {
 
 type Props = {
   categoryData?: CategoryType;
-  setReloadComponent: React.Dispatch<React.SetStateAction<boolean>>;
   toBeAdded?: boolean;
   isDataCorrect: boolean;
   setIsDataCorrect: React.Dispatch<React.SetStateAction<boolean>>;
@@ -47,7 +46,6 @@ type Props = {
 
 export default function CategoryNameInput({
   categoryData,
-  setReloadComponent,
   toBeAdded,
   isDataCorrect,
   setIsDataCorrect,
@@ -117,9 +115,9 @@ export default function CategoryNameInput({
       dispatch(setIsLoading(false));
       if (isChangingSuccess) {
         setShowSuccessIcon(true);
+        refetch!();
         setTimeout(() => {
           setShowSuccessIcon(false);
-          setReloadComponent((prev) => !prev);
         }, 1500);
       } else {
         refetch!();
