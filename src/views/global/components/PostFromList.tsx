@@ -32,27 +32,19 @@ import {
   QueryActionCreatorResult,
   QueryDefinition,
 } from "@reduxjs/toolkit/query";
-import { useDeletePostMutation } from "../../post/slices/postsApiSlice";
+import {
+  postsApiSlice,
+  useDeletePostMutation,
+} from "../../post/slices/postsApiSlice";
 import useShorten from "../../../hooks/useShorten";
 import useAuth from "../../../hooks/useAuth";
 
 type Props = {
   postData: PostType;
   view?: string;
-  refetch: () => QueryActionCreatorResult<
-    QueryDefinition<
-      void | {
-        isLogged: boolean;
-      },
-      any,
-      "Post" | "User" | "ErrorReport" | "Category",
-      PostsResult,
-      "api"
-    >
-  >;
 };
 
-export default function PostFromList({ postData, view, refetch }: Props) {
+export default function PostFromList({ postData, view }: Props) {
   const [isDeleted, setIsDeleted] = useState(false);
 
   const isThumbnailUrlCorrect = useIsThumbnailUrlCorrect();
@@ -102,11 +94,12 @@ export default function PostFromList({ postData, view, refetch }: Props) {
         return;
       } else {
         dispatch(setIsLoading(false));
-        refetch();
+        dispatch(postsApiSlice.util.invalidateTags(["Post"]));
         setIsDeleted(true);
       }
     } catch (err: any) {
       dispatch(setErrMsg(err?.data?.message || "Błąd usuwania posta."));
+      console.error(err);
       dispatch(setIsLoading(false));
     }
   };

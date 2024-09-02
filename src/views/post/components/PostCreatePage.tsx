@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 import {
+  postsApiSlice,
   useAddNewPostMutation,
   useGetPostByIdQuery,
 } from "../slices/postsApiSlice";
@@ -154,6 +155,8 @@ export default function PostCreatePage() {
   const addPost = async (postData: Partial<PostType>) => {
     try {
       const response = await addNewPost(postData).unwrap();
+      dispatch(postsApiSlice.util.invalidateTags(["Post"]));
+
       return response.id;
     } catch (err) {
       handleAddPostError(err);
@@ -171,7 +174,6 @@ export default function PostCreatePage() {
   useEffect(() => {
     if (dialogAnswer == "Zakończ" && dialogAction == "postAdded") {
       navigate("/adminpanel", { replace: true });
-      window.location.reload();
     } else if (dialogAnswer == "Dodaj kolejny" && dialogAction == "postAdded") {
       navigate("/post/create");
       window.location.reload();

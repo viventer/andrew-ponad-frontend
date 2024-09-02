@@ -17,7 +17,10 @@ import {
   setErrMsg,
   setIsLoading,
 } from "../../global/slices/globalStatesSlice";
-import { useDeleteCategoryMutation } from "../../global/slices/categoriesApiSlice";
+import {
+  categoriesApiSlice,
+  useDeleteCategoryMutation,
+} from "../../global/slices/categoriesApiSlice";
 import {
   CategoriesResult,
   CategoryType,
@@ -94,7 +97,7 @@ export default function CategoryFromList({
         return;
       } else {
         dispatch(setIsLoading(false));
-        refetch!();
+        dispatch(categoriesApiSlice.util.invalidateTags(["Category"]));
         setIsDeleted(true);
       }
     } catch (err) {

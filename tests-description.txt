@@ -427,21 +427,55 @@ posts.cy.ts
 - home, log out 
 - log in as admin 
 - delete all posts created in this test 
+- return to home and log out 
 
 
 categories.cy.ts 
+- log in as admin 
+- go to adminpanel 
+- go to categories tab 
 - add new category with name: Nowa 
 - add new post with visibility "Szkic" and the new category 
-- search for it 
+- search for it
 - check category name in its data 
 - search for "Nowa"
 - edit its name to "Nowa2"
 - go to posts tab 
 - change category filter to Nowa2 
 - check if there is the new post 
+- check category name in posts data 
+- open post and check category name
 - go to categories tab 
 - search for Nowa2
 - try to delete it 
 - check communicate
-- delete post with 
+- delete post with category Nowa2
+- try to delete category
+- check if it no longer exists
+- check if it is possible to choose it in category filter in the posts tab 
+- try to add category with name Router
+- check err msg 
+- change name to Router14 
+- add category 
+- try to change its name to Router
+- check err msg 
+- change name to Router15
+- save and click delete 
+- click Nie 
+- click delete button one more time 
+- click Tak 
+- check if category still exists 
+- type "na" in input 
+- check err msg 
+- type "nazwa"  
+- try to type nazwaaaaaaaaaaaaaaaaaaaaaaa
+- check err msg 
+- type "nazwa"
+- add category 
+- try to change category name to nazwaaaaaaaaaaaaaaaaaaaaaaa
+- check err msg 
+- delete category with name "nazwa" 
+- return to home 
+- log out 
+
 

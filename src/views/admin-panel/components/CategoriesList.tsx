@@ -20,7 +20,6 @@ export default function CategoriesList() {
     isSuccess,
     isError,
     error,
-    refetch,
   } = useGetAllCategoriesQuery();
 
   const searchQuery = useSelector(selectCategoriesTabSearchQuery);
@@ -30,9 +29,11 @@ export default function CategoriesList() {
   let filteredCategoriesData;
   if (isSuccess) {
     categoriesData = Object.entries(categoriesRawData.entities);
+    console.log(categoriesData);
     filteredCategoriesData = getFilteredData(categoriesData, {
       searchQuery,
     });
+    console.log(filteredCategoriesData);
   }
 
   const dispatch = useDispatch();
@@ -51,14 +52,13 @@ export default function CategoriesList() {
 
   return (
     <StyledAdminPanelList>
-      <CategoryFromList toBeAdded={true} refetch={refetch} />
+      <CategoryFromList toBeAdded={true} />
       {filteredCategoriesData &&
         filteredCategoriesData.map(([id, categoryData]) => {
           return (
             <CategoryFromList
               categoryData={categoryData as CategoryType}
               key={id}
-              refetch={refetch}
             />
           );
         })}

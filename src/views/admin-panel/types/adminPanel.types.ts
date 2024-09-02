@@ -1,3 +1,9 @@
+import {
+  QueryActionCreatorResult,
+  QueryDefinition,
+} from "@reduxjs/toolkit/query";
+import { CategoriesResult } from "../../global/types/category.types";
+
 export type AdminPanelState = {
   visibilityFilter: string;
   categoryFilter: string;

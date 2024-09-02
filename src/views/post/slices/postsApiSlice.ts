@@ -29,6 +29,13 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         });
         return postsAdapter.setAll(initialState, loadedPosts);
       },
+      providesTags: (result) =>
+        result
+          ? [
+              { type: "Post" as const, id: "LIST" },
+              ...result.ids.map((id) => ({ type: "Post" as const, id })),
+            ]
+          : [{ type: "Post", id: "LIST" }],
     }),
     // prettier-ignore
     getPostById: builder.query<PostsResult, { isLogged?: boolean; postId?: string }>({
@@ -45,7 +52,8 @@ export const postsApiSlice = apiSlice.injectEndpoints({
         const post = { ...responseData, id: responseData._id };
         return postsAdapter.setOne(initialState, post);
       },
-
+      providesTags: (result, error, arg) =>
+        result ? [{ type: "Post", id: arg.postId }] : [],
     }),
     updatePost: builder.mutation({
       query: ({ postId, postData }) => ({

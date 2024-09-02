@@ -17,6 +17,7 @@ import useGetFilteredData from "../../../hooks/useGetFilteredData";
 
 export default function PostsList() {
   const { isLogged } = useAuth();
+  const dispatch = useDispatch();
 
   const {
     data: postsRawData,
@@ -24,7 +25,6 @@ export default function PostsList() {
     isSuccess,
     isError,
     error,
-    refetch,
   } = useGetPostsQuery({ isLogged });
 
   const categoryFilter = useSelector(selectCategoryFilter);
@@ -44,7 +44,6 @@ export default function PostsList() {
     });
   }
 
-  const dispatch = useDispatch();
   if (isError) {
     dispatch(setErrMsg(error?.data?.message || "Błąd pobierania postów."));
   }
@@ -62,13 +61,7 @@ export default function PostsList() {
     <StyledAdminPanelList>
       {filteredPostData &&
         filteredPostData.map(([id, postData]) => {
-          return (
-            <PostFromList
-              refetch={refetch}
-              postData={postData as PostType}
-              key={id}
-            />
-          );
+          return <PostFromList postData={postData as PostType} key={id} />;
         })}
       {filteredPostData && filteredPostData.length == 0 && (
         <p>Nie znaleziono postów spełniających podane kryteria wyszukiwania.</p>

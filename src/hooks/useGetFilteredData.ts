@@ -77,6 +77,14 @@ const useGetFilteredData = () => {
             .includes(filterValue);
         } else if (
           key == "searchQuery" &&
+          typeof (element as PostType | CategoryType | ErrorReportType).name ==
+            "string"
+        ) {
+          return (element as PostType | CategoryType | ErrorReportType).name
+            .toLowerCase()
+            .includes(filterValue);
+        } else if (
+          key == "searchQuery" &&
           typeof (element as UserType).username == "string"
         ) {
           return element.username.toLowerCase().includes(filterValue);

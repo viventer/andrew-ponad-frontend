@@ -82,7 +82,7 @@ export default function CategoryNameInput({
         newName: newCategoryName,
       }).unwrap();
     } catch (err) {
-      dispatch(setErrMsg("Błąd zmiany nazwy kategorii."));
+      handleCategoryError(err);
     }
   };
 
@@ -92,11 +92,11 @@ export default function CategoryNameInput({
       setShowNewCategoryInput(false);
       setNewCategoryName("");
     } catch (err) {
-      handleCreateCategoryError(err);
+      handleCategoryError(err);
     }
   };
 
-  const handleCreateCategoryError = (err: any) => {
+  const handleCategoryError = (err: any) => {
     if (
       (!err?.originalStatus && !err?.status) ||
       err?.status === "FETCH_ERROR"
@@ -105,6 +105,8 @@ export default function CategoryNameInput({
       dispatch(setErrMsg("Brak odpowiedzi serwera"));
     } else if (err.originalStatus === 400 || err.status === 400) {
       dispatch(setErrMsg("Uzupełnij wymagane pola"));
+    } else if (err.status === 409) {
+      dispatch(setErrMsg("Kategoria o tej nazwie już istnieje"));
     }
   };
 
