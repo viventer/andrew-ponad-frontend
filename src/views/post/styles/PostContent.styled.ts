@@ -22,6 +22,11 @@ export const StyledPostContent = styled.section`
     font-size: 1.1rem;
   }
 
+  & ul,
+  & li {
+    list-style-position: inside;
+  }
+
   @media (max-width: 800px) {
     margin-top: 0;
   }

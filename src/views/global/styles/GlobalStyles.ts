@@ -11,8 +11,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   ::selection {
-    background: #ffb7b7; 
-    color: #fff; 
+    background: ${({ theme }) => theme.colors.sunset};
+    color: #000; 
   }
 
   ::-moz-selection {
