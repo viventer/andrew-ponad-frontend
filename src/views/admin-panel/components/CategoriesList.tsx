@@ -29,7 +29,6 @@ export default function CategoriesList() {
   let filteredCategoriesData;
   if (isSuccess) {
     categoriesData = Object.entries(categoriesRawData.entities);
-    console.log(categoriesData);
     filteredCategoriesData = getFilteredData(categoriesData, {
       searchQuery,
     });
@@ -53,15 +52,18 @@ export default function CategoriesList() {
   return (
     <StyledAdminPanelList>
       <CategoryFromList toBeAdded={true} />
-      {filteredCategoriesData &&
-        filteredCategoriesData.map(([id, categoryData]) => {
-          return (
-            <CategoryFromList
-              categoryData={categoryData as CategoryType}
-              key={id}
-            />
-          );
-        })}
+      {filteredCategoriesData && filteredCategoriesData.length > 0 ? (
+        filteredCategoriesData.map(([id, categoryData]) => (
+          <CategoryFromList
+            categoryData={categoryData as CategoryType}
+            key={id}
+          />
+        ))
+      ) : (
+        <p>
+          Nie znaleziono kategorii spełniających podane kryteria wyszukiwania.
+        </p>
+      )}
     </StyledAdminPanelList>
   );
 }

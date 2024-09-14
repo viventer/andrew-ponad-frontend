@@ -51,10 +51,6 @@ export const StyledPostContentEditor = styled.section`
     border: none;
   }
 
-  .ql-container .ql-editor {
-    max-height: 50vh;
-  }
-
   .ql-toolbar {
     border: none;
     border-bottom: 0.1rem solid rgba(255, 255, 255, 0.5);

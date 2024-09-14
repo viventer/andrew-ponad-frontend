@@ -77,12 +77,12 @@ export default function Post() {
           <PostInfo postData={postData} />
           <PostContent postContentData={postData?.content} />
         </>
-      ) : (
+      ) : !isGettingLoading ? (
         <ErrorPage
           headingMessage="Nie masz uprawnień do tego posta."
           subheadingMessage="Zaloguj się na konto o odpowiednich uprawnieniach."
         />
-      )}
+      ) : null}
     </StyledPost>
   );
 }

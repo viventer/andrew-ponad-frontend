@@ -11,8 +11,8 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   ::selection {
-    background: #ffb7b7; 
-    color: #fff; 
+    background: ${({ theme }) => theme.colors.sunset};
+    color: #000; 
   }
 
   ::-moz-selection {
@@ -117,6 +117,10 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
   }
 
+  .ql-container .ql-editor {
+    max-height: 30vh;
+  }
+
   .deleteImgButton {
     position: absolute;
     right: 0.3rem;
@@ -211,7 +215,7 @@ export const GlobalStyles = createGlobalStyle`
 
   .onlyOneElement .quillEditor {
     height: 100%;
-    max-height: calc(80vh + 42px);
+    max-height: calc(80vh - 42px);
   }
 
   .onlyOneElement .ql-container {
@@ -219,6 +223,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .onlyOneElement .ql-editor {
-    max-height: 80vh;
+    height: calc(100% - 42px);
+    max-height: 100%;
   }
 `;

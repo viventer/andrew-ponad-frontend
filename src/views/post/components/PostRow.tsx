@@ -19,6 +19,7 @@ export default function PostRow({ rowData }: { rowData: PostRowType }) {
     switch (type) {
       case "textEditor":
         const sanitizedHTML = DOMPurify.sanitize(rowData[i].textEditorContent!);
+        console.log(rowData[i].textEditorContent);
         return (
           <article
             key={i}
