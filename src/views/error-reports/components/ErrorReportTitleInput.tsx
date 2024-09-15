@@ -13,7 +13,7 @@ export default function ErrorReportTitleInput() {
   const title = useSelector(selectErrorReportTitle);
 
   return (
-    <StyledErrorReportTitleInput>
+    <StyledErrorReportTitleInput data-test="titleInput">
       <label htmlFor="titleInput">
         Tytuł zgłoszenia <span className="sunset">*</span>
       </label>

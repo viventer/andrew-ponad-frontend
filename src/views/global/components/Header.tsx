@@ -36,6 +36,7 @@ export default function Header() {
           dispatch(setIsSearchBoxVisible(false));
           dispatch(setIsErrorReportVisible(false));
         }}
+        data-test="showUserInfoButton"
       >
         <FontAwesomeIcon icon={faUser} className="icon" />
       </button>

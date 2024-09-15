@@ -33,6 +33,10 @@ export default function SliderElement({
 
   const navigate = useNavigate();
 
+  if (isVisible && visibleElementsIndexes[1] == index) {
+    console.log(postData.title);
+  }
+
   return (
     <StyledSliderElement
       className={isVisible ? visibleElementClassName : "hide"}
@@ -40,7 +44,15 @@ export default function SliderElement({
     >
       <img src={thumbnailUrl} />
       <div>
-        <h3>{postData.title}</h3>
+        <h3
+          data-test={
+            isVisible && visibleElementsIndexes[1] == index
+              ? "mainSliderPostTitle"
+              : "sliderPostTitle"
+          }
+        >
+          {postData.title}
+        </h3>
       </div>
       <PostFromListInfo postData={postData} view="slider" />
     </StyledSliderElement>

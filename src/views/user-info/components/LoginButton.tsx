@@ -7,7 +7,7 @@ import { StyledButton } from "../../global/styles/Button.styled";
 
 export default function LoginButton() {
   return (
-    <StyledButton>
+    <StyledButton data-test="loginButton">
       <Link to="/login" className="reactRouterLink">
         <FontAwesomeIcon icon={faRightToBracket} className="icon" />
         <p>Zaloguj się</p>

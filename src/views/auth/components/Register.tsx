@@ -170,7 +170,7 @@ export default function Register() {
 
       <div className="flex">
         <p>Masz już konto? </p>
-        <Link to="/login" className="reactRouterLink">
+        <Link to="/login" className="reactRouterLink" data-test="loginLink">
           <p>Zaloguj się</p>
         </Link>
       </div>

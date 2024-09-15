@@ -67,8 +67,9 @@ export default function ImageDropzone({
       className={`imageDropzone ${
         view != "errorReport" && "responsivePostElement"
       }`}
+      data-test="imageDropzone"
     >
-      <input {...getInputProps()} />
+      <input {...getInputProps()} data-test="imageInput" />
       <div className="hover-effect">
         <FontAwesomeIcon icon={faExchange} className="change-icon" />
         <p className="change-paragraph">Zmień zdjęcie</p>

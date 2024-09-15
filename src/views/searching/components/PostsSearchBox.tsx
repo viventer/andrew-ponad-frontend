@@ -50,8 +50,9 @@ export default function PostsSearchBox({
           />
         </div>
         <StyledButton
-          className="expandButton"
+          className="collapseButton"
           onClick={() => dispatch(setIsSearchBoxVisible(false))}
+          data-test="collapseButton"
         >
           <FontAwesomeIcon icon={faChevronUp} />
         </StyledButton>

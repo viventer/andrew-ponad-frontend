@@ -23,6 +23,7 @@ export default function CreateErrorReport() {
           dispatch(setIsErrorReportVisible(false));
           dispatch(resetErrorReportState());
         }}
+        data-test="closeErrorReportButton"
       >
         <FontAwesomeIcon icon={faClose} />
       </button>

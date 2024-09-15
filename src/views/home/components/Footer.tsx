@@ -27,11 +27,15 @@ export default function Footer() {
             dispatch(setIsUserInfoVisible(false));
             dispatch(setIsSearchBoxVisible(false));
           }}
+          data-test="errorReportsFooterButton"
         >
           <FontAwesomeIcon icon={faBug} />
           <p>Zgłoś błąd</p>
         </button>
-        <button className="gradeCalculatorButton">
+        <button
+          className="gradeCalculatorButton"
+          data-test="gradeCalculatorButton"
+        >
           <FontAwesomeIcon icon={faGraduationCap} className="icon" />
           <Link to="/gradecalculator" className="link">
             <p>Kalkulator ocen</p>

@@ -7,7 +7,11 @@ import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 export default function RegisterButton() {
   return (
     <StyledButton>
-      <Link to="/register" className="reactRouterLink">
+      <Link
+        to="/register"
+        className="reactRouterLink"
+        data-test="registerButton"
+      >
         <FontAwesomeIcon icon={faUserPlus} className="icon" />
         <p>Zarejestruj się</p>
       </Link>

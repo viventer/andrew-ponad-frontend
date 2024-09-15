@@ -34,7 +34,7 @@ export default function SearchBar({
           onChange={(e) => setSearchQuery(e.target.value)}
           maxLength={64}
         />
-        <button className="icon">
+        <button className="icon" data-test="searchBarIcon">
           <FontAwesomeIcon icon={faSearch} />
         </button>
       </form>

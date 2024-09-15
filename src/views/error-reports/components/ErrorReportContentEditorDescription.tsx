@@ -27,7 +27,7 @@ export default function ErrorReportContentEditorDescription({
   const quillModules = { toolbar: toolbarOptions };
 
   return (
-    <StyledErrorReportContentEditorDescription>
+    <StyledErrorReportContentEditorDescription data-test="descriptionInput">
       <h3>
         Opis błędu&nbsp;
         <span className={isDescriptionLengthCorrect ? "green" : "red"}>

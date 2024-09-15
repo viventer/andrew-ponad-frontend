@@ -22,18 +22,16 @@ export default function PostFromSection({
   return (
     <StyledPostFromSection
       className={`post${index} ${areExpanded ? "isExpanded" : ""}`}
+      onClick={() => navigate(`/post/${postData.id}`)}
     >
-      <div
-        className="thumbnailWrapper"
-        onClick={() => navigate(`/post/${postData.id}`)}
-      >
+      <div className="thumbnailWrapper">
         <img src={postData.thumbnail} alt="post thumbnail" />
         <div className="postViews">
           <FontAwesomeIcon icon={faEye} className="icon" />
           {postData.views}
         </div>
       </div>
-      <p>{postData.title}</p>
+      <p data-test={`postFromSectionTitle${index}`}>{postData.title}</p>
     </StyledPostFromSection>
   );
 }

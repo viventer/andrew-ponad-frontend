@@ -35,7 +35,7 @@ export default function PostInfo({
   return (
     <StyledPostInfo>
       <div>
-        <h2>{postData.title}</h2>
+        <h2 data-test="postInfoTitle">{postData.title}</h2>
         {postData?.categoryName && (
           <p>
             <FontAwesomeIcon icon={faIcons} className="icon" />
