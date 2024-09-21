@@ -22,6 +22,7 @@ export default function FixedSuccessModal({ message }: { message: string }) {
           onClick={() => {
             dispatch(setSuccessMsg(""));
           }}
+          data-test="successModalButton"
         >
           OK
         </StyledButton>

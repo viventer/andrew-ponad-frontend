@@ -96,6 +96,7 @@ export default function ErrorReportForm() {
       <StyledButton
         onClick={sendReport}
         disabled={!(isDataProvided && isDescriptionLengthCorrect)}
+        data-test="sendRaportButton"
       >
         <FontAwesomeIcon icon={faPaperPlane} />
         Wyślij zgłoszenie

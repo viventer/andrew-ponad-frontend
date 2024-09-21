@@ -113,6 +113,7 @@ export default function UserInfo() {
                     navigate("/adminpanel");
                     dispatch(setIsUserInfoVisible(false));
                   }}
+                  data-test="adminPanelButton"
                 >
                   <FontAwesomeIcon icon={faHammer} />
                   Admin panel

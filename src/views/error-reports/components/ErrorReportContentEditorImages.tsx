@@ -74,7 +74,11 @@ export default function ErrorReportContentEditorImages() {
       <h3>Dodaj zrzuty ekranu z błędem</h3>
       {imageDropzones}
       {images.length < 3 && (
-        <StyledButton onClick={() => addNewImage()} className="addButton">
+        <StyledButton
+          onClick={() => addNewImage()}
+          className="addButton"
+          data-test="addImgButton"
+        >
           <FontAwesomeIcon icon={faPlus} />
           Dodaj zdjęcie
         </StyledButton>

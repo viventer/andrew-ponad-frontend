@@ -64,6 +64,7 @@ export default function AdminPanel() {
                 className={selectedTab === "errorReports" ? "selected" : ""}
                 onClick={() => setSelectedTab("errorReports")}
                 aria-selected={selectedTab === "errorReports" ? true : false}
+                data-test="reportsTabSelection"
               >
                 <FontAwesomeIcon icon={faBug} className="navIcon" />
                 <p>Błędy</p>

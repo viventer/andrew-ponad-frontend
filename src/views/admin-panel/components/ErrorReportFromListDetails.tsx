@@ -33,9 +33,15 @@ export default function ErrorReportFromListDetails({
     <StyledErrorReportFromListDetails>
       <h3 className="reportTitle">{reportData.title}</h3>
       <h3>Opis błędu:</h3>
-      <article dangerouslySetInnerHTML={{ __html: sanitizedHTML }}></article>
+      <article
+        data-test="reportDescription"
+        dangerouslySetInnerHTML={{ __html: sanitizedHTML }}
+      ></article>
       {hasImages && (
-        <button onClick={() => setShowScreenshots((prev) => !prev)}>
+        <button
+          onClick={() => setShowScreenshots((prev) => !prev)}
+          data-test="showScreenshotsButton"
+        >
           <h3>Dołączone zrzuty ekranu</h3>
           <FontAwesomeIcon
             icon={showScreenshots ? faChevronUp : faChevronDown}
@@ -43,14 +49,16 @@ export default function ErrorReportFromListDetails({
         </button>
       )}
       {showScreenshots && (
-        <section className="images">{formattedImages}</section>
+        <section className="images" data-test="imgSection">
+          {formattedImages}
+        </section>
       )}
       <p className="creationDate">
         <span>data utworzenia: </span>
         {creationDate}
       </p>
       {reportData.username && (
-        <p>
+        <p data-test="reportAuthor">
           <span>autor: </span>
           {reportData.username}
         </p>

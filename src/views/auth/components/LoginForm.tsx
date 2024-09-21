@@ -53,6 +53,7 @@ export default function LoginForm({
       <StyledButton
         className={canSubmit ? "activeButton" : "disabledButton"}
         disabled={!canSubmit}
+        data-test="loginFormButton"
       >
         <p>Zaloguj się</p>
       </StyledButton>
