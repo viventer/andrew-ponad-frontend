@@ -107,5 +107,50 @@ describe("Error Reports", () => {
     cy.getDataTest("showScreenshotsButton").click();
     cy.getDataTest("imgSection").find("img").should("have.length", 3);
     cy.getDataTest("reportAuthor").should("contain.text", "anonim");
+
+    cy.getDataTest("adminPanelSearchBar").type("title 1 " + key);
+    cy.getDataTest("errorReportFromList")
+      .find('[data-test="selectedSelectorOption"]')
+      .click();
+    cy.getDataTest("errorReportFromList")
+      .find('[data-test="selectorOption"]')
+      .contains("W trakcie")
+      .click();
+    cy.getDataTest("saveIcon").click();
+
+    cy.getDataTest("filterSelector")
+      .find('[data-test="selectedSelectorOption"]')
+      .click();
+    cy.getDataTest("filterSelector")
+      .find('[data-test="selectorOption"]')
+      .contains("W trakcie")
+      .click();
+
+    cy.contains("p", "title 1 " + key);
+    cy.getDataTest("deleteButton").click();
+    cy.getDataTest("Tak-dialogOption").click();
+    cy.should("not.contain.text", "title 1 " + key);
+
+    cy.getDataTest("filterSelector")
+      .find('[data-test="selectedSelectorOption"]')
+      .click();
+    cy.getDataTest("filterSelector")
+      .find('[data-test="selectorOption"]')
+      .contains("Dowolny")
+      .click();
+
+    cy.getDataTest("adminPanelSearchBar").find("input").clear();
+    cy.getDataTest("adminPanelSearchBar").type("title 2 " + key);
+    cy.getDataTest("deleteButton").click();
+    cy.getDataTest("Tak-dialogOption").click();
+    cy.should("not.contain.text", "title 2 " + key);
+
+    cy.getDataTest("adminPanelSearchBar").find("input").clear();
+    cy.getDataTest("adminPanelSearchBar").type("title 3 " + key);
+    cy.getDataTest("deleteButton").click();
+    cy.getDataTest("Tak-dialogOption").click();
+    cy.should("not.contain.text", "title 3 " + key);
+
+    cy.visit("/");
   });
 });

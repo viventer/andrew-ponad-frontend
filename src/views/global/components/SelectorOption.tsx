@@ -24,7 +24,10 @@ export default function SelectorOption({
   };
 
   return (
-    <StyledSelectorOption className={areOptionsVisible ? "" : "hide"}>
+    <StyledSelectorOption
+      className={areOptionsVisible ? "" : "hide"}
+      data-test="selectorOption"
+    >
       <button
         onClick={() => {
           selectOption();

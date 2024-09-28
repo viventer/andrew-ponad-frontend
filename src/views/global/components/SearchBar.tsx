@@ -25,6 +25,9 @@ export default function SearchBar({
           ? "searchBoxSearchBar"
           : ""
       }
+      data-test={`${
+        view == "adminPanel" ? "adminPanelSearchBar" : "mainSearchBar"
+      }`}
     >
       <form onSubmit={(e) => e.preventDefault()}>
         <input

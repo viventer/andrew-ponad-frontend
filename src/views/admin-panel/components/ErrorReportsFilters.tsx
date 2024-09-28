@@ -26,7 +26,7 @@ export default function ErrorReportsFilters() {
   statusOptions.push("Dowolny");
 
   return (
-    <StyledAdminPanelFilters>
+    <StyledAdminPanelFilters data-test="errorReportsFilters">
       <FontAwesomeIcon
         icon={faFilter}
         className="icon errorReportsFiltersIcon"

@@ -18,7 +18,7 @@ export default function FilterSelector({
   const [areOptionsVisible, setAreOptionsVisible] = useState(false);
 
   return (
-    <StyledSelector>
+    <StyledSelector data-test="filterSelector">
       <SelectedSelectorOption
         setAreOptionsVisible={setAreOptionsVisible}
         areOptionsVisible={areOptionsVisible}

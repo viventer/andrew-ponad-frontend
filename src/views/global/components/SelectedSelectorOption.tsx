@@ -30,6 +30,7 @@ export default function SelectedSelectorOption({
           toggleOptionsVisibility();
         }}
         className={`selected ${direction} selectorButton`}
+        data-test="selectedSelectorOption"
       >
         <div className="flex-center">
           {icon && <FontAwesomeIcon icon={icon} className="selectorIcon" />}

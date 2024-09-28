@@ -185,7 +185,10 @@ export default function ErrorReportFromList({ reportData, refetch }: Props) {
       : reportData.title;
 
   return (
-    <StyledElementFromList className={`${isDeleted ? "hide" : ""}`}>
+    <StyledElementFromList
+      className={`${isDeleted ? "hide" : ""}`}
+      data-test="errorReportFromList"
+    >
       <div className="shortInfo errorReportShortInfo">
         <div
           onClick={() => setShowDetails((prev) => !prev)}
@@ -207,12 +210,20 @@ export default function ErrorReportFromList({ reportData, refetch }: Props) {
                   className="successIcon icon"
                 />
               ) : (
-                <FontAwesomeIcon icon={faSave} className="saveIcon icon" />
+                <FontAwesomeIcon
+                  icon={faSave}
+                  className="saveIcon icon"
+                  data-test="saveIcon"
+                />
               )}
             </button>
           </div>
-          <button onClick={showDialog} className="deleteButton">
-            <FontAwesomeIcon icon={faTrash} className="delteIcon icon" />
+          <button
+            onClick={showDialog}
+            className="deleteButton"
+            data-test="deleteButton"
+          >
+            <FontAwesomeIcon icon={faTrash} className="deleteIcon icon" />
           </button>
         </div>
       </div>
