@@ -13,7 +13,7 @@ import { RootState } from "./store";
 import { RefreshResponse } from "../views/auth/types/auth.types";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://localhost:3500",
+  baseUrl: window.location.origin,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const state = getState() as RootState;
